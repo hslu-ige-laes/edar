@@ -1,7 +1,3 @@
-# reda - R Energy Data Analysis
-[Visit the page](https://hslu-ige-laes.github.io/edar/).
-
-
 # edar - Energy Data Analysis with R
 
 > **See [https://hslu-ige-laes.github.io/edar/](https://hslu-ige-laes.github.io/edar/)**
