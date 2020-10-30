@@ -37,7 +37,7 @@
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
 \hypersetup{
   pdftitle={Energy Data Analysis with R},
-  pdfauthor={Reto Marek},
+  pdfauthor={Lucerne University of Sciences and Arts, Engineering \& Architecture, Institute of Building Technology and Energy IGE, Reto Marek},
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
@@ -119,7 +119,7 @@
 \bibliographystyle{apalike}
 
 \title{Energy Data Analysis with R}
-\author{Reto Marek}
+\author{Lucerne University of Sciences and Arts, Engineering \& Architecture, Institute of Building Technology and Energy IGE, Reto Marek}
 \date{2020-10-30}
 
 \begin{document}
@@ -133,265 +133,24 @@
 \chapter*{Preface}\label{preface}}
 \addcontentsline{toc}{chapter}{Preface}
 
-Welcome to the introduction of energy data analysis with R.
-
-This documents gives you a short overview of the statistical software R and their capability of analyzing data sets in the context of building monitoring data and in general of time series.
+This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
 \textbf{Disclaimer}
-- The authors decline any liability or responsibility in connection with the published documentation
+The authors decline any liability or responsibility in connection with the published documentation
 
 © Lucerne University of Sciences and Arts, 2020
 
-\hypertarget{installing-r-and-r-studio}{%
-\chapter{Installing R and R Studio}\label{installing-r-and-r-studio}}
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
 
-\begin{itemize}
-\tightlist
-\item
-  Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
-\item
-  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
-\item
-  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''. Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
-\end{itemize}
+This book is aimed at R beginners as well as advanced R users. The recipes in this book will show you how to complete certain tasks. Simple examples are shown so that you can understand the basic principle and reproduce it with your own data.
 
-\hypertarget{download-and-install}{%
-\section{Download and install}\label{download-and-install}}
+The book is strongly inspired by the {[}R Graphics Cookbook{]} (\url{https://r-graphics.org/}). The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks that can be performed with the R or RStudio program.
 
-Installation instructions according to \citep{Grolemund.2015}
+\hypertarget{why-r-and-rstudio}{%
+\section{Why R and RStudio}\label{why-r-and-rstudio}}
 
-\hypertarget{windows}{%
-\subsection{Windows}\label{windows}}
-
-Installation according
-
-\hypertarget{mac}{%
-\subsection{Mac}\label{mac}}
-
-\hypertarget{linux}{%
-\subsection{Linux}\label{linux}}
-
-\hypertarget{r-basics}{%
-\chapter{R Basics}\label{r-basics}}
-
-\hypertarget{packages}{%
-\section{Packages}\label{packages}}
-
-\hypertarget{install-from-cran}{%
-\subsection{Install from CRAN}\label{install-from-cran}}
-
-\begin{itemize}
-\tightlist
-\item
-  Close all projects in R Studio
-\item
-  \texttt{install.packages("ggplot2")}
-\end{itemize}
-
-\hypertarget{install-from-github}{%
-\subsection{Install from github}\label{install-from-github}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"retomarek/redutils"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{loading}{%
-\subsection{Loading}\label{loading}}
-
-\begin{itemize}
-\tightlist
-\item
-  \texttt{library(ggplot2)}
-\end{itemize}
-
-\hypertarget{importing-data}{%
-\section{Importing data}\label{importing-data}}
-
-\hypertarget{csv-file}{%
-\subsection{csv file}\label{csv-file}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{, }\DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{","}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
-
-Attention: By default, strings in the data are treated as factors.
-read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
-
-\hypertarget{excel-file}{%
-\subsection{Excel File}\label{excel-file}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Only need to install once}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)}
-
-\KeywordTok{library}\NormalTok{(xslx)}
-
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xlsx"}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetIndex=}\DecValTok{2}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetName=}\StringTok{"Revenues"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-For reading older Excel files in the .xls format, the gdata package has the function read.xls():
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Only need to install once}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gdata"}\NormalTok{)}
-
-\KeywordTok{library}\NormalTok{(gdata)}
-\CommentTok{# Read first sheet}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheet=}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you'll need ActiveState Perl. The Community Edition can be obtained for free.
-
-\hypertarget{data-manipulations}{%
-\section{Data manipulations}\label{data-manipulations}}
-
-\hypertarget{data-frames}{%
-\subsection{data frames}\label{data-frames}}
-
-\hypertarget{change-row-names-of-df}{%
-\subsubsection{change row names of df}\label{change-row-names-of-df}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Column1"}\NormalTok{,}\StringTok{"Column2"}\NormalTok{,}\StringTok{"Column3"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{wide-to-long}{%
-\subsection{wide to long}\label{wide-to-long}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# wide format}
-\KeywordTok{head}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert wide to long format}
-\NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
-                                      \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
-                                      \DataTypeTok{names_to =} \StringTok{"name"}\NormalTok{,}
-                                      \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
-                                      \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{                         )}
-
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5
-\end{verbatim}
-
-\hypertarget{long-to-wide}{%
-\subsection{long to wide}\label{long-to-wide}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert long table into wide table}
-\NormalTok{df.wide <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_wider}\NormalTok{(df.long,}
-                                     \DataTypeTok{names_from =} \StringTok{"name"}\NormalTok{,}
-                                     \DataTypeTok{values_from =} \StringTok{"value"}\NormalTok{)}
-\NormalTok{                         )}
-
-\CommentTok{# wide format}
-\KeywordTok{head}\NormalTok{(df.wide)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatVolFlowColdwater FlatVolFlowHotwater FlatHum FlatTemp
-## 1                0.006                   0      NA       NA
-## 2                0.000                   0      NA       NA
-## 3                0.000                   0      NA       NA
-## 4                0.000                   0      NA       NA
-## 5                0.006                   0      NA       NA
-## 6                0.000                   0      NA       NA
-\end{verbatim}
+Spreadsheet programs like Excel quickly reach their limits when working with large data sets or creating complex graphics. Also the interactive ability of the graphics is limited. The open source programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
 
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}
@@ -725,6 +484,85 @@ Make ggplot2 chart above interactive with plotly
 \end{Shaded}
 
 \includegraphics{Energy-Data-Analysis-with-R_files/figure-latex/energysignature plotly-1.pdf}
+
+\hypertarget{appendix-appendix}{%
+\appendix}
+
+
+\hypertarget{installing-r-and-r-studio}{%
+\chapter{Installing R and R Studio}\label{installing-r-and-r-studio}}
+
+\begin{itemize}
+\tightlist
+\item
+  Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
+\item
+  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
+\item
+  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''. Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
+\end{itemize}
+
+\hypertarget{how-to-download-and-install-r}{%
+\section{How to Download and Install R}\label{how-to-download-and-install-r}}
+
+\hypertarget{windows}{%
+\subsection{Windows}\label{windows}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/windows/base/} and press the link ``Download R\ldots{}''
+\item
+  Run the downloaded installer file and follow the installation wizard
+\end{enumerate}
+
+The wizard will install R into your ``Program Files'' folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
+
+\hypertarget{mac-osx}{%
+\subsection{Mac OSX}\label{mac-osx}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/macosx/} and download the latest *.pkg file
+\item
+  Run the downloaded installer file and follow the installation wizard
+\end{enumerate}
+
+The installer allows you to customize your installation. However the default values will be suitable for most users.
+
+\hypertarget{linux}{%
+\subsection{Linux}\label{linux}}
+
+R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
+
+The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
+
+\begin{itemize}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/linux/} and then follow the directory trail to the version of Linux you wish to install R on top of
+\end{itemize}
+
+The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
+
+\hypertarget{how-to-download-and-install-rstudio}{%
+\section{How to Download and Install RStudio}\label{how-to-download-and-install-rstudio}}
+
+R Studio is a development environment for R.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://rstudio.com/products/rstudio/download/} and download ``RStudio Desktop Open Source''
+\item
+  Follow the on-screen instructions
+\item
+  Once you have installed R Studio, you can run it like any other application via
+\end{enumerate}
 
   \bibliography{book.bib,packages.bib}
 

@@ -1,4 +1,11 @@
 book_filename: "Energy Data Analysis with R"
+rmd_files: [
+  "index.rmd",
+  "introduction.Rmd",
+  "eda.Rmd",
+  "datavis.Rmd",
+  "a1-installation.Rmd"
+]
 language:
   ui:
     chapter_name: "Chapter "

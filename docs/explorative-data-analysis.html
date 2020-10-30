@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 3 Explorative Data Analysis | Energy Data Analysis with R</title>
+  <title>Chapter 2 Explorative Data Analysis | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 3 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta property="og:title" content="Chapter 2 Explorative Data Analysis | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,12 +16,12 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 3 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="Chapter 2 Explorative Data Analysis | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
 
-<meta name="author" content="Reto Marek" />
+<meta name="author" content="Lucerne University of Sciences and Arts, Engineering &amp; Architecture, Institute of Building Technology and Energy IGE, Reto Marek" />
 
 
 <meta name="date" content="2020-10-30" />
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="r-basics.html"/>
+<link rel="prev" href="introduction.html"/>
 <link rel="next" href="data-visualizations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -141,51 +141,39 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
 <li class="divider"></li>
 <li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
-<li class="chapter" data-level="1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html"><i class="fa fa-check"></i><b>1</b> Installing R and R Studio</a><ul>
-<li class="chapter" data-level="1.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#download-and-install"><i class="fa fa-check"></i><b>1.1</b> Download and install</a><ul>
-<li class="chapter" data-level="1.1.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
-<li class="chapter" data-level="1.1.2" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#mac"><i class="fa fa-check"></i><b>1.1.2</b> Mac</a></li>
-<li class="chapter" data-level="1.1.3" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#linux"><i class="fa fa-check"></i><b>1.1.3</b> Linux</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#why-r-and-rstudio"><i class="fa fa-check"></i><b>1.1</b> Why R and RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>2</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="2.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#get-overview"><i class="fa fa-check"></i><b>2.1</b> Get overview</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#load-data"><i class="fa fa-check"></i><b>2.1.1</b> Load data</a></li>
+<li class="chapter" data-level="2.1.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#names"><i class="fa fa-check"></i><b>2.1.2</b> Names</a></li>
+<li class="chapter" data-level="2.1.3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#structure"><i class="fa fa-check"></i><b>2.1.3</b> Structure</a></li>
+<li class="chapter" data-level="2.1.4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#headtail"><i class="fa fa-check"></i><b>2.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="2.1.5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#five-number-summary"><i class="fa fa-check"></i><b>2.1.5</b> Five number summary</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>2.2</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#season-from-date"><i class="fa fa-check"></i><b>2.2.1</b> season from date</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a><ul>
-<li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#packages"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
-<li class="chapter" data-level="2.1.1" data-path="r-basics.html"><a href="r-basics.html#install-from-cran"><i class="fa fa-check"></i><b>2.1.1</b> Install from CRAN</a></li>
-<li class="chapter" data-level="2.1.2" data-path="r-basics.html"><a href="r-basics.html#install-from-github"><i class="fa fa-check"></i><b>2.1.2</b> Install from github</a></li>
-<li class="chapter" data-level="2.1.3" data-path="r-basics.html"><a href="r-basics.html#loading"><i class="fa fa-check"></i><b>2.1.3</b> Loading</a></li>
+<li class="chapter" data-level="3" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-visualizations.html"><a href="data-visualizations.html#general-plots"><i class="fa fa-check"></i><b>3.1</b> General Plots</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="data-visualizations.html"><a href="data-visualizations.html#scatterplot"><i class="fa fa-check"></i><b>3.1.1</b> Scatterplot</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.2</b> Importing data</a><ul>
-<li class="chapter" data-level="2.2.1" data-path="r-basics.html"><a href="r-basics.html#csv-file"><i class="fa fa-check"></i><b>2.2.1</b> csv file</a></li>
-<li class="chapter" data-level="2.2.2" data-path="r-basics.html"><a href="r-basics.html#excel-file"><i class="fa fa-check"></i><b>2.2.2</b> Excel File</a></li>
-</ul></li>
-<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#data-manipulations"><i class="fa fa-check"></i><b>2.3</b> Data manipulations</a><ul>
-<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#data-frames"><i class="fa fa-check"></i><b>2.3.1</b> data frames</a></li>
-<li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#wide-to-long"><i class="fa fa-check"></i><b>2.3.2</b> wide to long</a></li>
-<li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#long-to-wide"><i class="fa fa-check"></i><b>2.3.3</b> long to wide</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualizations.html"><a href="data-visualizations.html#building-energy-signature"><i class="fa fa-check"></i><b>3.2</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-visualizations.html"><a href="data-visualizations.html#static"><i class="fa fa-check"></i><b>3.2.1</b> static</a></li>
+<li class="chapter" data-level="3.2.2" data-path="data-visualizations.html"><a href="data-visualizations.html#interactive"><i class="fa fa-check"></i><b>3.2.2</b> interactive</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Explorative Data Analysis</a><ul>
-<li class="chapter" data-level="3.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#get-overview"><i class="fa fa-check"></i><b>3.1</b> Get overview</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#load-data"><i class="fa fa-check"></i><b>3.1.1</b> Load data</a></li>
-<li class="chapter" data-level="3.1.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#names"><i class="fa fa-check"></i><b>3.1.2</b> Names</a></li>
-<li class="chapter" data-level="3.1.3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#structure"><i class="fa fa-check"></i><b>3.1.3</b> Structure</a></li>
-<li class="chapter" data-level="3.1.4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#headtail"><i class="fa fa-check"></i><b>3.1.4</b> Head/Tail</a></li>
-<li class="chapter" data-level="3.1.5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#five-number-summary"><i class="fa fa-check"></i><b>3.1.5</b> Five number summary</a></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html"><i class="fa fa-check"></i><b>A</b> Installing R and R Studio</a><ul>
+<li class="chapter" data-level="A.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#how-to-download-and-install-r"><i class="fa fa-check"></i><b>A.1</b> How to Download and Install R</a><ul>
+<li class="chapter" data-level="A.1.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#windows"><i class="fa fa-check"></i><b>A.1.1</b> Windows</a></li>
+<li class="chapter" data-level="A.1.2" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#mac-osx"><i class="fa fa-check"></i><b>A.1.2</b> Mac OSX</a></li>
+<li class="chapter" data-level="A.1.3" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#linux"><i class="fa fa-check"></i><b>A.1.3</b> Linux</a></li>
 </ul></li>
-<li class="chapter" data-level="3.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>3.2</b> Data Wrangling</a><ul>
-<li class="chapter" data-level="3.2.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#season-from-date"><i class="fa fa-check"></i><b>3.2.1</b> season from date</a></li>
+<li class="chapter" data-level="A.2" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#how-to-download-and-install-rstudio"><i class="fa fa-check"></i><b>A.2</b> How to Download and Install RStudio</a></li>
 </ul></li>
-</ul></li>
-<li class="chapter" data-level="4" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>4</b> Data Visualizations</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-visualizations.html"><a href="data-visualizations.html#general-plots"><i class="fa fa-check"></i><b>4.1</b> General Plots</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="data-visualizations.html"><a href="data-visualizations.html#scatterplot"><i class="fa fa-check"></i><b>4.1.1</b> Scatterplot</a></li>
-</ul></li>
-<li class="chapter" data-level="4.2" data-path="data-visualizations.html"><a href="data-visualizations.html#building-energy-signature"><i class="fa fa-check"></i><b>4.2</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="data-visualizations.html"><a href="data-visualizations.html#static"><i class="fa fa-check"></i><b>4.2.1</b> static</a></li>
-<li class="chapter" data-level="4.2.2" data-path="data-visualizations.html"><a href="data-visualizations.html#interactive"><i class="fa fa-check"></i><b>4.2.2</b> interactive</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
 
@@ -207,26 +195,26 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="explorative-data-analysis" class="section level1">
-<h1><span class="header-section-number">Chapter 3</span> Explorative Data Analysis</h1>
+<h1><span class="header-section-number">Chapter 2</span> Explorative Data Analysis</h1>
 <div id="get-overview" class="section level2">
-<h2><span class="header-section-number">3.1</span> Get overview</h2>
+<h2><span class="header-section-number">2.1</span> Get overview</h2>
 <blockquote>
 <p>Get an overview of the whole data set and specific series of it</p>
 </blockquote>
 <div id="load-data" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Load data</h3>
+<h3><span class="header-section-number">2.1.1</span> Load data</h3>
 <blockquote>
 <p>Load test data set in a data frame (e.g. from a csv-file)</p>
 </blockquote>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
 <p><br></p>
 </div>
 <div id="names" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Names</h3>
+<h3><span class="header-section-number">2.1.2</span> Names</h3>
 <blockquote>
 <p>show the column headers of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
 <pre><code>##  [1] &quot;time&quot;                 &quot;WthStnPress&quot;          &quot;WthStnHum&quot;           
 ##  [4] &quot;WthStnRain&quot;           &quot;WthStnSolRad&quot;         &quot;WthStnTemp&quot;          
 ##  [7] &quot;WthStnWindDir&quot;        &quot;WthStnWindSpd&quot;        &quot;BldgEnergyHotwater&quot;  
@@ -235,11 +223,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 </div>
 <div id="structure" class="section level3">
-<h3><span class="header-section-number">3.1.3</span> Structure</h3>
+<h3><span class="header-section-number">2.1.3</span> Structure</h3>
 <blockquote>
 <p>show the structure of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    16394 obs. of  14 variables:
 ##  $ time                : chr  &quot;2018-09-30T22:00:00.000Z&quot; &quot;2018-09-30T23:00:00.000Z&quot; &quot;2018-10-01T00:00:00.000Z&quot; &quot;2018-10-01T01:00:00.000Z&quot; ...
 ##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
@@ -258,8 +246,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 </div>
 <div id="headtail" class="section level3">
-<h3><span class="header-section-number">3.1.4</span> Head/Tail</h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<h3><span class="header-section-number">2.1.4</span> Head/Tail</h3>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
 ## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
@@ -281,7 +269,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      NA       NA                0.000                   0
 ## 5      NA       NA                0.006                   0
 ## 6      NA       NA                0.000                   0</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
 <pre><code>##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
 ## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
@@ -313,31 +301,31 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p><br></p>
 </div>
 <div id="five-number-summary" class="section level3">
-<h3><span class="header-section-number">3.1.5</span> Five number summary</h3>
+<h3><span class="header-section-number">2.1.5</span> Five number summary</h3>
 <blockquote>
 <p>reveals details of a specific series</p>
 </blockquote>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##   -5.25    5.50   11.25   11.99   17.35   40.30      12</code></pre>
 <p><br></p>
 </div>
 </div>
 <div id="data-wrangling" class="section level2">
-<h2><span class="header-section-number">3.2</span> Data Wrangling</h2>
+<h2><span class="header-section-number">2.2</span> Data Wrangling</h2>
 <div id="season-from-date" class="section level3">
-<h3><span class="header-section-number">3.2.1</span> season from date</h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># install redutils library</span></a>
-<a class="sourceLine" id="cb26-2" title="2"><span class="co"># devtools::install_github(&quot;retomarek/redutils&quot;, ref = &quot;master&quot;)</span></a>
-<a class="sourceLine" id="cb26-3" title="3"></a>
-<a class="sourceLine" id="cb26-4" title="4"><span class="co"># get season from a date</span></a>
-<a class="sourceLine" id="cb26-5" title="5">redutils<span class="op">::</span><span class="kw">season</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>))</a></code></pre></div>
+<h3><span class="header-section-number">2.2.1</span> season from date</h3>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># install redutils library</span></a>
+<a class="sourceLine" id="cb12-2" title="2"><span class="co"># devtools::install_github(&quot;retomarek/redutils&quot;, ref = &quot;master&quot;)</span></a>
+<a class="sourceLine" id="cb12-3" title="3"></a>
+<a class="sourceLine" id="cb12-4" title="4"><span class="co"># get season from a date</span></a>
+<a class="sourceLine" id="cb12-5" title="5">redutils<span class="op">::</span><span class="kw">season</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>))</a></code></pre></div>
 <pre><code>## [1] &quot;Spring&quot;</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1">redutils<span class="op">::</span><span class="kw">season</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;Winter&quot;</span>,<span class="st">&quot;Frühling&quot;,&quot;</span>Sommer<span class="st">&quot;,&quot;</span>Herbst<span class="st">&quot;))</span></a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" title="1">redutils<span class="op">::</span><span class="kw">season</span>(<span class="kw">as.Date</span>(<span class="st">&quot;2019-04-01&quot;</span>), <span class="kw">c</span>(<span class="st">&quot;Winter&quot;</span>,<span class="st">&quot;Frühling&quot;,&quot;</span>Sommer<span class="st">&quot;,&quot;</span>Herbst<span class="st">&quot;))</span></a></code></pre></div>
 <pre><code>## [1] &quot;Frühling&quot;</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># apply it for a data frame</span></a>
-<a class="sourceLine" id="cb30-2" title="2">df.season &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">season =</span> redutils<span class="op">::</span><span class="kw">season</span>(df<span class="op">$</span>time))</a>
-<a class="sourceLine" id="cb30-3" title="3"><span class="kw">head</span>(df.season)</a></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" title="1"><span class="co"># apply it for a data frame</span></a>
+<a class="sourceLine" id="cb16-2" title="2">df.season &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">season =</span> redutils<span class="op">::</span><span class="kw">season</span>(df<span class="op">$</span>time))</a>
+<a class="sourceLine" id="cb16-3" title="3"><span class="kw">head</span>(df.season)</a></code></pre></div>
 <pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
 ## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
@@ -368,7 +356,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           </div>
         </div>
       </div>
-<a href="r-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="data-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
