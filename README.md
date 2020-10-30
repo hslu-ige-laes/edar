@@ -5,7 +5,7 @@
 <hr>
 
 **Disclaimer**<br>
-- The authors decline any liability or responsibility in connection with the published documentation
+The authors decline any liability or responsibility in connection with the published documentation
 
 &copy; Lucerne University of Sciences and Arts, 2020
   
