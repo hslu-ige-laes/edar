@@ -26,11 +26,12 @@ building-energy-signature
 static
 interactive
 installation
-how-to-download-and-install-r
+download-and-install-r
 windows
 mac-osx
 linux
-how-to-download-and-install-rstudio
+download-and-install-rstudio
+open-rstudio
 packages
 install-packages
 loading-packages

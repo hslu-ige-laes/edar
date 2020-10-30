@@ -5,7 +5,7 @@
 - "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface.
 - "R" may be used without "RStudio", but "RStudio" may not be used without "R". Both, "R" and "RStudio" are free of charge and there are no licencse fees.
 
-## How to Download and Install R
+## Download and Install R
 ### Windows
 
 1. Open [https://cran.r-project.org/bin/windows/base/](https://cran.r-project.org/bin/windows/base/) and press the link "Download R..."
@@ -28,9 +28,12 @@ The CRAN website provides files to build R from source on Debian, Redhat, SUSE, 
 
 The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
 
-## How to Download and Install RStudio
+## Download and Install RStudio
 R Studio is a development environment for R.
 
 1. Open [https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/) and download "RStudio Desktop Open Source"
 1. Follow the on-screen instructions
 1. Once you have installed R Studio, you can run it like any other application via 
+
+## Open RStudio
+Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing “RStudio” at the Windows Run prompt.

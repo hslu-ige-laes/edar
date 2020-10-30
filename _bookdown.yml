@@ -7,7 +7,6 @@ rmd_files: [
   "dataVis.Rmd",
   "a1-installation.Rmd",
   "a2-rPackages.Rmd"
-
 ]
 language:
   ui:
