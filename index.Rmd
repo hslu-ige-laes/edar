@@ -1,6 +1,6 @@
 --- 
 title: "Energy Data Analysis with R"
-author: "Reto Marek"
+author: "Lucerne University of Sciences and Arts, Engineering & Architecture, Institute of Building Technology and Energy IGE, Reto Marek"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
@@ -13,11 +13,11 @@ description: "Introduction into energy data analysis and visualization with R."
 ---
 
 # Preface {-}
-Welcome to the introduction of energy data analysis with R.
+This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-This documents gives you a short overview of the statistical software R and their capability of analyzing data sets in the context of building monitoring data and in general of time series.
+<hr>
 
 **Disclaimer**<br>
-- The authors decline any liability or responsibility in connection with the published documentation
+The authors decline any liability or responsibility in connection with the published documentation
 
 &copy; Lucerne University of Sciences and Arts, 2020
