@@ -71,4 +71,15 @@ redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"
 df.season <- dplyr::mutate(df, season = redutils::season(df$time))
 head(df.season)
 ```
- 
+
+
+## Basic plots
+### Scatterplot
+#### plot()
+```{r scatterplot plot}
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
+
+# crate simple scatterplot
+plot(df$WthStnTemp, df$BldgEnergyHeating)
+```

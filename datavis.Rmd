@@ -1,15 +1,7 @@
 # Data Visualizations
 
 ## General Plots
-### Scatterplot
-#### plot()
-```{r scatterplot plot}
-# load data set
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
 
-# crate simple scatterplot
-plot(df$WthStnTemp, df$BldgEnergyHeating)
-```
 
 <br>
 

@@ -1,3 +1,4 @@
+fig:knitr-logo
 why-r-and-rstudio
 getting-started
 r-basics
@@ -18,10 +19,11 @@ headtail
 five-number-summary
 data-wrangling
 season-from-date
-data-visualizations
-general-plots
+basic-plots
 scatterplot
 plot
+data-visualizations
+general-plots
 building-energy-signature
 static
 interactive
@@ -35,3 +37,4 @@ open-rstudio
 packages
 install-packages
 loading-packages
+upading-packages

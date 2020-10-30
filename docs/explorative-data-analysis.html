@@ -24,7 +24,7 @@
 <meta name="author" content="Lucerne University of Sciences and Arts, Engineering &amp; Architecture, Institute of Building Technology and Energy IGE, Reto Marek" />
 
 
-<meta name="date" content="2020-10-30" />
+<meta name="date" content="2020-10-31" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -166,11 +166,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="3.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>3.2</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="3.2.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#season-from-date"><i class="fa fa-check"></i><b>3.2.1</b> season from date</a></li>
 </ul></li>
+<li class="chapter" data-level="3.3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#basic-plots"><i class="fa fa-check"></i><b>3.3</b> Basic plots</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#scatterplot"><i class="fa fa-check"></i><b>3.3.1</b> Scatterplot</a></li>
+</ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>4</b> Data Visualizations</a><ul>
-<li class="chapter" data-level="4.1" data-path="data-visualizations.html"><a href="data-visualizations.html#general-plots"><i class="fa fa-check"></i><b>4.1</b> General Plots</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="data-visualizations.html"><a href="data-visualizations.html#scatterplot"><i class="fa fa-check"></i><b>4.1.1</b> Scatterplot</a></li>
-</ul></li>
+<li class="chapter" data-level="4.1" data-path="data-visualizations.html"><a href="data-visualizations.html#general-plots"><i class="fa fa-check"></i><b>4.1</b> General Plots</a></li>
 <li class="chapter" data-level="4.2" data-path="data-visualizations.html"><a href="data-visualizations.html#building-energy-signature"><i class="fa fa-check"></i><b>4.2</b> Building Energy Signature</a><ul>
 <li class="chapter" data-level="4.2.1" data-path="data-visualizations.html"><a href="data-visualizations.html#static"><i class="fa fa-check"></i><b>4.2.1</b> static</a></li>
 <li class="chapter" data-level="4.2.2" data-path="data-visualizations.html"><a href="data-visualizations.html#interactive"><i class="fa fa-check"></i><b>4.2.2</b> interactive</a></li>
@@ -189,6 +190,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="B" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>B</b> R Packages</a><ul>
 <li class="chapter" data-level="B.1" data-path="packages.html"><a href="packages.html#install-packages"><i class="fa fa-check"></i><b>B.1</b> Install Packages</a></li>
 <li class="chapter" data-level="B.2" data-path="packages.html"><a href="packages.html#loading-packages"><i class="fa fa-check"></i><b>B.2</b> Loading Packages</a></li>
+<li class="chapter" data-level="B.3" data-path="packages.html"><a href="packages.html#upading-packages"><i class="fa fa-check"></i><b>B.3</b> Upading Packages</a></li>
 </ul></li>
 <li class="divider"></li>
 <li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
@@ -363,7 +365,22 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      NA       NA                0.000                   0   Fall
 ## 5      NA       NA                0.006                   0   Fall
 ## 6      NA       NA                0.000                   0   Fall</code></pre>
+</div>
+</div>
+<div id="basic-plots" class="section level2">
+<h2><span class="header-section-number">3.3</span> Basic plots</h2>
+<div id="scatterplot" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Scatterplot</h3>
+<div id="plot" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> plot()</h4>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># load data set</span></a>
+<a class="sourceLine" id="cb31-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb31-3" title="3"></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co"># crate simple scatterplot</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
+<p><img src="Energy-Data-Analysis-with-R_files/figure-html/scatterplot%20plot-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
 </div>
