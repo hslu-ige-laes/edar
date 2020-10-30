@@ -1,4 +1,4 @@
-book_filename: "Energy Data Analysis with R"
+book_filename: "edar.Rmd"
 rmd_files: [
   "index.rmd",
   "gettingStarted.Rmd",

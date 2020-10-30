@@ -224,10 +224,10 @@ Figure B.1: Install packages via RStudio GUI
 <li><p>Type the name of the package under “Packages, in this case type ggplot2</p></li>
 <li><p>Click “Install”</p></li>
 </ol>
+<p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
 <p>An other way is to use the install.packages function.
 Open R (if already opened please close all projects) and type the following at the command line:</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
-<p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
 <p>If you want to install a package directly from github, the package “devtools” must be installed first:</p>
 <div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
 <a class="sourceLine" id="cb35-2" title="2"><span class="kw">library</span>(devtools)</a>
@@ -269,7 +269,7 @@ gitbook.start({
 "link": null,
 "text": null
 },
-"download": ["Energy Data Analysis with R.pdf", "Energy Data Analysis with R.epub"],
+"download": ["edar.pdf", "edar.epub"],
 "toc": {
 "collapse": "section"
 },
