@@ -1,0 +1,2 @@
+# Getting started
+First you have to install R and RStudio. 

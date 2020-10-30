@@ -1,0 +1,27 @@
+# R Packages {#packages}
+Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package. The following describes how to load and use packages.
+
+## Install Packages
+The easiest way to install an R Package is to use the install.packages function. Open R (if already opened please close all projects) and type the following at the command line:
+```r
+install.packages("ggplot2")
+```
+
+This will search for the package "ggplot" specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
+
+If you want to install a package directly from github, the package 'devtools' must be installed first:
+
+```r
+install.packages("devtools")
+library(devtools)
+install_github("retomarek/redutils")
+```
+
+### Loading Packages
+If you have installed a package, its functions are not yet available in your R project.
+
+To use an R package, you must load it with the following command:
+
+```r
+install.packages("ggplot2")
+```

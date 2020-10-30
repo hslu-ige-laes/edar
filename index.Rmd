@@ -15,9 +15,17 @@ description: "Introduction into energy data analysis and visualization with R."
 # Preface {-}
 This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
+This book is aimed at R beginners as well as advanced R users and is strongly inspired by the [R Graphics Cookbook] (https://r-graphics.org/). The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
+
+The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data.
+
+## Why R and RStudio?
+Spreadsheet programs like Excel quickly reach their limits when working with large data sets or creating complex graphics. Also the interactive ability of the graphics is limited. The open source programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
+
 <hr>
 
 **Disclaimer**<br>
 The authors decline any liability or responsibility in connection with the published documentation
 
 &copy; Lucerne University of Sciences and Arts, 2020
+

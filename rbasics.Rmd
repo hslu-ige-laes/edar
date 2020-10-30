@@ -1,22 +1,4 @@
 # R Basics
-## Packages
-### Install from CRAN
-- Close all projects in R Studio
-- `install.packages("ggplot2")`
-
-### Install from github
-```r
-install.packages("devtools")
-library(devtools)
-install_github("retomarek/redutils")
-```
-
-<br>
-
-### Loading
-- `library(ggplot2)`
-
-<br>
 
 ## Importing data
 ### csv file

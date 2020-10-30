@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 2 R Basics | Energy Data Analysis with R</title>
+  <title>A Installing R and R Studio | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 2 R Basics | Energy Data Analysis with R" />
+  <meta property="og:title" content="A Installing R and R Studio | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 2 R Basics | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="A Installing R and R Studio | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="getting-started.html"/>
-<link rel="next" href="explorative-data-analysis.html"/>
+<link rel="prev" href="data-visualizations.html"/>
+<link rel="next" href="packages.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -210,135 +210,50 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="r-basics" class="section level1">
-<h1><span class="header-section-number">Chapter 2</span> R Basics</h1>
-<div id="importing-data" class="section level2">
-<h2><span class="header-section-number">2.1</span> Importing data</h2>
-<div id="csv-file" class="section level3">
-<h3><span class="header-section-number">2.1.1</span> csv file</h3>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb1-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
-<p>Attention: By default, strings in the data are treated as factors.
-read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table</p>
-<p><br></p>
+<div id="installation" class="section level1">
+<h1><span class="header-section-number">A</span> Installing R and R Studio</h1>
+<ul>
+<li>Before we can start the first analysis, we have to install “R” and “RStudio”.</li>
+<li>“R” is a programming language used for statistical computing while “RStudio” provides a graphical user interface.</li>
+<li>“R” may be used without “RStudio”, but “RStudio” may not be used without “R”. Both, “R” and “RStudio” are free of charge and there are no licencse fees.</li>
+</ul>
+<div id="how-to-download-and-install-r" class="section level2">
+<h2><span class="header-section-number">A.1</span> How to Download and Install R</h2>
+<div id="windows" class="section level3">
+<h3><span class="header-section-number">A.1.1</span> Windows</h3>
+<ol style="list-style-type: decimal">
+<li>Open <a href="https://cran.r-project.org/bin/windows/base/">https://cran.r-project.org/bin/windows/base/</a> and press the link “Download R…”</li>
+<li>Run the downloaded installer file and follow the installation wizard</li>
+</ol>
+<p>The wizard will install R into your “Program Files” folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.</p>
 </div>
-<div id="excel-file" class="section level3">
-<h3><span class="header-section-number">2.1.2</span> Excel File</h3>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Only need to install once</span></a>
-<a class="sourceLine" id="cb3-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
-<a class="sourceLine" id="cb3-3" title="3"></a>
-<a class="sourceLine" id="cb3-4" title="4"><span class="kw">library</span>(xslx)</a>
-<a class="sourceLine" id="cb3-5" title="5"></a>
-<a class="sourceLine" id="cb3-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb3-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetIndex=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb3-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Revenues&quot;</span>)</a></code></pre></div>
-<p>For reading older Excel files in the .xls format, the gdata package has the function read.xls():</p>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Only need to install once</span></a>
-<a class="sourceLine" id="cb4-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;gdata&quot;</span>)</a>
-<a class="sourceLine" id="cb4-3" title="3"></a>
-<a class="sourceLine" id="cb4-4" title="4"><span class="kw">library</span>(gdata)</a>
-<a class="sourceLine" id="cb4-5" title="5"><span class="co"># Read first sheet</span></a>
-<a class="sourceLine" id="cb4-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>)</a>
-<a class="sourceLine" id="cb4-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">2</span>)</a></code></pre></div>
-<p>Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.</p>
-<p><br></p>
+<div id="mac-osx" class="section level3">
+<h3><span class="header-section-number">A.1.2</span> Mac OSX</h3>
+<ol style="list-style-type: decimal">
+<li>Open <a href="https://cran.r-project.org/bin/macosx/">https://cran.r-project.org/bin/macosx/</a> and download the latest *.pkg file</li>
+<li>Run the downloaded installer file and follow the installation wizard</li>
+</ol>
+<p>The installer allows you to customize your installation. However the default values will be suitable for most users.</p>
 </div>
-</div>
-<div id="data-manipulations" class="section level2">
-<h2><span class="header-section-number">2.2</span> Data manipulations</h2>
-<div id="data-frames" class="section level3">
-<h3><span class="header-section-number">2.2.1</span> data frames</h3>
-<div id="change-row-names-of-df" class="section level4">
-<h4><span class="header-section-number">2.2.1.1</span> change row names of df</h4>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Column1&quot;</span>,<span class="st">&quot;Column2&quot;</span>,<span class="st">&quot;Column3&quot;</span>)</a></code></pre></div>
+<div id="linux" class="section level3">
+<h3><span class="header-section-number">A.1.3</span> Linux</h3>
+<p>R is part of many Linux distributions, therefore you should check with your Linux package management system if it’s already installed.</p>
+<p>The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”</p>
+<ul>
+<li>Open <a href="https://cran.r-project.org/bin/linux/">https://cran.r-project.org/bin/linux/</a> and then follow the directory trail to the version of Linux you wish to install R on top of</li>
+</ul>
+<p>The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.</p>
 </div>
 </div>
-<div id="wide-to-long" class="section level3">
-<h3><span class="header-section-number">2.2.2</span> wide to long</h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># wide format</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">head</span>(df)</a></code></pre></div>
-<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0</code></pre>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="co"># convert wide to long format</span></a>
-<a class="sourceLine" id="cb8-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
-<a class="sourceLine" id="cb8-3" title="3">                                      <span class="dt">cols =</span> <span class="op">-</span>time,</a>
-<a class="sourceLine" id="cb8-4" title="4">                                      <span class="dt">names_to =</span> <span class="st">&quot;name&quot;</span>,</a>
-<a class="sourceLine" id="cb8-5" title="5">                                      <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>,</a>
-<a class="sourceLine" id="cb8-6" title="6">                                      <span class="dt">values_drop_na =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb8-7" title="7">                         )</a>
-<a class="sourceLine" id="cb8-8" title="8"></a>
-<a class="sourceLine" id="cb8-9" title="9"><span class="co"># long format</span></a>
-<a class="sourceLine" id="cb8-10" title="10"><span class="kw">head</span>(df.long)</a></code></pre></div>
-<pre><code>##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5</code></pre>
-</div>
-<div id="long-to-wide" class="section level3">
-<h3><span class="header-section-number">2.2.3</span> long to wide</h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" title="1"><span class="co"># long format</span></a>
-<a class="sourceLine" id="cb10-2" title="2"><span class="kw">head</span>(df.long)</a></code></pre></div>
-<pre><code>##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" title="1"><span class="co"># convert long table into wide table</span></a>
-<a class="sourceLine" id="cb12-2" title="2">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_wider</span>(df.long,</a>
-<a class="sourceLine" id="cb12-3" title="3">                                     <span class="dt">names_from =</span> <span class="st">&quot;name&quot;</span>,</a>
-<a class="sourceLine" id="cb12-4" title="4">                                     <span class="dt">values_from =</span> <span class="st">&quot;value&quot;</span>)</a>
-<a class="sourceLine" id="cb12-5" title="5">                         )</a>
-<a class="sourceLine" id="cb12-6" title="6"></a>
-<a class="sourceLine" id="cb12-7" title="7"><span class="co"># wide format</span></a>
-<a class="sourceLine" id="cb12-8" title="8"><span class="kw">head</span>(df.wide)</a></code></pre></div>
-<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatVolFlowColdwater FlatVolFlowHotwater FlatHum FlatTemp
-## 1                0.006                   0      NA       NA
-## 2                0.000                   0      NA       NA
-## 3                0.000                   0      NA       NA
-## 4                0.000                   0      NA       NA
-## 5                0.006                   0      NA       NA
-## 6                0.000                   0      NA       NA</code></pre>
+<div id="how-to-download-and-install-rstudio" class="section level2">
+<h2><span class="header-section-number">A.2</span> How to Download and Install RStudio</h2>
+<p>R Studio is a development environment for R.</p>
+<ol style="list-style-type: decimal">
+<li>Open <a href="https://rstudio.com/products/rstudio/download/">https://rstudio.com/products/rstudio/download/</a> and download “RStudio Desktop Open Source”</li>
+<li>Follow the on-screen instructions</li>
+<li>Once you have installed R Studio, you can run it like any other application via</li>
+</ol>
 
-</div>
 </div>
 </div>
             </section>
@@ -346,8 +261,8 @@ read.csv() is a convenience wrapper function around read.table(). If you need mo
           </div>
         </div>
       </div>
-<a href="getting-started.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="explorative-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

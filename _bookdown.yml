@@ -1,10 +1,13 @@
 book_filename: "Energy Data Analysis with R"
 rmd_files: [
   "index.rmd",
-  "introduction.Rmd",
+  "gettingStarted.Rmd",
+  "rBasics.Rmd",
   "eda.Rmd",
-  "datavis.Rmd",
-  "a1-installation.Rmd"
+  "dataVis.Rmd",
+  "a1-installation.Rmd",
+  "a2-rPackages.Rmd"
+
 ]
 language:
   ui:

@@ -1,8 +1,0 @@
-# Introduction
-This book is aimed at R beginners as well as advanced R users. The recipes in this book will show you how to complete certain tasks. Simple examples are shown so that you can understand the basic principle and reproduce it with your own data.
-
-The book is strongly inspired by the [R Graphics Cookbook] (https://r-graphics.org/). The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks that can be performed with the R or RStudio program. 
-
-## Why R and RStudio
-Spreadsheet programs like Excel quickly reach their limits when working with large data sets or creating complex graphics. Also the interactive ability of the graphics is limited. The open source programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
-
