@@ -1,5 +1,5 @@
 --- 
-title: "edar - Energy Data Analysis with R"
+title: "Energy Data Analysis with R"
 author: "Reto Marek"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
