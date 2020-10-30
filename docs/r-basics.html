@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 2 R Basics | Energy Data Analysis with R</title>
+  <meta name="description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 2 R Basics | Energy Data Analysis with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="github-repo" content="hslu-ige-laes/edar" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 2 R Basics | Energy Data Analysis with R" />
+  
+  <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
+  
+
+<meta name="author" content="Reto Marek" />
+
+
+<meta name="date" content="2020-10-30" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="installing-r-and-r-studio.html"/>
+<link rel="next" href="explorative-data-analysis.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Energy Data Analysis with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Preface</a></li>
+<li class="chapter" data-level="1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html"><i class="fa fa-check"></i><b>1</b> Installing R and R Studio</a><ul>
+<li class="chapter" data-level="1.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#download-and-install"><i class="fa fa-check"></i><b>1.1</b> Download and install</a><ul>
+<li class="chapter" data-level="1.1.1" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#windows"><i class="fa fa-check"></i><b>1.1.1</b> Windows</a></li>
+<li class="chapter" data-level="1.1.2" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#mac"><i class="fa fa-check"></i><b>1.1.2</b> Mac</a></li>
+<li class="chapter" data-level="1.1.3" data-path="installing-r-and-r-studio.html"><a href="installing-r-and-r-studio.html#linux"><i class="fa fa-check"></i><b>1.1.3</b> Linux</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="r-basics.html"><a href="r-basics.html"><i class="fa fa-check"></i><b>2</b> R Basics</a><ul>
+<li class="chapter" data-level="2.1" data-path="r-basics.html"><a href="r-basics.html#packages"><i class="fa fa-check"></i><b>2.1</b> Packages</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="r-basics.html"><a href="r-basics.html#install-from-cran"><i class="fa fa-check"></i><b>2.1.1</b> Install from CRAN</a></li>
+<li class="chapter" data-level="2.1.2" data-path="r-basics.html"><a href="r-basics.html#install-from-github"><i class="fa fa-check"></i><b>2.1.2</b> Install from github</a></li>
+<li class="chapter" data-level="2.1.3" data-path="r-basics.html"><a href="r-basics.html#loading"><i class="fa fa-check"></i><b>2.1.3</b> Loading</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="r-basics.html"><a href="r-basics.html#importing-data"><i class="fa fa-check"></i><b>2.2</b> Importing data</a><ul>
+<li class="chapter" data-level="2.2.1" data-path="r-basics.html"><a href="r-basics.html#csv-file"><i class="fa fa-check"></i><b>2.2.1</b> csv file</a></li>
+<li class="chapter" data-level="2.2.2" data-path="r-basics.html"><a href="r-basics.html#excel-file"><i class="fa fa-check"></i><b>2.2.2</b> Excel File</a></li>
+</ul></li>
+<li class="chapter" data-level="2.3" data-path="r-basics.html"><a href="r-basics.html#data-manipulations"><i class="fa fa-check"></i><b>2.3</b> Data manipulations</a><ul>
+<li class="chapter" data-level="2.3.1" data-path="r-basics.html"><a href="r-basics.html#data-frames"><i class="fa fa-check"></i><b>2.3.1</b> data frames</a></li>
+<li class="chapter" data-level="2.3.2" data-path="r-basics.html"><a href="r-basics.html#wide-to-long"><i class="fa fa-check"></i><b>2.3.2</b> wide to long</a></li>
+<li class="chapter" data-level="2.3.3" data-path="r-basics.html"><a href="r-basics.html#long-to-wide"><i class="fa fa-check"></i><b>2.3.3</b> long to wide</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>3</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="3.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#get-overview"><i class="fa fa-check"></i><b>3.1</b> Get overview</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#load-data"><i class="fa fa-check"></i><b>3.1.1</b> Load data</a></li>
+<li class="chapter" data-level="3.1.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#names"><i class="fa fa-check"></i><b>3.1.2</b> Names</a></li>
+<li class="chapter" data-level="3.1.3" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#structure"><i class="fa fa-check"></i><b>3.1.3</b> Structure</a></li>
+<li class="chapter" data-level="3.1.4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#headtail"><i class="fa fa-check"></i><b>3.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="3.1.5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#five-number-summary"><i class="fa fa-check"></i><b>3.1.5</b> Five number summary</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#data-wrangling"><i class="fa fa-check"></i><b>3.2</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html#season-from-date"><i class="fa fa-check"></i><b>3.2.1</b> season from date</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>4</b> Data Visualizations</a><ul>
+<li class="chapter" data-level="4.1" data-path="data-visualizations.html"><a href="data-visualizations.html#general-plots"><i class="fa fa-check"></i><b>4.1</b> General Plots</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="data-visualizations.html"><a href="data-visualizations.html#scatterplot"><i class="fa fa-check"></i><b>4.1.1</b> Scatterplot</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-visualizations.html"><a href="data-visualizations.html#building-energy-signature"><i class="fa fa-check"></i><b>4.2</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-visualizations.html"><a href="data-visualizations.html#static"><i class="fa fa-check"></i><b>4.2.1</b> static</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-visualizations.html"><a href="data-visualizations.html#interactive"><i class="fa fa-check"></i><b>4.2.2</b> interactive</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Energy Data Analysis with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="r-basics" class="section level1">
+<h1><span class="header-section-number">Chapter 2</span> R Basics</h1>
+<div id="packages" class="section level2">
+<h2><span class="header-section-number">2.1</span> Packages</h2>
+<div id="install-from-cran" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> Install from CRAN</h3>
+<ul>
+<li>Close all projects in R Studio</li>
+<li><code>install.packages("ggplot2")</code></li>
+</ul>
+</div>
+<div id="install-from-github" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Install from github</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb1-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;retomarek/redutils&quot;</span>)</a></code></pre></div>
+<p><br></p>
+</div>
+<div id="loading" class="section level3">
+<h3><span class="header-section-number">2.1.3</span> Loading</h3>
+<ul>
+<li><code>library(ggplot2)</code></li>
+</ul>
+<p><br></p>
+</div>
+</div>
+<div id="importing-data" class="section level2">
+<h2><span class="header-section-number">2.2</span> Importing data</h2>
+<div id="csv-file" class="section level3">
+<h3><span class="header-section-number">2.2.1</span> csv file</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb2-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
+<p>Attention: By default, strings in the data are treated as factors.
+read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table</p>
+<p><br></p>
+</div>
+<div id="excel-file" class="section level3">
+<h3><span class="header-section-number">2.2.2</span> Excel File</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">library</span>(xslx)</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetIndex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Revenues&quot;</span>)</a></code></pre></div>
+<p>For reading older Excel files in the .xls format, the gdata package has the function read.xls():</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;gdata&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">library</span>(gdata)</a>
+<a class="sourceLine" id="cb5-5" title="5"><span class="co"># Read first sheet</span></a>
+<a class="sourceLine" id="cb5-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>)</a>
+<a class="sourceLine" id="cb5-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.</p>
+<p><br></p>
+</div>
+</div>
+<div id="data-manipulations" class="section level2">
+<h2><span class="header-section-number">2.3</span> Data manipulations</h2>
+<div id="data-frames" class="section level3">
+<h3><span class="header-section-number">2.3.1</span> data frames</h3>
+<div id="change-row-names-of-df" class="section level4">
+<h4><span class="header-section-number">2.3.1.1</span> change row names of df</h4>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Column1&quot;</span>,<span class="st">&quot;Column2&quot;</span>,<span class="st">&quot;Column3&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="wide-to-long" class="section level3">
+<h3><span class="header-section-number">2.3.2</span> wide to long</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># wide format</span></a>
+<a class="sourceLine" id="cb7-2" title="2"><span class="kw">head</span>(df)</a></code></pre></div>
+<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
+## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
+## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
+## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
+## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
+## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
+## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
+##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
+## 1      12.80        157.50           3.2                  0                 0
+## 2      12.35         11.25           1.6                 19                 0
+## 3      11.90        146.25           2.4                  0                 0
+## 4      11.90        157.50           0.8                  0                 0
+## 5      11.60        146.25           2.4                  0                 0
+## 6      11.75         22.50           0.8                  0                 0
+##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
+## 1      NA       NA                0.006                   0
+## 2      NA       NA                0.000                   0
+## 3      NA       NA                0.000                   0
+## 4      NA       NA                0.000                   0
+## 5      NA       NA                0.006                   0
+## 6      NA       NA                0.000                   0</code></pre>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" title="1"><span class="co"># convert wide to long format</span></a>
+<a class="sourceLine" id="cb9-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
+<a class="sourceLine" id="cb9-3" title="3">                                      <span class="dt">cols =</span> <span class="op">-</span>time,</a>
+<a class="sourceLine" id="cb9-4" title="4">                                      <span class="dt">names_to =</span> <span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb9-5" title="5">                                      <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>,</a>
+<a class="sourceLine" id="cb9-6" title="6">                                      <span class="dt">values_drop_na =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb9-7" title="7">                         )</a>
+<a class="sourceLine" id="cb9-8" title="8"></a>
+<a class="sourceLine" id="cb9-9" title="9"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb9-10" title="10"><span class="kw">head</span>(df.long)</a></code></pre></div>
+<pre><code>##                       time          name  value
+## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
+## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
+## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
+## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
+## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
+## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5</code></pre>
+</div>
+<div id="long-to-wide" class="section level3">
+<h3><span class="header-section-number">2.3.3</span> long to wide</h3>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" title="1"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb11-2" title="2"><span class="kw">head</span>(df.long)</a></code></pre></div>
+<pre><code>##                       time          name  value
+## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
+## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
+## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
+## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
+## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
+## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" title="1"><span class="co"># convert long table into wide table</span></a>
+<a class="sourceLine" id="cb13-2" title="2">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_wider</span>(df.long,</a>
+<a class="sourceLine" id="cb13-3" title="3">                                     <span class="dt">names_from =</span> <span class="st">&quot;name&quot;</span>,</a>
+<a class="sourceLine" id="cb13-4" title="4">                                     <span class="dt">values_from =</span> <span class="st">&quot;value&quot;</span>)</a>
+<a class="sourceLine" id="cb13-5" title="5">                         )</a>
+<a class="sourceLine" id="cb13-6" title="6"></a>
+<a class="sourceLine" id="cb13-7" title="7"><span class="co"># wide format</span></a>
+<a class="sourceLine" id="cb13-8" title="8"><span class="kw">head</span>(df.wide)</a></code></pre></div>
+<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
+## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
+## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
+## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
+## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
+## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
+## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
+##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
+## 1      12.80        157.50           3.2                  0                 0
+## 2      12.35         11.25           1.6                 19                 0
+## 3      11.90        146.25           2.4                  0                 0
+## 4      11.90        157.50           0.8                  0                 0
+## 5      11.60        146.25           2.4                  0                 0
+## 6      11.75         22.50           0.8                  0                 0
+##   FlatVolFlowColdwater FlatVolFlowHotwater FlatHum FlatTemp
+## 1                0.006                   0      NA       NA
+## 2                0.000                   0      NA       NA
+## 3                0.000                   0      NA       NA
+## 4                0.000                   0      NA       NA
+## 5                0.006                   0      NA       NA
+## 6                0.000                   0      NA       NA</code></pre>
+
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="installing-r-and-r-studio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explorative-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["Energy Data Analysis with R.pdf", "Energy Data Analysis with R.epub"],
+"toc": {
+"collapse": "subsection"
+},
+"info": false
+});
+});
+</script>
+
+</body>
+
+</html>

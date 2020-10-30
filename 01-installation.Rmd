@@ -1,0 +1,16 @@
+# Installing R and R Studio
+- Before we can start the first analysis, we have to install "R" and "RStudio".
+- "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface.
+- "R" may be used without "RStudio", but "RStudio" may not be used without "R". Both, "R" and "RStudio" are free of charge and there are no licencse fees.
+
+## Download and install
+Installation instructions according to [@Grolemund.2015]
+
+### Windows
+Installation according 
+
+### Mac
+
+
+### Linux
+

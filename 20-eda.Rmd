@@ -1,0 +1,74 @@
+# Explorative Data Analysis
+## Get overview
+
+> Get an overview of the whole data set and specific series of it
+
+### Load data
+
+> Load test data set in a data frame (e.g. from a csv-file)
+
+```{r eda readcsv}
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+```
+
+<br>
+
+### Names
+
+> show the column headers of the data frame
+
+```{r eda names}
+names(df)
+```
+
+<br>
+
+### Structure
+
+> show the structure of the data frame
+
+```{r eda str}
+str(df)
+```
+
+<br>
+
+### Head/Tail
+```{r eda head}
+head(df)
+```
+
+```{r eda tail}
+tail(df)
+```
+
+<br>
+
+### Five number summary
+
+> reveals details of a specific series
+
+```{r eda summary}
+summary(df$WthStnTemp)
+```
+
+<br>
+
+## Data Wrangling
+### season from date
+```{r eda season1}
+# install redutils library
+# devtools::install_github("retomarek/redutils", ref = "master")
+
+# get season from a date
+redutils::season(as.Date("2019-04-01"))
+```
+```{r eda season2}
+redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
+```
+```{r eda season3}
+# apply it for a data frame
+df.season <- dplyr::mutate(df, season = redutils::season(df$time))
+head(df.season)
+```
+ 

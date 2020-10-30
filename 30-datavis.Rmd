@@ -1,0 +1,86 @@
+# Data Visualizations
+
+## General Plots
+### Scatterplot
+#### plot()
+```{r scatterplot plot}
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
+
+# crate simple scatterplot
+plot(df$WthStnTemp, df$BldgEnergyHeating)
+```
+
+<br>
+
+## Building Energy Signature
+### static
+```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(redutils)
+library(lubridate)
+
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
+               stringsAsFactors=FALSE, sep =",")
+
+# select data and calculate season
+data <- df %>% 
+  select(time, WthStnTemp, BldgEnergyHeating) %>% 
+  mutate(season = redutils::season(df$time)) %>% 
+  na.omit()
+
+# Aggregate data to daily values
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$year <- as.Date(cut(data$time, breaks = "year"))
+data$month <- as.Date(cut(data$time, breaks = "month"))
+data$day <- as.Date(cut(data$time, breaks = "day"))
+
+data <- data %>% 
+  select(day, WthStnTemp, BldgEnergyHeating, season) %>% 
+  group_by(day) %>% 
+  mutate(WthStnTemp = mean(WthStnTemp))
+
+data <- data %>% 
+  group_by(day) %>% 
+  mutate(BldgEnergyHeating = sum(BldgEnergyHeating))
+
+data <- data %>% 
+  unique()
+
+# static chart with ggplot
+p <- ggplot2::ggplot(data) +
+  ggplot2::geom_point(aes(x = WthStnTemp,
+                          y = BldgEnergyHeating, color=season,
+                          text = paste("</br>Date:  ", as.Date(data$day),
+                                       "</br>Temp: ", round(data$WthStnTemp, digits = 1), "\u00B0C",
+                                       "</br>Energy: ", round(data$BldgEnergyHeating, digits = 0), "kWh/d",
+                                       "</br>Season: ", data$season))
+                      ) +
+  ggtitle("Building Energy Signature") +
+        theme_minimal() +
+        theme(
+          legend.position="none",
+          plot.title = element_text(hjust = 0.5)
+        )
+p
+```
+
+<br>
+
+### interactive
+Make ggplot2 chart above interactive with plotly
+
+```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = TRUE}
+# continuation from upper ggplot code section
+plotly::ggplotly(p, tooltip = c("text")) %>%
+  layout(xaxis = list(title = "Outside temperature (\u00B0C)",
+                      range = c(min(-5,min(data$WthStnTemp)), max(35,max(data$WthStnTemp))), zeroline = F),
+         yaxis = list(title = "Daily energy consumption (kWh/d)",
+                      range = c(-5, max(data$BldgEnergyHeating) + 10)),
+         showlegend = TRUE
+         ) %>%
+  plotly::config(displayModeBar = FALSE, displaylogo = FALSE)
+```
