@@ -763,14 +763,14 @@ R Studio is a development environment for R.
 Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing ``RStudio'' at the Windows Run prompt.
 
 \hypertarget{packages}{%
-\chapter{R Packages}\label{packages}}
+\chapter{Packages in R}\label{packages}}
 
 Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package. The following describes how to load and use packages.
 
 \hypertarget{install-packages}{%
 \section{Install Packages}\label{install-packages}}
 
-The easiest way to install an R Package is to use the RStudio tab packages:
+The easiest way to install an R Package is to use the RStudio tab ``Packages'':
 
 \begin{figure}
 \includegraphics[width=0.5\linewidth]{images/a2-installPackagesRStudio} \caption{Install packages via RStudio GUI}\label{fig:knitr-logo}
@@ -799,7 +799,7 @@ Open R (if already opened please close all projects) and type the following at t
 
 This will search for the package ``ggplot'' specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
 
-If you want to install a package directly from github, the package `devtools' must be installed first:
+If you want to install a package directly from github, the package ``devtools'' must be installed first:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -814,7 +814,7 @@ If you want to install a package directly from github, the package `devtools' mu
 
 If you have installed a package, its functions are not yet available in your R project.
 
-To use an R package, you must load it in your script with the following command:
+To use an R package in your sript, you must load it with the following command:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -822,8 +822,8 @@ To use an R package, you must load it in your script with the following command:
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{upading-packages}{%
-\section{Upading Packages}\label{upading-packages}}
+\hypertarget{updating-packages}{%
+\section{Updating Packages}\label{updating-packages}}
 
 R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
 

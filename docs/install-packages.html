@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>B Packages in R | Energy Data Analysis with R</title>
+  <title>B.1 Install Packages | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta property="og:title" content="B.1 Install Packages | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="B.1 Install Packages | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="open-rstudio.html"/>
-<link rel="next" href="install-packages.html"/>
+<link rel="prev" href="packages.html"/>
+<link rel="next" href="loading-packages.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -209,17 +209,37 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="packages" class="section level1">
-<h1><span class="header-section-number">B</span> Packages in R</h1>
-<p>Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package. The following describes how to load and use packages.</p>
+<div id="install-packages" class="section level2">
+<h2><span class="header-section-number">B.1</span> Install Packages</h2>
+<p>The easiest way to install an R Package is to use the RStudio tab “Packages”:</p>
+<div class="figure"><span id="fig:knitr-logo"></span>
+<img src="images/a2-installPackagesRStudio.png" alt="Install packages via RStudio GUI" width="50%" />
+<p class="caption">
+Figure B.1: Install packages via RStudio GUI
+</p>
+</div>
+<ol style="list-style-type: lower-alpha">
+<li><p>Click on the “Packages” tab</p></li>
+<li><p>Click on “Install” next to Update</p></li>
+<li><p>Type the name of the package under “Packages, in this case type ggplot2</p></li>
+<li><p>Click “Install”</p></li>
+</ol>
+<p>An other way is to use the install.packages function.
+Open R (if already opened please close all projects) and type the following at the command line:</p>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
+<p>If you want to install a package directly from github, the package “devtools” must be installed first:</p>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;retomarek/redutils&quot;</span>)</a></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="open-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="packages.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loading-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

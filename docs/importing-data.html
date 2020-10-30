@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>B Packages in R | Energy Data Analysis with R</title>
+  <title>2.1 Importing data | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta property="og:title" content="2.1 Importing data | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="2.1 Importing data | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="open-rstudio.html"/>
-<link rel="next" href="install-packages.html"/>
+<link rel="prev" href="r-basics.html"/>
+<link rel="next" href="data-manipulations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -209,17 +209,46 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="packages" class="section level1">
-<h1><span class="header-section-number">B</span> Packages in R</h1>
-<p>Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package. The following describes how to load and use packages.</p>
+<div id="importing-data" class="section level2">
+<h2><span class="header-section-number">2.1</span> Importing data</h2>
+<div id="csv-file" class="section level3">
+<h3><span class="header-section-number">2.1.1</span> csv file</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb1-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
+<p>Attention: By default, strings in the data are treated as factors.
+read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table</p>
+<p><br></p>
+</div>
+<div id="excel-file" class="section level3">
+<h3><span class="header-section-number">2.1.2</span> Excel File</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb3-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="kw">library</span>(xslx)</a>
+<a class="sourceLine" id="cb3-5" title="5"></a>
+<a class="sourceLine" id="cb3-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb3-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetIndex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb3-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Revenues&quot;</span>)</a></code></pre></div>
+<p>For reading older Excel files in the .xls format, the gdata package has the function read.xls():</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;gdata&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">library</span>(gdata)</a>
+<a class="sourceLine" id="cb4-5" title="5"><span class="co"># Read first sheet</span></a>
+<a class="sourceLine" id="cb4-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">2</span>)</a></code></pre></div>
+<p>Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.</p>
+<p><br></p>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="open-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="r-basics.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-manipulations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

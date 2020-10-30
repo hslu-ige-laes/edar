@@ -37,4 +37,4 @@ open-rstudio
 packages
 install-packages
 loading-packages
-upading-packages
+updating-packages

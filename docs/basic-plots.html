@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>B Packages in R | Energy Data Analysis with R</title>
+  <title>3.3 Basic plots | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta property="og:title" content="3.3 Basic plots | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="B Packages in R | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="3.3 Basic plots | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="open-rstudio.html"/>
-<link rel="next" href="install-packages.html"/>
+<link rel="prev" href="data-wrangling.html"/>
+<link rel="next" href="data-visualizations.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -209,17 +209,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="packages" class="section level1">
-<h1><span class="header-section-number">B</span> Packages in R</h1>
-<p>Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package. The following describes how to load and use packages.</p>
+<div id="basic-plots" class="section level2">
+<h2><span class="header-section-number">3.3</span> Basic plots</h2>
+<div id="scatterplot" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Scatterplot</h3>
+<div id="plot" class="section level4">
+<h4><span class="header-section-number">3.3.1.1</span> plot()</h4>
+<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># load data set</span></a>
+<a class="sourceLine" id="cb31-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb31-3" title="3"></a>
+<a class="sourceLine" id="cb31-4" title="4"><span class="co"># crate simple scatterplot</span></a>
+<a class="sourceLine" id="cb31-5" title="5"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
+<p><img src="Energy-Data-Analysis-with-R_files/figure-html/scatterplot%20plot-1.png" width="672" /></p>
+
 </div>
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="open-rstudio.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="install-packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-wrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="data-visualizations.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
