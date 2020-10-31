@@ -10,6 +10,10 @@ data-frames
 change-row-names-of-df
 wide-to-long
 long-to-wide
+data-wrangling
+add-metadata-for-later-filtering
+add-year-month-day
+add-season-of-year
 explorative-data-analysis
 get-overview
 load-data
@@ -17,8 +21,6 @@ names
 structure
 headtail
 five-number-summary
-data-wrangling
-season-from-date
 basic-plots
 scatterplot
 plot
@@ -27,6 +29,7 @@ building-energy-signature
 task
 solution
 discussion
+see-also
 installation
 download-and-install-r
 windows
@@ -38,9 +41,3 @@ packages
 install-packages
 loading-packages
 updating-packages
-add-metadata-for-later-filtering
-date
-data-wrangling-1
-see-also
-add-year-month-day
-add-season-of-year
