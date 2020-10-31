@@ -3,7 +3,7 @@ rmd_files: [
   "index.rmd",
   "gettingStarted.Rmd",
   "rBasics.Rmd",
-  "dataWrangling",
+  "dataWrangling.Rmd",
   "eda.Rmd",
   "dataVis.Rmd",
   "a1-installation.Rmd",

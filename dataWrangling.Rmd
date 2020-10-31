@@ -2,22 +2,65 @@
 ## Add Metadata for later filtering
 
 Firstly we have to load the required libraries and import a dataset into a dataframe:
-```{metadata load dataset, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata dataset, warning=FALSE, message=FALSE, collapse = TRUE}
 
 # load data set
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
-               stringsAsFactors=FALSE, sep =",")
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+               stringsAsFactors=FALSE, sep =";")
 
 ```
 
-### Date
-```{metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
+### Add Year, Month, Day
+To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
+```{r metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
 library(dplyr)
 library(lubridate)
 
-df$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
-df$year <- as.Date(cut(data$time, breaks = "year"))
-df$month <- as.Date(cut(data$time, breaks = "month"))
-df$day <- as.Date(cut(data$time, breaks = "day"))
-head(df)
+df <- data
+
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+df$year <- as.Date(cut(df$time, breaks = "year"))
+df$month <- as.Date(cut(df$time, breaks = "month"))
+df$day <- as.Date(cut(df$time, breaks = "day"))
+```
+
+This code first parses the timestamp with a specific timezone. Then three columns are added.
+
+Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards. 
+
+```{r metadata date output, warning=FALSE, message=FALSE, collapse = TRUE}
+head(df,2)
+tail(df,2)
+```
+
+### Add Season of Year
+For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
+
+```{r metadata season1}
+# install redutils library
+# devtools::install_github("retomarek/redutils", ref = "master")
+
+# get season from a date
+redutils::season(as.Date("2019-04-01"))
+```
+
+If you want to change the language, you can give the function dedicated names for the season:
+
+```{r metadata season2}
+redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
+```
+
+To apply this function to a whole dataframe we can use the dplyr mutate function:
+
+```{r metadata season3}
+
+df <- data
+
+# apply it for a data frame
+df <- dplyr::mutate(df, season = redutils::season(df$time))
+```
+
+```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = TRUE}
+head(df,2)
+tail(df,2)
 ```

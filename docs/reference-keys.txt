@@ -38,3 +38,9 @@ packages
 install-packages
 loading-packages
 updating-packages
+add-metadata-for-later-filtering
+date
+data-wrangling-1
+see-also
+add-year-month-day
+add-season-of-year
