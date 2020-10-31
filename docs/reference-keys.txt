@@ -12,7 +12,7 @@ wide-to-long
 long-to-wide
 data-wrangling
 add-metadata-for-later-filtering
-add-year-month-day
+add-year-month-day-day-of-week
 add-season-of-year
 explorative-data-analysis
 get-overview

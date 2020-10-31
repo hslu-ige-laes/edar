@@ -1,7 +1,7 @@
 # Data Visualizations
 ## Building Energy Signature
 ### Task
-blabla
+Often the time series data from the outside temperature and the energy data are available in separate formats and time intervals. Therefore the following example imports and aggregates them separately.
 
 ### Solution
 ```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
@@ -11,42 +11,38 @@ library(dplyr)
 library(redutils)
 library(lubridate)
 
-# load data set
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
-               stringsAsFactors=FALSE, sep =",")
+# load time series data and aggregate daily mean values
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+dfOutsideTemp$day <- as.Date(cut(dfOutsideTemp$time, breaks = "day"))
+dfOutsideTemp <- dfOutsideTemp %>% group_by(day) %>% mutate(tempMean = mean(centralOutsideTemp)) %>% ungroup()
+dfOutsideTemp <- dfOutsideTemp %>% select(day, tempMean) %>% unique() %>% na.omit()
 
-# select data and calculate season
-data <- df %>% 
-  select(time, WthStnTemp, BldgEnergyHeating) %>% 
-  mutate(season = redutils::season(df$time)) %>% 
-  na.omit()
+dfHeatEnergy <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv",
+                         stringsAsFactors=FALSE, sep =";")
 
-# Aggregate data to daily values
-data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
-data$year <- as.Date(cut(data$time, breaks = "year"))
-data$month <- as.Date(cut(data$time, breaks = "month"))
-data$day <- as.Date(cut(data$time, breaks = "day"))
+dfHeatEnergy <- dfHeatEnergy %>% select(time, energyHeatingMeter) %>% na.omit()
+dfHeatEnergy$time <- parse_date_time(dfHeatEnergy$time, "YmdHMS", tz = "Europe/Zurich")
+dfHeatEnergy$day <- as.Date(cut(dfHeatEnergy$time, breaks = "day"))
+dfHeatEnergy <- dfHeatEnergy %>% group_by(day) %>% mutate(energyMax = max(energyHeatingMeter)) %>% ungroup()
+dfHeatEnergy <- dfHeatEnergy %>% select(day, energyMax) %>% unique() %>% na.omit()
+dfHeatEnergy <- dfHeatEnergy %>% mutate(energyCons = energyMax - lag(energyMax)) %>% select(-energyMax) %>% na.omit()
 
-data <- data %>% 
-  select(day, WthStnTemp, BldgEnergyHeating, season) %>% 
-  group_by(day) %>% 
-  mutate(WthStnTemp = mean(WthStnTemp))
+# merge the data in a tidy format
+df <- merge(dfOutsideTemp, dfHeatEnergy, by = "day")
 
-data <- data %>% 
-  group_by(day) %>% 
-  mutate(BldgEnergyHeating = sum(BldgEnergyHeating))
-
-data <- data %>% 
-  unique()
+# calculate season
+df <- df %>% mutate(season = redutils::season(df$day))
 
 # static chart with ggplot
-p <- ggplot2::ggplot(data) +
-  ggplot2::geom_point(aes(x = WthStnTemp,
-                          y = BldgEnergyHeating, color=season,
-                          text = paste("</br>Date:  ", as.Date(data$day),
-                                       "</br>Temp: ", round(data$WthStnTemp, digits = 1), "\u00B0C",
-                                       "</br>Energy: ", round(data$BldgEnergyHeating, digits = 0), "kWh/d",
-                                       "</br>Season: ", data$season))
+p <- ggplot2::ggplot(df) +
+  ggplot2::geom_point(aes(x = tempMean,
+                          y = energyCons, color=season,
+                          text = paste("</br>Date:  ", as.Date(df$day),
+                                       "</br>Temp: ", round(df$tempMean, digits = 1), "\u00B0C",
+                                       "</br>Energy: ", round(df$energyCons, digits = 0), "kWh/d",
+                                       "</br>Season: ", df$season))
                       ) +
   ggtitle("Building Energy Signature") +
         theme_minimal() +
@@ -63,9 +59,9 @@ Add the following part to your script to make the chart above interactive:
 # continuation from upper ggplot code section
 plotly::ggplotly(p, tooltip = c("text")) %>%
   layout(xaxis = list(title = "Outside temperature (\u00B0C)",
-                      range = c(min(-5,min(data$WthStnTemp)), max(35,max(data$WthStnTemp))), zeroline = F),
+                      range = c(min(-5,min(df$tempMean)), max(35,max(df$tempMean))), zeroline = F),
          yaxis = list(title = "Daily energy consumption (kWh/d)",
-                      range = c(-5, max(data$BldgEnergyHeating) + 10)),
+                      range = c(-5, max(df$energyCons) + 10)),
          showlegend = TRUE
          ) %>%
   plotly::config(displayModeBar = FALSE, displaylogo = FALSE)

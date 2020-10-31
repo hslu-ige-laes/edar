@@ -359,8 +359,8 @@ Firstly we have to load the required libraries and import a dataset into a dataf
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{add-year-month-day}{%
-\subsection{Add Year, Month, Day}\label{add-year-month-day}}
+\hypertarget{add-year-month-day-day-of-week}{%
+\subsection{Add Year, Month, Day, Day of Week}\label{add-year-month-day-day-of-week}}
 
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
 
@@ -375,6 +375,7 @@ To group, filter and aggregate data we need to have a the date splitted up in da
 \NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
 \NormalTok{df}\OperatorTok{$}\NormalTok{month <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"month"}\NormalTok{))}
 \NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{weekdays}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -388,10 +389,16 @@ Please note that the month also contains the year and a day. This is useful for 
 \CommentTok{##                  time centralOutsideTemp       year      month        day}
 \CommentTok{## 1 2018-03-21 11:00:00                5.2 2018-01-01 2018-03-01 2018-03-21}
 \CommentTok{## 2 2018-03-21 12:00:00                6.7 2018-01-01 2018-03-01 2018-03-21}
+\CommentTok{##    weekday}
+\CommentTok{## 1 Mittwoch}
+\CommentTok{## 2 Mittwoch}
 \KeywordTok{tail}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
 \CommentTok{##                      time centralOutsideTemp       year      month        day}
 \CommentTok{## 21864 2020-09-17 10:00:00              26.65 2020-01-01 2020-09-01 2020-09-17}
 \CommentTok{## 21865 2020-09-17 11:00:00              28.10 2020-01-01 2020-09-01 2020-09-17}
+\CommentTok{##          weekday}
+\CommentTok{## 21864 Donnerstag}
+\CommentTok{## 21865 Donnerstag}
 \end{Highlighting}
 \end{Shaded}
 
@@ -426,7 +433,7 @@ If you want to change the language, you can give the function dedicated names fo
 ## [1] "Frühling"
 \end{verbatim}
 
-To apply this function to a whole dataframe we can use the dplyr mutate function:
+To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named ``season'':
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -643,7 +650,7 @@ reveals details of a specific series
 \hypertarget{task}{%
 \subsection{Task}\label{task}}
 
-blabla
+Often the time series data from the outside temperature and the energy data are available in separate formats and time intervals. Therefore the following example imports and aggregates them separately.
 
 \hypertarget{solution}{%
 \subsection{Solution}\label{solution}}
@@ -656,42 +663,38 @@ blabla
 \KeywordTok{library}\NormalTok{(redutils)}
 \KeywordTok{library}\NormalTok{(lubridate)}
 
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{","}\NormalTok{)}
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+\NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# select data and calculate season}
-\NormalTok{data <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(time, WthStnTemp, BldgEnergyHeating) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{dfHeatEnergy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv"}\NormalTok{,}
+                         \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\CommentTok{# Aggregate data to daily values}
-\NormalTok{data}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{data}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
-\NormalTok{data}\OperatorTok{$}\NormalTok{month <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"month"}\NormalTok{))}
-\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, energyHeatingMeter) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyMax =} \KeywordTok{max}\NormalTok{(energyHeatingMeter)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, energyMax) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyCons =}\NormalTok{ energyMax }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(energyMax)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{energyMax) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(day, WthStnTemp, BldgEnergyHeating, season) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{WthStnTemp =} \KeywordTok{mean}\NormalTok{(WthStnTemp))}
+\CommentTok{# merge the data in a tidy format}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfHeatEnergy, }\DataTypeTok{by =} \StringTok{"day"}\NormalTok{)}
 
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{BldgEnergyHeating =} \KeywordTok{sum}\NormalTok{(BldgEnergyHeating))}
-
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{unique}\NormalTok{()}
+\CommentTok{# calculate season}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
 
 \CommentTok{# static chart with ggplot}
-\NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
-\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ WthStnTemp,}
-                          \DataTypeTok{y =}\NormalTok{ BldgEnergyHeating, }\DataTypeTok{color=}\NormalTok{season,}
-                          \DataTypeTok{text =} \KeywordTok{paste}\NormalTok{(}\StringTok{"</br>Date:  "}\NormalTok{, }\KeywordTok{as.Date}\NormalTok{(data}\OperatorTok{$}\NormalTok{day),}
-                                       \StringTok{"</br>Temp: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(data}\OperatorTok{$}\NormalTok{WthStnTemp, }\DataTypeTok{digits =} \DecValTok{1}\NormalTok{), }\StringTok{"\textbackslash{}u00B0C"}\NormalTok{,}
-                                       \StringTok{"</br>Energy: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(data}\OperatorTok{$}\NormalTok{BldgEnergyHeating, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{), }\StringTok{"kWh/d"}\NormalTok{,}
-                                       \StringTok{"</br>Season: "}\NormalTok{, data}\OperatorTok{$}\NormalTok{season))}
+\NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ tempMean,}
+                          \DataTypeTok{y =}\NormalTok{ energyCons, }\DataTypeTok{color=}\NormalTok{season,}
+                          \DataTypeTok{text =} \KeywordTok{paste}\NormalTok{(}\StringTok{"</br>Date:  "}\NormalTok{, }\KeywordTok{as.Date}\NormalTok{(df}\OperatorTok{$}\NormalTok{day),}
+                                       \StringTok{"</br>Temp: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean, }\DataTypeTok{digits =} \DecValTok{1}\NormalTok{), }\StringTok{"\textbackslash{}u00B0C"}\NormalTok{,}
+                                       \StringTok{"</br>Energy: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{energyCons, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{), }\StringTok{"kWh/d"}\NormalTok{,}
+                                       \StringTok{"</br>Season: "}\NormalTok{, df}\OperatorTok{$}\NormalTok{season))}
 \NormalTok{                      ) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Building Energy Signature"}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
@@ -712,9 +715,9 @@ Add the following part to your script to make the chart above interactive:
 \CommentTok{# continuation from upper ggplot code section}
 \NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Outside temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
-                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\KeywordTok{min}\NormalTok{(data}\OperatorTok{$}\NormalTok{WthStnTemp)), }\KeywordTok{max}\NormalTok{(}\DecValTok{35}\NormalTok{,}\KeywordTok{max}\NormalTok{(data}\OperatorTok{$}\NormalTok{WthStnTemp))), }\DataTypeTok{zeroline =}\NormalTok{ F),}
+                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean)), }\KeywordTok{max}\NormalTok{(}\DecValTok{35}\NormalTok{,}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean))), }\DataTypeTok{zeroline =}\NormalTok{ F),}
          \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily energy consumption (kWh/d)"}\NormalTok{,}
-                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{, }\KeywordTok{max}\NormalTok{(data}\OperatorTok{$}\NormalTok{BldgEnergyHeating) }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)),}
+                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{energyCons) }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)),}
          \DataTypeTok{showlegend =} \OtherTok{TRUE}
 \NormalTok{         ) }\OperatorTok{%>%}
 \StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{displayModeBar =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
