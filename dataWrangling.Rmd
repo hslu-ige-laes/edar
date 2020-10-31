@@ -1,0 +1,23 @@
+# Data Wrangling
+## Add Metadata for later filtering
+
+Firstly we have to load the required libraries and import a dataset into a dataframe:
+```{metadata load dataset, warning=FALSE, message=FALSE, collapse = TRUE}
+
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
+               stringsAsFactors=FALSE, sep =",")
+
+```
+
+### Date
+```{metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
+library(dplyr)
+library(lubridate)
+
+df$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+df$year <- as.Date(cut(data$time, breaks = "year"))
+df$month <- as.Date(cut(data$time, breaks = "month"))
+df$day <- as.Date(cut(data$time, breaks = "day"))
+head(df)
+```
