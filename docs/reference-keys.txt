@@ -23,10 +23,10 @@ basic-plots
 scatterplot
 plot
 data-visualizations
-general-plots
 building-energy-signature
-static
-interactive
+task
+solution
+discussion
 installation
 download-and-install-r
 windows

@@ -1,12 +1,9 @@
 # Data Visualizations
-
-## General Plots
-
-
-<br>
-
 ## Building Energy Signature
-### static
+### Task
+blabla
+
+### Solution
 ```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
 library(ggplot2)
 library(plotly)
@@ -60,10 +57,7 @@ p <- ggplot2::ggplot(data) +
 p
 ```
 
-<br>
-
-### interactive
-Make ggplot2 chart above interactive with plotly
+Add the following part to your script to make the chart above interactive:
 
 ```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = TRUE}
 # continuation from upper ggplot code section
@@ -76,3 +70,6 @@ plotly::ggplotly(p, tooltip = c("text")) %>%
          ) %>%
   plotly::config(displayModeBar = FALSE, displaylogo = FALSE)
 ```
+
+### Discussion
+blabla

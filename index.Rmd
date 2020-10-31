@@ -1,6 +1,6 @@
 --- 
 title: "Energy Data Analysis with R"
-author: "Lucerne University of Sciences and Arts, Engineering & Architecture, Institute of Building Technology and Energy IGE, Reto Marek"
+author: "Reto Marek"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 output: bookdown::gitbook
