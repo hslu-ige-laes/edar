@@ -77,7 +77,7 @@ blabla
 Create a mollier h-x diagram with scatter plot of temperature- and humidity time series data including a comfort zone.
 
 ### Solution
-```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r mollier hx, warning=FALSE, message=FALSE, collapse = TRUE}
 library(redutils)
 library(dplyr)
 library(r2d3)

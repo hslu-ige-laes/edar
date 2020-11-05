@@ -120,7 +120,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-10-31}
+\date{2020-11-05}
 
 \begin{document}
 \maketitle
@@ -733,6 +733,57 @@ blabla
 
 \hypertarget{see-also}{%
 \subsection{See Also}\label{see-also}}
+
+\hypertarget{mollier-hx-diagram}{%
+\section{Mollier hx Diagram}\label{mollier-hx-diagram}}
+
+\hypertarget{task-1}{%
+\subsection{Task}\label{task-1}}
+
+Create a mollier h-x diagram with scatter plot of temperature- and humidity time series data including a comfort zone.
+
+\hypertarget{solution-1}{%
+\subsection{Solution}\label{solution-1}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(redutils)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(r2d3)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# read data}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# select temperature and humidity and remove empty cells}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp, FlatA_Hum) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# create column with day for later grouping}
+\NormalTok{data}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+
+\CommentTok{# calculate daily mean of temperature and humidity}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{humMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Hum))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# shrink down to daily values}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean, humMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# plot mollier hx diagram}
+\NormalTok{redutils}\OperatorTok{::}\KeywordTok{mollierHxDiagram}\NormalTok{(data)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/mollier hx-1.pdf}
+
+\hypertarget{discussion-1}{%
+\subsection{Discussion}\label{discussion-1}}
+
+blabla
+
+\hypertarget{see-also-1}{%
+\subsection{See Also}\label{see-also-1}}
 
 \hypertarget{appendix-appendix}{%
 \appendix}

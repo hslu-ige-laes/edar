@@ -30,6 +30,11 @@ task
 solution
 discussion
 see-also
+mollier-hx-diagram
+task-1
+solution-1
+discussion-1
+see-also-1
 installation
 download-and-install-r
 windows
