@@ -71,3 +71,41 @@ plotly::ggplotly(p, tooltip = c("text")) %>%
 blabla
 
 ### See Also
+
+## Mollier hx Diagram
+### Task
+Create a mollier h-x diagram with scatter plot of temperature- and humidity time series data including a comfort zone.
+
+### Solution
+```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
+library(redutils)
+library(dplyr)
+library(r2d3)
+library(lubridate)
+
+# read data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
+
+# select temperature and humidity and remove empty cells
+data <- data %>% select(time, FlatA_Temp, FlatA_Hum) %>% na.omit()
+
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$day <- as.Date(cut(data$time, breaks = "day"))
+
+# calculate daily mean of temperature and humidity
+data <- data %>% group_by(day) %>% mutate(tempMean = mean(as.numeric(FlatA_Temp))) %>% ungroup()
+data <- data %>% group_by(day) %>% mutate(humMean = mean(as.numeric(FlatA_Hum))) %>% ungroup()
+
+# shrink down to daily values
+data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
+
+# plot mollier hx diagram
+redutils::mollierHxDiagram(data)
+```
+
+### Discussion
+blabla
+
+### See Also
