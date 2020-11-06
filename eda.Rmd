@@ -38,7 +38,7 @@ str(df)
 head(df)
 ```
 
-```{r eda tail, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r eda tail, warning=FALSE, message=FALSE, collapse = FALSE}
 tail(df)
 ```
 
@@ -48,7 +48,7 @@ tail(df)
 
 > reveals details of a specific series
 
-```{r eda summary, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r eda summary, warning=FALSE, message=FALSE, collapse = FALSE}
 summary(df$WthStnTemp)
 ```
 
@@ -59,7 +59,7 @@ summary(df$WthStnTemp)
 ## Basic plots
 ### Scatterplot
 #### plot()
-```{r scatterplot plot, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r scatterplot plot, warning=FALSE, message=FALSE, collapse = FALSE}
 # load data set
 df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
 

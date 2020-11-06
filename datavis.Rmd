@@ -21,7 +21,7 @@ After reading in the two time series the data has to get aggregated per day and 
 
 Create a new script, copy/paste the following code and run it:
 
-```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = FALSE}
 library(ggplot2)
 library(plotly)
 library(dplyr)
@@ -72,7 +72,7 @@ p
 
 Add the following part to your script to make the chart above interactive:
 
-```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = FALSE}
 # continuation from upper ggplot code section
 plotly::ggplotly(p, tooltip = c("text")) %>%
   layout(xaxis = list(title = "Outside temperature (\u00B0C)",
@@ -110,7 +110,7 @@ install_github("hslu-ige-laes/redutils")
 ```
 Create a new script, copy/paste the following code and run it:
 
-```{r mollier hx, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r mollier hx, warning=FALSE, message=FALSE, collapse = FALSE}
 library(redutils)
 library(dplyr)
 library(r2d3)

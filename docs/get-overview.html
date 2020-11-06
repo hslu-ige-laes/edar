@@ -232,7 +232,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Load test data set in a data frame (e.g. from a csv-file)</p>
 </blockquote>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
 <p><br></p>
 </div>
 <div id="names" class="section level3">
@@ -240,7 +240,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>show the column headers of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
 <pre><code>##  [1] &quot;time&quot;                 &quot;WthStnPress&quot;          &quot;WthStnHum&quot;           
 ##  [4] &quot;WthStnRain&quot;           &quot;WthStnSolRad&quot;         &quot;WthStnTemp&quot;          
 ##  [7] &quot;WthStnWindDir&quot;        &quot;WthStnWindSpd&quot;        &quot;BldgEnergyHotwater&quot;  
@@ -253,7 +253,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>show the structure of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    16394 obs. of  14 variables:
 ##  $ time                : chr  &quot;2018-09-30T22:00:00.000Z&quot; &quot;2018-09-30T23:00:00.000Z&quot; &quot;2018-10-01T00:00:00.000Z&quot; &quot;2018-10-01T01:00:00.000Z&quot; ...
 ##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
@@ -273,7 +273,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="headtail" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> Head/Tail</h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
 ## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
@@ -295,35 +295,35 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      NA       NA                0.000                   0
 ## 5      NA       NA                0.006                   0
 ## 6      NA       NA                0.000                   0</code></pre>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">tail</span>(df)</a>
-<a class="sourceLine" id="cb28-2" title="2"><span class="co">##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad</span></a>
-<a class="sourceLine" id="cb28-3" title="3"><span class="co">## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9</span></a>
-<a class="sourceLine" id="cb28-4" title="4"><span class="co">## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0</span></a>
-<a class="sourceLine" id="cb28-5" title="5"><span class="co">## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0</span></a>
-<a class="sourceLine" id="cb28-6" title="6"><span class="co">## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0</span></a>
-<a class="sourceLine" id="cb28-7" title="7"><span class="co">## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0</span></a>
-<a class="sourceLine" id="cb28-8" title="8"><span class="co">## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA</span></a>
-<a class="sourceLine" id="cb28-9" title="9"><span class="co">##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater</span></a>
-<a class="sourceLine" id="cb28-10" title="10"><span class="co">## 16389     22.000        162.00      0.000000                 NA</span></a>
-<a class="sourceLine" id="cb28-11" title="11"><span class="co">## 16390     20.175        124.25      1.609340                 NA</span></a>
-<a class="sourceLine" id="cb28-12" title="12"><span class="co">## 16391     19.350        125.00      0.402335                 NA</span></a>
-<a class="sourceLine" id="cb28-13" title="13"><span class="co">## 16392     19.900         93.00      1.609340                 NA</span></a>
-<a class="sourceLine" id="cb28-14" title="14"><span class="co">## 16393     20.625        116.25      2.414010                 NA</span></a>
-<a class="sourceLine" id="cb28-15" title="15"><span class="co">## 16394         NA            NA            NA                 NA</span></a>
-<a class="sourceLine" id="cb28-16" title="16"><span class="co">##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater</span></a>
-<a class="sourceLine" id="cb28-17" title="17"><span class="co">## 16389                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-18" title="18"><span class="co">## 16390                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-19" title="19"><span class="co">## 16391                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-20" title="20"><span class="co">## 16392                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-21" title="21"><span class="co">## 16393                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-22" title="22"><span class="co">## 16394                NA      NA       NA                   NA</span></a>
-<a class="sourceLine" id="cb28-23" title="23"><span class="co">##       FlatVolFlowHotwater</span></a>
-<a class="sourceLine" id="cb28-24" title="24"><span class="co">## 16389                  NA</span></a>
-<a class="sourceLine" id="cb28-25" title="25"><span class="co">## 16390                  NA</span></a>
-<a class="sourceLine" id="cb28-26" title="26"><span class="co">## 16391                  NA</span></a>
-<a class="sourceLine" id="cb28-27" title="27"><span class="co">## 16392                  NA</span></a>
-<a class="sourceLine" id="cb28-28" title="28"><span class="co">## 16393                  NA</span></a>
-<a class="sourceLine" id="cb28-29" title="29"><span class="co">## 16394                  NA</span></a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
+<pre><code>##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
+## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
+## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
+## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0
+## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0
+## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0
+## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA
+##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater
+## 16389     22.000        162.00      0.000000                 NA
+## 16390     20.175        124.25      1.609340                 NA
+## 16391     19.350        125.00      0.402335                 NA
+## 16392     19.900         93.00      1.609340                 NA
+## 16393     20.625        116.25      2.414010                 NA
+## 16394         NA            NA            NA                 NA
+##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater
+## 16389                NA      NA       NA                   NA
+## 16390                NA      NA       NA                   NA
+## 16391                NA      NA       NA                   NA
+## 16392                NA      NA       NA                   NA
+## 16393                NA      NA       NA                   NA
+## 16394                NA      NA       NA                   NA
+##       FlatVolFlowHotwater
+## 16389                  NA
+## 16390                  NA
+## 16391                  NA
+## 16392                  NA
+## 16393                  NA
+## 16394                  NA</code></pre>
 <p><br></p>
 </div>
 <div id="five-number-summary" class="section level3">
@@ -331,9 +331,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>reveals details of a specific series</p>
 </blockquote>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="co">##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s </span></a>
-<a class="sourceLine" id="cb29-3" title="3"><span class="co">##   -5.25    5.50   11.25   11.99   17.35   40.30      12</span></a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
+##   -5.25    5.50   11.25   11.99   17.35   40.30      12</code></pre>
 <p><br></p>
 </div>
 </div>

@@ -2,7 +2,7 @@
 ## Add Metadata for later filtering
 
 Firstly we have to load a dataset into a dataframe:
-```{r metadata dataset, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata dataset, warning=FALSE, message=FALSE, collapse = FALSE}
 
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
@@ -12,7 +12,7 @@ df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/cent
 
 ### Year, Month, Day, Day of Week
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
-```{r metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata date, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)
 library(lubridate)
 
@@ -27,7 +27,7 @@ This code first parses the timestamp with a specific timezone. Then three column
 
 Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards. 
 
-```{r metadata date output, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata date output, warning=FALSE, message=FALSE, collapse = FALSE}
 head(df,2)
 tail(df,2)
 ```
@@ -35,7 +35,7 @@ tail(df,2)
 ### Season of Year
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
 
-```{r metadata season1, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata season1, warning=FALSE, message=FALSE, collapse = FALSE}
 # install redutils library
 # devtools::install_github("retomarek/redutils", ref = "master")
 
@@ -45,32 +45,32 @@ redutils::season(as.Date("2019-04-01"))
 
 If you want to change the language, you can give the function dedicated names for the season:
 
-```{r metadata season2, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata season2, warning=FALSE, message=FALSE, collapse = FALSE}
 redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
 ```
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
 
-```{r metadata season3, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata season3, warning=FALSE, message=FALSE, collapse = FALSE}
 # apply it for a data frame
 df <- dplyr::mutate(df, season = redutils::season(df$time))
 ```
 
-```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = FALSE}
 head(df,2)
 tail(df,2)
 ```
 
 ## Data Frames
 Firstly we have to load a dataset into a dataframe:
-```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = FALSE}
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                stringsAsFactors=FALSE, sep =";")
 ```
 
 ### Change Row Names
-```{r change row names, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r change row names, warning=FALSE, message=FALSE, collapse = FALSE}
 # Print the header and the first line
 head(df, 1)
 
@@ -80,7 +80,7 @@ head(df, 1)
 ```
 
 ### Wide to Long
-```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
 
 # create a copy of the dataframe and print the header and the first five line
 head(df, 5)
@@ -98,7 +98,7 @@ head(df.long, 16)
 ```
 
 ### Long to Wide
-```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = FALSE}
 # long format
 head(df.long)
 
@@ -114,7 +114,7 @@ head(df.wide)
 
 
 ### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
-```{r dataframe merge, warning=FALSE, message=FALSE, collapse = TRUE}
+```{r dataframe merge, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)
 library(lubridate)
 
