@@ -41,46 +41,10 @@
   hidelinks,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{listings}
+\newcommand{\passthrough}[1]{#1}
+\lstset{defaultdialect=[5.3]Lua}
+\lstset{defaultdialect=[x86masm]Assembler}
 \usepackage{longtable,booktabs}
 % Correct order of tables after \paragraph or \subparagraph
 \usepackage{etoolbox}
@@ -115,6 +79,9 @@
   \thm@postskip=\thm@preskip
 }
 \makeatother
+\lstset{
+  breaklines=true
+}
 \usepackage[]{natbib}
 \bibliographystyle{apalike}
 
@@ -278,43 +245,35 @@ This will search for the package ``ggplot'' specified on a server (the so-called
 An other way is to use the install.packages function.
 Open R (if already opened please close all projects) and type the following at the command line:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+install.packages("ggplot2")
+\end{lstlisting}
 
 If you want to install a package directly from github, the package ``devtools'' must be installed first:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+\end{lstlisting}
 
 \hypertarget{loading-a-package}{%
 \subsection{Loading a Package}\label{loading-a-package}}
 
 If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+install.packages("ggplot2")
+\end{lstlisting}
 
 \hypertarget{upgrading-packages}{%
 \subsection{Upgrading Packages}\label{upgrading-packages}}
 
 R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+update.packages(ask = FALSE)
+\end{lstlisting}
 
 \hypertarget{loading-data}{%
 \section{Loading Data}\label{loading-data}}
@@ -322,18 +281,14 @@ R packages are often constantly updated on CRAN or GitHub, so you may want to up
 \hypertarget{csv-file}{%
 \subsection{Csv File}\label{csv-file}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{, }\DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+df <- read.csv("datafile.csv")
+df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{","}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+\end{lstlisting}
 
 Attention: By default, strings in the data are treated as factors.
 read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
@@ -341,32 +296,28 @@ read.csv() is a convenience wrapper function around read.table(). If you need mo
 \hypertarget{excel-file}{%
 \subsection{Excel File}\label{excel-file}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Only need to install once}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"xlsx"}\NormalTok{)}
+\begin{lstlisting}[language=R]
+# Only need to install once
+install.packages("xlsx")
 
-\KeywordTok{library}\NormalTok{(xslx)}
+library(xslx)
 
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xlsx"}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetIndex=}\DecValTok{2}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetName=}\StringTok{"Revenues"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+df <- read.xlsx("datafile.xlsx", 1)
+df <- read.xlsx("datafile.xls", sheetIndex=2)
+df <- read.xlsx("datafile.xls", sheetName="Revenues")
+\end{lstlisting}
 
 For reading older Excel files in the .xls format, the gdata package has the function read.xls():
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Only need to install once}
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"gdata"}\NormalTok{)}
+\begin{lstlisting}[language=R]
+# Only need to install once
+install.packages("gdata")
 
-\KeywordTok{library}\NormalTok{(gdata)}
-\CommentTok{# Read first sheet}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheet=}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+library(gdata)
+# Read first sheet
+df <- read.xls("datafile.xls")
+df <- read.xls("datafile.xls", sheet=2)
+\end{lstlisting}
 
 Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you'll need ActiveState Perl. The Community Edition can be obtained for free.
 
@@ -378,214 +329,186 @@ Both the xlsx and gdata packages require other software to be installed on your 
 
 Firstly we have to load a dataset into a dataframe:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# load data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+               stringsAsFactors=FALSE, sep =";")
+\end{lstlisting}
 
 \hypertarget{year-month-day-day-of-week}{%
 \subsection{Year, Month, Day, Day of Week}\label{year-month-day-day-of-week}}
 
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(lubridate)
 
-\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
-\NormalTok{df}\OperatorTok{$}\NormalTok{month <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"month"}\NormalTok{))}
-\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{weekdays}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
-\end{Highlighting}
-\end{Shaded}
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+df$year <- as.Date(cut(df$time, breaks = "year"))
+df$month <- as.Date(cut(df$time, breaks = "month"))
+df$day <- as.Date(cut(df$time, breaks = "day"))
+df$weekday <- weekdays(df$time)
+\end{lstlisting}
 
 This code first parses the timestamp with a specific timezone. Then three columns are added.
 
 Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards.
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+head(df,2)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                  time centralOutsideTemp       year      month        day
 ## 1 2018-03-21 11:00:00                5.2 2018-01-01 2018-03-01 2018-03-21
 ## 2 2018-03-21 12:00:00                6.7 2018-01-01 2018-03-01 2018-03-21
 ##    weekday
 ## 1 Mittwoch
 ## 2 Mittwoch
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tail}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+tail(df,2)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                      time centralOutsideTemp       year      month        day
 ## 21864 2020-09-17 10:00:00              26.65 2020-01-01 2020-09-01 2020-09-17
 ## 21865 2020-09-17 11:00:00              28.10 2020-01-01 2020-09-01 2020-09-17
 ##          weekday
 ## 21864 Donnerstag
 ## 21865 Donnerstag
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{season-of-year}{%
 \subsection{Season of Year}\label{season-of-year}}
 
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# install redutils library}
-\CommentTok{# devtools::install_github("retomarek/redutils", ref = "master")}
+\begin{lstlisting}[language=R]
+# install redutils library
+# devtools::install_github("retomarek/redutils", ref = "master")
 
-\CommentTok{# get season from a date}
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+# get season from a date
+redutils::season(as.Date("2019-04-01"))
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ## [1] "Spring"
-\end{verbatim}
+\end{lstlisting}
 
 If you want to change the language, you can give the function dedicated names for the season:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\StringTok{"Winter"}\NormalTok{,}\StringTok{"Frühling","}\NormalTok{Sommer}\StringTok{","}\NormalTok{Herbst}\StringTok{"))}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ## [1] "Frühling"
-\end{verbatim}
+\end{lstlisting}
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named ``season'':
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# apply it for a data frame}
-\NormalTok{df <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{time))}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# apply it for a data frame
+df <- dplyr::mutate(df, season = redutils::season(df$time))
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+head(df,2)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                  time centralOutsideTemp       year      month        day
 ## 1 2018-03-21 11:00:00                5.2 2018-01-01 2018-03-01 2018-03-21
 ## 2 2018-03-21 12:00:00                6.7 2018-01-01 2018-03-01 2018-03-21
 ##    weekday season
 ## 1 Mittwoch Spring
 ## 2 Mittwoch Spring
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tail}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+tail(df,2)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                      time centralOutsideTemp       year      month        day
 ## 21864 2020-09-17 10:00:00              26.65 2020-01-01 2020-09-01 2020-09-17
 ## 21865 2020-09-17 11:00:00              28.10 2020-01-01 2020-09-01 2020-09-17
 ##          weekday season
 ## 21864 Donnerstag   Fall
 ## 21865 Donnerstag   Fall
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{data-frames}{%
 \section{Data Frames}\label{data-frames}}
 
 Firstly we have to load a dataset into a dataframe:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# load data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+               stringsAsFactors=FALSE, sep =";")
+\end{lstlisting}
 
 \hypertarget{change-row-names}{%
 \subsection{Change Row Names}\label{change-row-names}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Print the header and the first line}
-\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# Print the header and the first line
+head(df, 1)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
 ## 1 2018-10-03 00:00:00        53      24.43      38.8       22.4        44
 ##   FlatC_Temp FlatD_Hum FlatD_Temp
 ## 1       24.5        49      24.43
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# rename columns and print the header and the first line}
-\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{,}\StringTok{"Hum_A"}\NormalTok{,}\StringTok{"Temp_A"}\NormalTok{,}\StringTok{"Hum_B"}\NormalTok{,}\StringTok{"Temp_B"}\NormalTok{,}\StringTok{"Hum_C"}\NormalTok{,}\StringTok{"Temp_C"}\NormalTok{,}\StringTok{"Hum_D"}\NormalTok{, }\StringTok{"Temp_D"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# rename columns and print the header and the first line
+names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","Hum_D", "Temp_D")
+head(df, 1)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
 ## 1 2018-10-03 00:00:00    53  24.43  38.8   22.4    44   24.5    49  24.43
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{wide-to-long}{%
 \subsection{Wide to Long}\label{wide-to-long}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# create a copy of the dataframe and print the header and the first five line}
-\KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# create a copy of the dataframe and print the header and the first five line
+head(df, 5)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
 ## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43
 ## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40
 ## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38
 ## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33
 ## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert wide to long format}
-\NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
-                                      \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{timestamp,}
-                                      \DataTypeTok{names_to =} \StringTok{"sensor"}\NormalTok{,}
-                                      \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
-                                      \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{                         )}
+\begin{lstlisting}[language=R]
+# convert wide to long format
+df.long <- as.data.frame(tidyr::pivot_longer(df,
+                                      cols = -timestamp,
+                                      names_to = "sensor",
+                                      values_to = "value",
+                                      values_drop_na = TRUE)
+                         )
 
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+# long format
+head(df.long, 16)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##              timestamp sensor value
 ## 1  2018-10-03 00:00:00  Hum_A 53.00
 ## 2  2018-10-03 00:00:00 Temp_A 24.43
@@ -603,19 +526,17 @@ Firstly we have to load a dataset into a dataframe:
 ## 14 2018-10-03 01:00:00 Temp_C 24.50
 ## 15 2018-10-03 01:00:00  Hum_D 49.00
 ## 16 2018-10-03 01:00:00 Temp_D 24.40
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{long-to-wide}{%
 \subsection{Long to Wide}\label{long-to-wide}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# long format
+head(df.long)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##             timestamp sensor value
 ## 1 2018-10-03 00:00:00  Hum_A 53.00
 ## 2 2018-10-03 00:00:00 Temp_A 24.43
@@ -623,22 +544,20 @@ Firstly we have to load a dataset into a dataframe:
 ## 4 2018-10-03 00:00:00 Temp_B 22.40
 ## 5 2018-10-03 00:00:00  Hum_C 44.00
 ## 6 2018-10-03 00:00:00 Temp_C 24.50
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert long table into wide table}
-\NormalTok{df.wide <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_wider}\NormalTok{(df.long,}
-                                            \DataTypeTok{names_from =} \StringTok{"sensor"}\NormalTok{,}
-                                            \DataTypeTok{values_from =} \StringTok{"value"}\NormalTok{)}
-\NormalTok{                         )}
+\begin{lstlisting}[language=R]
+# convert long table into wide table
+df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
+                                            names_from = "sensor",
+                                            values_from = "value")
+                         )
 
-\CommentTok{# wide format}
-\KeywordTok{head}\NormalTok{(df.wide)}
-\end{Highlighting}
-\end{Shaded}
+# wide format
+head(df.wide)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
 ## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43
 ## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40
@@ -646,31 +565,29 @@ Firstly we have to load a dataset into a dataframe:
 ## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33
 ## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30
 ## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{DATAWRANGLING-MERGE-TWO-DATAFRAMES}{%
 \subsection{Merge two Dataframes}\label{DATAWRANGLING-MERGE-TWO-DATAFRAMES}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
+\begin{lstlisting}[language=R]
+library(dplyr)
+library(lubridate)
 
-\CommentTok{# read file one and parse dates}
-\NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+# read file one and parse dates
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
 
-\CommentTok{# read file two and parse dates}
-\NormalTok{dfFlatTempHum <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+# read file two and parse dates
+dfFlatTempHum <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
 
-\NormalTok{dfFlatTempHum}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfFlatTempHum}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time, "YmdHMS", tz = "Europe/Zurich")
 
-\CommentTok{# merge the two files into a new data frame and keep only rows where all values are available}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfFlatTempHum, }\DataTypeTok{by =} \StringTok{"time"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-\end{Highlighting}
-\end{Shaded}
+# merge the two files into a new data frame and keep only rows where all values are available
+df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
+\end{lstlisting}
 
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}
@@ -689,11 +606,9 @@ Get an overview of the whole data set and specific series of it
 Load test data set in a data frame (e.g.~from a csv-file)
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{","}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+\end{lstlisting}
 
 \hypertarget{names}{%
 \subsection{Names}\label{names}}
@@ -702,19 +617,17 @@ Load test data set in a data frame (e.g.~from a csv-file)
 show the column headers of the data frame
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+names(df)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##  [1] "time"                 "WthStnPress"          "WthStnHum"           
 ##  [4] "WthStnRain"           "WthStnSolRad"         "WthStnTemp"          
 ##  [7] "WthStnWindDir"        "WthStnWindSpd"        "BldgEnergyHotwater"  
 ## [10] "BldgEnergyHeating"    "FlatHum"              "FlatTemp"            
 ## [13] "FlatVolFlowColdwater" "FlatVolFlowHotwater"
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{structure}{%
 \subsection{Structure}\label{structure}}
@@ -723,13 +636,11 @@ show the column headers of the data frame
 show the structure of the data frame
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{str}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+str(df)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ## 'data.frame':    16394 obs. of  14 variables:
 ##  $ time                : chr  "2018-09-30T22:00:00.000Z" "2018-09-30T23:00:00.000Z" "2018-10-01T00:00:00.000Z" "2018-10-01T01:00:00.000Z" ...
 ##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
@@ -745,18 +656,16 @@ show the structure of the data frame
 ##  $ FlatTemp            : num  NA NA NA NA NA NA NA NA NA NA ...
 ##  $ FlatVolFlowColdwater: num  0.006 0 0 0 0.006 ...
 ##  $ FlatVolFlowHotwater : num  0 0 0 0 0 ...
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{headtail}{%
 \subsection{Head/Tail}\label{headtail}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+head(df)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
 ## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
@@ -778,15 +687,13 @@ show the structure of the data frame
 ## 4      NA       NA                0.000                   0
 ## 5      NA       NA                0.006                   0
 ## 6      NA       NA                0.000                   0
-\end{verbatim}
+\end{lstlisting}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{tail}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+tail(df)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
 ## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
@@ -815,7 +722,7 @@ show the structure of the data frame
 ## 16392                  NA
 ## 16393                  NA
 ## 16394                  NA
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{five-number-summary}{%
 \subsection{Five number summary}\label{five-number-summary}}
@@ -824,16 +731,14 @@ show the structure of the data frame
 reveals details of a specific series
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{WthStnTemp)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+summary(df$WthStnTemp)
+\end{lstlisting}
 
-\begin{verbatim}
+\begin{lstlisting}
 ##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
 ##   -5.25    5.50   11.25   11.99   17.35   40.30      12
-\end{verbatim}
+\end{lstlisting}
 
 \hypertarget{basic-plots}{%
 \section{Basic plots}\label{basic-plots}}
@@ -844,15 +749,13 @@ reveals details of a specific series
 \hypertarget{plot}{%
 \subsubsection{plot()}\label{plot}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{","}\NormalTok{)}
+\begin{lstlisting}[language=R]
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
 
-\CommentTok{# crate simple scatterplot}
-\KeywordTok{plot}\NormalTok{(df}\OperatorTok{$}\NormalTok{WthStnTemp, df}\OperatorTok{$}\NormalTok{BldgEnergyHeating)}
-\end{Highlighting}
-\end{Shaded}
+# crate simple scatterplot
+plot(df$WthStnTemp, df$BldgEnergyHeating)
+\end{lstlisting}
 
 \includegraphics{edar_files/figure-latex/scatterplot plot-1.pdf}
 
@@ -893,74 +796,69 @@ After reading in the two time series the data has to get aggregated per day and 
 
 Create a new script, copy/paste the following code and run it:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(lubridate)}
+\begin{lstlisting}[language=R]
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(redutils)
+library(lubridate)
 
-\CommentTok{# load time series data and aggregate daily mean values}
-\NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
-\NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+# load time series data and aggregate daily mean values
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+dfOutsideTemp$day <- as.Date(cut(dfOutsideTemp$time, breaks = "day"))
+dfOutsideTemp <- dfOutsideTemp %>% group_by(day) %>% mutate(tempMean = mean(centralOutsideTemp)) %>% ungroup()
+dfOutsideTemp <- dfOutsideTemp %>% select(day, tempMean) %>% unique() %>% na.omit()
 
-\NormalTok{dfHeatEnergy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv"}\NormalTok{,}
-                         \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+dfHeatEnergy <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv",
+                         stringsAsFactors=FALSE, sep =";")
+dfHeatEnergy <- dfHeatEnergy %>% select(time, energyHeatingMeter) %>% na.omit()
+dfHeatEnergy$time <- parse_date_time(dfHeatEnergy$time, "YmdHMS", tz = "Europe/Zurich")
+dfHeatEnergy$day <- as.Date(cut(dfHeatEnergy$time, breaks = "day"))
+dfHeatEnergy <- dfHeatEnergy %>% group_by(day) %>% mutate(energyMax = max(energyHeatingMeter)) %>% ungroup()
+dfHeatEnergy <- dfHeatEnergy %>% select(day, energyMax) %>% unique() %>% na.omit()
+dfHeatEnergy <- dfHeatEnergy %>% mutate(energyCons = energyMax - lag(energyMax)) %>% select(-energyMax) %>% na.omit()
 
-\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, energyHeatingMeter) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-\NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyMax =} \KeywordTok{max}\NormalTok{(energyHeatingMeter)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
-\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, energyMax) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-\NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyCons =}\NormalTok{ energyMax }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(energyMax)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{energyMax) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+# merge the data in a tidy format
+df <- merge(dfOutsideTemp, dfHeatEnergy, by = "day")
 
-\CommentTok{# merge the data in a tidy format}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfHeatEnergy, }\DataTypeTok{by =} \StringTok{"day"}\NormalTok{)}
+# calculate season
+df <- df %>% mutate(season = redutils::season(df$day))
 
-\CommentTok{# calculate season}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
-
-\CommentTok{# static chart with ggplot}
-\NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
-\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ tempMean,}
-                          \DataTypeTok{y =}\NormalTok{ energyCons, }\DataTypeTok{color=}\NormalTok{season,}
-                          \DataTypeTok{text =} \KeywordTok{paste}\NormalTok{(}\StringTok{"</br>Date:  "}\NormalTok{, }\KeywordTok{as.Date}\NormalTok{(df}\OperatorTok{$}\NormalTok{day),}
-                                       \StringTok{"</br>Temp: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean, }\DataTypeTok{digits =} \DecValTok{1}\NormalTok{), }\StringTok{"\textbackslash{}u00B0C"}\NormalTok{,}
-                                       \StringTok{"</br>Energy: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{energyCons, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{), }\StringTok{"kWh/d"}\NormalTok{,}
-                                       \StringTok{"</br>Season: "}\NormalTok{, df}\OperatorTok{$}\NormalTok{season))}
-\NormalTok{                      ) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Building Energy Signature"}\NormalTok{) }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
-\StringTok{        }\KeywordTok{theme}\NormalTok{(}
-          \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
-          \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
-\NormalTok{        )}
-\NormalTok{p}
-\end{Highlighting}
-\end{Shaded}
+# static chart with ggplot
+p <- ggplot2::ggplot(df) +
+  ggplot2::geom_point(aes(x = tempMean,
+                          y = energyCons, color=season,
+                          text = paste("</br>Date:  ", as.Date(df$day),
+                                       "</br>Temp: ", round(df$tempMean, digits = 1), "\u00B0C",
+                                       "</br>Energy: ", round(df$energyCons, digits = 0), "kWh/d",
+                                       "</br>Season: ", df$season))
+                      ) +
+  ggtitle("Building Energy Signature") +
+        theme_minimal() +
+        theme(
+          legend.position="none",
+          plot.title = element_text(hjust = 0.5)
+        )
+p
+\end{lstlisting}
 
 \includegraphics{edar_files/figure-latex/energysignature ggplot-1.pdf}
 
 Add the following part to your script to make the chart above interactive:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# continuation from upper ggplot code section}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Outside temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
-                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean)), }\KeywordTok{max}\NormalTok{(}\DecValTok{35}\NormalTok{,}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean))), }\DataTypeTok{zeroline =}\NormalTok{ F),}
-         \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily energy consumption (kWh/d)"}\NormalTok{,}
-                      \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{energyCons) }\OperatorTok{+}\StringTok{ }\DecValTok{10}\NormalTok{)),}
-         \DataTypeTok{showlegend =} \OtherTok{TRUE}
-\NormalTok{         ) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{displayModeBar =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+# continuation from upper ggplot code section
+plotly::ggplotly(p, tooltip = c("text")) %>%
+  layout(xaxis = list(title = "Outside temperature (\u00B0C)",
+                      range = c(min(-5,min(df$tempMean)), max(35,max(df$tempMean))), zeroline = F),
+         yaxis = list(title = "Daily energy consumption (kWh/d)",
+                      range = c(-5, max(df$energyCons) + 10)),
+         showlegend = TRUE
+         ) %>%
+  plotly::config(displayModeBar = FALSE, displaylogo = FALSE)
+\end{lstlisting}
 
 \includegraphics{edar_files/figure-latex/energysignature plotly-1.pdf}
 
@@ -995,54 +893,50 @@ You want to plot a mollier h-x diagram with
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
-Finally use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities) which you can install as followed:
+Finally use the plot function \passthrough{\lstinline!mollierHxDiagram!} from the \passthrough{\lstinline!redutils!} package (R Energy Data Utilities) which you can install as followed:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\begin{lstlisting}[language=R]
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+\end{lstlisting}
 
 Create a new script, copy/paste the following code and run it:
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(r2d3)}
-\KeywordTok{library}\NormalTok{(lubridate)}
+\begin{lstlisting}[language=R]
+library(redutils)
+library(dplyr)
+library(r2d3)
+library(lubridate)
 
-\CommentTok{# read data}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+# read and print data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
 
-\CommentTok{# select temperature and humidity and remove empty cells}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp, FlatA_Hum) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+# select temperature and humidity and remove empty cells
+data <- data %>% select(time, FlatA_Temp, FlatA_Hum) %>% na.omit()
 
-\CommentTok{# create column with day for later grouping}
-\NormalTok{data}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$day <- as.Date(cut(data$time, breaks = "day"))
 
-\CommentTok{# calculate daily mean of temperature and humidity}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{humMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Hum))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+# calculate daily mean of temperature and humidity
+data <- data %>% group_by(day) %>% mutate(tempMean = mean(as.numeric(FlatA_Temp))) %>% ungroup()
+data <- data %>% group_by(day) %>% mutate(humMean = mean(as.numeric(FlatA_Hum))) %>% ungroup()
 
-\CommentTok{# shrink down to daily values and remove rows with empty values}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean, humMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+# shrink down to daily values and remove rows with empty values
+data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 
-\CommentTok{# plot mollier hx diagram}
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{mollierHxDiagram}\NormalTok{(data)}
-\end{Highlighting}
-\end{Shaded}
+# plot mollier hx diagram
+redutils::mollierHxDiagram(data)
+\end{lstlisting}
 
 \includegraphics{edar_files/figure-latex/mollier hx-1.pdf}
 
 \hypertarget{discussion}{%
 \subsection{Discussion}\label{discussion}}
 
-The diagram is based on D3 and packaged into the package \texttt{redutils}. The original D3 source with a html integration you can find here: https://github.com/hslu-ige-laes/d3-mollierhx
+The diagram is based on D3 and packaged into the package \passthrough{\lstinline!redutils!}. The original D3 source with a html integration you can find here: https://github.com/hslu-ige-laes/d3-mollierhx
 
 \hypertarget{see-also}{%
 \subsection{See Also}\label{see-also}}

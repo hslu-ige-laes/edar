@@ -3,7 +3,6 @@
 
 Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataset, warning=FALSE, message=FALSE, collapse = FALSE}
-
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
                stringsAsFactors=FALSE, sep =";")

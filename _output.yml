@@ -17,4 +17,5 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
   toc_depth: 2
+  pandoc_args: --listings
 bookdown::epub_book: default

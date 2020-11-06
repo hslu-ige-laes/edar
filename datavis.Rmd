@@ -38,7 +38,6 @@ dfOutsideTemp <- dfOutsideTemp %>% select(day, tempMean) %>% unique() %>% na.omi
 
 dfHeatEnergy <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv",
                          stringsAsFactors=FALSE, sep =";")
-
 dfHeatEnergy <- dfHeatEnergy %>% select(time, energyHeatingMeter) %>% na.omit()
 dfHeatEnergy$time <- parse_date_time(dfHeatEnergy$time, "YmdHMS", tz = "Europe/Zurich")
 dfHeatEnergy$day <- as.Date(cut(dfHeatEnergy$time, breaks = "day"))
@@ -116,7 +115,7 @@ library(dplyr)
 library(r2d3)
 library(lubridate)
 
-# read data
+# read and print data
 data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                           stringsAsFactors=FALSE, sep =";")
 
