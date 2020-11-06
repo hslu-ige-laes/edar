@@ -674,13 +674,36 @@ reveals details of a specific series
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
 
+\hypertarget{basis}{%
+\subsection{Basis}\label{basis}}
+
+\begin{itemize}
+\item
+  Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals
+\item
+  Energy consumption time series from a energy meter with steadily increasing meter values
+\end{itemize}
+
 \hypertarget{task}{%
 \subsection{Task}\label{task}}
 
-Often the time series data from the outside temperature and the energy data are available in separate formats and time intervals. Therefore the following example imports and aggregates them separately.
+You want to create a scatter plot with
+
+\begin{itemize}
+\item
+  the daily mean outside temperature on the x-axis
+\item
+  the daily energy consumption on the y-axis
+\item
+  points colored according to season
+\end{itemize}
 
 \hypertarget{solution}{%
 \subsection{Solution}\label{solution}}
+
+After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -753,31 +776,38 @@ Add the following part to your script to make the chart above interactive:
 
 \includegraphics{edar_files/figure-latex/energysignature plotly-1.pdf}
 
-\hypertarget{discussion}{%
-\subsection{Discussion}\label{discussion}}
-
-blabla
-
-\hypertarget{see-also}{%
-\subsection{See Also}\label{see-also}}
-
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
+
+\hypertarget{basis-1}{%
+\subsection{Basis}\label{basis-1}}
+
+\begin{itemize}
+\tightlist
+\item
+  A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
+\end{itemize}
 
 \hypertarget{task-1}{%
 \subsection{Task}\label{task-1}}
 
-Create a mollier h-x diagram with
-- scatter plot of temperature- and humidity sensor data (mean values per day)
-- points colored according to season
-- comfort zone
+You want to plot a mollier h-x diagram with
 
-The sensor data is not in a constant intervall and not yet aggregated.
+\begin{itemize}
+\item
+  scatter plot of temperature- and humidity sensor data (mean values per day)
+\item
+  points colored according to season
+\item
+  comfort zone
+\end{itemize}
 
 \hypertarget{solution-1}{%
 \subsection{Solution}\label{solution-1}}
 
-Use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities) which you can install as followed:
+The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
+
+Finally use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities) which you can install as followed:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -787,7 +817,7 @@ Use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} packa
 \end{Highlighting}
 \end{Shaded}
 
-Afterwards create a new script, copy/paste the following code and run it:
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -821,13 +851,13 @@ Afterwards create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/mollier hx-1.pdf}
 
-\hypertarget{discussion-1}{%
-\subsection{Discussion}\label{discussion-1}}
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
 
 The diagram is based on D3 and packaged into the package \texttt{redutils}. The original D3 source with a html integration you can find here: https://github.com/hslu-ige-laes/d3-mollierhx
 
-\hypertarget{see-also-1}{%
-\subsection{See Also}\label{see-also-1}}
+\hypertarget{see-also}{%
+\subsection{See Also}\label{see-also}}
 
 If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \ref{DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 
