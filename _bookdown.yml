@@ -5,9 +5,7 @@ rmd_files: [
   "rBasics.Rmd",
   "dataWrangling.Rmd",
   "eda.Rmd",
-  "dataVis.Rmd",
-  "a1-installation.Rmd",
-  "a2-rPackages.Rmd"
+  "dataVis.Rmd"
 ]
 language:
   ui:

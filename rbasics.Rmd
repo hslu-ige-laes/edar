@@ -47,8 +47,6 @@ R packages are often constantly updated on CRAN or GitHub, so you may want to up
 ```r
 update.packages(ask = FALSE)
 ```
-## R Scripts
-Create and run script.
 
 ## Loading Data
 ### Csv File
@@ -91,4 +89,4 @@ Both the xlsx and gdata packages require other software to be installed on your 
 
 <br>
 
- 
+

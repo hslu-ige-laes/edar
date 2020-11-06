@@ -1,11 +1,11 @@
 # Data Wrangling
 ## Add Metadata for later filtering
 
-Firstly we have to load the required libraries and import a dataset into a dataframe:
+Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataset, warning=FALSE, message=FALSE, collapse = TRUE}
 
 # load data set
-data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
                stringsAsFactors=FALSE, sep =";")
 
 ```
@@ -15,8 +15,6 @@ To group, filter and aggregate data we need to have a the date splitted up in da
 ```{r metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
 library(dplyr)
 library(lubridate)
-
-df <- data
 
 df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
 df$year <- as.Date(cut(df$time, breaks = "year"))
@@ -54,9 +52,6 @@ redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
 
 ```{r metadata season3}
-
-df <- data
-
 # apply it for a data frame
 df <- dplyr::mutate(df, season = redutils::season(df$time))
 ```
@@ -67,7 +62,61 @@ tail(df,2)
 ```
 
 ## Data Frames
-### Merge two {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
+Firstly we have to load a dataset into a dataframe:
+```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = TRUE}
+
+# load data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+               stringsAsFactors=FALSE, sep =";")
+
+```
+
+### Change Row Names
+```{r change row names, warning=FALSE, message=FALSE, collapse = TRUE}
+# Print the header and the first line
+head(df, 1)
+
+# rename columns and print the header and the first line
+names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","Hum_D", "Temp_D")
+head(df, 1)
+```
+
+## Wide to Long
+
+```{r rbasics wide2long}
+
+# create a copy of the dataframe and print the header and the first five line
+head(df, 5)
+
+# convert wide to long format
+df.long <- as.data.frame(tidyr::pivot_longer(df,
+                                      cols = -timestamp,
+                                      names_to = "sensor",
+                                      values_to = "value",
+                                      values_drop_na = TRUE)
+                         )
+
+# long format
+head(df.long, 16)
+```
+
+### Long to Wide
+```{r rbasics long2wide}
+# long format
+head(df.long)
+
+# convert long table into wide table
+df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
+                                            names_from = "sensor",
+                                            values_from = "value")
+                         )
+
+# wide format
+head(df.wide)
+```
+
+
+### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 ```{r dataframe merge, warning=FALSE, message=FALSE, collapse = TRUE}
 library(dplyr)
 library(lubridate)

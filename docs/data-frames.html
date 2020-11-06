@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Explorative Data Analysis | Energy Data Analysis with R</title>
+  <title>3.2 Data Frames | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta property="og:title" content="3.2 Data Frames | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="3.2 Data Frames | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="wide-to-long.html"/>
-<link rel="next" href="get-overview.html"/>
+<link rel="prev" href="add-metadata-for-later-filtering.html"/>
+<link rel="next" href="wide-to-long.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -223,16 +223,36 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="explorative-data-analysis" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Explorative Data Analysis</h1>
+<div id="data-frames" class="section level2">
+<h2><span class="header-section-number">3.2</span> Data Frames</h2>
+<p>Firstly we have to load a dataset into a dataframe:</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" title="1"></a>
+<a class="sourceLine" id="cb18-2" title="2"><span class="co"># load data set</span></a>
+<a class="sourceLine" id="cb18-3" title="3">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb18-4" title="4">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
+<div id="change-row-names" class="section level3">
+<h3><span class="header-section-number">3.2.1</span> Change Row Names</h3>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb19-1" title="1"><span class="co"># Print the header and the first line</span></a>
+<a class="sourceLine" id="cb19-2" title="2"><span class="kw">head</span>(df, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb19-3" title="3"><span class="co">##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum</span></a>
+<a class="sourceLine" id="cb19-4" title="4"><span class="co">## 1 2018-10-03 00:00:00        53      24.43      38.8       22.4        44</span></a>
+<a class="sourceLine" id="cb19-5" title="5"><span class="co">##   FlatC_Temp FlatD_Hum FlatD_Temp</span></a>
+<a class="sourceLine" id="cb19-6" title="6"><span class="co">## 1       24.5        49      24.43</span></a>
+<a class="sourceLine" id="cb19-7" title="7"></a>
+<a class="sourceLine" id="cb19-8" title="8"><span class="co"># rename columns and print the header and the first line</span></a>
+<a class="sourceLine" id="cb19-9" title="9"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>,<span class="st">&quot;Hum_A&quot;</span>,<span class="st">&quot;Temp_A&quot;</span>,<span class="st">&quot;Hum_B&quot;</span>,<span class="st">&quot;Temp_B&quot;</span>,<span class="st">&quot;Hum_C&quot;</span>,<span class="st">&quot;Temp_C&quot;</span>,<span class="st">&quot;Hum_D&quot;</span>, <span class="st">&quot;Temp_D&quot;</span>)</a>
+<a class="sourceLine" id="cb19-10" title="10"><span class="kw">head</span>(df, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb19-11" title="11"><span class="co">##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D</span></a>
+<a class="sourceLine" id="cb19-12" title="12"><span class="co">## 1 2018-10-03 00:00:00    53  24.43  38.8   22.4    44   24.5    49  24.43</span></a></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="wide-to-long.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="get-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="add-metadata-for-later-filtering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="wide-to-long.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 4 Explorative Data Analysis | Energy Data Analysis with R</title>
+  <title>3.3 Wide to Long | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 4 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta property="og:title" content="3.3 Wide to Long | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 4 Explorative Data Analysis | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="3.3 Wide to Long | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="wide-to-long.html"/>
-<link rel="next" href="get-overview.html"/>
+<link rel="prev" href="data-frames.html"/>
+<link rel="next" href="explorative-data-analysis.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -223,16 +223,99 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="explorative-data-analysis" class="section level1">
-<h1><span class="header-section-number">Chapter 4</span> Explorative Data Analysis</h1>
+<div id="wide-to-long" class="section level2">
+<h2><span class="header-section-number">3.3</span> Wide to Long</h2>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" title="1"><span class="co"># create a copy of the dataframe and print the header and the first five line</span></a>
+<a class="sourceLine" id="cb20-2" title="2"><span class="kw">head</span>(df, <span class="dv">5</span>)</a></code></pre></div>
+<pre><code>##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
+## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43
+## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40
+## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38
+## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33
+## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30</code></pre>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># convert wide to long format</span></a>
+<a class="sourceLine" id="cb22-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
+<a class="sourceLine" id="cb22-3" title="3">                                      <span class="dt">cols =</span> <span class="op">-</span>timestamp,</a>
+<a class="sourceLine" id="cb22-4" title="4">                                      <span class="dt">names_to =</span> <span class="st">&quot;sensor&quot;</span>,</a>
+<a class="sourceLine" id="cb22-5" title="5">                                      <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>,</a>
+<a class="sourceLine" id="cb22-6" title="6">                                      <span class="dt">values_drop_na =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb22-7" title="7">                         )</a>
+<a class="sourceLine" id="cb22-8" title="8"></a>
+<a class="sourceLine" id="cb22-9" title="9"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb22-10" title="10"><span class="kw">head</span>(df.long, <span class="dv">16</span>)</a></code></pre></div>
+<pre><code>##              timestamp sensor value
+## 1  2018-10-03 00:00:00  Hum_A 53.00
+## 2  2018-10-03 00:00:00 Temp_A 24.43
+## 3  2018-10-03 00:00:00  Hum_B 38.80
+## 4  2018-10-03 00:00:00 Temp_B 22.40
+## 5  2018-10-03 00:00:00  Hum_C 44.00
+## 6  2018-10-03 00:00:00 Temp_C 24.50
+## 7  2018-10-03 00:00:00  Hum_D 49.00
+## 8  2018-10-03 00:00:00 Temp_D 24.43
+## 9  2018-10-03 01:00:00  Hum_A 53.00
+## 10 2018-10-03 01:00:00 Temp_A 24.40
+## 11 2018-10-03 01:00:00  Hum_B 38.80
+## 12 2018-10-03 01:00:00 Temp_B 22.40
+## 13 2018-10-03 01:00:00  Hum_C 44.00
+## 14 2018-10-03 01:00:00 Temp_C 24.50
+## 15 2018-10-03 01:00:00  Hum_D 49.00
+## 16 2018-10-03 01:00:00 Temp_D 24.40</code></pre>
+<div id="long-to-wide" class="section level3">
+<h3><span class="header-section-number">3.3.1</span> Long to Wide</h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb24-2" title="2"><span class="kw">head</span>(df.long)</a></code></pre></div>
+<pre><code>##             timestamp sensor value
+## 1 2018-10-03 00:00:00  Hum_A 53.00
+## 2 2018-10-03 00:00:00 Temp_A 24.43
+## 3 2018-10-03 00:00:00  Hum_B 38.80
+## 4 2018-10-03 00:00:00 Temp_B 22.40
+## 5 2018-10-03 00:00:00  Hum_C 44.00
+## 6 2018-10-03 00:00:00 Temp_C 24.50</code></pre>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="co"># convert long table into wide table</span></a>
+<a class="sourceLine" id="cb26-2" title="2">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_wider</span>(df.long,</a>
+<a class="sourceLine" id="cb26-3" title="3">                                            <span class="dt">names_from =</span> <span class="st">&quot;sensor&quot;</span>,</a>
+<a class="sourceLine" id="cb26-4" title="4">                                            <span class="dt">values_from =</span> <span class="st">&quot;value&quot;</span>)</a>
+<a class="sourceLine" id="cb26-5" title="5">                         )</a>
+<a class="sourceLine" id="cb26-6" title="6"></a>
+<a class="sourceLine" id="cb26-7" title="7"><span class="co"># wide format</span></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="kw">head</span>(df.wide)</a></code></pre></div>
+<pre><code>##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
+## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43
+## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40
+## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7  24.50  48.3  24.38
+## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33
+## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30
+## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30</code></pre>
 </div>
+<div id="DATAWRANGLING-MERGE-TWO-DATAFRAMES" class="section level3">
+<h3><span class="header-section-number">3.3.2</span> Merge two Dataframes</h3>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb28-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb28-3" title="3"></a>
+<a class="sourceLine" id="cb28-4" title="4"><span class="co"># read file one and parse dates</span></a>
+<a class="sourceLine" id="cb28-5" title="5">dfOutsideTemp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb28-6" title="6">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb28-7" title="7">dfOutsideTemp<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfOutsideTemp<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb28-8" title="8"></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="co"># read file two and parse dates</span></a>
+<a class="sourceLine" id="cb28-10" title="10">dfFlatTempHum &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb28-11" title="11">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb28-12" title="12"></a>
+<a class="sourceLine" id="cb28-13" title="13">dfFlatTempHum<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfFlatTempHum<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb28-14" title="14"></a>
+<a class="sourceLine" id="cb28-15" title="15"><span class="co"># merge the two files into a new data frame and keep only rows where all values are available</span></a>
+<a class="sourceLine" id="cb28-16" title="16">df &lt;-<span class="st"> </span><span class="kw">merge</span>(dfOutsideTemp, dfFlatTempHum, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
+
+</div>
+</div>
+<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
-<a href="wide-to-long.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="get-overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-frames.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="explorative-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -152,16 +152,175 @@ The authors decline any liability or responsibility in connection with the publi
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
-First you have to install R and RStudio.
+\hypertarget{installation}{%
+\section{Installing R and R Studio}\label{installation}}
+
+\begin{itemize}
+\tightlist
+\item
+  Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
+\item
+  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
+\item
+  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''. Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
+\end{itemize}
+
+\hypertarget{download-and-install-r}{%
+\subsection{Download and Install R}\label{download-and-install-r}}
+
+\hypertarget{windows}{%
+\subsubsection{Windows}\label{windows}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/windows/base/} and press the link ``Download R\ldots{}''
+\item
+  Run the downloaded installer file and follow the installation wizard
+\end{enumerate}
+
+The wizard will install R into your ``Program Files'' folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
+
+\hypertarget{mac-osx}{%
+\subsubsection{Mac OSX}\label{mac-osx}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/macosx/} and download the latest *.pkg file
+\item
+  Run the downloaded installer file and follow the installation wizard
+\end{enumerate}
+
+The installer allows you to customize your installation. However the default values will be suitable for most users.
+
+\hypertarget{linux}{%
+\subsubsection{Linux}\label{linux}}
+
+R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
+
+The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
+
+\begin{itemize}
+\tightlist
+\item
+  Open \url{https://cran.r-project.org/bin/linux/} and then follow the directory trail to the version of Linux you wish to install R on top of
+\end{itemize}
+
+The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
+
+\hypertarget{download-and-install-rstudio}{%
+\subsection{Download and Install RStudio}\label{download-and-install-rstudio}}
+
+R Studio is a development environment for R.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Open \url{https://rstudio.com/products/rstudio/download/} and download ``RStudio Desktop Open Source''
+\item
+  Follow the on-screen instructions
+\item
+  Once you have installed R Studio, you can run it like any other application via
+\end{enumerate}
+
+\hypertarget{open-rstudio}{%
+\subsection{Open RStudio}\label{open-rstudio}}
+
+Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing ``RStudio'' at the Windows Run prompt.
+
+\hypertarget{create-your-first-r-script}{%
+\section{Create your first R Script}\label{create-your-first-r-script}}
+
+blabla
+
+\hypertarget{whats-next}{%
+\section{Whats next?}\label{whats-next}}
+
+blabla
 
 \hypertarget{r-basics}{%
 \chapter{R Basics}\label{r-basics}}
 
-\hypertarget{importing-data}{%
-\section{Importing data}\label{importing-data}}
+\hypertarget{packages}{%
+\section{Packages in R}\label{packages}}
+
+Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
+
+The following chapters describe how to install, load, update and use packages.
+
+\hypertarget{installing-a-package}{%
+\subsection{Installing a Package}\label{installing-a-package}}
+
+The easiest way to install an R Package is to use the RStudio tab ``Packages'':
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{images/a2-installPackagesRStudio} \caption{Install packages via RStudio GUI}\label{fig:knitr-logo}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Click on the ``Packages'' tab
+\item
+  Click on ``Install'' next to Update
+\item
+  Type the name of the package under ``Packages, in this case type ggplot2
+\item
+  Click ``Install''
+\end{enumerate}
+
+This will search for the package ``ggplot'' specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
+
+An other way is to use the install.packages function.
+Open R (if already opened please close all projects) and type the following at the command line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you want to install a package directly from github, the package ``devtools'' must be installed first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{loading-a-package}{%
+\subsection{Loading a Package}\label{loading-a-package}}
+
+If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{upgrading-packages}{%
+\subsection{Upgrading Packages}\label{upgrading-packages}}
+
+R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{loading-data}{%
+\section{Loading Data}\label{loading-data}}
 
 \hypertarget{csv-file}{%
-\subsection{csv file}\label{csv-file}}
+\subsection{Csv File}\label{csv-file}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -211,150 +370,19 @@ For reading older Excel files in the .xls format, the gdata package has the func
 
 Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you'll need ActiveState Perl. The Community Edition can be obtained for free.
 
-\hypertarget{data-manipulations}{%
-\section{Data manipulations}\label{data-manipulations}}
-
-\hypertarget{data-frames}{%
-\subsection{data frames}\label{data-frames}}
-
-\hypertarget{change-row-names-of-df}{%
-\subsubsection{change row names of df}\label{change-row-names-of-df}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"Column1"}\NormalTok{,}\StringTok{"Column2"}\NormalTok{,}\StringTok{"Column3"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{wide-to-long}{%
-\subsection{wide to long}\label{wide-to-long}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# wide format}
-\KeywordTok{head}\NormalTok{(df)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert wide to long format}
-\NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
-                                      \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
-                                      \DataTypeTok{names_to =} \StringTok{"name"}\NormalTok{,}
-                                      \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
-                                      \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{                         )}
-
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5
-\end{verbatim}
-
-\hypertarget{long-to-wide}{%
-\subsection{long to wide}\label{long-to-wide}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# long format}
-\KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time          name  value
-## 1 2018-09-30T22:00:00.000Z   WthStnPress 1012.3
-## 2 2018-09-30T22:00:00.000Z     WthStnHum   87.0
-## 3 2018-09-30T22:00:00.000Z    WthStnRain    0.8
-## 4 2018-09-30T22:00:00.000Z  WthStnSolRad    0.0
-## 5 2018-09-30T22:00:00.000Z    WthStnTemp   12.8
-## 6 2018-09-30T22:00:00.000Z WthStnWindDir  157.5
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# convert long table into wide table}
-\NormalTok{df.wide <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_wider}\NormalTok{(df.long,}
-                                     \DataTypeTok{names_from =} \StringTok{"name"}\NormalTok{,}
-                                     \DataTypeTok{values_from =} \StringTok{"value"}\NormalTok{)}
-\NormalTok{                         )}
-
-\CommentTok{# wide format}
-\KeywordTok{head}\NormalTok{(df.wide)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatVolFlowColdwater FlatVolFlowHotwater FlatHum FlatTemp
-## 1                0.006                   0      NA       NA
-## 2                0.000                   0      NA       NA
-## 3                0.000                   0      NA       NA
-## 4                0.000                   0      NA       NA
-## 5                0.006                   0      NA       NA
-## 6                0.000                   0      NA       NA
-\end{verbatim}
-
 \hypertarget{data-wrangling}{%
 \chapter{Data Wrangling}\label{data-wrangling}}
 
 \hypertarget{add-metadata-for-later-filtering}{%
 \section{Add Metadata for later filtering}\label{add-metadata-for-later-filtering}}
 
-Firstly we have to load the required libraries and import a dataset into a dataframe:
+Firstly we have to load a dataset into a dataframe:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 
 \CommentTok{# load data set}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -368,8 +396,6 @@ To group, filter and aggregate data we need to have a the date splitted up in da
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(lubridate)}
-
-\NormalTok{df <-}\StringTok{ }\NormalTok{data}
 
 \NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
 \NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
@@ -437,8 +463,6 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\NormalTok{data}
-
 \CommentTok{# apply it for a data frame}
 \NormalTok{df <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{time))}
 \end{Highlighting}
@@ -447,21 +471,155 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{head}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\CommentTok{##                  time centralOutsideTemp season}
-\CommentTok{## 1 2018-03-21 11:00:00                5.2 Spring}
-\CommentTok{## 2 2018-03-21 12:00:00                6.7 Spring}
+\CommentTok{##                  time centralOutsideTemp       year      month        day}
+\CommentTok{## 1 2018-03-21 11:00:00                5.2 2018-01-01 2018-03-01 2018-03-21}
+\CommentTok{## 2 2018-03-21 12:00:00                6.7 2018-01-01 2018-03-01 2018-03-21}
+\CommentTok{##    weekday season}
+\CommentTok{## 1 Mittwoch Spring}
+\CommentTok{## 2 Mittwoch Spring}
 \KeywordTok{tail}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
-\CommentTok{##                      time centralOutsideTemp season}
-\CommentTok{## 21864 2020-09-17 10:00:00              26.65   Fall}
-\CommentTok{## 21865 2020-09-17 11:00:00              28.10   Fall}
+\CommentTok{##                      time centralOutsideTemp       year      month        day}
+\CommentTok{## 21864 2020-09-17 10:00:00              26.65 2020-01-01 2020-09-01 2020-09-17}
+\CommentTok{## 21865 2020-09-17 11:00:00              28.10 2020-01-01 2020-09-01 2020-09-17}
+\CommentTok{##          weekday season}
+\CommentTok{## 21864 Donnerstag   Fall}
+\CommentTok{## 21865 Donnerstag   Fall}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{data-frames-1}{%
-\section{Data Frames}\label{data-frames-1}}
+\hypertarget{data-frames}{%
+\section{Data Frames}\label{data-frames}}
+
+Firstly we have to load a dataset into a dataframe:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+
+\CommentTok{# load data set}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{change-row-names}{%
+\subsection{Change Row Names}\label{change-row-names}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Print the header and the first line}
+\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
+\CommentTok{##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum}
+\CommentTok{## 1 2018-10-03 00:00:00        53      24.43      38.8       22.4        44}
+\CommentTok{##   FlatC_Temp FlatD_Hum FlatD_Temp}
+\CommentTok{## 1       24.5        49      24.43}
+
+\CommentTok{# rename columns and print the header and the first line}
+\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{,}\StringTok{"Hum_A"}\NormalTok{,}\StringTok{"Temp_A"}\NormalTok{,}\StringTok{"Hum_B"}\NormalTok{,}\StringTok{"Temp_B"}\NormalTok{,}\StringTok{"Hum_C"}\NormalTok{,}\StringTok{"Temp_C"}\NormalTok{,}\StringTok{"Hum_D"}\NormalTok{, }\StringTok{"Temp_D"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
+\CommentTok{##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D}
+\CommentTok{## 1 2018-10-03 00:00:00    53  24.43  38.8   22.4    44   24.5    49  24.43}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{wide-to-long}{%
+\section{Wide to Long}\label{wide-to-long}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create a copy of the dataframe and print the header and the first five line}
+\KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
+## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43
+## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40
+## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38
+## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33
+## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# convert wide to long format}
+\NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
+                                      \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{timestamp,}
+                                      \DataTypeTok{names_to =} \StringTok{"sensor"}\NormalTok{,}
+                                      \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
+                                      \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{)}
+\NormalTok{                         )}
+
+\CommentTok{# long format}
+\KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##              timestamp sensor value
+## 1  2018-10-03 00:00:00  Hum_A 53.00
+## 2  2018-10-03 00:00:00 Temp_A 24.43
+## 3  2018-10-03 00:00:00  Hum_B 38.80
+## 4  2018-10-03 00:00:00 Temp_B 22.40
+## 5  2018-10-03 00:00:00  Hum_C 44.00
+## 6  2018-10-03 00:00:00 Temp_C 24.50
+## 7  2018-10-03 00:00:00  Hum_D 49.00
+## 8  2018-10-03 00:00:00 Temp_D 24.43
+## 9  2018-10-03 01:00:00  Hum_A 53.00
+## 10 2018-10-03 01:00:00 Temp_A 24.40
+## 11 2018-10-03 01:00:00  Hum_B 38.80
+## 12 2018-10-03 01:00:00 Temp_B 22.40
+## 13 2018-10-03 01:00:00  Hum_C 44.00
+## 14 2018-10-03 01:00:00 Temp_C 24.50
+## 15 2018-10-03 01:00:00  Hum_D 49.00
+## 16 2018-10-03 01:00:00 Temp_D 24.40
+\end{verbatim}
+
+\hypertarget{long-to-wide}{%
+\subsection{Long to Wide}\label{long-to-wide}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# long format}
+\KeywordTok{head}\NormalTok{(df.long)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             timestamp sensor value
+## 1 2018-10-03 00:00:00  Hum_A 53.00
+## 2 2018-10-03 00:00:00 Temp_A 24.43
+## 3 2018-10-03 00:00:00  Hum_B 38.80
+## 4 2018-10-03 00:00:00 Temp_B 22.40
+## 5 2018-10-03 00:00:00  Hum_C 44.00
+## 6 2018-10-03 00:00:00 Temp_C 24.50
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# convert long table into wide table}
+\NormalTok{df.wide <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_wider}\NormalTok{(df.long,}
+                                            \DataTypeTok{names_from =} \StringTok{"sensor"}\NormalTok{,}
+                                            \DataTypeTok{values_from =} \StringTok{"value"}\NormalTok{)}
+\NormalTok{                         )}
+
+\CommentTok{# wide format}
+\KeywordTok{head}\NormalTok{(df.wide)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
+## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43
+## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40
+## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7  24.50  48.3  24.38
+## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33
+## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30
+## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30
+\end{verbatim}
 
 \hypertarget{DATAWRANGLING-MERGE-TWO-DATAFRAMES}{%
-\subsection{Merge two}\label{DATAWRANGLING-MERGE-TWO-DATAFRAMES}}
+\subsection{Merge two Dataframes}\label{DATAWRANGLING-MERGE-TWO-DATAFRAMES}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -860,161 +1018,6 @@ The diagram is based on D3 and packaged into the package \texttt{redutils}. The 
 \subsection{See Also}\label{see-also}}
 
 If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \ref{DATAWRANGLING-MERGE-TWO-DATAFRAMES}
-
-\hypertarget{appendix-appendix}{%
-\appendix}
-
-
-\hypertarget{installation}{%
-\chapter{Installing R and R Studio}\label{installation}}
-
-\begin{itemize}
-\tightlist
-\item
-  Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
-\item
-  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
-\item
-  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''. Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
-\end{itemize}
-
-\hypertarget{download-and-install-r}{%
-\section{Download and Install R}\label{download-and-install-r}}
-
-\hypertarget{windows}{%
-\subsection{Windows}\label{windows}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open \url{https://cran.r-project.org/bin/windows/base/} and press the link ``Download R\ldots{}''
-\item
-  Run the downloaded installer file and follow the installation wizard
-\end{enumerate}
-
-The wizard will install R into your ``Program Files'' folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
-
-\hypertarget{mac-osx}{%
-\subsection{Mac OSX}\label{mac-osx}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open \url{https://cran.r-project.org/bin/macosx/} and download the latest *.pkg file
-\item
-  Run the downloaded installer file and follow the installation wizard
-\end{enumerate}
-
-The installer allows you to customize your installation. However the default values will be suitable for most users.
-
-\hypertarget{linux}{%
-\subsection{Linux}\label{linux}}
-
-R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
-
-The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
-
-\begin{itemize}
-\tightlist
-\item
-  Open \url{https://cran.r-project.org/bin/linux/} and then follow the directory trail to the version of Linux you wish to install R on top of
-\end{itemize}
-
-The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
-
-\hypertarget{download-and-install-rstudio}{%
-\section{Download and Install RStudio}\label{download-and-install-rstudio}}
-
-R Studio is a development environment for R.
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open \url{https://rstudio.com/products/rstudio/download/} and download ``RStudio Desktop Open Source''
-\item
-  Follow the on-screen instructions
-\item
-  Once you have installed R Studio, you can run it like any other application via
-\end{enumerate}
-
-\hypertarget{open-rstudio}{%
-\section{Open RStudio}\label{open-rstudio}}
-
-Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing ``RStudio'' at the Windows Run prompt.
-
-\hypertarget{packages}{%
-\chapter{Packages in R}\label{packages}}
-
-Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
-
-The following chapters describe how to install, load, update and use packages.
-
-\hypertarget{install-packages}{%
-\section{Install Packages}\label{install-packages}}
-
-The easiest way to install an R Package is to use the RStudio tab ``Packages'':
-
-\begin{figure}
-\includegraphics[width=0.5\linewidth]{images/a2-installPackagesRStudio} \caption{Install packages via RStudio GUI}\label{fig:knitr-logo}
-\end{figure}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi})}
-\item
-  Click on the ``Packages'' tab
-\item
-  Click on ``Install'' next to Update
-\item
-  Type the name of the package under ``Packages, in this case type ggplot2
-\item
-  Click ``Install''
-\end{enumerate}
-
-This will search for the package ``ggplot'' specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
-
-An other way is to use the install.packages function.
-Open R (if already opened please close all projects) and type the following at the command line:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-If you want to install a package directly from github, the package ``devtools'' must be installed first:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{loading-packages}{%
-\section{Loading Packages}\label{loading-packages}}
-
-If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{updating-packages}{%
-\section{Updating Packages}\label{updating-packages}}
-
-R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
   \bibliography{book.bib,packages.bib}
 
