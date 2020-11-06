@@ -15,7 +15,7 @@ description: "Introduction into energy data analysis and visualization with R."
 # Preface {-}
 This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-This book is aimed at R beginners as well as advanced R users and is strongly inspired by the [R Graphics Cookbook] (https://r-graphics.org/). The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
+This book is aimed at R beginners as well as advanced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a>. The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
 
 The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data.
 

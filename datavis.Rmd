@@ -74,9 +74,24 @@ blabla
 
 ## Mollier hx Diagram
 ### Task
-Create a mollier h-x diagram with scatter plot of temperature- and humidity time series data including a comfort zone.
+Create a mollier h-x diagram with
+- scatter plot of temperature- and humidity sensor data (mean values per day)
+- points colored according to season
+- comfort zone
+
+The sensor data is not in a constant intervall and not yet aggregated.
 
 ### Solution
+Use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities) which you can install as followed:
+
+```r
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+```
+
+Afterwards create a new script, copy/paste the following code and run it:
+
 ```{r mollier hx, warning=FALSE, message=FALSE, collapse = TRUE}
 library(redutils)
 library(dplyr)
@@ -98,7 +113,7 @@ data$day <- as.Date(cut(data$time, breaks = "day"))
 data <- data %>% group_by(day) %>% mutate(tempMean = mean(as.numeric(FlatA_Temp))) %>% ungroup()
 data <- data %>% group_by(day) %>% mutate(humMean = mean(as.numeric(FlatA_Hum))) %>% ungroup()
 
-# shrink down to daily values
+# shrink down to daily values and remove rows with empty values
 data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 
 # plot mollier hx diagram
@@ -106,6 +121,7 @@ redutils::mollierHxDiagram(data)
 ```
 
 ### Discussion
-blabla
+The diagram is based on D3 and packaged into the package `redutils`. The original D3 source with a html integration you can find here: <a href="https://github.com/hslu-ige-laes/d3-mollierhx" target="_blank">https://github.com/hslu-ige-laes/d3-mollierhx</a>
 
 ### See Also
+If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \@ref(DATAWRANGLING-MERGE-TWO-DATAFRAMES)

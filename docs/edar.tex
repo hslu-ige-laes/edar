@@ -120,7 +120,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-05}
+\date{2020-11-06}
 
 \begin{document}
 \maketitle
@@ -135,7 +135,7 @@
 
 This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-This book is aimed at R beginners as well as advanced R users and is strongly inspired by the {[}R Graphics Cookbook{]} (\url{https://r-graphics.org/}). The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
+This book is aimed at R beginners as well as advanced R users and is strongly inspired by the R Graphics Cookbook. The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
 
 The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data.
 
@@ -359,8 +359,8 @@ Firstly we have to load the required libraries and import a dataset into a dataf
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{add-year-month-day-day-of-week}{%
-\subsection{Add Year, Month, Day, Day of Week}\label{add-year-month-day-day-of-week}}
+\hypertarget{year-month-day-day-of-week}{%
+\subsection{Year, Month, Day, Day of Week}\label{year-month-day-day-of-week}}
 
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
 
@@ -402,8 +402,8 @@ Please note that the month also contains the year and a day. This is useful for 
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{add-season-of-year}{%
-\subsection{Add Season of Year}\label{add-season-of-year}}
+\hypertarget{season-of-year}{%
+\subsection{Season of Year}\label{season-of-year}}
 
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column:
 
@@ -454,6 +454,33 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 \CommentTok{##                      time centralOutsideTemp season}
 \CommentTok{## 21864 2020-09-17 10:00:00              26.65   Fall}
 \CommentTok{## 21865 2020-09-17 11:00:00              28.10   Fall}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{data-frames-1}{%
+\section{Data Frames}\label{data-frames-1}}
+
+\hypertarget{DATAWRANGLING-MERGE-TWO-DATAFRAMES}{%
+\subsection{Merge two}\label{DATAWRANGLING-MERGE-TWO-DATAFRAMES}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# read file one and parse dates}
+\NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+\NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# read file two and parse dates}
+\NormalTok{dfFlatTempHum <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\NormalTok{dfFlatTempHum}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfFlatTempHum}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# merge the two files into a new data frame and keep only rows where all values are available}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfFlatTempHum, }\DataTypeTok{by =} \StringTok{"time"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 \end{Highlighting}
 \end{Shaded}
 
@@ -740,10 +767,27 @@ blabla
 \hypertarget{task-1}{%
 \subsection{Task}\label{task-1}}
 
-Create a mollier h-x diagram with scatter plot of temperature- and humidity time series data including a comfort zone.
+Create a mollier h-x diagram with
+- scatter plot of temperature- and humidity sensor data (mean values per day)
+- points colored according to season
+- comfort zone
+
+The sensor data is not in a constant intervall and not yet aggregated.
 
 \hypertarget{solution-1}{%
 \subsection{Solution}\label{solution-1}}
+
+Use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities) which you can install as followed:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Afterwards create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -767,7 +811,7 @@ Create a mollier h-x diagram with scatter plot of temperature- and humidity time
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{humMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Hum))) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
 
-\CommentTok{# shrink down to daily values}
+\CommentTok{# shrink down to daily values and remove rows with empty values}
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean, humMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
 \CommentTok{# plot mollier hx diagram}
@@ -780,10 +824,12 @@ Create a mollier h-x diagram with scatter plot of temperature- and humidity time
 \hypertarget{discussion-1}{%
 \subsection{Discussion}\label{discussion-1}}
 
-blabla
+The diagram is based on D3 and packaged into the package \texttt{redutils}. The original D3 source with a html integration you can find here: https://github.com/hslu-ige-laes/d3-mollierhx
 
 \hypertarget{see-also-1}{%
 \subsection{See Also}\label{see-also-1}}
+
+If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \ref{DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 
 \hypertarget{appendix-appendix}{%
 \appendix}
@@ -914,7 +960,7 @@ If you want to install a package directly from github, the package ``devtools'' 
 \begin{Highlighting}[]
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
 \KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"retomarek/redutils"}\NormalTok{)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

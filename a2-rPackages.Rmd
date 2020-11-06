@@ -31,7 +31,7 @@ If you want to install a package directly from github, the package "devtools" mu
 ```r
 install.packages("devtools")
 library(devtools)
-install_github("retomarek/redutils")
+install_github("hslu-ige-laes/redutils")
 ```
 
 ## Loading Packages

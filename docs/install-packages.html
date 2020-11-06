@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2020-11-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,8 +161,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="3.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>3.1</b> Add Metadata for later filtering</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Add Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Add Season of Year</a></li>
+<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Season of Year</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-frames-1.html"><a href="data-frames-1.html"><i class="fa fa-check"></i><b>3.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-frames-1.html"><a href="data-frames-1.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>3.2.1</b> Merge two</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Explorative Data Analysis</a><ul>
@@ -241,11 +244,11 @@ Figure B.1: Install packages via RStudio GUI
 <p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
 <p>An other way is to use the install.packages function.
 Open R (if already opened please close all projects) and type the following at the command line:</p>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>If you want to install a package directly from github, the package “devtools” must be installed first:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb39-2" title="2"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb39-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;retomarek/redutils&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb41-2" title="2"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
 </div>
             </section>
 

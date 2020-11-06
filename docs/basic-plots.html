@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2020-11-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -161,8 +161,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="3.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>3.1</b> Add Metadata for later filtering</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Add Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Add Season of Year</a></li>
+<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Season of Year</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-frames-1.html"><a href="data-frames-1.html"><i class="fa fa-check"></i><b>3.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-frames-1.html"><a href="data-frames-1.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>3.2.1</b> Merge two</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Explorative Data Analysis</a><ul>
@@ -229,11 +232,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">4.2.1</span> Scatterplot</h3>
 <div id="plot" class="section level4">
 <h4><span class="header-section-number">4.2.1.1</span> plot()</h4>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="co"># load data set</span></a>
-<a class="sourceLine" id="cb34-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb34-3" title="3"></a>
-<a class="sourceLine" id="cb34-4" title="4"><span class="co"># crate simple scatterplot</span></a>
-<a class="sourceLine" id="cb34-5" title="5"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># load data set</span></a>
+<a class="sourceLine" id="cb35-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb35-3" title="3"></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co"># crate simple scatterplot</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
 <p><img src="edar_files/figure-html/scatterplot%20plot-1.png" width="672" /></p>
 
 </div>

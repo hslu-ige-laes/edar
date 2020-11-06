@@ -12,8 +12,10 @@ wide-to-long
 long-to-wide
 data-wrangling
 add-metadata-for-later-filtering
-add-year-month-day-day-of-week
-add-season-of-year
+year-month-day-day-of-week
+season-of-year
+data-frames-1
+DATAWRANGLING-MERGE-TWO-DATAFRAMES
 explorative-data-analysis
 get-overview
 load-data

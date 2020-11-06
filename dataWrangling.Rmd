@@ -10,7 +10,7 @@ data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/ce
 
 ```
 
-### Add Year, Month, Day, Day of Week
+### Year, Month, Day, Day of Week
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
 ```{r metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
 library(dplyr)
@@ -34,7 +34,7 @@ head(df,2)
 tail(df,2)
 ```
 
-### Add Season of Year
+### Season of Year
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
 
 ```{r metadata season1}
@@ -64,4 +64,26 @@ df <- dplyr::mutate(df, season = redutils::season(df$time))
 ```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = TRUE}
 head(df,2)
 tail(df,2)
+```
+
+## Data Frames
+### Merge two {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
+```{r dataframe merge, warning=FALSE, message=FALSE, collapse = TRUE}
+library(dplyr)
+library(lubridate)
+
+# read file one and parse dates
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+
+# read file two and parse dates
+dfFlatTempHum <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
+
+dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time, "YmdHMS", tz = "Europe/Zurich")
+
+# merge the two files into a new data frame and keep only rows where all values are available
+df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
+
 ```

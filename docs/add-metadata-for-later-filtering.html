@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-05" />
+<meta name="date" content="2020-11-06" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="data-wrangling.html"/>
-<link rel="next" href="explorative-data-analysis.html"/>
+<link rel="next" href="data-frames-1.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -161,8 +161,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 <li class="chapter" data-level="3" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>3</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="3.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>3.1</b> Add Metadata for later filtering</a><ul>
-<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Add Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#add-season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Add Season of Year</a></li>
+<li class="chapter" data-level="3.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>3.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="3.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>3.1.2</b> Season of Year</a></li>
+</ul></li>
+<li class="chapter" data-level="3.2" data-path="data-frames-1.html"><a href="data-frames-1.html"><i class="fa fa-check"></i><b>3.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-frames-1.html"><a href="data-frames-1.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>3.2.1</b> Merge two</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="4" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>4</b> Explorative Data Analysis</a><ul>
@@ -230,8 +233,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb14-2" title="2"><span class="co"># load data set</span></a>
 <a class="sourceLine" id="cb14-3" title="3">data &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
 <a class="sourceLine" id="cb14-4" title="4">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
-<div id="add-year-month-day-day-of-week" class="section level3">
-<h3><span class="header-section-number">3.1.1</span> Add Year, Month, Day, Day of Week</h3>
+<div id="year-month-day-day-of-week" class="section level3">
+<h3><span class="header-section-number">3.1.1</span> Year, Month, Day, Day of Week</h3>
 <p>To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:</p>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb15-2" title="2"><span class="kw">library</span>(lubridate)</a>
@@ -260,8 +263,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb16-13" title="13"><span class="co">## 21864 Donnerstag</span></a>
 <a class="sourceLine" id="cb16-14" title="14"><span class="co">## 21865 Donnerstag</span></a></code></pre></div>
 </div>
-<div id="add-season-of-year" class="section level3">
-<h3><span class="header-section-number">3.1.2</span> Add Season of Year</h3>
+<div id="season-of-year" class="section level3">
+<h3><span class="header-section-number">3.1.2</span> Season of Year</h3>
 <p>For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column:</p>
 <div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" title="1"><span class="co"># install redutils library</span></a>
 <a class="sourceLine" id="cb17-2" title="2"><span class="co"># devtools::install_github(&quot;retomarek/redutils&quot;, ref = &quot;master&quot;)</span></a>
@@ -285,17 +288,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb22-6" title="6"><span class="co">##                      time centralOutsideTemp season</span></a>
 <a class="sourceLine" id="cb22-7" title="7"><span class="co">## 21864 2020-09-17 10:00:00              26.65   Fall</span></a>
 <a class="sourceLine" id="cb22-8" title="8"><span class="co">## 21865 2020-09-17 11:00:00              28.10   Fall</span></a></code></pre></div>
-
 </div>
 </div>
-<!-- </div> -->
             </section>
 
           </div>
         </div>
       </div>
 <a href="data-wrangling.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="explorative-data-analysis.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="data-frames-1.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
