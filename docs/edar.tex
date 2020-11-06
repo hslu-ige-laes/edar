@@ -440,24 +440,18 @@ For some analyses it is useful to color single points of a scatterplot according
 
 \CommentTok{# get season from a date}
 \NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{))}
+\CommentTok{## [1] "Spring"}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "Spring"
-\end{verbatim}
 
 If you want to change the language, you can give the function dedicated names for the season:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{), }\KeywordTok{c}\NormalTok{(}\StringTok{"Winter"}\NormalTok{,}\StringTok{"Frühling","}\NormalTok{Sommer}\StringTok{","}\NormalTok{Herbst}\StringTok{"))}
+\StringTok{## [1] "}\NormalTok{Frühling"}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-## [1] "Frühling"
-\end{verbatim}
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named ``season'':
 
@@ -525,22 +519,16 @@ Firstly we have to load a dataset into a dataframe:
 
 \begin{Shaded}
 \begin{Highlighting}[]
+
 \CommentTok{# create a copy of the dataframe and print the header and the first five line}
 \KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+\CommentTok{##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D}
+\CommentTok{## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43}
+\CommentTok{## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40}
+\CommentTok{## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38}
+\CommentTok{## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33}
+\CommentTok{## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30}
 
-\begin{verbatim}
-##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
-## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43
-## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40
-## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38
-## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33
-## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# convert wide to long format}
 \NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
                                       \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{timestamp,}
@@ -551,28 +539,25 @@ Firstly we have to load a dataset into a dataframe:
 
 \CommentTok{# long format}
 \KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
+\CommentTok{##              timestamp sensor value}
+\CommentTok{## 1  2018-10-03 00:00:00  Hum_A 53.00}
+\CommentTok{## 2  2018-10-03 00:00:00 Temp_A 24.43}
+\CommentTok{## 3  2018-10-03 00:00:00  Hum_B 38.80}
+\CommentTok{## 4  2018-10-03 00:00:00 Temp_B 22.40}
+\CommentTok{## 5  2018-10-03 00:00:00  Hum_C 44.00}
+\CommentTok{## 6  2018-10-03 00:00:00 Temp_C 24.50}
+\CommentTok{## 7  2018-10-03 00:00:00  Hum_D 49.00}
+\CommentTok{## 8  2018-10-03 00:00:00 Temp_D 24.43}
+\CommentTok{## 9  2018-10-03 01:00:00  Hum_A 53.00}
+\CommentTok{## 10 2018-10-03 01:00:00 Temp_A 24.40}
+\CommentTok{## 11 2018-10-03 01:00:00  Hum_B 38.80}
+\CommentTok{## 12 2018-10-03 01:00:00 Temp_B 22.40}
+\CommentTok{## 13 2018-10-03 01:00:00  Hum_C 44.00}
+\CommentTok{## 14 2018-10-03 01:00:00 Temp_C 24.50}
+\CommentTok{## 15 2018-10-03 01:00:00  Hum_D 49.00}
+\CommentTok{## 16 2018-10-03 01:00:00 Temp_D 24.40}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##              timestamp sensor value
-## 1  2018-10-03 00:00:00  Hum_A 53.00
-## 2  2018-10-03 00:00:00 Temp_A 24.43
-## 3  2018-10-03 00:00:00  Hum_B 38.80
-## 4  2018-10-03 00:00:00 Temp_B 22.40
-## 5  2018-10-03 00:00:00  Hum_C 44.00
-## 6  2018-10-03 00:00:00 Temp_C 24.50
-## 7  2018-10-03 00:00:00  Hum_D 49.00
-## 8  2018-10-03 00:00:00 Temp_D 24.43
-## 9  2018-10-03 01:00:00  Hum_A 53.00
-## 10 2018-10-03 01:00:00 Temp_A 24.40
-## 11 2018-10-03 01:00:00  Hum_B 38.80
-## 12 2018-10-03 01:00:00 Temp_B 22.40
-## 13 2018-10-03 01:00:00  Hum_C 44.00
-## 14 2018-10-03 01:00:00 Temp_C 24.50
-## 15 2018-10-03 01:00:00  Hum_D 49.00
-## 16 2018-10-03 01:00:00 Temp_D 24.40
-\end{verbatim}
 
 \hypertarget{long-to-wide}{%
 \subsection{Long to Wide}\label{long-to-wide}}
@@ -581,21 +566,14 @@ Firstly we have to load a dataset into a dataframe:
 \begin{Highlighting}[]
 \CommentTok{# long format}
 \KeywordTok{head}\NormalTok{(df.long)}
-\end{Highlighting}
-\end{Shaded}
+\CommentTok{##             timestamp sensor value}
+\CommentTok{## 1 2018-10-03 00:00:00  Hum_A 53.00}
+\CommentTok{## 2 2018-10-03 00:00:00 Temp_A 24.43}
+\CommentTok{## 3 2018-10-03 00:00:00  Hum_B 38.80}
+\CommentTok{## 4 2018-10-03 00:00:00 Temp_B 22.40}
+\CommentTok{## 5 2018-10-03 00:00:00  Hum_C 44.00}
+\CommentTok{## 6 2018-10-03 00:00:00 Temp_C 24.50}
 
-\begin{verbatim}
-##             timestamp sensor value
-## 1 2018-10-03 00:00:00  Hum_A 53.00
-## 2 2018-10-03 00:00:00 Temp_A 24.43
-## 3 2018-10-03 00:00:00  Hum_B 38.80
-## 4 2018-10-03 00:00:00 Temp_B 22.40
-## 5 2018-10-03 00:00:00  Hum_C 44.00
-## 6 2018-10-03 00:00:00 Temp_C 24.50
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# convert long table into wide table}
 \NormalTok{df.wide <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_wider}\NormalTok{(df.long,}
                                             \DataTypeTok{names_from =} \StringTok{"sensor"}\NormalTok{,}
@@ -604,18 +582,15 @@ Firstly we have to load a dataset into a dataframe:
 
 \CommentTok{# wide format}
 \KeywordTok{head}\NormalTok{(df.wide)}
+\CommentTok{##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D}
+\CommentTok{## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43}
+\CommentTok{## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40}
+\CommentTok{## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7  24.50  48.3  24.38}
+\CommentTok{## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33}
+\CommentTok{## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30}
+\CommentTok{## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
-## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43
-## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40
-## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7  24.50  48.3  24.38
-## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33
-## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30
-## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30
-\end{verbatim}
 
 \hypertarget{DATAWRANGLING-MERGE-TWO-DATAFRAMES}{%
 \subsection{Merge two Dataframes}\label{DATAWRANGLING-MERGE-TWO-DATAFRAMES}}
@@ -752,39 +727,36 @@ show the structure of the data frame
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{tail}\NormalTok{(df)}
+\CommentTok{##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad}
+\CommentTok{## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9}
+\CommentTok{## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0}
+\CommentTok{## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0}
+\CommentTok{## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0}
+\CommentTok{## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0}
+\CommentTok{## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA}
+\CommentTok{##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater}
+\CommentTok{## 16389     22.000        162.00      0.000000                 NA}
+\CommentTok{## 16390     20.175        124.25      1.609340                 NA}
+\CommentTok{## 16391     19.350        125.00      0.402335                 NA}
+\CommentTok{## 16392     19.900         93.00      1.609340                 NA}
+\CommentTok{## 16393     20.625        116.25      2.414010                 NA}
+\CommentTok{## 16394         NA            NA            NA                 NA}
+\CommentTok{##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater}
+\CommentTok{## 16389                NA      NA       NA                   NA}
+\CommentTok{## 16390                NA      NA       NA                   NA}
+\CommentTok{## 16391                NA      NA       NA                   NA}
+\CommentTok{## 16392                NA      NA       NA                   NA}
+\CommentTok{## 16393                NA      NA       NA                   NA}
+\CommentTok{## 16394                NA      NA       NA                   NA}
+\CommentTok{##       FlatVolFlowHotwater}
+\CommentTok{## 16389                  NA}
+\CommentTok{## 16390                  NA}
+\CommentTok{## 16391                  NA}
+\CommentTok{## 16392                  NA}
+\CommentTok{## 16393                  NA}
+\CommentTok{## 16394                  NA}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
-## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
-## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0
-## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0
-## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0
-## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA
-##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater
-## 16389     22.000        162.00      0.000000                 NA
-## 16390     20.175        124.25      1.609340                 NA
-## 16391     19.350        125.00      0.402335                 NA
-## 16392     19.900         93.00      1.609340                 NA
-## 16393     20.625        116.25      2.414010                 NA
-## 16394         NA            NA            NA                 NA
-##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater
-## 16389                NA      NA       NA                   NA
-## 16390                NA      NA       NA                   NA
-## 16391                NA      NA       NA                   NA
-## 16392                NA      NA       NA                   NA
-## 16393                NA      NA       NA                   NA
-## 16394                NA      NA       NA                   NA
-##       FlatVolFlowHotwater
-## 16389                  NA
-## 16390                  NA
-## 16391                  NA
-## 16392                  NA
-## 16393                  NA
-## 16394                  NA
-\end{verbatim}
 
 \hypertarget{five-number-summary}{%
 \subsection{Five number summary}\label{five-number-summary}}
@@ -796,13 +768,10 @@ reveals details of a specific series
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{WthStnTemp)}
+\CommentTok{##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's }
+\CommentTok{##   -5.25    5.50   11.25   11.99   17.35   40.30      12}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##   -5.25    5.50   11.25   11.99   17.35   40.30      12
-\end{verbatim}
 
 \hypertarget{basic-plots}{%
 \section{Basic plots}\label{basic-plots}}

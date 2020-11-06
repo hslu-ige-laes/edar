@@ -35,7 +35,7 @@ tail(df,2)
 ### Season of Year
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
 
-```{r metadata season1}
+```{r metadata season1, warning=FALSE, message=FALSE, collapse = TRUE}
 # install redutils library
 # devtools::install_github("retomarek/redutils", ref = "master")
 
@@ -45,13 +45,13 @@ redutils::season(as.Date("2019-04-01"))
 
 If you want to change the language, you can give the function dedicated names for the season:
 
-```{r metadata season2}
+```{r metadata season2, warning=FALSE, message=FALSE, collapse = TRUE}
 redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
 ```
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
 
-```{r metadata season3}
+```{r metadata season3, warning=FALSE, message=FALSE, collapse = TRUE}
 # apply it for a data frame
 df <- dplyr::mutate(df, season = redutils::season(df$time))
 ```
@@ -80,7 +80,7 @@ head(df, 1)
 ```
 
 ### Wide to Long
-```{r rbasics wide2long}
+```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = TRUE}
 
 # create a copy of the dataframe and print the header and the first five line
 head(df, 5)
@@ -98,7 +98,7 @@ head(df.long, 16)
 ```
 
 ### Long to Wide
-```{r rbasics long2wide}
+```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = TRUE}
 # long format
 head(df.long)
 
