@@ -50,7 +50,7 @@ update.packages(ask = FALSE)
 
 ## Loading Data
 ### Csv File
-```r
+```{r eval=FALSE}
 df <- read.csv("datafile.csv")
 df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
 ```
@@ -63,7 +63,7 @@ read.csv() is a convenience wrapper function around read.table(). If you need mo
 <br>
 
 ### Excel File
-```r
+```{r eval=FALSE}
 # Only need to install once
 install.packages("xlsx")
 
@@ -75,7 +75,7 @@ df <- read.xlsx("datafile.xls", sheetName="Revenues")
 ```
 
 For reading older Excel files in the .xls format, the gdata package has the function read.xls():
-```r
+```{r eval=FALSE}
 # Only need to install once
 install.packages("gdata")
 

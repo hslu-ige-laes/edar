@@ -103,7 +103,7 @@ The sensor data is not in a constant intervall and not yet aggregated. So after 
 
 Finally use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities) which you can install as followed:
 
-```r
+```{r eval=FALSE}
 install.packages("devtools")
 library(devtools)
 install_github("hslu-ige-laes/redutils")

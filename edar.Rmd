@@ -1,0 +1,533 @@
+--- 
+title: "Energy Data Analysis with R"
+author: "Reto Marek"
+date: "`r Sys.Date()`"
+site: bookdown::bookdown_site
+output: bookdown::gitbook
+documentclass: book
+bibliography: [book.bib, packages.bib]
+biblio-style: apalike
+link-citations: yes
+github-repo: hslu-ige-laes/edar
+description: "Introduction into energy data analysis and visualization with R."
+---
+
+# Preface {-}
+This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
+
+This book is aimed at R beginners as well as advanced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a>. The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
+
+The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data.
+
+## Why R and RStudio?
+Spreadsheet programs like Excel quickly reach their limits when working with large data sets or creating complex graphics. Also the interactive ability of the graphics is limited. The open source programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
+
+<hr>
+
+**Disclaimer**<br>
+The authors decline any liability or responsibility in connection with the published documentation
+
+&copy; Lucerne University of Sciences and Arts, 2020
+
+
+<!--chapter:end:index.rmd-->
+
+# Getting started
+## Installing R and R Studio {#installation}
+- Before we can start the first analysis, we have to install "R" and "RStudio".
+- "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface.
+- "R" may be used without "RStudio", but "RStudio" may not be used without "R". Both, "R" and "RStudio" are free of charge and there are no licencse fees.
+
+### Download and Install R
+#### Windows
+
+1. Open [https://cran.r-project.org/bin/windows/base/](https://cran.r-project.org/bin/windows/base/) and press the link "Download R..."
+1. Run the downloaded installer file and follow the installation wizard
+
+The wizard will install R into your "Program Files" folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
+
+#### Mac OSX
+1. Open [https://cran.r-project.org/bin/macosx/](https://cran.r-project.org/bin/macosx/) and download the latest *.pkg file
+1. Run the downloaded installer file and follow the installation wizard
+
+The installer allows you to customize your installation. However the default values will be suitable for most users.
+
+#### Linux
+R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
+
+The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”
+
+- Open [https://cran.r-project.org/bin/linux/](https://cran.r-project.org/bin/linux/) and then follow the directory trail to the version of Linux you wish to install R on top of
+
+The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
+
+### Download and Install RStudio
+R Studio is a development environment for R.
+
+1. Open [https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/) and download "RStudio Desktop Open Source"
+1. Follow the on-screen instructions
+1. Once you have installed R Studio, you can run it like any other application via 
+
+### Open RStudio
+Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing “RStudio” at the Windows Run prompt.
+
+## Create your first R Script
+blabla
+
+## Whats next?
+blabla
+
+<!--chapter:end:gettingStarted.Rmd-->
+
+# R Basics
+## Packages in R {#packages}
+Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
+
+The following chapters describe how to install, load, update and use packages.
+
+### Installing a Package
+The easiest way to install an R Package is to use the RStudio tab "Packages":
+
+```{r knitr-logo, echo=FALSE, out.width='50%', fig.show='hold', fig.cap='Install packages via RStudio GUI'}
+knitr::include_graphics(rep('images/a2-installPackagesRStudio.png'))
+```
+
+a) Click on the “Packages” tab
+
+b) Click on “Install” next to Update
+
+c) Type the name of the package under “Packages, in this case type ggplot2
+
+d) Click “Install”
+
+This will search for the package "ggplot" specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
+
+An other way is to use the install.packages function.
+Open R (if already opened please close all projects) and type the following at the command line:
+```r
+install.packages("ggplot2")
+```
+
+If you want to install a package directly from github, the package "devtools" must be installed first:
+
+```r
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+```
+
+### Loading a Package
+If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
+
+```r
+install.packages("ggplot2")
+```
+
+### Upgrading Packages
+R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
+```r
+update.packages(ask = FALSE)
+```
+
+## Loading Data
+### Csv File
+```{r eval=FALSE}
+df <- read.csv("datafile.csv")
+df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
+```
+```{r rbasics readcsv}
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+```
+Attention: By default, strings in the data are treated as factors. 
+read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
+
+<br>
+
+### Excel File
+```{r eval=FALSE}
+# Only need to install once
+install.packages("xlsx")
+
+library(xslx)
+
+df <- read.xlsx("datafile.xlsx", 1)
+df <- read.xlsx("datafile.xls", sheetIndex=2)
+df <- read.xlsx("datafile.xls", sheetName="Revenues")
+```
+
+For reading older Excel files in the .xls format, the gdata package has the function read.xls():
+```{r eval=FALSE}
+# Only need to install once
+install.packages("gdata")
+
+library(gdata)
+# Read first sheet
+df <- read.xls("datafile.xls")
+df <- read.xls("datafile.xls", sheet=2)
+```
+
+Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.
+
+<br>
+
+
+
+<!--chapter:end:rBasics.Rmd-->
+
+# Data Wrangling
+## Add Metadata for later filtering
+
+Firstly we have to load a dataset into a dataframe:
+```{r metadata dataset, warning=FALSE, message=FALSE, collapse = TRUE}
+
+# load data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+               stringsAsFactors=FALSE, sep =";")
+
+```
+
+### Year, Month, Day, Day of Week
+To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
+```{r metadata date, warning=FALSE, message=FALSE, collapse = TRUE}
+library(dplyr)
+library(lubridate)
+
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+df$year <- as.Date(cut(df$time, breaks = "year"))
+df$month <- as.Date(cut(df$time, breaks = "month"))
+df$day <- as.Date(cut(df$time, breaks = "day"))
+df$weekday <- weekdays(df$time)
+```
+
+This code first parses the timestamp with a specific timezone. Then three columns are added.
+
+Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards. 
+
+```{r metadata date output, warning=FALSE, message=FALSE, collapse = TRUE}
+head(df,2)
+tail(df,2)
+```
+
+### Season of Year
+For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
+
+```{r metadata season1}
+# install redutils library
+# devtools::install_github("retomarek/redutils", ref = "master")
+
+# get season from a date
+redutils::season(as.Date("2019-04-01"))
+```
+
+If you want to change the language, you can give the function dedicated names for the season:
+
+```{r metadata season2}
+redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
+```
+
+To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
+
+```{r metadata season3}
+# apply it for a data frame
+df <- dplyr::mutate(df, season = redutils::season(df$time))
+```
+
+```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = TRUE}
+head(df,2)
+tail(df,2)
+```
+
+## Data Frames
+Firstly we have to load a dataset into a dataframe:
+```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = TRUE}
+# load data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+               stringsAsFactors=FALSE, sep =";")
+```
+
+### Change Row Names
+```{r change row names, warning=FALSE, message=FALSE, collapse = TRUE}
+# Print the header and the first line
+head(df, 1)
+
+# rename columns and print the header and the first line
+names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","Hum_D", "Temp_D")
+head(df, 1)
+```
+
+### Wide to Long
+```{r rbasics wide2long}
+
+# create a copy of the dataframe and print the header and the first five line
+head(df, 5)
+
+# convert wide to long format
+df.long <- as.data.frame(tidyr::pivot_longer(df,
+                                      cols = -timestamp,
+                                      names_to = "sensor",
+                                      values_to = "value",
+                                      values_drop_na = TRUE)
+                         )
+
+# long format
+head(df.long, 16)
+```
+
+### Long to Wide
+```{r rbasics long2wide}
+# long format
+head(df.long)
+
+# convert long table into wide table
+df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
+                                            names_from = "sensor",
+                                            values_from = "value")
+                         )
+
+# wide format
+head(df.wide)
+```
+
+
+### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
+```{r dataframe merge, warning=FALSE, message=FALSE, collapse = TRUE}
+library(dplyr)
+library(lubridate)
+
+# read file one and parse dates
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+
+# read file two and parse dates
+dfFlatTempHum <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
+
+dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time, "YmdHMS", tz = "Europe/Zurich")
+
+# merge the two files into a new data frame and keep only rows where all values are available
+df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
+
+```
+
+<!--chapter:end:dataWrangling.Rmd-->
+
+# Explorative Data Analysis
+## Get overview
+
+> Get an overview of the whole data set and specific series of it
+
+### Load data
+
+> Load test data set in a data frame (e.g. from a csv-file)
+
+```{r eda readcsv}
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+```
+
+<br>
+
+### Names
+
+> show the column headers of the data frame
+
+```{r eda names}
+names(df)
+```
+
+<br>
+
+### Structure
+
+> show the structure of the data frame
+
+```{r eda str}
+str(df)
+```
+
+<br>
+
+### Head/Tail
+```{r eda head}
+head(df)
+```
+
+```{r eda tail}
+tail(df)
+```
+
+<br>
+
+### Five number summary
+
+> reveals details of a specific series
+
+```{r eda summary}
+summary(df$WthStnTemp)
+```
+
+<br>
+
+
+
+## Basic plots
+### Scatterplot
+#### plot()
+```{r scatterplot plot}
+# load data set
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
+
+# crate simple scatterplot
+plot(df$WthStnTemp, df$BldgEnergyHeating)
+```
+
+<!--chapter:end:eda.Rmd-->
+
+# Data Visualizations
+## Building Energy Signature
+### Basis
+
+* Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals 
+
+* Energy consumption time series from a energy meter with steadily increasing meter values
+
+### Task
+You want to create a scatter plot with
+
+* the daily mean outside temperature on the x-axis
+
+* the daily energy consumption on the y-axis
+
+* points colored according to season
+
+
+### Solution
+After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
+
+Create a new script, copy/paste the following code and run it:
+
+```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = TRUE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(redutils)
+library(lubridate)
+
+# load time series data and aggregate daily mean values
+dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE, sep =";")
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+dfOutsideTemp$day <- as.Date(cut(dfOutsideTemp$time, breaks = "day"))
+dfOutsideTemp <- dfOutsideTemp %>% group_by(day) %>% mutate(tempMean = mean(centralOutsideTemp)) %>% ungroup()
+dfOutsideTemp <- dfOutsideTemp %>% select(day, tempMean) %>% unique() %>% na.omit()
+
+dfHeatEnergy <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv",
+                         stringsAsFactors=FALSE, sep =";")
+
+dfHeatEnergy <- dfHeatEnergy %>% select(time, energyHeatingMeter) %>% na.omit()
+dfHeatEnergy$time <- parse_date_time(dfHeatEnergy$time, "YmdHMS", tz = "Europe/Zurich")
+dfHeatEnergy$day <- as.Date(cut(dfHeatEnergy$time, breaks = "day"))
+dfHeatEnergy <- dfHeatEnergy %>% group_by(day) %>% mutate(energyMax = max(energyHeatingMeter)) %>% ungroup()
+dfHeatEnergy <- dfHeatEnergy %>% select(day, energyMax) %>% unique() %>% na.omit()
+dfHeatEnergy <- dfHeatEnergy %>% mutate(energyCons = energyMax - lag(energyMax)) %>% select(-energyMax) %>% na.omit()
+
+# merge the data in a tidy format
+df <- merge(dfOutsideTemp, dfHeatEnergy, by = "day")
+
+# calculate season
+df <- df %>% mutate(season = redutils::season(df$day))
+
+# static chart with ggplot
+p <- ggplot2::ggplot(df) +
+  ggplot2::geom_point(aes(x = tempMean,
+                          y = energyCons, color=season,
+                          text = paste("</br>Date:  ", as.Date(df$day),
+                                       "</br>Temp: ", round(df$tempMean, digits = 1), "\u00B0C",
+                                       "</br>Energy: ", round(df$energyCons, digits = 0), "kWh/d",
+                                       "</br>Season: ", df$season))
+                      ) +
+  ggtitle("Building Energy Signature") +
+        theme_minimal() +
+        theme(
+          legend.position="none",
+          plot.title = element_text(hjust = 0.5)
+        )
+p
+```
+
+Add the following part to your script to make the chart above interactive:
+
+```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = TRUE}
+# continuation from upper ggplot code section
+plotly::ggplotly(p, tooltip = c("text")) %>%
+  layout(xaxis = list(title = "Outside temperature (\u00B0C)",
+                      range = c(min(-5,min(df$tempMean)), max(35,max(df$tempMean))), zeroline = F),
+         yaxis = list(title = "Daily energy consumption (kWh/d)",
+                      range = c(-5, max(df$energyCons) + 10)),
+         showlegend = TRUE
+         ) %>%
+  plotly::config(displayModeBar = FALSE, displaylogo = FALSE)
+```
+
+## Mollier hx Diagram
+### Basis
+
+* A csv file with time series from multiple temperature and humidity sensors in °C and %rH
+
+### Task
+You want to plot a mollier h-x diagram with
+
+* scatter plot of temperature- and humidity sensor data (mean values per day)
+
+* points colored according to season
+
+* comfort zone
+
+### Solution
+The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
+
+Finally use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities) which you can install as followed:
+
+```{r eval=FALSE}
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+```
+Create a new script, copy/paste the following code and run it:
+
+```{r mollier hx, warning=FALSE, message=FALSE, collapse = TRUE}
+library(redutils)
+library(dplyr)
+library(r2d3)
+library(lubridate)
+
+# read data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE, sep =";")
+
+# select temperature and humidity and remove empty cells
+data <- data %>% select(time, FlatA_Temp, FlatA_Hum) %>% na.omit()
+
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$day <- as.Date(cut(data$time, breaks = "day"))
+
+# calculate daily mean of temperature and humidity
+data <- data %>% group_by(day) %>% mutate(tempMean = mean(as.numeric(FlatA_Temp))) %>% ungroup()
+data <- data %>% group_by(day) %>% mutate(humMean = mean(as.numeric(FlatA_Hum))) %>% ungroup()
+
+# shrink down to daily values and remove rows with empty values
+data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
+
+# plot mollier hx diagram
+redutils::mollierHxDiagram(data)
+```
+
+### Discussion
+The diagram is based on D3 and packaged into the package `redutils`. The original D3 source with a html integration you can find here: <a href="https://github.com/hslu-ige-laes/d3-mollierhx" target="_blank">https://github.com/hslu-ige-laes/d3-mollierhx</a>
+
+### See Also
+If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \@ref(DATAWRANGLING-MERGE-TWO-DATAFRAMES)
+
+<!--chapter:end:dataVis.Rmd-->
+

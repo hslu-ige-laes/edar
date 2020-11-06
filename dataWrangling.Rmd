@@ -64,11 +64,9 @@ tail(df,2)
 ## Data Frames
 Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = TRUE}
-
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                stringsAsFactors=FALSE, sep =";")
-
 ```
 
 ### Change Row Names
@@ -81,8 +79,7 @@ names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","H
 head(df, 1)
 ```
 
-## Wide to Long
-
+### Wide to Long
 ```{r rbasics wide2long}
 
 # create a copy of the dataframe and print the header and the first five line
