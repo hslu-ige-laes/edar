@@ -4,7 +4,7 @@ p.caption {
 }
 p code {
   white-space: inherit;
-  font-size: 10px;
+  font-size: 10pt;
 }
 pre {
   word-break: normal;
@@ -12,5 +12,5 @@ pre {
 }
 pre code {
   white-space: inherit;
-  font-size: 10px;
+  font-size: 10pt;
 }
