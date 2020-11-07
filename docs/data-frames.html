@@ -227,7 +227,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Firstly we have to load a dataset into a dataframe:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="co"># load data set</span></a>
 <a class="sourceLine" id="cb24-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb24-3" title="3">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb24-3" title="3">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb24-4" title="4">               <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
 <div id="change-row-names" class="section level3">
 <h3><span class="header-section-number">3.2.1</span> Change Row Names</h3>
 <div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="co"># Print the header and the first line</span></a>
@@ -314,17 +315,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb37-3" title="3"></a>
 <a class="sourceLine" id="cb37-4" title="4"><span class="co"># read file one and parse dates</span></a>
 <a class="sourceLine" id="cb37-5" title="5">dfOutsideTemp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb37-6" title="6">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb37-7" title="7">dfOutsideTemp<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfOutsideTemp<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb37-6" title="6">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb37-7" title="7">                          <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
 <a class="sourceLine" id="cb37-8" title="8"></a>
-<a class="sourceLine" id="cb37-9" title="9"><span class="co"># read file two and parse dates</span></a>
-<a class="sourceLine" id="cb37-10" title="10">dfFlatTempHum &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb37-11" title="11">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb37-9" title="9">dfOutsideTemp<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfOutsideTemp<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb37-10" title="10">                                      <span class="dt">orders =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb37-11" title="11">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
 <a class="sourceLine" id="cb37-12" title="12"></a>
-<a class="sourceLine" id="cb37-13" title="13">dfFlatTempHum<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfFlatTempHum<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb37-14" title="14"></a>
-<a class="sourceLine" id="cb37-15" title="15"><span class="co"># merge the two files into a new data frame and keep only rows where all values are available</span></a>
-<a class="sourceLine" id="cb37-16" title="16">df &lt;-<span class="st"> </span><span class="kw">merge</span>(dfOutsideTemp, dfFlatTempHum, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
+<a class="sourceLine" id="cb37-13" title="13"><span class="co"># read file two and parse dates</span></a>
+<a class="sourceLine" id="cb37-14" title="14">dfFlatTempHum &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb37-15" title="15">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb37-16" title="16"></a>
+<a class="sourceLine" id="cb37-17" title="17">dfFlatTempHum<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfFlatTempHum<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb37-18" title="18">                                      <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb37-19" title="19">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb37-20" title="20"></a>
+<a class="sourceLine" id="cb37-21" title="21"><span class="co"># merge the two files into a new data frame and keep only rows where all values are available</span></a>
+<a class="sourceLine" id="cb37-22" title="22">df &lt;-<span class="st"> </span><span class="kw">merge</span>(dfOutsideTemp, dfFlatTempHum, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a></code></pre></div>
 
 </div>
 </div>

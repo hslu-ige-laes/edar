@@ -8,7 +8,9 @@
 > Load test data set in a data frame (e.g. from a csv-file)
 
 ```{r eda readcsv}
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep ="," )
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
+               stringsAsFactors=FALSE,
+               sep ="," )
 ```
 
 <br>
@@ -61,7 +63,9 @@ summary(df$WthStnTemp)
 #### plot()
 ```{r scatterplot plot, warning=FALSE, message=FALSE, collapse = FALSE}
 # load data set
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv", stringsAsFactors=FALSE, sep =",")
+df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
+               stringsAsFactors=FALSE,
+               sep =",")
 
 # crate simple scatterplot
 plot(df$WthStnTemp, df$BldgEnergyHeating)

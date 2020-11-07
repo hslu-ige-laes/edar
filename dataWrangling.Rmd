@@ -5,7 +5,8 @@ Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataset, warning=FALSE, message=FALSE, collapse = FALSE}
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
-               stringsAsFactors=FALSE, sep =";")
+               stringsAsFactors=FALSE,
+               sep =";")
 
 ```
 
@@ -26,6 +27,8 @@ This code first parses the timestamp with a specific timezone. Then three column
 
 Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards. 
 
+\newpage
+
 ```{r metadata date output, warning=FALSE, message=FALSE, collapse = FALSE}
 head(df,2)
 tail(df,2)
@@ -45,7 +48,8 @@ redutils::season(as.Date("2019-04-01"))
 If you want to change the language, you can give the function dedicated names for the season:
 
 ```{r metadata season2, warning=FALSE, message=FALSE, collapse = FALSE}
-redutils::season(as.Date("2019-04-01"), c("Winter","Frühling","Sommer","Herbst"))
+redutils::season(as.Date("2019-04-01"),
+                 c("Winter","Frühling","Sommer","Herbst"))
 ```
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
@@ -65,7 +69,8 @@ Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = FALSE}
 # load data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
-               stringsAsFactors=FALSE, sep =";")
+               stringsAsFactors=FALSE,
+               sep =";")
 ```
 
 ### Change Row Names
@@ -119,14 +124,20 @@ library(lubridate)
 
 # read file one and parse dates
 dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
-                          stringsAsFactors=FALSE, sep =";")
-dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time, "YmdHMS", tz = "Europe/Zurich")
+                          stringsAsFactors=FALSE,
+                          sep =";")
+
+dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time,
+                                      orders = "YmdHMS",
+                                      tz = "Europe/Zurich")
 
 # read file two and parse dates
 dfFlatTempHum <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                           stringsAsFactors=FALSE, sep =";")
 
-dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time, "YmdHMS", tz = "Europe/Zurich")
+dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time,
+                                      order = "YmdHMS",
+                                      tz = "Europe/Zurich")
 
 # merge the two files into a new data frame and keep only rows where all values are available
 df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
