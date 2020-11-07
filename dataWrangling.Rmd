@@ -63,7 +63,6 @@ df <- dplyr::mutate(df, season = redutils::season(df$time))
 head(df,2)
 tail(df,2)
 ```
-
 ## Data Frames
 Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -72,7 +71,6 @@ df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flat
                stringsAsFactors=FALSE,
                sep =";")
 ```
-
 ### Change Row Names
 ```{r change row names, warning=FALSE, message=FALSE, collapse = FALSE}
 # Print the header and the first line
@@ -82,7 +80,6 @@ head(df, 1)
 names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","Hum_D", "Temp_D")
 head(df, 1)
 ```
-
 ### Wide to Long
 ```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
 
@@ -100,7 +97,6 @@ df.long <- as.data.frame(tidyr::pivot_longer(df,
 # long format
 head(df.long, 16)
 ```
-
 ### Long to Wide
 ```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = FALSE}
 # long format
@@ -115,8 +111,6 @@ df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
 # wide format
 head(df.wide)
 ```
-
-
 ### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 ```{r dataframe merge, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)
