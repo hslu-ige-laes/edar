@@ -10,6 +10,7 @@ biblio-style: apalike
 link-citations: yes
 github-repo: hslu-ige-laes/edar
 description: "Introduction into energy data analysis and visualization with R."
+
 ---
 
 # Preface {-}

@@ -86,10 +86,10 @@ head(df, 5)
 
 # convert wide to long format
 df.long <- as.data.frame(tidyr::pivot_longer(df,
-                                      cols = -timestamp,
-                                      names_to = "sensor",
-                                      values_to = "value",
-                                      values_drop_na = TRUE)
+                                             cols = -timestamp,
+                                             names_to = "sensor",
+                                             values_to = "value",
+                                             values_drop_na = TRUE)
                          )
 
 # long format
