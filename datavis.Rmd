@@ -110,7 +110,7 @@ dygraph(plotdata, main = "Room Temperature Reduction") %>%
           strokePattern = "dotted") %>% 
   dyLimit(tempSetpoint,
           color = "red",
-          label = "Setpoint") %>% 
+          label = "Target Setpoint") %>% 
   dyRangeSelector() %>% 
   dyLegend(show = "always")
 
@@ -144,6 +144,7 @@ Create a new script, copy/paste the following code and run it:
 
 ```{r energysignature ggplot, warning=FALSE, message=FALSE, collapse = FALSE}
 library(ggplot2)
+library(ggthemes)
 library(plotly)
 library(dplyr)
 library(redutils)
@@ -208,12 +209,15 @@ df <- df %>% mutate(season = redutils::season(df$day))
 # static chart with ggplot
 p <- ggplot2::ggplot(df) +
   ggplot2::geom_point(aes(x = tempMean,
-                          y = energyCons, color=season,
+                          y = energyCons,
+                          color = season,
+                          alpha = 0.1,
                           text = paste("</br>Date:  ", as.Date(df$day),
                                        "</br>Temp: ", round(df$tempMean, digits = 1), "\u00B0C",
                                        "</br>Energy: ", round(df$energyCons, digits = 0), "kWh/d",
                                        "</br>Season: ", df$season))
                       ) +
+  scale_color_manual(values=c("#440154", "#2db27d", "#fde725", "#365c8d")) +
   ggtitle("Building Energy Signature") +
         theme_minimal() +
         theme(

@@ -1013,7 +1013,7 @@ You want to create a time series plot with
           \DataTypeTok{strokePattern =} \StringTok{"dotted"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{dyLimit}\NormalTok{(tempSetpoint,}
           \DataTypeTok{color =} \StringTok{"red"}\NormalTok{,}
-          \DataTypeTok{label =} \StringTok{"Setpoint"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+          \DataTypeTok{label =} \StringTok{"Target Setpoint"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{dyRangeSelector}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{dyLegend}\NormalTok{(}\DataTypeTok{show =} \StringTok{"always"}\NormalTok{)}
 \end{Highlighting}
@@ -1065,6 +1065,7 @@ Create a new script, copy/paste the following code and run it:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
 \KeywordTok{library}\NormalTok{(plotly)}
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(redutils)}
@@ -1129,12 +1130,15 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# static chart with ggplot}
 \NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
 \StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ tempMean,}
-                          \DataTypeTok{y =}\NormalTok{ energyCons, }\DataTypeTok{color=}\NormalTok{season,}
+                          \DataTypeTok{y =}\NormalTok{ energyCons,}
+                          \DataTypeTok{color =}\NormalTok{ season,}
+                          \DataTypeTok{alpha =} \FloatTok{0.1}\NormalTok{,}
                           \DataTypeTok{text =} \KeywordTok{paste}\NormalTok{(}\StringTok{"</br>Date:  "}\NormalTok{, }\KeywordTok{as.Date}\NormalTok{(df}\OperatorTok{$}\NormalTok{day),}
                                        \StringTok{"</br>Temp: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean, }\DataTypeTok{digits =} \DecValTok{1}\NormalTok{), }\StringTok{"\textbackslash{}u00B0C"}\NormalTok{,}
                                        \StringTok{"</br>Energy: "}\NormalTok{, }\KeywordTok{round}\NormalTok{(df}\OperatorTok{$}\NormalTok{energyCons, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{), }\StringTok{"kWh/d"}\NormalTok{,}
                                        \StringTok{"</br>Season: "}\NormalTok{, df}\OperatorTok{$}\NormalTok{season))}
 \NormalTok{                      ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values=}\KeywordTok{c}\NormalTok{(}\StringTok{"#440154"}\NormalTok{, }\StringTok{"#2db27d"}\NormalTok{, }\StringTok{"#fde725"}\NormalTok{, }\StringTok{"#365c8d"}\NormalTok{)) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Building Energy Signature"}\NormalTok{) }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
 \StringTok{        }\KeywordTok{theme}\NormalTok{(}
