@@ -1,11 +1,118 @@
 # Data Visualizations
-## Building Energy Signature
+## Temperature Reduction
+### Task
+As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
+
+You want to create a time series plot with
+
+* the daily median, min and max value
+
+* the overall median of each period
+
+* the desired setpoint
+
 ### Basis
 
-* Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals 
+* Time series data from e.g. a temperature sensor with unaligned time intervals
 
-* Energy consumption time series from a energy meter with steadily increasing meter values
+### Solution
 
+```{r tempreduction, warning=FALSE, message=FALSE, collapse = FALSE}
+library(dplyr)
+library(lubridate)
+library(dygraphs)
+library(xts)
+library(redutils)
+
+# Settings
+tempSetpoint = 22.0
+
+startDate = "2018-11-01"
+endDate = "2019-02-01"
+
+optiDate1 = "2018-12-17"
+optiLabel1 = "Optimization I"
+
+optiDate2 = "2019-01-03"
+optiLabel2 = "Optimization II"
+
+# read and print data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and remove empty cells
+data <- data %>% select(time, FlatA_Temp) %>% na.omit()
+
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$day <- as.Date(cut(data$time, breaks = "day"))
+data$day <- as.Date(as.character(data$day,"%Y-%m-%d"))
+
+# filter time range
+data <- data %>% filter(day > startDate, day < endDate)
+
+# calculate daily median, min and max of temperature
+data <- data %>%
+  group_by(day) %>%
+  mutate(minDay = min(as.numeric(FlatA_Temp)),
+         medianDay = median(as.numeric(FlatA_Temp)),
+         maxDay = max(as.numeric(FlatA_Temp))
+         ) %>%
+  ungroup()
+
+# shrink down to daily values and remove rows with empty values
+data <- data %>% select(day, medianDay, minDay, maxDay) %>% unique() %>% na.omit()
+
+# calculate medians for time ranges
+data <- data %>%
+  mutate(period = ifelse(day >= startDate & day <= optiDate1,
+                         "Baseline",
+                         ifelse(day >= optiDate1 & day <= optiDate2,
+                                "Opti1",
+                                "Opti2")
+                         )
+         )
+
+data <- data %>%
+  group_by(period) %>%
+  mutate(medianPeriod = median(medianDay)) %>% 
+  ungroup() %>% 
+  select(-period)
+
+# create xts object for plotting
+plotdata <- xts( x=data[,-1], order.by=data$day)
+
+# plot graph
+dygraph(plotdata, main = "Temperature Reduction") %>%
+  dyAxis("x", drawGrid = FALSE) %>%
+  dySeries(c("minDay", "medianDay", "maxDay"),
+           label = "Temperature") %>%
+  dySeries(c("medianPeriod"),
+           label = "Median Period",
+           strokePattern = "dashed") %>%
+  dyOptions(colors = RColorBrewer::brewer.pal(3, "Set2")) %>%
+
+  dyEvent(x = optiDate1,
+          label = optiLabel1,
+          labelLoc = "bottom",
+          color = "orange") %>% 
+  dyEvent(x = optiDate2,
+          label = optiLabel2,
+          labelLoc = "bottom",
+          color = "orange") %>% 
+  dyLimit(tempSetpoint,
+          color = "red",
+          label = "Setpoint") %>% 
+  dyRangeSelector() %>% 
+  dyLegend(show = "always")
+
+```
+
+### Discussion
+In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.
+
+## Building Energy Signature
 ### Task
 You want to create a scatter plot with
 
@@ -15,6 +122,11 @@ You want to create a scatter plot with
 
 * points colored according to season
 
+### Basis
+
+* Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals 
+
+* Energy consumption time series from a energy meter with steadily increasing meter values
 
 ### Solution
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
@@ -117,10 +229,6 @@ plotly::ggplotly(p, tooltip = c("text")) %>%
 ```
 
 ## Mollier hx Diagram
-### Basis
-
-* A csv file with time series from multiple temperature and humidity sensors in °C and %rH
-
 ### Task
 You want to plot a mollier h-x diagram with
 
@@ -129,6 +237,10 @@ You want to plot a mollier h-x diagram with
 * points colored according to season
 
 * comfort zone
+
+### Basis
+
+* A csv file with time series from multiple temperature and humidity sensors in °C and %rH
 
 ### Solution
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
@@ -163,12 +275,9 @@ data$day <- as.Date(cut(data$time, breaks = "day"))
 # calculate daily mean of temperature and humidity
 data <- data %>%
   group_by(day) %>%
-  mutate(tempMean = mean(as.numeric(FlatA_Temp))) %>%
-  ungroup()
-
-data <- data %>%
-  group_by(day) %>%
-  mutate(humMean = mean(as.numeric(FlatA_Hum))) %>%
+  mutate(tempMean = mean(as.numeric(FlatA_Temp)),
+         humMean = mean(as.numeric(FlatA_Hum))
+         ) %>%
   ungroup()
 
 # shrink down to daily values and remove rows with empty values

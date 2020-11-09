@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-07}
+\date{2020-11-09}
 
 \begin{document}
 \maketitle
@@ -775,6 +775,8 @@ show the structure of the data frame
 \hypertarget{headtail}{%
 \subsection{Head/Tail}\label{headtail}}
 
+The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{head}\NormalTok{(df)}
@@ -886,21 +888,142 @@ reveals details of a specific series
 \hypertarget{data-visualizations}{%
 \chapter{Data Visualizations}\label{data-visualizations}}
 
-\hypertarget{building-energy-signature}{%
-\section{Building Energy Signature}\label{building-energy-signature}}
+\hypertarget{temperature-reduction}{%
+\section{Temperature Reduction}\label{temperature-reduction}}
+
+\hypertarget{task}{%
+\subsection{Task}\label{task}}
+
+As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
+
+You want to create a time series plot with
+
+\begin{itemize}
+\item
+  the daily median, min and max value
+\item
+  the overall median of each period
+\item
+  the desired setpoint
+\end{itemize}
 
 \hypertarget{basis}{%
 \subsection{Basis}\label{basis}}
 
 \begin{itemize}
+\tightlist
 \item
-  Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals
-\item
-  Energy consumption time series from a energy meter with steadily increasing meter values
+  Time series data from e.g.~a temperature sensor with unaligned time intervals
 \end{itemize}
 
-\hypertarget{task}{%
-\subsection{Task}\label{task}}
+\hypertarget{solution}{%
+\subsection{Solution}\label{solution}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(dygraphs)}
+\KeywordTok{library}\NormalTok{(xts)}
+\KeywordTok{library}\NormalTok{(redutils)}
+
+\CommentTok{# Settings}
+\NormalTok{tempSetpoint =}\StringTok{ }\FloatTok{22.0}
+
+\NormalTok{startDate =}\StringTok{ "2018-11-01"}
+\NormalTok{endDate =}\StringTok{ "2019-02-01"}
+
+\NormalTok{optiDate1 =}\StringTok{ "2018-12-17"}
+\NormalTok{optiLabel1 =}\StringTok{ "Optimization I"}
+
+\NormalTok{optiDate2 =}\StringTok{ "2019-01-03"}
+\NormalTok{optiLabel2 =}\StringTok{ "Optimization II"}
+
+\CommentTok{# read and print data}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# select temperature and remove empty cells}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# create column with day for later grouping}
+\NormalTok{data}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(data}\OperatorTok{$}\NormalTok{day,}\StringTok{"%Y-%m-%d"}\NormalTok{))}
+
+\CommentTok{# filter time range}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(day }\OperatorTok{>}\StringTok{ }\NormalTok{startDate, day }\OperatorTok{<}\StringTok{ }\NormalTok{endDate)}
+
+\CommentTok{# calculate daily median, min and max of temperature}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{minDay =} \KeywordTok{min}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp)),}
+         \DataTypeTok{medianDay =} \KeywordTok{median}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp)),}
+         \DataTypeTok{maxDay =} \KeywordTok{max}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp))}
+\NormalTok{         ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# shrink down to daily values and remove rows with empty values}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, medianDay, minDay, maxDay) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# calculate medians for time ranges}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{ifelse}\NormalTok{(day }\OperatorTok{>=}\StringTok{ }\NormalTok{startDate }\OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate1,}
+                         \StringTok{"Baseline"}\NormalTok{,}
+                         \KeywordTok{ifelse}\NormalTok{(day }\OperatorTok{>=}\StringTok{ }\NormalTok{optiDate1 }\OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate2,}
+                                \StringTok{"Opti1"}\NormalTok{,}
+                                \StringTok{"Opti2"}\NormalTok{)}
+\NormalTok{                         )}
+\NormalTok{         )}
+
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(period) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{medianPeriod =} \KeywordTok{median}\NormalTok{(medianDay)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{period)}
+
+\CommentTok{# create xts object for plotting}
+\NormalTok{plotdata <-}\StringTok{ }\KeywordTok{xts}\NormalTok{( }\DataTypeTok{x=}\NormalTok{data[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{order.by=}\NormalTok{data}\OperatorTok{$}\NormalTok{day)}
+
+\CommentTok{# plot graph}
+\KeywordTok{dygraph}\NormalTok{(plotdata, }\DataTypeTok{main =} \StringTok{"Temperature Reduction"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dyAxis}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\DataTypeTok{drawGrid =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dySeries}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"minDay"}\NormalTok{, }\StringTok{"medianDay"}\NormalTok{, }\StringTok{"maxDay"}\NormalTok{),}
+           \DataTypeTok{label =} \StringTok{"Temperature"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dySeries}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"medianPeriod"}\NormalTok{),}
+           \DataTypeTok{label =} \StringTok{"Median Period"}\NormalTok{,}
+           \DataTypeTok{strokePattern =} \StringTok{"dashed"}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{dyOptions}\NormalTok{(}\DataTypeTok{colors =}\NormalTok{ RColorBrewer}\OperatorTok{::}\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{"Set2"}\NormalTok{)) }\OperatorTok{%>%}
+
+\StringTok{  }\KeywordTok{dyEvent}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ optiDate1,}
+          \DataTypeTok{label =}\NormalTok{ optiLabel1,}
+          \DataTypeTok{labelLoc =} \StringTok{"bottom"}\NormalTok{,}
+          \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{dyEvent}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ optiDate2,}
+          \DataTypeTok{label =}\NormalTok{ optiLabel2,}
+          \DataTypeTok{labelLoc =} \StringTok{"bottom"}\NormalTok{,}
+          \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{dyLimit}\NormalTok{(tempSetpoint,}
+          \DataTypeTok{color =} \StringTok{"red"}\NormalTok{,}
+          \DataTypeTok{label =} \StringTok{"Setpoint"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{dyRangeSelector}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{dyLegend}\NormalTok{(}\DataTypeTok{show =} \StringTok{"always"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/tempreduction-1.pdf}
+
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
+
+In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.
+
+\hypertarget{building-energy-signature}{%
+\section{Building Energy Signature}\label{building-energy-signature}}
+
+\hypertarget{task-1}{%
+\subsection{Task}\label{task-1}}
 
 You want to create a scatter plot with
 
@@ -913,8 +1036,18 @@ You want to create a scatter plot with
   points colored according to season
 \end{itemize}
 
-\hypertarget{solution}{%
-\subsection{Solution}\label{solution}}
+\hypertarget{basis-1}{%
+\subsection{Basis}\label{basis-1}}
+
+\begin{itemize}
+\item
+  Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals
+\item
+  Energy consumption time series from a energy meter with steadily increasing meter values
+\end{itemize}
+
+\hypertarget{solution-1}{%
+\subsection{Solution}\label{solution-1}}
 
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 
@@ -1026,17 +1159,8 @@ Add the following part to your script to make the chart above interactive:
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
-\hypertarget{basis-1}{%
-\subsection{Basis}\label{basis-1}}
-
-\begin{itemize}
-\tightlist
-\item
-  A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
-\end{itemize}
-
-\hypertarget{task-1}{%
-\subsection{Task}\label{task-1}}
+\hypertarget{task-2}{%
+\subsection{Task}\label{task-2}}
 
 You want to plot a mollier h-x diagram with
 
@@ -1049,8 +1173,17 @@ You want to plot a mollier h-x diagram with
   comfort zone
 \end{itemize}
 
-\hypertarget{solution-1}{%
-\subsection{Solution}\label{solution-1}}
+\hypertarget{basis-2}{%
+\subsection{Basis}\label{basis-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
+\end{itemize}
+
+\hypertarget{solution-2}{%
+\subsection{Solution}\label{solution-2}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
@@ -1088,12 +1221,9 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# calculate daily mean of temperature and humidity}
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp))) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{humMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Hum))) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp)),}
+         \DataTypeTok{humMean =} \KeywordTok{mean}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Hum))}
+\NormalTok{         ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
 \CommentTok{# shrink down to daily values and remove rows with empty values}
@@ -1106,8 +1236,8 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/mollier hx-1.pdf}
 
-\hypertarget{discussion}{%
-\subsection{Discussion}\label{discussion}}
+\hypertarget{discussion-1}{%
+\subsection{Discussion}\label{discussion-1}}
 
 The diagram is based on D3 and packaged into the package \texttt{redutils}. The original D3 source with a html integration you can find here: https://github.com/hslu-ige-laes/d3-mollierhx
 

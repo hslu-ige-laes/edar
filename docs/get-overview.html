@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-07" />
+<meta name="date" content="2020-11-09" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -53,6 +53,13 @@
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
@@ -192,17 +199,23 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>5</b> Data Visualizations</a><ul>
-<li class="chapter" data-level="5.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>5.1</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis"><i class="fa fa-check"></i><b>5.1.1</b> Basis</a></li>
-<li class="chapter" data-level="5.1.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task"><i class="fa fa-check"></i><b>5.1.2</b> Task</a></li>
-<li class="chapter" data-level="5.1.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution"><i class="fa fa-check"></i><b>5.1.3</b> Solution</a></li>
+<li class="chapter" data-level="5.1" data-path="temperature-reduction.html"><a href="temperature-reduction.html"><i class="fa fa-check"></i><b>5.1</b> Temperature Reduction</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="temperature-reduction.html"><a href="temperature-reduction.html#task"><i class="fa fa-check"></i><b>5.1.1</b> Task</a></li>
+<li class="chapter" data-level="5.1.2" data-path="temperature-reduction.html"><a href="temperature-reduction.html#basis"><i class="fa fa-check"></i><b>5.1.2</b> Basis</a></li>
+<li class="chapter" data-level="5.1.3" data-path="temperature-reduction.html"><a href="temperature-reduction.html#solution"><i class="fa fa-check"></i><b>5.1.3</b> Solution</a></li>
+<li class="chapter" data-level="5.1.4" data-path="temperature-reduction.html"><a href="temperature-reduction.html#discussion"><i class="fa fa-check"></i><b>5.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>5.2</b> Mollier hx Diagram</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-1"><i class="fa fa-check"></i><b>5.2.1</b> Basis</a></li>
-<li class="chapter" data-level="5.2.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-1"><i class="fa fa-check"></i><b>5.2.2</b> Task</a></li>
-<li class="chapter" data-level="5.2.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-1"><i class="fa fa-check"></i><b>5.2.3</b> Solution</a></li>
-<li class="chapter" data-level="5.2.4" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#discussion"><i class="fa fa-check"></i><b>5.2.4</b> Discussion</a></li>
-<li class="chapter" data-level="5.2.5" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#see-also"><i class="fa fa-check"></i><b>5.2.5</b> See Also</a></li>
+<li class="chapter" data-level="5.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>5.2</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-1"><i class="fa fa-check"></i><b>5.2.1</b> Task</a></li>
+<li class="chapter" data-level="5.2.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-1"><i class="fa fa-check"></i><b>5.2.2</b> Basis</a></li>
+<li class="chapter" data-level="5.2.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-1"><i class="fa fa-check"></i><b>5.2.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>5.3</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-2"><i class="fa fa-check"></i><b>5.3.1</b> Task</a></li>
+<li class="chapter" data-level="5.3.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-2"><i class="fa fa-check"></i><b>5.3.2</b> Basis</a></li>
+<li class="chapter" data-level="5.3.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-2"><i class="fa fa-check"></i><b>5.3.3</b> Solution</a></li>
+<li class="chapter" data-level="5.3.4" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#discussion-1"><i class="fa fa-check"></i><b>5.3.4</b> Discussion</a></li>
+<li class="chapter" data-level="5.3.5" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#see-also"><i class="fa fa-check"></i><b>5.3.5</b> See Also</a></li>
 </ul></li>
 </ul></li>
 </ul>
@@ -275,6 +288,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="headtail" class="section level3">
 <h3><span class="header-section-number">4.1.4</span> Head/Tail</h3>
+<p>The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.</p>
 <div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0

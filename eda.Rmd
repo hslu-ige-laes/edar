@@ -36,6 +36,8 @@ str(df)
 <br>
 
 ### Head/Tail
+The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.
+
 ```{r eda head}
 head(df)
 ```
