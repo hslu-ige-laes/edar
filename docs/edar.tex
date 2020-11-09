@@ -888,8 +888,8 @@ reveals details of a specific series
 \hypertarget{data-visualizations}{%
 \chapter{Data Visualizations}\label{data-visualizations}}
 
-\hypertarget{temperature-reduction}{%
-\section{Temperature Reduction}\label{temperature-reduction}}
+\hypertarget{room-temperature-reduction}{%
+\section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
 \hypertarget{task}{%
 \subsection{Task}\label{task}}
@@ -926,6 +926,7 @@ You want to create a time series plot with
 \KeywordTok{library}\NormalTok{(dygraphs)}
 \KeywordTok{library}\NormalTok{(xts)}
 \KeywordTok{library}\NormalTok{(redutils)}
+\KeywordTok{library}\NormalTok{(RColorBrewer)}
 
 \CommentTok{# Settings}
 \NormalTok{tempSetpoint =}\StringTok{ }\FloatTok{22.0}
@@ -938,6 +939,8 @@ You want to create a time series plot with
 
 \NormalTok{optiDate2 =}\StringTok{ "2019-01-03"}
 \NormalTok{optiLabel2 =}\StringTok{ "Optimization II"}
+
+\NormalTok{optiDelayDays =}\StringTok{ }\DecValTok{5}
 
 \CommentTok{# read and print data}
 \NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
@@ -971,15 +974,18 @@ You want to create a time series plot with
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{ifelse}\NormalTok{(day }\OperatorTok{>=}\StringTok{ }\NormalTok{startDate }\OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate1,}
                          \StringTok{"Baseline"}\NormalTok{,}
-                         \KeywordTok{ifelse}\NormalTok{(day }\OperatorTok{>=}\StringTok{ }\NormalTok{optiDate1 }\OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate2,}
+                         \KeywordTok{ifelse}\NormalTok{((day }\OperatorTok{>=}\StringTok{ }\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(optiDate1) }\OperatorTok{+}\StringTok{ }\NormalTok{optiDelayDays))}
+                                \OperatorTok{&}\StringTok{ }\NormalTok{(day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate2),}
                                 \StringTok{"Opti1"}\NormalTok{,}
-                                \StringTok{"Opti2"}\NormalTok{)}
-\NormalTok{                         )}
-\NormalTok{         )}
+                                \KeywordTok{ifelse}\NormalTok{((day }\OperatorTok{>=}\StringTok{ }\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(optiDate2) }\OperatorTok{+}\StringTok{ }\NormalTok{optiDelayDays))}
+                                \OperatorTok{&}\StringTok{ }\NormalTok{(day }\OperatorTok{<=}\StringTok{ }\NormalTok{endDate),}
+                                \StringTok{"Opti2"}\NormalTok{,}
+                                \OtherTok{NA}\NormalTok{)}
+\NormalTok{                         )))}
 
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(period) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{medianPeriod =} \KeywordTok{median}\NormalTok{(medianDay)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{medianPeriod =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(period), }\OtherTok{NA}\NormalTok{, }\KeywordTok{median}\NormalTok{(medianDay))) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{period)}
 
@@ -987,7 +993,7 @@ You want to create a time series plot with
 \NormalTok{plotdata <-}\StringTok{ }\KeywordTok{xts}\NormalTok{( }\DataTypeTok{x=}\NormalTok{data[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{order.by=}\NormalTok{data}\OperatorTok{$}\NormalTok{day)}
 
 \CommentTok{# plot graph}
-\KeywordTok{dygraph}\NormalTok{(plotdata, }\DataTypeTok{main =} \StringTok{"Temperature Reduction"}\NormalTok{) }\OperatorTok{%>%}
+\KeywordTok{dygraph}\NormalTok{(plotdata, }\DataTypeTok{main =} \StringTok{"Room Temperature Reduction"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{dyAxis}\NormalTok{(}\StringTok{"x"}\NormalTok{, }\DataTypeTok{drawGrid =} \OtherTok{FALSE}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{dySeries}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\StringTok{"minDay"}\NormalTok{, }\StringTok{"medianDay"}\NormalTok{, }\StringTok{"maxDay"}\NormalTok{),}
            \DataTypeTok{label =} \StringTok{"Temperature"}\NormalTok{) }\OperatorTok{%>%}
@@ -995,15 +1001,16 @@ You want to create a time series plot with
            \DataTypeTok{label =} \StringTok{"Median Period"}\NormalTok{,}
            \DataTypeTok{strokePattern =} \StringTok{"dashed"}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{dyOptions}\NormalTok{(}\DataTypeTok{colors =}\NormalTok{ RColorBrewer}\OperatorTok{::}\KeywordTok{brewer.pal}\NormalTok{(}\DecValTok{3}\NormalTok{, }\StringTok{"Set2"}\NormalTok{)) }\OperatorTok{%>%}
-
 \StringTok{  }\KeywordTok{dyEvent}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ optiDate1,}
           \DataTypeTok{label =}\NormalTok{ optiLabel1,}
           \DataTypeTok{labelLoc =} \StringTok{"bottom"}\NormalTok{,}
-          \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+          \DataTypeTok{color =} \StringTok{"slategray"}\NormalTok{,}
+          \DataTypeTok{strokePattern =} \StringTok{"dotted"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{dyEvent}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ optiDate2,}
           \DataTypeTok{label =}\NormalTok{ optiLabel2,}
           \DataTypeTok{labelLoc =} \StringTok{"bottom"}\NormalTok{,}
-          \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+          \DataTypeTok{color =} \StringTok{"slategray"}\NormalTok{,}
+          \DataTypeTok{strokePattern =} \StringTok{"dotted"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{dyLimit}\NormalTok{(tempSetpoint,}
           \DataTypeTok{color =} \StringTok{"red"}\NormalTok{,}
           \DataTypeTok{label =} \StringTok{"Setpoint"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
@@ -1018,6 +1025,8 @@ You want to create a time series plot with
 \subsection{Discussion}\label{discussion}}
 
 In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.
+
+Please note that the calculation of the periodic median after optimization I and II starts delayed because it takes time until the building has cooled down.
 
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
