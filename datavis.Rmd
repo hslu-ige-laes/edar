@@ -223,13 +223,8 @@ p <- ggplot2::ggplot(df) +
           legend.position="none",
           plot.title = element_text(hjust = 0.5)
         )
-p
-```
 
-Add the following part to your script to make the chart above interactive:
-
-```{r energysignature plotly, warning=FALSE, message=FALSE, collapse = FALSE}
-# continuation from upper ggplot code section
+# interactive chart
 plotly::ggplotly(p, tooltip = c("text")) %>%
   layout(xaxis = list(title = "Outside temperature (\u00B0C)",
                       range = c(min(-5,min(df$tempMean)), max(35,max(df$tempMean))), zeroline = F),
@@ -240,9 +235,12 @@ plotly::ggplotly(p, tooltip = c("text")) %>%
   plotly::config(displayModeBar = FALSE, displaylogo = FALSE)
 ```
 
-## Superimposed Daily Mean Profiles
+## Daily Energy Profiles
 
 ```{r energyprofiles plotly, warning=FALSE, message=FALSE, collapse = FALSE}
+# change language to English, otherwise weekdays are in local language
+Sys.setlocale("LC_TIME", "English")
+
 library(plotly)
 library(dplyr)
 library(lubridate)
@@ -273,9 +271,6 @@ df <- df %>%
   select(-meterValue) %>%
   na.omit()
 
-# change language to English, otherwise weekdays are in local language
-Sys.setlocale("LC_TIME", "English")
-
 # add metadata for later grouping and visualization purposes
 df$x <- hour(df$timestamp) + minute(df$timestamp)/60 + second(df$timestamp) / 3600
 # df$time <- format(df$timestamp, "%H:%M")
@@ -288,9 +283,6 @@ df$day <- as.Date(df$timestamp, format = "%Y-%m-%d  %H:%M:%S")
 
 df <- df %>% mutate(value = ifelse(x == 0.00, NA, df$value))
 
-
-# Test
-# ==================================================================================
 # plot graph with all time series
 df %>% 
   highlight_key(~day) %>%

@@ -47,7 +47,7 @@ building-energy-signature
 task-1
 basis-1
 solution-1
-superimposed-daily-mean-profiles
+daily-energy-profiles
 mollier-hx-diagram
 task-2
 basis-2

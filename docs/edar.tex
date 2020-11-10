@@ -1144,17 +1144,8 @@ Create a new script, copy/paste the following code and run it:
           \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
           \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
 \NormalTok{        )}
-\NormalTok{p}
-\end{Highlighting}
-\end{Shaded}
 
-\includegraphics{edar_files/figure-latex/energysignature ggplot-1.pdf}
-
-Add the following part to your script to make the chart above interactive:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# continuation from upper ggplot code section}
+\CommentTok{# interactive chart}
 \NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Outside temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
                       \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean)), }\KeywordTok{max}\NormalTok{(}\DecValTok{35}\NormalTok{,}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean))), }\DataTypeTok{zeroline =}\NormalTok{ F),}
@@ -1166,10 +1157,21 @@ Add the following part to your script to make the chart above interactive:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/energysignature plotly-1.pdf}
+\includegraphics{edar_files/figure-latex/energysignature ggplot-1.pdf}
 
-\hypertarget{superimposed-daily-mean-profiles}{%
-\section{Superimposed Daily Mean Profiles}\label{superimposed-daily-mean-profiles}}
+\hypertarget{daily-energy-profiles}{%
+\section{Daily Energy Profiles}\label{daily-energy-profiles}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# change language to English, otherwise weekdays are in local language}
+\KeywordTok{Sys.setlocale}\NormalTok{(}\StringTok{"LC_TIME"}\NormalTok{, }\StringTok{"English"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "English_United States.1252"
+\end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1203,17 +1205,6 @@ Add the following part to your script to make the chart above interactive:
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# change language to English, otherwise weekdays are in local language}
-\KeywordTok{Sys.setlocale}\NormalTok{(}\StringTok{"LC_TIME"}\NormalTok{, }\StringTok{"English"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\begin{verbatim}
-## [1] "English_United States.1252"
-\end{verbatim}
-
-\begin{Shaded}
-\begin{Highlighting}[]
 \CommentTok{# add metadata for later grouping and visualization purposes}
 \NormalTok{df}\OperatorTok{$}\NormalTok{x <-}\StringTok{ }\KeywordTok{hour}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{+}\StringTok{ }\KeywordTok{minute}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}\OperatorTok{/}\DecValTok{60} \OperatorTok{+}\StringTok{ }\KeywordTok{second}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{/}\StringTok{ }\DecValTok{3600}
 \CommentTok{# df$time <- format(df$timestamp, "%H:%M")}
@@ -1226,9 +1217,6 @@ Add the following part to your script to make the chart above interactive:
 
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ }\FloatTok{0.00}\NormalTok{, }\OtherTok{NA}\NormalTok{, df}\OperatorTok{$}\NormalTok{value))}
 
-
-\CommentTok{# Test}
-\CommentTok{# ==================================================================================}
 \CommentTok{# plot graph with all time series}
 \NormalTok{df }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{highlight_key}\NormalTok{(}\OperatorTok{~}\NormalTok{day) }\OperatorTok{%>%}
