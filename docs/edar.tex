@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-09}
+\date{2020-11-10}
 
 \begin{document}
 \maketitle
@@ -943,23 +943,23 @@ You want to create a time series plot with
 \NormalTok{optiDelayDays =}\StringTok{ }\DecValTok{5}
 
 \CommentTok{# read and print data}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
                  \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                  \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
 \CommentTok{# select temperature and remove empty cells}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
 \CommentTok{# create column with day for later grouping}
-\NormalTok{data}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(data}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(data}\OperatorTok{$}\NormalTok{day,}\StringTok{"%Y-%m-%d"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{as.character}\NormalTok{(df}\OperatorTok{$}\NormalTok{day,}\StringTok{"%Y-%m-%d"}\NormalTok{))}
 
 \CommentTok{# filter time range}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(day }\OperatorTok{>}\StringTok{ }\NormalTok{startDate, day }\OperatorTok{<}\StringTok{ }\NormalTok{endDate)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(day }\OperatorTok{>}\StringTok{ }\NormalTok{startDate, day }\OperatorTok{<}\StringTok{ }\NormalTok{endDate)}
 
 \CommentTok{# calculate daily median, min and max of temperature}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{minDay =} \KeywordTok{min}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp)),}
          \DataTypeTok{medianDay =} \KeywordTok{median}\NormalTok{(}\KeywordTok{as.numeric}\NormalTok{(FlatA_Temp)),}
@@ -968,10 +968,10 @@ You want to create a time series plot with
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
 \CommentTok{# shrink down to daily values and remove rows with empty values}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, medianDay, minDay, maxDay) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, medianDay, minDay, maxDay) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
 \CommentTok{# calculate medians for time ranges}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{period =} \KeywordTok{ifelse}\NormalTok{(day }\OperatorTok{>=}\StringTok{ }\NormalTok{startDate }\OperatorTok{&}\StringTok{ }\NormalTok{day }\OperatorTok{<=}\StringTok{ }\NormalTok{optiDate1,}
                          \StringTok{"Baseline"}\NormalTok{,}
                          \KeywordTok{ifelse}\NormalTok{((day }\OperatorTok{>=}\StringTok{ }\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(optiDate1) }\OperatorTok{+}\StringTok{ }\NormalTok{optiDelayDays))}
@@ -983,14 +983,14 @@ You want to create a time series plot with
                                 \OtherTok{NA}\NormalTok{)}
 \NormalTok{                         )))}
 
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(period) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{medianPeriod =} \KeywordTok{ifelse}\NormalTok{(}\KeywordTok{is.na}\NormalTok{(period), }\OtherTok{NA}\NormalTok{, }\KeywordTok{median}\NormalTok{(medianDay))) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{period)}
 
 \CommentTok{# create xts object for plotting}
-\NormalTok{plotdata <-}\StringTok{ }\KeywordTok{xts}\NormalTok{( }\DataTypeTok{x=}\NormalTok{data[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{order.by=}\NormalTok{data}\OperatorTok{$}\NormalTok{day)}
+\NormalTok{plotdata <-}\StringTok{ }\KeywordTok{xts}\NormalTok{( }\DataTypeTok{x=}\NormalTok{df[,}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{order.by=}\NormalTok{df}\OperatorTok{$}\NormalTok{day)}
 
 \CommentTok{# plot graph}
 \KeywordTok{dygraph}\NormalTok{(plotdata, }\DataTypeTok{main =} \StringTok{"Room Temperature Reduction"}\NormalTok{) }\OperatorTok{%>%}
@@ -1065,7 +1065,6 @@ Create a new script, copy/paste the following code and run it:
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(ggthemes)}
 \KeywordTok{library}\NormalTok{(plotly)}
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(redutils)}
@@ -1168,6 +1167,149 @@ Add the following part to your script to make the chart above interactive:
 \end{Shaded}
 
 \includegraphics{edar_files/figure-latex/energysignature plotly-1.pdf}
+
+\hypertarget{superimposed-daily-mean-profiles}{%
+\section{Superimposed Daily Mean Profiles}\label{superimposed-daily-mean-profiles}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# load time series data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/heatPumpElectricity.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# rename column names}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
+                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
+
+\CommentTok{# filter time range if necessary}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(timestamp }\OperatorTok{>}\StringTok{ "2019-11-01 00:00:00"}\NormalTok{, timestamp }\OperatorTok{<}\StringTok{ "2020-04-01 00:00:00"}\NormalTok{)}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(df[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{], df[}\KeywordTok{nrow}\NormalTok{(df), }\DecValTok{1}\NormalTok{], }\DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# convert steadily counting energy meter value in kWh to power in Watts }
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{/}\DecValTok{4}\OperatorTok{*}\DecValTok{1000}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# change language to English, otherwise weekdays are in local language}
+\KeywordTok{Sys.setlocale}\NormalTok{(}\StringTok{"LC_TIME"}\NormalTok{, }\StringTok{"English"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "English_United States.1252"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# add metadata for later grouping and visualization purposes}
+\NormalTok{df}\OperatorTok{$}\NormalTok{x <-}\StringTok{ }\KeywordTok{hour}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{+}\StringTok{ }\KeywordTok{minute}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}\OperatorTok{/}\DecValTok{60} \OperatorTok{+}\StringTok{ }\KeywordTok{second}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{/}\StringTok{ }\DecValTok{3600}
+\CommentTok{# df$time <- format(df$timestamp, "%H:%M")}
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{format}\NormalTok{(}\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{strptime}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\StringTok{"%Y-%m-%d  %H:%M:%S"}\NormalTok{,}\DataTypeTok{tz=}\StringTok{""}\NormalTok{)) ,}\DataTypeTok{format =} \StringTok{"%H:%M"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{format =} \StringTok{"%H:%M"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{weekdays}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{weekday, }\KeywordTok{c}\NormalTok{(}\StringTok{"Monday"}\NormalTok{,}\StringTok{"Tuesday"}\NormalTok{,}\StringTok{"Wednesday"}\NormalTok{,}\StringTok{"Thursday"}\NormalTok{,}\StringTok{"Friday"}\NormalTok{,}\StringTok{"Saturday"}\NormalTok{, }\StringTok{"Sunday"}\NormalTok{))}
+\CommentTok{# df$day <- as.Date(cut(df$timestamp, breaks = "day"))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{format =} \StringTok{"%Y-%m-%d  %H:%M:%S"}\NormalTok{)}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ }\FloatTok{0.00}\NormalTok{, }\OtherTok{NA}\NormalTok{, df}\OperatorTok{$}\NormalTok{value))}
+
+
+\CommentTok{# Test}
+\CommentTok{# ==================================================================================}
+\CommentTok{# plot graph with all time series}
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight_key}\NormalTok{(}\OperatorTok{~}\NormalTok{day) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{plot_ly}\NormalTok{(}\DataTypeTok{x=}\OperatorTok{~}\NormalTok{x,}
+          \DataTypeTok{y=}\OperatorTok{~}\NormalTok{value,}
+          \DataTypeTok{color=}\OperatorTok{~}\NormalTok{weekday,}
+          \DataTypeTok{type=}\StringTok{"scatter"}\NormalTok{,}
+          \DataTypeTok{mode=}\StringTok{"lines"}\NormalTok{,}
+          \DataTypeTok{line =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{width =} \DecValTok{1}\NormalTok{),}
+          \DataTypeTok{alpha =} \FloatTok{0.15}\NormalTok{,}
+          \DataTypeTok{colors =} \StringTok{"dodgerblue4"}\NormalTok{,}
+          \DataTypeTok{text =} \OperatorTok{~}\NormalTok{day,}
+          \DataTypeTok{hovertemplate =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Time: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"%H:%M"}\NormalTok{),}
+                                \StringTok{"<br>Date: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"%Y-%m-%d"}\NormalTok{),}
+                                \StringTok{"<br>Mean: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Superimposed Profiles of Power Consumption per 15 min"}\NormalTok{,}
+         \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
+         \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
+           \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
+           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
+\NormalTok{           ),}
+           \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
+             \DataTypeTok{title =} \StringTok{"Power (W)"}\NormalTok{,}
+             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{value)) }
+\NormalTok{           )}
+\NormalTok{         ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}
+            \DataTypeTok{off =} \StringTok{"plotly_doubleclick"}\NormalTok{,}
+            \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
+            \DataTypeTok{opacityDim =} \FloatTok{1.0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)), }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/energyprofiles plotly-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Calculate Mean value for all 15 minutes for each weekday}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(weekday, x) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dayTimeMean =} \KeywordTok{mean}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# shrink data frame}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(x, weekday, time, dayTimeMean) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(weekday, x)}
+
+\CommentTok{# plot graph with mean values}
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight_key}\NormalTok{(}\OperatorTok{~}\NormalTok{weekday) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{plot_ly}\NormalTok{(}\DataTypeTok{x=}\OperatorTok{~}\NormalTok{x,}
+          \DataTypeTok{y=}\OperatorTok{~}\NormalTok{dayTimeMean,}
+          \DataTypeTok{color=}\OperatorTok{~}\NormalTok{weekday,}
+          \DataTypeTok{type=}\StringTok{"scatter"}\NormalTok{,}
+          \DataTypeTok{mode=}\StringTok{"lines"}\NormalTok{,}
+          \DataTypeTok{alpha =} \FloatTok{0.25}\NormalTok{,}
+          \DataTypeTok{colors =} \StringTok{"dodgerblue4"}\NormalTok{,}
+          \DataTypeTok{text =} \OperatorTok{~}\NormalTok{weekday,}
+          \DataTypeTok{hovertemplate =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Time: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"%H:%M"}\NormalTok{),}
+                                \StringTok{"<br>Mean: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{  }
+\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Superimposed Mean Profiles of Power Consumption per 15 min"}\NormalTok{,}
+         \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
+         \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
+           \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
+           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
+\NormalTok{         ),}
+         \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
+             \DataTypeTok{title =} \StringTok{"Power (W)"}\NormalTok{,}
+             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{dayTimeMean))  }
+\NormalTok{         )}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}
+            \DataTypeTok{off =} \StringTok{"plotly_doubleclick"}\NormalTok{,}
+            \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
+            \DataTypeTok{opacityDim =} \FloatTok{0.7}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)), }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/energyprofiles plotly-2.pdf}
 
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
