@@ -1195,7 +1195,7 @@ Create a new script, copy/paste the following code and run it:
 \KeywordTok{library}\NormalTok{(lubridate)}
 
 \CommentTok{# load time series data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/heatPumpElectricity.csv"}\NormalTok{,}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
@@ -1208,15 +1208,15 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
 
 \CommentTok{# filter time range if necessary}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(timestamp }\OperatorTok{>}\StringTok{ "2019-11-01 00:00:00"}\NormalTok{, timestamp }\OperatorTok{<}\StringTok{ "2020-04-01 00:00:00"}\NormalTok{)}
+\CommentTok{#df <- df %>% filter(timestamp > "2019-11-01 00:00:00", timestamp < "2020-04-01 00:00:00")}
 
 \CommentTok{# Fill missing values with NA}
 \NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(df[}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{], df[}\KeywordTok{nrow}\NormalTok{(df), }\DecValTok{1}\NormalTok{], }\DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
 
-\CommentTok{# convert steadily counting energy meter value in kWh to power in Watts }
+\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{/}\DecValTok{4}\OperatorTok{*}\DecValTok{1000}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
 
@@ -1246,16 +1246,17 @@ Create a new script, copy/paste the following code and run it:
           \DataTypeTok{text =} \OperatorTok{~}\NormalTok{day,}
           \DataTypeTok{hovertemplate =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Time: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"%H:%M"}\NormalTok{),}
                                 \StringTok{"<br>Date: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"%Y-%m-%d"}\NormalTok{),}
-                                \StringTok{"<br>Mean: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{  }
+                                \StringTok{"<br>Value: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}\StringTok{  }
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Superimposed Profiles of Power Consumption per 15 min"}\NormalTok{,}
          \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
          \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
            \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
-           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
+           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{),}
+           \DataTypeTok{showline=}\OtherTok{TRUE}
 \NormalTok{           ),}
            \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
-             \DataTypeTok{title =} \StringTok{"Power (W)"}\NormalTok{,}
-             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{value)) }
+             \DataTypeTok{title =} \StringTok{"Power (kW)"}\NormalTok{,}
+             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{value)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{)}
 \NormalTok{           )}
 \NormalTok{         ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}
@@ -1300,8 +1301,8 @@ Create a new script, copy/paste the following code and run it:
            \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
 \NormalTok{         ),}
          \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
-             \DataTypeTok{title =} \StringTok{"Power (W)"}\NormalTok{,}
-             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{dayTimeMean))  }
+             \DataTypeTok{title =} \StringTok{"Power (kW)"}\NormalTok{,}
+             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{dayTimeMean)}\OperatorTok{*}\FloatTok{1.05}\NormalTok{)  }
 \NormalTok{         )}
 \NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}

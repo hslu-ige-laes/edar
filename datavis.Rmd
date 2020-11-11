@@ -259,15 +259,15 @@ df$timestamp <- parse_date_time(df$timestamp,
 df$timestamp <- force_tz(df$timestamp, tzone = "UTC")
 
 # filter time range if necessary
-df <- df %>% filter(timestamp > "2019-11-01 00:00:00", timestamp < "2020-04-01 00:00:00")
+#df <- df %>% filter(timestamp > "2019-11-01 00:00:00", timestamp < "2020-04-01 00:00:00")
 
 # Fill missing values with NA
 grid.df <- data.frame(timestamp = seq(df[1, 1], df[nrow(df), 1], by = "15 mins"))
 df <- merge(df, grid.df, all = TRUE)
 
-# convert steadily counting energy meter value in kWh to power in Watts 
+# convert steadily counting energy meter value from kWh to power in kW
 df <- df %>% 
-  mutate(value = (meterValue - lag(meterValue))/4*1000) %>%
+  mutate(value = (meterValue - lag(meterValue))*4) %>%
   select(-meterValue) %>%
   na.omit()
 
@@ -297,16 +297,17 @@ df %>%
           text = ~day,
           hovertemplate = paste("Time: ", format(df$time, "%H:%M"),
                                 "<br>Date: ", format(df$time, "%Y-%m-%d"),
-                                "<br>Mean: %{y:.0f}")) %>%  
+                                "<br>Value: %{y:.0f}")) %>%  
   layout(title = "Superimposed Profiles of Power Consumption per 15 min",
          showlegend = TRUE,
          xaxis = list(
            title = "Hour of day",
-           tickvals = list(0, 3, 6, 9, 12, 15, 18, 21)
+           tickvals = list(0, 3, 6, 9, 12, 15, 18, 21),
+           showline=TRUE
            ),
            yaxis = list(
-             title = "Power (W)",
-             range = c(0, max(df$value)) 
+             title = "Power (kW)",
+             range = c(0, max(df$value)*1.05)
            )
          ) %>% 
   highlight(on = "plotly_hover",
@@ -346,8 +347,8 @@ df %>%
            tickvals = list(0, 3, 6, 9, 12, 15, 18, 21)
          ),
          yaxis = list(
-             title = "Power (W)",
-             range = c(0, max(df$dayTimeMean))  
+             title = "Power (kW)",
+             range = c(0, max(df$dayTimeMean)*1.05)  
          )
   ) %>% 
   highlight(on = "plotly_hover",
