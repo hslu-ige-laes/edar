@@ -12,11 +12,8 @@ linux
 download-and-install-rstudio
 install-required-packages
 create-your-first-r-script-and-visualization
+whats-next
 r-basics
-packages
-installing-a-package
-loading-a-package
-upgrading-packages
 loading-data
 csv-file
 excel-file
@@ -56,3 +53,7 @@ basis-2
 solution-2
 discussion-1
 see-also
+packages
+installing-a-package
+loading-a-package
+upgrading-packages

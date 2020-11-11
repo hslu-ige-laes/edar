@@ -2,58 +2,60 @@
 ## Install R and R Studio {#installation}
 Before we can start the first analysis, we have to install "R" and "RStudio". This may seem laborious, but it is necessary and easier than it appears at first glance.
 
-- "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface.
-- "R" may be used without "RStudio", but "RStudio" may not be used without "R".
-- Both, "R" and "RStudio" are free of charge and there are no licencse fees.
-- When you later make an analysis and visualizations, you only work in the graphical user interface "RStudio".
+- "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface
+- "R" may be used without "RStudio", but "RStudio" may not be used without "R"
+- Both, "R" and "RStudio" are free of charge and there are no licencse fees
+- When you later make an analysis and visualizations, you only work in the graphical user interface "RStudio"
 
 ### Download and Install R
 #### Windows
 
-1. Open [https://cran.r-project.org/bin/windows/base/](https://cran.r-project.org/bin/windows/base/) and press the link "Download R..."
+1. Open <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">https://cran.r-project.org/bin/windows/base/</a> and press the link "Download R..."
 1. Run the downloaded installer file and follow the installation wizard
 
-The wizard will install R into your "Program Files" folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
+The wizard will install "R" into your `Program Files` folders and adds a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
 
 #### Mac OSX
-1. Open [https://cran.r-project.org/bin/macosx/](https://cran.r-project.org/bin/macosx/) and download the latest *.pkg file
+1. Open <a href="https://cran.r-project.org/bin/macosx/" target="_blank">https://cran.r-project.org/bin/macosx/</a> and download the latest `*.pkg` file
 1. Run the downloaded installer file and follow the installation wizard
 
 The installer allows you to customize your installation. However the default values will be suitable for most users.
 
 #### Linux
-R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
+"R" is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
 
-The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”
+The CRAN website provides files to build "R" from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”
 
-- Open [https://cran.r-project.org/bin/linux/](https://cran.r-project.org/bin/linux/) and then follow the directory trail to the version of Linux you wish to install R on top of
+- Open <a href="https://cran.r-project.org/bin/linux/" target="_blank">https://cran.r-project.org/bin/linux/</a> and then follow the directory trail to the version of Linux you wish to install R on top of
 
 The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
 
 ### Download and Install RStudio
-R Studio is a development environment for R.
+"R Studio" is a development environment for "R".
 
-1. Open [https://rstudio.com/products/rstudio/download/](https://rstudio.com/products/rstudio/download/) and download "RStudio Desktop Open Source"
+1. Open <a href="https://rstudio.com/products/rstudio/download/" target="_blank">https://rstudio.com/products/rstudio/download/</a> and download "RStudio Desktop Open Source"
 1. Follow the on-screen instructions
-1. Once you have installed R Studio, you can run it like any other application via 
+1. Once you have installed "R Studio", you can run it like any other application by clicking the program icon 
 
 ## Install required packages
-Chapter \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages we use in this book, and it is recommended to install them now.
+Chapter \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
 
-- Open "RStudio" just as you would any program, by clicking on its icon.
-- Copy the following code and paste it into your console right of the symbol `>`:
+- Open "RStudio" just as you would any program, by clicking on its icon
+- Copy the following code and paste it into your console (on the bottom left, right of the symbol `>`):
 ```{r install packages, eval=FALSE}
 install.packages("devtools", "tidyverse", "plotly", "lubridate", "r2d3")
 install_github("hslu-ige-laes/redutils")
 ```
-- Press enter
+- Press `Enter` or `Return`
 
-The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \@ref(Packages) what packages are in detail and how they can be installed and then loaded into scripts.
+The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \@ref(packages) what packages are in detail and how they can be installed and later loaded into scripts.
 
 ## Create your first R Script and visualization
-Finally, you have both "R" and "RStudio" with the first set of packages on your computer. Let's create the first visualization.
+Finally, you have installed "R" and "RStudio" with the first set of packages on your computer.
 
-- Open "RStudio" just as you would any program, by clicking on its icon.
+Let's create the first visualization.
+
+- Open "RStudio" just as you would any program, by clicking on its icon
 - Go to the menu on the top left and click to `File / New File / R Script`
 - Copy the following code and paste it into your script:
 ```{r co2 intro code, eval=FALSE}
@@ -63,10 +65,16 @@ title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
 - select all by pressing `Ctrl + A`
 - Thren run the code by pressing the `Run` Button or `Ctrl + Enter`
-- You should now get your first visualization:
+
+You should now get your first visualization:
 ```{r co2 intro graph, echo=FALSE}
 library(graphics)
 plot(co2, ylab = "CO2 (ppm)", las = 1)
 title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
 
+## What's next?
+Now hopefully, everything has worked fine so far with the installation and your first visualization.
+Congratulations! You have now a running R environment and we can start with more interesting stuff.
+
+The following chapters will give you an overview 

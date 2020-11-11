@@ -161,22 +161,19 @@ The online book is hosted using GitHub's free GitHub Pages. All material for thi
 \hypertarget{why-r-and-rstudio}{%
 \section{Why R and RStudio?}\label{why-r-and-rstudio}}
 
-In a study commissioned by the Swiss Federal Office of Energy, people from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring program. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics is limited. The change to an environment like R seems to be difficult for many. In the market there are numerous books which make the change to R for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
+In a study commissioned by the Swiss Federal Office of Energy, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and create visualizations. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics there is limited. The change to an environment like ``R'' seems to be difficult for many. In the market there are numerous books which make the change to ``R'' for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
 
-The programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
+The freely available programming language ``R'' and its graphical user interface ``RStudio'' offer many more possibilities for data analysis and data visualization.
 
 \hypertarget{other-useful-sources}{%
 \section{Other useful sources}\label{other-useful-sources}}
 
-A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of the coursebook.
+A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book.
 
-There are a number of other useful books available on general R programming,
-including:
+There are a number of other useful books available on general R programming, including:
 
 \begin{itemize}
 \tightlist
-\item
-  R for Data Science
 \item
   R Graphics Cookbook
 \item
@@ -198,13 +195,13 @@ Before we can start the first analysis, we have to install ``R'' and ``RStudio''
 \begin{itemize}
 \tightlist
 \item
-  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
+  ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface
 \item
-  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''.
+  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''
 \item
-  Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
+  Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees
 \item
-  When you later make an analysis and visualizations, you only work in the graphical user interface ``RStudio''.
+  When you later make an analysis and visualizations, you only work in the graphical user interface ``RStudio''
 \end{itemize}
 
 \hypertarget{download-and-install-r}{%
@@ -217,12 +214,12 @@ Before we can start the first analysis, we have to install ``R'' and ``RStudio''
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Open \url{https://cran.r-project.org/bin/windows/base/} and press the link ``Download R\ldots{}''
+  Open https://cran.r-project.org/bin/windows/base/ and press the link ``Download R\ldots{}''
 \item
   Run the downloaded installer file and follow the installation wizard
 \end{enumerate}
 
-The wizard will install R into your ``Program Files'' folders and add a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
+The wizard will install ``R'' into your \texttt{Program\ Files} folders and adds a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
 
 \hypertarget{mac-osx}{%
 \subsubsection{Mac OSX}\label{mac-osx}}
@@ -231,7 +228,7 @@ The wizard will install R into your ``Program Files'' folders and add a shortcut
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Open \url{https://cran.r-project.org/bin/macosx/} and download the latest *.pkg file
+  Open https://cran.r-project.org/bin/macosx/ and download the latest \texttt{*.pkg} file
 \item
   Run the downloaded installer file and follow the installation wizard
 \end{enumerate}
@@ -241,14 +238,14 @@ The installer allows you to customize your installation. However the default val
 \hypertarget{linux}{%
 \subsubsection{Linux}\label{linux}}
 
-R is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
+``R'' is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
 
-The CRAN website provides files to build R from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
+The CRAN website provides files to build ``R'' from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
 
 \begin{itemize}
 \tightlist
 \item
-  Open \url{https://cran.r-project.org/bin/linux/} and then follow the directory trail to the version of Linux you wish to install R on top of
+  Open https://cran.r-project.org/bin/linux/ and then follow the directory trail to the version of Linux you wish to install R on top of
 \end{itemize}
 
 The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
@@ -256,30 +253,30 @@ The exact installation procedure will vary depending on your Linux operating sys
 \hypertarget{download-and-install-rstudio}{%
 \subsection{Download and Install RStudio}\label{download-and-install-rstudio}}
 
-R Studio is a development environment for R.
+``R Studio'' is a development environment for ``R''.
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Open \url{https://rstudio.com/products/rstudio/download/} and download ``RStudio Desktop Open Source''
+  Open https://rstudio.com/products/rstudio/download/ and download ``RStudio Desktop Open Source''
 \item
   Follow the on-screen instructions
 \item
-  Once you have installed R Studio, you can run it like any other application via
+  Once you have installed ``R Studio'', you can run it like any other application by clicking the program icon
 \end{enumerate}
 
 \hypertarget{install-required-packages}{%
 \section{Install required packages}\label{install-required-packages}}
 
-Chapter \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages we use in this book, and it is recommended to install them now.
+Chapter \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
 
 \begin{itemize}
 \tightlist
 \item
-  Open ``RStudio'' just as you would any program, by clicking on its icon.
+  Open ``RStudio'' just as you would any program, by clicking on its icon
 \item
-  Copy the following code and paste it into your console right of the symbol \texttt{\textgreater{}}:
+  Copy the following code and paste it into your console (on the bottom left, right of the symbol \texttt{\textgreater{}}):
 \end{itemize}
 
 \begin{Shaded}
@@ -292,20 +289,22 @@ Chapter \ref{packages} gives you an introduction to what a package is and how to
 \begin{itemize}
 \tightlist
 \item
-  Press enter
+  Press \texttt{Enter} or \texttt{Return}
 \end{itemize}
 
-The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \ref{Packages} what packages are in detail and how they can be installed and then loaded into scripts.
+The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \ref{packages} what packages are in detail and how they can be installed and later loaded into scripts.
 
 \hypertarget{create-your-first-r-script-and-visualization}{%
 \section{Create your first R Script and visualization}\label{create-your-first-r-script-and-visualization}}
 
-Finally, you have both ``R'' and ``RStudio'' with the first set of packages on your computer. Let's create the first visualization.
+Finally, you have installed ``R'' and ``RStudio'' with the first set of packages on your computer.
+
+Let's create the first visualization.
 
 \begin{itemize}
 \tightlist
 \item
-  Open ``RStudio'' just as you would any program, by clicking on its icon.
+  Open ``RStudio'' just as you would any program, by clicking on its icon
 \item
   Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
 \item
@@ -326,84 +325,21 @@ Finally, you have both ``R'' and ``RStudio'' with the first set of packages on y
   select all by pressing \texttt{Ctrl\ +\ A}
 \item
   Thren run the code by pressing the \texttt{Run} Button or \texttt{Ctrl\ +\ Enter}
-\item
-  You should now get your first visualization:
-  \includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
 \end{itemize}
+
+You should now get your first visualization:
+\includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
+
+\hypertarget{whats-next}{%
+\section{What's next?}\label{whats-next}}
+
+Now hopefully, everything has worked fine so far with the installation and your first visualization.
+Congratulations! You have now a running R environment and we can start with more interesting stuff.
+
+The following chapters will give you an overview
 
 \hypertarget{r-basics}{%
 \chapter{R Basics}\label{r-basics}}
-
-\hypertarget{packages}{%
-\section{Packages in R}\label{packages}}
-
-Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
-
-The following chapters describe how to install, load, update and use packages.
-
-\hypertarget{installing-a-package}{%
-\subsection{Installing a Package}\label{installing-a-package}}
-
-The easiest way to install an R Package is to use the RStudio tab ``Packages'':
-
-\begin{figure}
-\includegraphics[width=0.5\linewidth]{images/a2-installPackagesRStudio} \caption{Install packages via RStudio GUI}\label{fig:knitr-logo}
-\end{figure}
-
-\begin{enumerate}
-\def\labelenumi{\alph{enumi})}
-\item
-  Click on the ``Packages'' tab
-\item
-  Click on ``Install'' next to Update
-\item
-  Type the name of the package under ``Packages, in this case type ggplot2
-\item
-  Click ``Install''
-\end{enumerate}
-
-This will search for the package ``ggplot'' specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
-
-An other way is to use the install.packages function.
-Open R (if already opened please close all projects) and type the following at the command line:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-If you want to install a package directly from github, the package ``devtools'' must be installed first:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
-\KeywordTok{library}\NormalTok{(devtools)}
-\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{loading-a-package}{%
-\subsection{Loading a Package}\label{loading-a-package}}
-
-If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{upgrading-packages}{%
-\subsection{Upgrading Packages}\label{upgrading-packages}}
-
-R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
 \hypertarget{loading-data}{%
 \section{Loading Data}\label{loading-data}}
@@ -1468,6 +1404,81 @@ The diagram is based on D3 and packaged into the package \texttt{redutils}. The 
 \subsection{See Also}\label{see-also}}
 
 If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \ref{DATAWRANGLING-MERGE-TWO-DATAFRAMES}
+
+\hypertarget{appendix-appendix}{%
+\appendix}
+
+
+\hypertarget{packages}{%
+\chapter{Packages in R}\label{packages}}
+
+Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
+
+The following chapters describe how to install, load, update and use packages.
+
+\hypertarget{installing-a-package}{%
+\section{Installing a Package}\label{installing-a-package}}
+
+The easiest way to install an R Package is to use the RStudio tab ``Packages'':
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{images/a2-installPackagesRStudio} \caption{Install packages via RStudio GUI}\label{fig:knitr-logo}
+\end{figure}
+
+\begin{enumerate}
+\def\labelenumi{\alph{enumi})}
+\item
+  Click on the ``Packages'' tab
+\item
+  Click on ``Install'' next to Update
+\item
+  Type the name of the package under ``Packages, in this case type ggplot2
+\item
+  Click ``Install''
+\end{enumerate}
+
+This will search for the package ``ggplot'' specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
+
+An other way is to use the install.packages function.
+Open R (if already opened please close all projects) and type the following at the command line:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+If you want to install a package directly from github, the package ``devtools'' must be installed first:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(devtools)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{loading-a-package}{%
+\section{Loading a Package}\label{loading-a-package}}
+
+If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"ggplot2"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{upgrading-packages}{%
+\section{Upgrading Packages}\label{upgrading-packages}}
+
+R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
   \bibliography{book.bib,packages.bib}
 

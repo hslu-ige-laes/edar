@@ -2,11 +2,14 @@ book_filename: "edar.Rmd"
 repo: https://github.com/hslu-ige-laes/edar
 rmd_files: [
   "index.rmd",
+
   "gettingStarted.Rmd",
   "rBasics.Rmd",
   "dataWrangling.Rmd",
   "eda.Rmd",
-  "dataVis.Rmd"
+  "dataVis.Rmd",
+
+  "a1-packages.rmd",
 ]
 language:
   ui:

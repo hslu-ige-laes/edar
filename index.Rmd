@@ -29,17 +29,15 @@ The online book is hosted using GitHub's free <a href="https://pages.github.com"
 
 
 ## Why R and RStudio?
-In a study commissioned by the Swiss Federal Office of Energy, people from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring program. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics is limited. The change to an environment like R seems to be difficult for many. In the market there are numerous books which make the change to R for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
+In a study commissioned by the Swiss Federal Office of Energy, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and create visualizations. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics there is limited. The change to an environment like "R" seems to be difficult for many. In the market there are numerous books which make the change to "R" for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
 
-The programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
+The freely available programming language "R" and its graphical user interface "RStudio" offer many more possibilities for data analysis and data visualization.
 
 ## Other useful sources
-A really good source is <a href="http://r4ds.had.co.nz" target="_blank">R for Data Science</a> by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of the coursebook. 
+A really good source is <a href="http://r4ds.had.co.nz" target="_blank">R for Data Science</a> by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
 
-There are a number of other useful books available on general R programming,
-including:
+There are a number of other useful books available on general R programming, including:
 
-- <a href="http://r4ds.had.co.nz" target="_blank">R for Data Science</a>
 - <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a>
 - <a href="https://rafalab.github.io/dsbook/" target="_blank">Introduction to Data Science - Data Analysis and Prediction Algorithms with R</a>
 - <a href="https://rstudio-education.github.io/hopr/" target="_blank">Hands-On Programming with R</a>
