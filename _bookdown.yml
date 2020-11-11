@@ -1,4 +1,5 @@
 book_filename: "edar.Rmd"
+repo: https://github.com/hslu-ige-laes/edar
 rmd_files: [
   "index.rmd",
   "gettingStarted.Rmd",

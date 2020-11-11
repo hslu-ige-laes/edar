@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.6)  11 NOV 2020 10:58
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.6)  11 NOV 2020 11:32
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -893,21 +893,21 @@ Chapter 2.
 [7
 
 ]
-Underfull \hbox (badness 1331) in paragraph at lines 266--268
+Underfull \hbox (badness 1331) in paragraph at lines 265--267
 []\TU/lmr/m/n/10 Open []$[][][][][] [] [] [] [][][][][][][] [] [][][] [] [][][]
 [][][][][] [] [][][][][][][] [] [][][][][][][][][]$[] and download
  []
 
 [8]
 LaTeX Font Info:    Font shape `TU/lmtt/bx/n' in size <8> not available
-(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 288.
+(Font)              Font shape `TU/lmtt/b/n' tried instead on input line 287.
 
-LaTeX Warning: Reference `Packages' on page 9 undefined on input line 299.
+LaTeX Warning: Reference `Packages' on page 9 undefined on input line 298.
 
 File: edar_files/figure-latex/co2 intro graph-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/co2 intro graph-1.pdf>
 
-Overfull \hbox (188.02762pt too wide) in paragraph at lines 331--333
+Overfull \hbox (188.02762pt too wide) in paragraph at lines 330--332
 []\TU/lmr/m/n/10 You should now get your first visualization: [] 
  []
 
@@ -926,7 +926,7 @@ Chapter 4.
 ]
 Chapter 5.
 [21]
-Overfull \hbox (266.7121pt too wide) in paragraph at lines 853--853
+Overfull \hbox (266.7121pt too wide) in paragraph at lines 852--852
 []\TU/lmtt/m/n/8 ##  $ time                : chr  "2018-09-30T22:00:00.000Z" "2
 018-09-30T23:00:00.000Z" "2018-10-01T00:00:00.000Z" "2018-10-01T01:00:00.000Z" 
 ...[] 
@@ -940,11 +940,11 @@ Chapter 6.
 [25
 
 ]
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1099
  []
 
 
-Underfull \vbox (badness 10000) detected at line 1100
+Underfull \vbox (badness 10000) detected at line 1099
  []
 
 [26]
@@ -968,7 +968,7 @@ f)
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [32]
-Overfull \vbox (0.9416pt too high) detected at line 1378
+Overfull \vbox (0.9416pt too high) detected at line 1377
  []
 
 [33]
@@ -979,7 +979,7 @@ f)
 File: edar_files/figure-latex/mollier hx-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/mollier hx-1.pdf>
 [35]
-Underfull \hbox (badness 3128) in paragraph at lines 1466--1467
+Underfull \hbox (badness 3128) in paragraph at lines 1465--1466
 \TU/lmr/m/n/10 The original D3 source with a html integration you can find here
 :
  []
@@ -987,16 +987,16 @@ Underfull \hbox (badness 3128) in paragraph at lines 1466--1467
 No file edar.bbl.
 [36] (./edar.aux)
 Package rerunfilecheck Info: File `edar.out' has not changed.
-(rerunfilecheck)             Checksum: D0B0812A351D99D3F14A538A48F6925E;3398.
+(rerunfilecheck)             Checksum: 4C7DBBA5D509D8AD4C82AF40573B3540;3308.
 
 LaTeX Warning: There were undefined references.
 
  ) 
 Here is how much of TeX's memory you used:
- 17172 strings out of 479393
- 301747 string characters out of 5877882
- 766668 words of memory out of 5000000
- 36314 multiletter control sequences out of 15000+600000
+ 17171 strings out of 479393
+ 301731 string characters out of 5877882
+ 766634 words of memory out of 5000000
+ 36313 multiletter control sequences out of 15000+600000
  541571 words of font info for 86 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  94i,6n,118p,728b,498s stack positions out of 5000i,500n,10000p,200000b,80000s

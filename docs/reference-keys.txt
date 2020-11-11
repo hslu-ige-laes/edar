@@ -1,6 +1,5 @@
 fig:knitr-logo
-introduction
-preface
+intro
 content
 why-r-and-rstudio
 other-useful-sources
