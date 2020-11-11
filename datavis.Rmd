@@ -246,7 +246,7 @@ library(dplyr)
 library(lubridate)
 
 # load time series data
-df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/heatPumpElectricity.csv",
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv",
                stringsAsFactors=FALSE,
                sep =";")
 
