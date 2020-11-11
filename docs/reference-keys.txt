@@ -1,5 +1,9 @@
 fig:knitr-logo
+introduction
+preface
+content
 why-r-and-rstudio
+other-useful-sources
 getting-started
 installation
 download-and-install-r
@@ -7,9 +11,8 @@ windows
 mac-osx
 linux
 download-and-install-rstudio
-open-rstudio
-create-your-first-r-script
-whats-next
+install-required-packages
+create-your-first-r-script-and-visualization
 r-basics
 packages
 installing-a-package

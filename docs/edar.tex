@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-10}
+\date{2020-11-11}
 
 \begin{document}
 \maketitle
@@ -139,40 +139,73 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
+\hypertarget{introduction}{%
+\chapter{Introduction}\label{introduction}}
+
 \hypertarget{preface}{%
-\chapter*{Preface}\label{preface}}
-\addcontentsline{toc}{chapter}{Preface}
+\section{Preface}\label{preface}}
 
-This document gives you a short overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
+This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-This book is aimed at R beginners as well as advanced R users and is strongly inspired by the R Graphics Cookbook. The goal of this book is to additionaly provide specific recipes for energy and comfort related tasks.
+It is aimed at R beginners as well as exerienced R users and is strongly inspired by the R Graphics Cookbook and Engineering Data Analysis in R. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy.
 
-The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data.
+\hypertarget{content}{%
+\section{Content}\label{content}}
+
+The book is independently structured and a beginner gets information on how to install the program environment and gets a quick practical introduction.
+
+The examples in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
+
+This book was developed using Yihui Xie's bookdown framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
+The online book is hosted using GitHub's free GitHub Pages. All material for this book is available and can be explored at the book's GitHub repository.
 
 \hypertarget{why-r-and-rstudio}{%
 \section{Why R and RStudio?}\label{why-r-and-rstudio}}
 
-Spreadsheet programs like Excel quickly reach their limits when working with large data sets or creating complex graphics. Also the interactive ability of the graphics is limited. The open source programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
+In a study commissioned by the Swiss Federal Office of Energy, people from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring program. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics is limited. The change to an environment like R seems to be difficult for many. In the market there are numerous books which make the change to R for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
 
-\textbf{Disclaimer}
-The authors decline any liability or responsibility in connection with the published documentation
+The programming language R and its graphical user interface RStudio offer many more possibilities for data analysis and data visualization.
 
-© Lucerne University of Sciences and Arts, 2020
+\hypertarget{other-useful-sources}{%
+\section{Other useful sources}\label{other-useful-sources}}
+
+A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of the coursebook.
+
+There are a number of other useful books available on general R programming,
+including:
+
+\begin{itemize}
+\tightlist
+\item
+  R for Data Science
+\item
+  R Graphics Cookbook
+\item
+  Introduction to Data Science - Data Analysis and Prediction Algorithms with R
+\item
+  Hands-On Programming with R
+\item
+  Engineering Data Analysis in R
+\end{itemize}
 
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
 \hypertarget{installation}{%
-\section{Installing R and R Studio}\label{installation}}
+\section{Install R and R Studio}\label{installation}}
+
+Before we can start the first analysis, we have to install ``R'' and ``RStudio''. This may seem laborious, but it is necessary and easier than it appears at first glance.
 
 \begin{itemize}
 \tightlist
 \item
-  Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
-\item
   ``R'' is a programming language used for statistical computing while ``RStudio'' provides a graphical user interface.
 \item
-  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''. Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
+  ``R'' may be used without ``RStudio'', but ``RStudio'' may not be used without ``R''.
+\item
+  Both, ``R'' and ``RStudio'' are free of charge and there are no licencse fees.
+\item
+  When you later make an analysis and visualizations, you only work in the graphical user interface ``RStudio''.
 \end{itemize}
 
 \hypertarget{download-and-install-r}{%
@@ -237,20 +270,67 @@ R Studio is a development environment for R.
   Once you have installed R Studio, you can run it like any other application via
 \end{enumerate}
 
-\hypertarget{open-rstudio}{%
-\subsection{Open RStudio}\label{open-rstudio}}
+\hypertarget{install-required-packages}{%
+\section{Install required packages}\label{install-required-packages}}
 
-Now that you have both R and RStudio on your computer, you can begin using R by opening the RStudio program. Open RStudio just as you would any program, by clicking on its icon or by typing ``RStudio'' at the Windows Run prompt.
+Chapter \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages we use in this book, and it is recommended to install them now.
 
-\hypertarget{create-your-first-r-script}{%
-\section{Create your first R Script}\label{create-your-first-r-script}}
+\begin{itemize}
+\tightlist
+\item
+  Open ``RStudio'' just as you would any program, by clicking on its icon.
+\item
+  Copy the following code and paste it into your console right of the symbol \texttt{\textgreater{}}:
+\end{itemize}
 
-blabla
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"r2d3"}\NormalTok{)}
+\KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
-\hypertarget{whats-next}{%
-\section{Whats next?}\label{whats-next}}
+\begin{itemize}
+\tightlist
+\item
+  Press enter
+\end{itemize}
 
-blabla
+The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \ref{Packages} what packages are in detail and how they can be installed and then loaded into scripts.
+
+\hypertarget{create-your-first-r-script-and-visualization}{%
+\section{Create your first R Script and visualization}\label{create-your-first-r-script-and-visualization}}
+
+Finally, you have both ``R'' and ``RStudio'' with the first set of packages on your computer. Let's create the first visualization.
+
+\begin{itemize}
+\tightlist
+\item
+  Open ``RStudio'' just as you would any program, by clicking on its icon.
+\item
+  Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
+\item
+  Copy the following code and paste it into your script:
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(graphics)}
+\KeywordTok{plot}\NormalTok{(co2, }\DataTypeTok{ylab =} \StringTok{"CO2 (ppm)"}\NormalTok{, }\DataTypeTok{las =} \DecValTok{1}\NormalTok{)}
+\KeywordTok{title}\NormalTok{(}\DataTypeTok{main =} \StringTok{"Mauna Loa Atmospheric CO2 Concentration"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{itemize}
+\tightlist
+\item
+  select all by pressing \texttt{Ctrl\ +\ A}
+\item
+  Thren run the code by pressing the \texttt{Run} Button or \texttt{Ctrl\ +\ Enter}
+\item
+  You should now get your first visualization:
+  \includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
+\end{itemize}
 
 \hypertarget{r-basics}{%
 \chapter{R Basics}\label{r-basics}}
@@ -1330,7 +1410,8 @@ You want to plot a mollier h-x diagram with
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
-Finally use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities) which you can install as followed:
+Finally use the plot function \texttt{mollierHxDiagram} from the \texttt{redutils} package (R Energy Data Utilities).
+If you have not yet installed this package, proceed as follows:
 
 \begin{Shaded}
 \begin{Highlighting}[]

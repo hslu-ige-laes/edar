@@ -356,7 +356,6 @@ df %>%
             opacityDim = 0.7) %>% 
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
 
-
 ```
 
 ## Mollier hx Diagram
@@ -376,7 +375,8 @@ You want to plot a mollier h-x diagram with
 ### Solution
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
-Finally use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities) which you can install as followed:
+Finally use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities).
+If you have not yet installed this package, proceed as follows:
 
 ```{r eval=FALSE}
 install.packages("devtools")
