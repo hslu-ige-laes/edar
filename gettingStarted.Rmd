@@ -38,7 +38,7 @@ The exact installation procedure will vary depending on your Linux operating sys
 1. Once you have installed "R Studio", you can run it like any other application by clicking the program icon 
 
 ## Install required packages
-Chapter \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
+Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
 
 - Open "RStudio" just as you would any program, by clicking on its icon
 - Copy the following code and paste it into your console (on the bottom left, right of the symbol `>`):
@@ -48,9 +48,9 @@ install_github("hslu-ige-laes/redutils")
 ```
 - Press `Enter` or `Return`
 
-The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in chapter \@ref(packages) what packages are in detail and how they can be installed and later loaded into scripts.
+The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \@ref(packages) what packages are in general and how they can be installed and later loaded into scripts.
 
-## Create your first R Script and visualization
+## Create an R Script
 Finally, you have installed "R" and "RStudio" with the first set of packages on your computer.
 
 Let's create the first visualization.
@@ -72,6 +72,8 @@ library(graphics)
 plot(co2, ylab = "CO2 (ppm)", las = 1)
 title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
+
+As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Dataset Package</a> provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 
 
 ## What's next?
 Now hopefully, everything has worked fine so far with the installation and your first visualization.

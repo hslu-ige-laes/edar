@@ -11,7 +11,7 @@ mac-osx
 linux
 download-and-install-rstudio
 install-required-packages
-create-your-first-r-script-and-visualization
+create-an-r-script
 whats-next
 r-basics
 loading-data

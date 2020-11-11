@@ -237,7 +237,7 @@ plotly::ggplotly(p, tooltip = c("text")) %>%
 
 ## Daily Energy Profiles
 
-```{r energyprofiles plotly, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r energyprofiles1 plotly, warning=FALSE, message=FALSE, collapse = FALSE}
 # change language to English, otherwise weekdays are in local language
 Sys.setlocale("LC_TIME", "English")
 
@@ -258,8 +258,8 @@ df$timestamp <- parse_date_time(df$timestamp,
                                 tz = "Europe/Zurich")
 df$timestamp <- force_tz(df$timestamp, tzone = "UTC")
 
-# filter time range if necessary
-#df <- df %>% filter(timestamp > "2019-11-01 00:00:00", timestamp < "2020-04-01 00:00:00")
+# uncomment to filter time range if necessary
+#df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")
 
 # Fill missing values with NA
 grid.df <- data.frame(timestamp = seq(df[1, 1], df[nrow(df), 1], by = "15 mins"))
@@ -271,19 +271,21 @@ df <- df %>%
   select(-meterValue) %>%
   na.omit()
 
+# remove negative values which occur beause of change summer/winter time
+df <- df %>% filter(value >= 0)
+
 # add metadata for later grouping and visualization purposes
 df$x <- hour(df$timestamp) + minute(df$timestamp)/60 + second(df$timestamp) / 3600
-# df$time <- format(df$timestamp, "%H:%M")
-df$time <- format(as.POSIXct(strptime(df$timestamp, "%Y-%m-%d  %H:%M:%S",tz="")) ,format = "%H:%M")
-df$time <- as.POSIXct(df$time, format = "%H:%M")
 df$weekday <- weekdays(df$timestamp)
 df$weekday <- factor(df$weekday, c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday"))
-# df$day <- as.Date(cut(df$timestamp, breaks = "day"))
 df$day <- as.Date(df$timestamp, format = "%Y-%m-%d  %H:%M:%S")
 
 df <- df %>% mutate(value = ifelse(x == 0.00, NA, df$value))
 
 # plot graph with all time series
+rangeX <- seq(0,24,0.25)
+maxValue <- max(df$value, na.rm = TRUE)*1.05
+
 df %>% 
   highlight_key(~day) %>%
   plot_ly(x=~x,
@@ -295,40 +297,52 @@ df %>%
           alpha = 0.15,
           colors = "dodgerblue4",
           text = ~day,
-          hovertemplate = paste("Time: ", format(df$time, "%H:%M"),
-                                "<br>Date: ", format(df$time, "%Y-%m-%d"),
-                                "<br>Value: %{y:.0f}")) %>%  
+          hovertemplate = paste("Time: ", format(df$timestamp, "%H:%M"),
+                                "<br>Date: ", format(df$timestamp, "%Y-%m-%d"),
+                                "<br>Value: %{y:.0f}")) %>%
+  # workaround with add_trace to have fixed y axis when selecting a dedicated day
+  add_trace(x = 0, y = 0, type = "scatter", showlegend = FALSE, opacity=0) %>%
+  add_trace(x = 24, y = maxValue, type = "scatter", showlegend = FALSE, opacity=0) %>%
   layout(title = "Superimposed Profiles of Power Consumption per 15 min",
          showlegend = TRUE,
          xaxis = list(
            title = "Hour of day",
+           range = rangeX,
            tickvals = list(0, 3, 6, 9, 12, 15, 18, 21),
            showline=TRUE
            ),
            yaxis = list(
              title = "Power (kW)",
-             range = c(0, max(df$value)*1.05)
+             range = c(0, maxValue)
            )
          ) %>% 
   highlight(on = "plotly_hover",
             off = "plotly_doubleclick",
             color = "orange",
-            opacityDim = 1.0) %>% 
+            opacityDim = 1.0,
+            selected = attrs_selected(showlegend = FALSE)) %>% # this hides elements in the legend
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
+```
 
+Next we want to create an overview with the mean values for each 15 minute slot per day.
 
+Append the following code at the end of your script:
+
+```{r energyprofiles2 plotly, warning=FALSE, message=FALSE, collapse = FALSE}
 # Calculate Mean value for all 15 minutes for each weekday
-df <- df %>% group_by(weekday, x) %>% mutate(dayTimeMean = mean(value)) %>% ungroup()
+df2 <- df %>% group_by(weekday, x) %>% mutate(dayTimeMean = mean(value)) %>% ungroup()
 
 # shrink data frame
-df <- df %>%
-  select(x, weekday, time, dayTimeMean) %>%
+df2 <- df2 %>%
+  select(x, weekday, timestamp, dayTimeMean) %>%
   unique() %>%
   na.omit() %>% 
   arrange(weekday, x)
 
 # plot graph with mean values
-df %>% 
+maxValMean <- max(df2$dayTimeMean, na.rm = TRUE)*1.05
+
+df2 %>% 
   highlight_key(~weekday) %>%
   plot_ly(x=~x,
           y=~dayTimeMean,
@@ -338,8 +352,11 @@ df %>%
           alpha = 0.25,
           colors = "dodgerblue4",
           text = ~weekday,
-          hovertemplate = paste("Time: ", format(df$time, "%H:%M"),
-                                "<br>Mean: %{y:.0f}")) %>%  
+          hovertemplate = paste("Time: ", format(df2$timestamp, "%H:%M"),
+                                "<br>Mean: %{y:.0f}")) %>%
+  # workaround with add_trace to have fixed y axis when selecting a dedicated day
+  add_trace(x = 0, y = 0, type = "scatter", showlegend = FALSE, opacity=0) %>% 
+  add_trace(x = 24, y = maxValMean, type = "scatter", showlegend = FALSE, opacity=0) %>%
   layout(title = "Superimposed Mean Profiles of Power Consumption per 15 min",
          showlegend = TRUE,
          xaxis = list(
@@ -348,13 +365,14 @@ df %>%
          ),
          yaxis = list(
              title = "Power (kW)",
-             range = c(0, max(df$dayTimeMean)*1.05)  
+             range = c(0, maxValMean)
          )
   ) %>% 
   highlight(on = "plotly_hover",
             off = "plotly_doubleclick",
             color = "orange",
-            opacityDim = 0.7) %>% 
+            opacityDim = 0.7,
+            selected = attrs_selected(showlegend = FALSE)) %>% # this hides elements in the legend
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
 
 ```
