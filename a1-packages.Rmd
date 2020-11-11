@@ -1,0 +1,50 @@
+# (APPENDIX) Appendix {-}
+
+# Packages in R {#packages}
+Many functions of R are not pre-installed and must be loaded manually. R packages are similar to libraries in C, Python etc. An R package bundles useful functions, help files and data sets. You can use these functions within your own R code once you load the package.
+
+The following chapters describe how to install, load, update and use packages.
+
+## Installing a Package
+The easiest way to install an R Package is to use the RStudio tab "Packages":
+
+```{r knitr-logo, echo=FALSE, out.width='50%', fig.show='hold', fig.cap='Install packages via RStudio GUI'}
+knitr::include_graphics(rep('images/a2-installPackagesRStudio.png'))
+```
+
+a) Click on the “Packages” tab
+
+b) Click on “Install” next to Update
+
+c) Type the name of the package under “Packages, in this case type ggplot2
+
+d) Click “Install”
+
+This will search for the package "ggplot" specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.
+
+An other way is to use the install.packages function.
+Open R (if already opened please close all projects) and type the following at the command line:
+```r
+install.packages("ggplot2")
+```
+
+If you want to install a package directly from github, the package "devtools" must be installed first:
+
+```r
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+```
+
+## Loading a Package
+If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
+
+```r
+install.packages("ggplot2")
+```
+
+## Upgrading Packages
+R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:
+```r
+update.packages(ask = FALSE)
+```
