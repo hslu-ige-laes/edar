@@ -203,7 +203,7 @@ dfHeatEnergy <- dfHeatEnergy %>%
 df <- merge(dfOutsideTemp, dfHeatEnergy, by = "day")
 
 # calculate season
-df <- df %>% mutate(season = redutils::season(df$day))
+df <- df %>% mutate(season = redutils::getSeason(df$day))
 
 # static chart with ggplot
 p <- ggplot2::ggplot(df) +
@@ -407,7 +407,6 @@ Create a new script, copy/paste the following code and run it:
 ```{r mollier hx, warning=FALSE, message=FALSE, collapse = FALSE}
 library(redutils)
 library(dplyr)
-library(r2d3)
 library(lubridate)
 
 # read and print data
@@ -434,7 +433,7 @@ data <- data %>%
 data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 
 # plot mollier hx diagram
-redutils::mollierHxDiagram(data)
+plotMollierHx(data)
 ```
 
 ### Discussion
