@@ -38,30 +38,27 @@ tail(df,2)
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
 
 ```{r metadata season1, warning=FALSE, message=FALSE, collapse = FALSE}
-# install redutils library
-# devtools::install_github("retomarek/redutils", ref = "master")
-
+library(redutils)
 # get season from a date
-redutils::season(as.Date("2019-04-01"))
+getSeason(as.Date("2019-04-01"))
 ```
 
 If you want to change the language, you can give the function dedicated names for the season:
 
 ```{r metadata season2, warning=FALSE, message=FALSE, collapse = FALSE}
-redutils::season(as.Date("2019-04-01"),
-                 c("Winter","Frühling","Sommer","Herbst"))
+getSeason(as.Date("2019-04-01"),
+                  seasonNames = c("Winter","Frühling","Sommer","Herbst"))
 ```
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":
 
 ```{r metadata season3, warning=FALSE, message=FALSE, collapse = FALSE}
-# apply it for a data frame
-df <- dplyr::mutate(df, season = redutils::season(df$time))
+df <- dplyr::mutate(df, season = getSeason(df$time))
 ```
 
 ```{r metadata season3 output, warning=FALSE, message=FALSE, collapse = FALSE}
-head(df,2)
-tail(df,2)
+head(df,1)
+tail(df,1)
 ```
 ## Data Frames
 Firstly we have to load a dataset into a dataframe:
