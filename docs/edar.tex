@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-11}
+\date{2020-11-12}
 
 \begin{document}
 \maketitle
@@ -281,7 +281,7 @@ Appendix \ref{packages} gives you an introduction to what a package is and how t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"r2d3"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"r2d3"}\NormalTok{, }\StringTok{"checkmate"}\NormalTok{)}
 \KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -300,16 +300,9 @@ The installation of the packages is now in progress and this may take a while, p
 Finally, you have installed ``R'' and ``RStudio'' with the first set of packages on your computer.
 
 Let's create the first visualization.
-
-\begin{itemize}
-\tightlist
-\item
-  Open ``RStudio'' just as you would any program, by clicking on its icon
-\item
-  Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
-\item
-  Copy the following code and paste it into your script:
-\end{itemize}
+- Open ``RStudio'' just as you would any program, by clicking on its icon
+- Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
+- Copy the following code and paste it into your script:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -328,6 +321,7 @@ Let's create the first visualization.
 \end{itemize}
 
 You should now get your first visualization:
+
 \includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
 
 As you probably noticed, we did not load any data. The basic installation of ``R'' and some packages come with test data. So that is an easy way to test something. The R Dataset Package provides some preinstalled datasets, including the used ``Mauna Loa Atmospheric CO2 Concentration'' dataset.
@@ -477,11 +471,9 @@ For some analyses it is useful to color single points of a scatterplot according
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# install redutils library}
-\CommentTok{# devtools::install_github("retomarek/redutils", ref = "master")}
-
+\KeywordTok{library}\NormalTok{(redutils)}
 \CommentTok{# get season from a date}
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{))}
+\KeywordTok{getSeason}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -493,8 +485,8 @@ If you want to change the language, you can give the function dedicated names fo
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{),}
-                 \KeywordTok{c}\NormalTok{(}\StringTok{"Winter"}\NormalTok{,}\StringTok{"Frühling","}\NormalTok{Sommer}\StringTok{","}\NormalTok{Herbst}\StringTok{"))}
+\KeywordTok{getSeason}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\StringTok{"2019-04-01"}\NormalTok{),}
+                  \DataTypeTok{seasonNames =} \KeywordTok{c}\NormalTok{(}\StringTok{"Winter"}\NormalTok{,}\StringTok{"Frühling","}\NormalTok{Sommer}\StringTok{","}\NormalTok{Herbst}\StringTok{"))}
 \end{Highlighting}
 \end{Shaded}
 
@@ -506,38 +498,33 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# apply it for a data frame}
-\NormalTok{df <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{time))}
+\NormalTok{df <-}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{season =} \KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{time))}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{head}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(df,}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##                  time centralOutsideTemp       year      month        day
 ## 1 2018-03-21 11:00:00                5.2 2018-01-01 2018-03-01 2018-03-21
-## 2 2018-03-21 12:00:00                6.7 2018-01-01 2018-03-01 2018-03-21
 ##    weekday season
 ## 1 Mittwoch Spring
-## 2 Mittwoch Spring
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{tail}\NormalTok{(df,}\DecValTok{2}\NormalTok{)}
+\KeywordTok{tail}\NormalTok{(df,}\DecValTok{1}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
 ##                      time centralOutsideTemp       year      month        day
-## 21864 2020-09-17 10:00:00              26.65 2020-01-01 2020-09-01 2020-09-17
-## 21865 2020-09-17 11:00:00              28.10 2020-01-01 2020-09-01 2020-09-17
+## 21865 2020-09-17 11:00:00               28.1 2020-01-01 2020-09-01 2020-09-17
 ##          weekday season
-## 21864 Donnerstag   Fall
 ## 21865 Donnerstag   Fall
 \end{verbatim}
 
@@ -1141,7 +1128,7 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfHeatEnergy, }\DataTypeTok{by =} \StringTok{"day"}\NormalTok{)}
 
 \CommentTok{# calculate season}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{season}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
 
 \CommentTok{# static chart with ggplot}
 \NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
@@ -1382,7 +1369,6 @@ Create a new script, copy/paste the following code and run it:
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(redutils)}
 \KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(r2d3)}
 \KeywordTok{library}\NormalTok{(lubridate)}
 
 \CommentTok{# read and print data}
@@ -1409,7 +1395,7 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean, humMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
 \CommentTok{# plot mollier hx diagram}
-\NormalTok{redutils}\OperatorTok{::}\KeywordTok{mollierHxDiagram}\NormalTok{(data)}
+\KeywordTok{plotMollierHx}\NormalTok{(data)}
 \end{Highlighting}
 \end{Shaded}
 

@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-11" />
+<meta name="date" content="2020-11-12" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -298,7 +298,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>Open “RStudio” just as you would any program, by clicking on its icon</li>
 <li>Copy the following code and paste it into your console (on the bottom left, right of the symbol <code>&gt;</code>):</li>
 </ul>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;plotly&quot;</span>, <span class="st">&quot;lubridate&quot;</span>, <span class="st">&quot;r2d3&quot;</span>)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>, <span class="st">&quot;tidyverse&quot;</span>, <span class="st">&quot;plotly&quot;</span>, <span class="st">&quot;lubridate&quot;</span>, <span class="st">&quot;r2d3&quot;</span>, <span class="st">&quot;checkmate&quot;</span>)</a>
 <a class="sourceLine" id="cb1-2" title="2"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
 <ul>
 <li>Press <code>Enter</code> or <code>Return</code></li>
@@ -308,12 +308,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="create-an-r-script" class="section level2">
 <h2><span class="header-section-number">2.3</span> Create an R Script</h2>
 <p>Finally, you have installed “R” and “RStudio” with the first set of packages on your computer.</p>
-<p>Let’s create the first visualization.</p>
-<ul>
-<li>Open “RStudio” just as you would any program, by clicking on its icon</li>
-<li>Go to the menu on the top left and click to <code>File / New File / R Script</code></li>
-<li>Copy the following code and paste it into your script:</li>
-</ul>
+<p>Let’s create the first visualization.
+- Open “RStudio” just as you would any program, by clicking on its icon
+- Go to the menu on the top left and click to <code>File / New File / R Script</code>
+- Copy the following code and paste it into your script:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb2-1" title="1"><span class="kw">library</span>(graphics)</a>
 <a class="sourceLine" id="cb2-2" title="2"><span class="kw">plot</span>(co2, <span class="dt">ylab =</span> <span class="st">&quot;CO2 (ppm)&quot;</span>, <span class="dt">las =</span> <span class="dv">1</span>)</a>
 <a class="sourceLine" id="cb2-3" title="3"><span class="kw">title</span>(<span class="dt">main =</span> <span class="st">&quot;Mauna Loa Atmospheric CO2 Concentration&quot;</span>)</a></code></pre></div>
@@ -321,8 +319,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li>select all by pressing <code>Ctrl + A</code></li>
 <li>Thren run the code by pressing the <code>Run</code> Button or <code>Ctrl + Enter</code></li>
 </ul>
-<p>You should now get your first visualization:
-<img src="edar_files/figure-html/co2%20intro%20graph-1.png" width="672" /></p>
+<p>You should now get your first visualization:</p>
+<p><img src="edar_files/figure-html/co2%20intro%20graph-1.png" width="672" /></p>
 <p>As you probably noticed, we did not load any data. The basic installation of “R” and some packages come with test data. So that is an easy way to test something. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Dataset Package</a> provides some preinstalled datasets, including the used “Mauna Loa Atmospheric CO2 Concentration” dataset.</p>
 </div>
 <div id="whats-next" class="section level2">
