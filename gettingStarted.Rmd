@@ -43,7 +43,7 @@ Appendix \@ref(packages) gives you an introduction to what a package is and how 
 - Open "RStudio" just as you would any program, by clicking on its icon
 - Copy the following code and paste it into your console (on the bottom left, right of the symbol `>`):
 ```{r install packages, eval=FALSE}
-install.packages("devtools", "tidyverse", "plotly", "lubridate", "r2d3")
+install.packages("devtools", "tidyverse", "plotly", "lubridate", "r2d3", "checkmate")
 install_github("hslu-ige-laes/redutils")
 ```
 - Press `Enter` or `Return`
@@ -54,7 +54,6 @@ The installation of the packages is now in progress and this may take a while, p
 Finally, you have installed "R" and "RStudio" with the first set of packages on your computer.
 
 Let's create the first visualization.
-
 - Open "RStudio" just as you would any program, by clicking on its icon
 - Go to the menu on the top left and click to `File / New File / R Script`
 - Copy the following code and paste it into your script:
@@ -67,6 +66,7 @@ title(main = "Mauna Loa Atmospheric CO2 Concentration")
 - Thren run the code by pressing the `Run` Button or `Ctrl + Enter`
 
 You should now get your first visualization:
+
 ```{r co2 intro graph, echo=FALSE}
 library(graphics)
 plot(co2, ylab = "CO2 (ppm)", las = 1)
