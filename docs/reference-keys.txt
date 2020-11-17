@@ -51,6 +51,10 @@ mollier-hx-diagram
 task-2
 basis-2
 solution-2
+sia-180-thermal-comfort
+task-3
+basis-3
+solution-3
 discussion-1
 see-also
 packages

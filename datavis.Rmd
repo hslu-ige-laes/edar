@@ -262,7 +262,9 @@ df$timestamp <- force_tz(df$timestamp, tzone = "UTC")
 #df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")
 
 # Fill missing values with NA
-grid.df <- data.frame(timestamp = seq(df[1, 1], df[nrow(df), 1], by = "15 mins"))
+grid.df <- data.frame(timestamp = seq(min(df$timestamp, na.rm = TRUE),
+                                      max(df$timestamp, na.rm = TRUE),
+                                      by = "15 mins"))
 df <- merge(df, grid.df, all = TRUE)
 
 # convert steadily counting energy meter value from kWh to power in kW
@@ -436,8 +438,224 @@ data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 plotMollierHx(data)
 ```
 
+## SIA 180 Thermal Comfort
+### Task
+You want to plot a diagram like the one from the SIA 180:2014 which showes
+
+* scatter plot of indoor- and outdoor temperature sensor data (indoor mean of day, outdoor mean of last 48 hours)
+
+* points colored according to season
+
+* different comfort lines
+
+### Basis
+
+* A csv file with time series from multiple temperature and humidity sensors in °C
+
+* A csv file with the outdoor temperature
+
+### Solution
+The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
+
+Create a new script, copy/paste the following code and run it:
+
+```{r sia180_1, warning=FALSE, message=FALSE, collapse = FALSE}
+library(redutils)
+library(dplyr)
+library(lubridate)
+library(zoo)
+library(plotly)
+
+# load time series data and aggregate mean values
+dfTempOa <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
+
+dfTempOa$time <- parse_date_time(dfTempOa$time,
+                                      order = "YmdHMS",
+                                      tz = "UTC")
+
+dfTempOa$hour <- cut(dfTempOa$time, breaks = "hour")
+
+dfTempOa <- dfTempOa %>%
+  group_by(hour) %>%
+  mutate(tempMean = mean(centralOutsideTemp)) %>%
+  ungroup() %>% 
+  select(time, tempMean) %>% 
+  unique()
+
+# Fill missing values with NA
+grid.df <- data.frame(time = seq(min(dfTempOa$time, na.rm = TRUE),
+                                 max(dfTempOa$time, na.rm = TRUE),
+                                 by = "hour"))
+dfTempOa <- merge(dfTempOa, grid.df, all = TRUE)
+
+dfTempOa <- dfTempOa %>%
+  mutate(tempOa = rollmean(tempMean, 48, fill = NA, align = "right"))
+
+dfTempOa <- dfTempOa %>%
+  select(time, tempOa) %>%
+  unique() %>%
+  na.omit()
+
+
+dfTempR <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                       stringsAsFactors=FALSE,
+                       sep =";")
+
+dfTempR$time <- parse_date_time(dfTempR$time,
+                                   order = "YmdHMS",
+                                   tz = "UTC")
+
+# select temperature and humidity and remove empty cells
+dfTempR <- dfTempR %>% select(time, FlatA_Temp) %>% na.omit()
+
+dfTempR$hour <- cut(dfTempR$time, breaks = "hour")
+
+dfTempR <- dfTempR %>%
+  group_by(hour) %>%
+  mutate(tempR = mean(FlatA_Temp)) %>%
+  ungroup() %>% 
+  select(time, tempR) %>% 
+  unique()
+
+# Fill missing values with NA
+grid.df <- data.frame(time = seq(min(dfTempR$time, na.rm = TRUE),
+                                 max(dfTempR$time, na.rm = TRUE),
+                                 by = "hour"))
+dfTempR <- merge(dfTempR, grid.df, all = TRUE)
+
+data <- merge(dfTempR, dfTempOa, all = TRUE) %>% unique() %>% na.omit()
+
+data$season <- redutils::getSeason(data$time)
+
+# plot diagram
+
+# axis properties
+minx <- floor(min(-4, min(data$tempOa)))
+maxx <- ceiling(max(32, max(data$tempOa)))
+
+miny <- floor(min(18.0,min(data$tempR)))-1
+maxy <- ceiling(max(32.0,max(data$tempR)))+1
+
+# line setpoint heat
+df.heatSp <- data.frame(tempOa = c(minx, 19, 23.5, maxx), tempR = c(20.5, 20.5, 22, 22))
+
+# line setpoint cool according to SIA 180:2014 Fig. 4
+df.coolSp1 <- data.frame(tempOa = c(minx, 12, 17.5, maxx),tempR = c(24.5, 24.5, 26.5, 26.5))
+
+# line setpoint cool according to SIA 180:2014 Fig. 3
+df.coolSp2 <- data.frame(tempOa = c(minx, 10, maxx),tempR = c(25, 25, 0.33 * maxx + 21.8))
+
+data %>%
+  plot_ly(showlegend = TRUE) %>%
+  add_lines(data = df.coolSp2,
+            x = ~tempOa,
+            y = ~tempR,
+            name = "Max. heated, cooled or mech. ventilated",
+            opacity = 0.7,
+            color = "#FDE725FF",
+            hoverinfo = "text",
+            text = ~ paste("Max. heated, cooled or mech. ventilated",
+                           "<br />TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                           "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa)
+            )
+  ) %>%
+  add_lines(data = df.coolSp1,
+            x = ~tempOa,
+            y = ~tempR,
+            name = "Max. natural ventilation",
+            opacity = 0.7,
+            color = "#1E9B8AFF",
+            hoverinfo = "text",
+            text = ~ paste("Max. natural ventilation",
+                           "<br />TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                           "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa)
+            )        ) %>%
+  add_lines(data = df.heatSp,
+            x = ~tempOa,
+            y = ~tempR,
+            name = "Minimum", 
+            opacity = 0.7,
+            color = "#440154FF",
+            hoverinfo = "text",
+            text = ~ paste("Minimum",
+                           "<br />TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                           "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa)
+            )        ) %>%
+  add_markers(data = data %>% filter(season == "Spring"),
+              x = ~tempOa,
+              y = ~tempR,
+              name = "Spring",
+              marker = list(color = "#2db27d", opacity = 0.2),
+              hoverinfo = "text",
+              text = ~ paste("TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                             "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa),
+                             "<br />Date:       ", time,
+                             "<br />Season:  ", season
+              )
+  ) %>%
+  add_markers(data = data %>% filter(season == "Summer"),
+              x = ~tempOa,
+              y = ~tempR,
+              name = "Summer",
+              marker = list(color = "#febc2b", opacity = 0.2),
+              hoverinfo = "text",
+              text = ~ paste("TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                             "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa),
+                             "<br />Date:       ", time,
+                             "<br />Season:  ", season
+              )
+  ) %>%
+  add_markers(data = data %>% filter(season == "Fall"),
+              x = ~tempOa,
+              y = ~tempR,
+              name = "Fall",
+              marker = list(color = "#440154", opacity = 0.2),
+              hoverinfo = "text",
+              text = ~ paste("TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                             "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa),
+                             "<br />Date:       ", time,
+                             "<br />Season:  ", season
+              )
+  ) %>%
+  add_markers(data = data %>% filter(season == "Winter"),
+              x = ~tempOa,
+              y = ~tempR,
+              name = "Winter",
+              marker = list(color = "#365c8d", opacity = 0.2),
+              hoverinfo = "text",
+              text = ~ paste("TempR:   ", sprintf("%.1f \u00B0C", tempR),
+                             "<br />TempOa: ", sprintf("%.1f \u00B0C", tempOa),
+                             "<br />Date:       ", time,
+                             "<br />Season:  ", season
+              )
+  ) %>%
+  layout(
+    xaxis = list(title = "Outside Air Temperature in \u00B0C (Rolling Mean last 48 hours)",
+                 range = c(minx, maxx),
+                 zeroline = FALSE,
+                 tick0 = minx,
+                 dtick = 2,
+                 titlefont = list(size = 14, color = "darkgrey")),
+    yaxis = list(title = "Room Temperature in \u00B0C",
+                 range = c(miny, maxy),
+                 titlefont = list(size = 14, color = "darkgrey")),
+    hoverlabel = list(align = "left"),
+    margin = list(l = 80, t = 50, r = 50, b = 10)
+  ) %>%
+  
+  plotly::config(modeBarButtons = list(list("toImage")),
+                 displaylogo = FALSE,
+                 toImageButtonOptions = list(
+                   format = "svg"
+                 )
+  )
+
+```
+
 ### Discussion
-The diagram is based on D3 and packaged into the package `redutils`. The original D3 source with a html integration you can find here: <a href="https://github.com/hslu-ige-laes/d3-mollierhx" target="_blank">https://github.com/hslu-ige-laes/d3-mollierhx</a>
+tbd
 
 ### See Also
-If your two time series are in separate files, you must first read them in separately and then merge them into one data frame. See chapter \@ref(DATAWRANGLING-MERGE-TWO-DATAFRAMES)
+tbd
