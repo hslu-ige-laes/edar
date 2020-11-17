@@ -57,6 +57,12 @@ basis-3
 solution-3
 discussion-1
 see-also
+electricity-consumption-residential
+task-4
+basis-4
+solution-4
+discussion-2
+see-also-1
 packages
 installing-a-package
 loading-a-package
