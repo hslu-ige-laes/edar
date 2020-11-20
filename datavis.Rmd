@@ -121,6 +121,83 @@ In this example we used the dygraph package to create the graph. This package is
 
 Please note that the calculation of the periodic median after optimization I and II starts delayed because it takes time until the building has cooled down. 
 
+## Energy Consumption Before/After per Month
+### Task
+
+### Basis
+
+### Solution
+```{r energyConsBeforeAfter, warning=FALSE, message=FALSE, collapse = FALSE}
+library(dplyr)
+library(lubridate)
+library(ggplot2)
+library(plotly)
+library(viridis)
+library(ggthemes)
+
+
+# load csv file
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat)
+
+colnames(df) <- c("timestamp", "meterValue")
+
+# calculate consumption value per month
+# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,
+# so the consumption for february first is value(march) - value(february)!
+df <- df %>% mutate(value = lead(meterValue) - meterValue)
+
+# remove counter value column
+df <- df %>% select(-meterValue)
+
+# add metadata for later filtering
+df$timestamp <- parse_date_time(df$timestamp, "YmdHMS", tz = "Europe/Zurich")
+df$year <- year(df$timestamp)
+df$month <- month(df$timestamp)
+
+# date to differentiate before/after
+dateOptimization <- "2017-09-01"
+
+# create two separate data frames for later visualization (before is grey, after is colored)
+df.after<- df %>% filter(timestamp >= dateOptimization) %>% na.omit()
+df.before <- df %>% filter(timestamp <= dateOptimization) %>% na.omit()
+
+# add statistical band values and median of phase "before"
+df.before <- df.before %>% group_by(month) %>% dplyr::mutate(median = quantile(value, 0.5),
+                                                             qLower = quantile(value, 0.05),
+                                                             qUpper = quantile(value, 0.95)
+                                                             ) %>% ungroup()
+
+# calculate values to later generate different colors
+count.all <- nrow(df %>% select(year) %>% unique())
+count.after <- nrow(df.after %>% select(year) %>% unique())
+count.baseline <- nrow(df.before %>% select(year) %>% unique())
+# correction in case the date is during a year
+if((count.after+count.baseline) > count.all){count.baseline <- count.baseline - 1}
+
+# plot graph with all time series
+g <- ggplot() +
+  geom_line(data = df.before, aes(x = month, y = value, group = year, color = factor(year)), alpha = 0.5) +
+  geom_ribbon(data = df.before, aes(x = month, ymin = qLower, ymax = qUpper), fill = "orange", alpha = 0.3) +
+  geom_line(data = df.before, aes(x = month, y = median), colour = "orange", linetype = "dashed") +
+  geom_line(data = df.after, aes(x = month, y = value, group = year, colour = factor(year)), alpha = 0.8) +
+  geom_point(data = df.after, aes(x = month, y = value, group = year, color = factor(year)), alpha = 0.8, shape = 21, fill = "white") +
+  theme_economist() +
+  labs(title = "Before/After Optimization\n", x = "Month", y = "Energy Consumption \n(kWh/month)", color = "Years\n") +
+  scale_x_discrete(limits = month.abb) +
+  scale_color_manual(values=c(rep("grey", count.baseline), viridis::viridis(count.after)))
+  
+ggplotly(g)
+```
+
+### Discussion
+
+
+
+
 ## Building Energy Signature
 ### Task
 You want to create a scatter plot with
