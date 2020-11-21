@@ -1,4 +1,4 @@
-fig:energyConsBeforeAfterPng
+fig:unnamed-chunk-4
 fig:knitr-logo
 intro
 content

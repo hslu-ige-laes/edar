@@ -1225,7 +1225,7 @@ Please note that the calculation of the periodic median after optimization I and
 \end{Shaded}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Energy Consumption Before/After Optimization}\label{fig:energyConsBeforeAfterPng}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Energy Consumption Before/After Optimization}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 \hypertarget{basis-1}{%
@@ -1243,23 +1243,23 @@ Please note that the calculation of the periodic median after optimization I and
 \KeywordTok{library}\NormalTok{(ggthemes)}
 
 \CommentTok{# load csv file}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
 
 \CommentTok{# filter flat}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
 
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
 
 \CommentTok{# calculate consumption value per month}
 \CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
 \CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
 
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotEnergyConsBeforeAfter}\NormalTok{(df,}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotEnergyConsBeforeAfter}\NormalTok{(data,}
                                   \DataTypeTok{dateOptimization =} \StringTok{"2017-09-01"}\NormalTok{,}
                                   \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
                                   \DataTypeTok{titlePlot =} \StringTok{"Before/After Optimization"}\NormalTok{,}
