@@ -1,3 +1,4 @@
+fig:energyConsBeforeAfterPng
 fig:knitr-logo
 intro
 content

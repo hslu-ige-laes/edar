@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-20" />
+<meta name="date" content="2020-11-21" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -285,21 +285,21 @@ Figure A.1: Install packages via RStudio GUI
 <p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
 <p>An other way is to use the install.packages function.
 Open R (if already opened please close all projects) and type the following at the command line:</p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>If you want to install a package directly from github, the package “devtools” must be installed first:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb66-2" title="2"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb66-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb69-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
 </div>
 <div id="loading-a-package" class="section level2">
 <h2><span class="header-section-number">A.2</span> Loading a Package</h2>
 <p>If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:</p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 </div>
 <div id="upgrading-packages" class="section level2">
 <h2><span class="header-section-number">A.3</span> Upgrading Packages</h2>
 <p>R packages are often constantly updated on CRAN or GitHub, so you may want to update them once in a while with:</p>
-<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="kw">update.packages</span>(<span class="dt">ask =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 
 </div>
 </div>
