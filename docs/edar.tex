@@ -771,39 +771,10 @@ Some data loggers have a cryptic data format which requires some data wrangling 
 ## 23                 volume instant.     1      0     0
 \end{verbatim}
 
-\begin{itemize}
-\tightlist
-\item
-  The Date and Time are in separate columns
-\item
-  The HCA-Unit value has a factor of 10, so the above HCA-value of 87 are in 10 liters Units and result in 87 * 10 = 870 liter
-\item
-  In the example ``Adr'' is the identification of the flat
-\item
-  Description of Nr. :
-  1 Heating meter energy since commissioning
-  2 Heating meter volume flow since commissioning
-  3 Heating meter volume flow (in case of a failure this value does not get increased)
-  4 Heating meter supply temperature
-  5 Heating meter return temperature
-  6 Heating meter temperature difference
-  7 Heating meter operating hours since commissioning
-  8 Heating meter operating hours since commissioning (in case of a failure this value does not get increased)
-  9 Heating meter average volume flow
-  10 Heating meter current power
-  11 timestamp of reading values Nr. 1\ldots13
-  12 Additional meter 1 impulse count (for flow meters normally 1 impulse per 10 ltrs)
-  13 Additional meter 2 impulse count (for flow meters normally 1 impulse per 10 ltrs)
-  14 Heating meter energy value at date of programmed reading, see Nr. 19
-  15 Heating meter volume flow value at date of programmed reading, see Nr. 19
-  16 Heating meter volume flow value at date of programmed reading, see Nr. 19
-  (in case of a failure this value does not get increased)
-  17 Additional meter 1 impulse count at date of programmed reading, see Nr. 19
-  18 Additional meter 2 impulse count at date of programmed reading, see Nr. 19
-  19 Date of the programmed planned reading
-  20 M-Bus Stateogrammed planned reading
-  20 M-Bus State
-\end{itemize}
+Please note
+* The Date and Time are in separate columns
+* The HCA-Unit value has a factor of 10, so the above HCA-value of 87 are in 10 liters Units and result in 87 * 10 = 870 liter
+* In the example ``Adr'' is the identification of the flat
 
 We are only interested in Nr. 1 heating energy of the flat and Nr. 12 the impulse count of the additional meter which is the hot water of the flat.
 
@@ -1072,6 +1043,8 @@ reveals details of a specific series
 \hypertarget{data-visualizations}{%
 \chapter{Data Visualizations}\label{data-visualizations}}
 
+tbd
+
 \hypertarget{room-temperature-reduction}{%
 \section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
@@ -1218,12 +1191,6 @@ Please note that the calculation of the periodic median after optimization I and
 \hypertarget{task-1}{%
 \subsection{Task}\label{task-1}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{knitr}\OperatorTok{::}\KeywordTok{include_graphics}\NormalTok{(}\StringTok{"images/plotEnergyConsBeforeAfter.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Energy Consumption Before/After Optimization}\label{fig:unnamed-chunk-4}
 \end{figure}
@@ -1243,33 +1210,34 @@ Please note that the calculation of the periodic median after optimization I and
 \KeywordTok{library}\NormalTok{(ggthemes)}
 
 \CommentTok{# load csv file}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
 
 \CommentTok{# filter flat}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
 
-\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
 
 \CommentTok{# calculate consumption value per month}
 \CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
 \CommentTok{# remove counter value column}
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
 
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotEnergyConsBeforeAfter}\NormalTok{(data,}
+\CommentTok{# create plot}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotEnergyConsBeforeAfter}\NormalTok{(df,}
                                   \DataTypeTok{dateOptimization =} \StringTok{"2017-09-01"}\NormalTok{,}
                                   \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
                                   \DataTypeTok{titlePlot =} \StringTok{"Before/After Optimization"}\NormalTok{,}
                                   \DataTypeTok{titleYAxis =} \StringTok{"Energy Consumption }\CharTok{\textbackslash{}n}\StringTok{(kWh/month)"}
 \NormalTok{                                  )}
 
-\CommentTok{# change theme}
+\CommentTok{# change theme (optional)}
 \NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
 
-\CommentTok{# make plot interactive}
+\CommentTok{# make plot interactive (optional)}
 \NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
 
 \CommentTok{# show plot}
@@ -1338,63 +1306,48 @@ Create a new script, copy/paste the following code and run it:
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(redutils)}
 \KeywordTok{library}\NormalTok{(lubridate)}
-
 \CommentTok{# load time series data and aggregate daily mean values}
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
                           \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                           \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
 \NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time,}
                                       \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
                                       \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
 \NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(day, tempMean) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv"}\NormalTok{,}
                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(time, energyHeatingMeter) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
 \NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time,}
                                      \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
                                      \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
 \NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyMax =} \KeywordTok{max}\NormalTok{(energyHeatingMeter)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(day, energyMax) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyCons =}\NormalTok{ energyMax }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(energyMax)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{energyMax) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
 \CommentTok{# merge the data in a tidy format}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfHeatEnergy, }\DataTypeTok{by =} \StringTok{"day"}\NormalTok{)}
-
 \CommentTok{# calculate season}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
-
 \CommentTok{# static chart with ggplot}
 \NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
 \StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ tempMean,}
@@ -1413,7 +1366,6 @@ Create a new script, copy/paste the following code and run it:
           \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
           \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
 \NormalTok{        )}
-
 \CommentTok{# interactive chart}
 \NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Outside temperature (\textbackslash{}u00B0C)"}\NormalTok{,}

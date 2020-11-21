@@ -7,7 +7,15 @@ rmd_files: [
   "rBasics.Rmd",
   "dataWrangling.Rmd",
   "eda.Rmd",
+
   "dataVis.Rmd",
+  "dataVisRoomTempRed.Rmd",
+  "dataVisEnergyConsBefAft.Rmd",
+  "dataVisBldgEngySig.Rmd",
+  "dataVisDailyEnergyProf.Rmd",
+  "dataVisMollierHx.Rmd",
+  "dataVisSia180ThermCmf.Rmd",
+  "dataVisEleConsRes.Rmd",
 
   "a1-packages.rmd",
 ]

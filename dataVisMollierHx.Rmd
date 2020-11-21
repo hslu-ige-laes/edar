@@ -1,0 +1,59 @@
+## Mollier hx Diagram
+### Task
+You want to plot a mollier h-x diagram with
+
+* scatter plot of temperature- and humidity sensor data (mean values per day)
+
+* points colored according to season
+
+* comfort zone
+
+### Basis
+
+* A csv file with time series from multiple temperature and humidity sensors in °C and %rH
+
+### Solution
+The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
+
+Finally use the plot function `mollierHxDiagram` from the `redutils` package (R Energy Data Utilities).
+If you have not yet installed this package, proceed as follows:
+
+```{r eval=FALSE}
+install.packages("devtools")
+library(devtools)
+install_github("hslu-ige-laes/redutils")
+```
+Create a new script, copy/paste the following code and run it:
+
+```{r mollier hx, warning=FALSE, message=FALSE, collapse = FALSE}
+library(redutils)
+library(dplyr)
+library(lubridate)
+
+# read and print data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and humidity and remove empty cells
+data <- data %>% select(time, FlatA_Temp, FlatA_Hum) %>% na.omit()
+
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+data$day <- as.Date(cut(data$time, breaks = "day"))
+
+# calculate daily mean of temperature and humidity
+data <- data %>%
+  group_by(day) %>%
+  mutate(tempMean = mean(as.numeric(FlatA_Temp)),
+         humMean = mean(as.numeric(FlatA_Hum))
+         ) %>%
+  ungroup()
+
+# shrink down to daily values and remove rows with empty values
+data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
+
+# plot mollier hx diagram
+plotMollierHx(data)
+```
+
