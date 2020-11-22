@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-21}
+\date{2020-11-22}
 
 \begin{document}
 \maketitle
@@ -1265,11 +1265,97 @@ Please note that the calculation of the periodic median after optimization I and
 \hypertarget{discussion-1}{%
 \subsection{Discussion}\label{discussion-1}}
 
-\hypertarget{building-energy-signature}{%
-\section{Building Energy Signature}\label{building-energy-signature}}
+\hypertarget{decomposition}{%
+\section{Decomposition}\label{decomposition}}
 
 \hypertarget{task-2}{%
 \subsection{Task}\label{task-2}}
+
+tbd
+
+\hypertarget{basis-2}{%
+\subsection{Basis}\label{basis-2}}
+
+\begin{itemize}
+\tightlist
+\item
+  tbd
+\end{itemize}
+
+\hypertarget{solution-2}{%
+\subsection{Solution}\label{solution-2}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(ggseas)}
+
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
+                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# calculate consumption value per month}
+\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
+\CommentTok{# so the consumption for february first is value(march) - value(february)!}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+
+\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\NormalTok{df2 <-}\StringTok{ }\NormalTok{ggseas}\OperatorTok{::}\KeywordTok{tsdf}\NormalTok{(df.ts)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{ggsdc}\NormalTok{(df2,}
+           \KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ x, }\DataTypeTok{y =}\NormalTok{ y),}
+           \DataTypeTok{method =} \StringTok{"stl"}\NormalTok{,}
+           \DataTypeTok{s.window =} \DecValTok{12}\NormalTok{,}
+           \DataTypeTok{facet.titles =} \KeywordTok{c}\NormalTok{(}\StringTok{"Original Time Series"}\NormalTok{,}
+                            \StringTok{"Trend"}\NormalTok{,}
+                            \StringTok{"Seasonal Pattern"}\NormalTok{,}
+                            \StringTok{"Randomness"}\NormalTok{)}
+\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"darkorange"}\NormalTok{, }\DataTypeTok{alpha =} \FloatTok{0.7}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}\DataTypeTok{panel.spacing =} \KeywordTok{unit}\NormalTok{(}\DecValTok{1}\NormalTok{, }\StringTok{"lines"}\NormalTok{),) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df2}\OperatorTok{$}\NormalTok{x), }\KeywordTok{max}\NormalTok{(df2}\OperatorTok{$}\NormalTok{x),}\DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Time Series Decomposition"}\NormalTok{)}
+
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/dataVisDecomposition1-1.pdf}
+
+\hypertarget{discussion-2}{%
+\subsection{Discussion}\label{discussion-2}}
+
+tbd
+
+\hypertarget{see-also}{%
+\subsection{See Also}\label{see-also}}
+
+tbd
+
+\hypertarget{building-energy-signature}{%
+\section{Building Energy Signature}\label{building-energy-signature}}
+
+\hypertarget{task-3}{%
+\subsection{Task}\label{task-3}}
 
 You want to create a scatter plot with
 
@@ -1282,8 +1368,8 @@ You want to create a scatter plot with
   points colored according to season
 \end{itemize}
 
-\hypertarget{basis-2}{%
-\subsection{Basis}\label{basis-2}}
+\hypertarget{basis-3}{%
+\subsection{Basis}\label{basis-3}}
 
 \begin{itemize}
 \item
@@ -1292,8 +1378,8 @@ You want to create a scatter plot with
   Energy consumption time series from a energy meter with steadily increasing meter values
 \end{itemize}
 
-\hypertarget{solution-2}{%
-\subsection{Solution}\label{solution-2}}
+\hypertarget{solution-3}{%
+\subsection{Solution}\label{solution-3}}
 
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 
@@ -1380,8 +1466,56 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/energysignature ggplot-1.pdf}
 
-\hypertarget{daily-energy-profiles}{%
-\section{Daily Energy Profiles}\label{daily-energy-profiles}}
+\hypertarget{daily-profiles---overview}{%
+\section{Daily Profiles - Overview}\label{daily-profiles---overview}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(redutils)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+
+\CommentTok{# load time series data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# rename column names}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
+                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+                                      \KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+                                      \DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# remove negative values which occur beause of change summer/winter time}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{>=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\NormalTok{p <-}\StringTok{ }\KeywordTok{plotDailyProfilesOverview}\NormalTok{(df, }\DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\KeywordTok{ggplotly}\NormalTok{(p)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverview1-1.pdf}
+
+\hypertarget{daily-profiles---overlayed}{%
+\section{Daily Profiles - Overlayed}\label{daily-profiles---overlayed}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1460,7 +1594,7 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\CommentTok{# workaround with add_trace to have fixed y axis when selecting a dedicated day}
 \StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{0}\NormalTok{, }\DataTypeTok{y =} \DecValTok{0}\NormalTok{, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{24}\NormalTok{, }\DataTypeTok{y =}\NormalTok{ maxValue, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Superimposed Profiles of Power Consumption per 15 min"}\NormalTok{,}
+\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily Profiles - Overlayed"}\NormalTok{,}
          \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
          \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
            \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
@@ -1482,7 +1616,7 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/energyprofiles1 plotly-1.pdf}
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverlayed1-1.pdf}
 
 Next we want to create an overview with the mean values for each 15 minute slot per day.
 
@@ -1540,11 +1674,119 @@ Append the following code at the end of your script:
 
 \includegraphics{edar_files/figure-latex/energyprofiles2 plotly-1.pdf}
 
+\hypertarget{daily-profiles---mean}{%
+\section{Daily Profiles - Mean}\label{daily-profiles---mean}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# change language to English, otherwise weekdays are in local language}
+\KeywordTok{Sys.setlocale}\NormalTok{(}\StringTok{"LC_TIME"}\NormalTok{, }\StringTok{"English"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] "English_United States.1252"
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# load time series data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# rename column names}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
+                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
+
+\CommentTok{# uncomment to filter time range if necessary}
+\CommentTok{#df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+                                      \KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
+                                      \DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
+\CommentTok{# remove negative values which occur beause of change summer/winter time}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{>=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+
+\CommentTok{# add metadata for later grouping and visualization purposes}
+\NormalTok{df}\OperatorTok{$}\NormalTok{x <-}\StringTok{ }\KeywordTok{hour}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{+}\StringTok{ }\KeywordTok{minute}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}\OperatorTok{/}\DecValTok{60} \OperatorTok{+}\StringTok{ }\KeywordTok{second}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{/}\StringTok{ }\DecValTok{3600}
+\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{weekdays}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{weekday, }\KeywordTok{c}\NormalTok{(}\StringTok{"Monday"}\NormalTok{,}\StringTok{"Tuesday"}\NormalTok{,}\StringTok{"Wednesday"}\NormalTok{,}\StringTok{"Thursday"}\NormalTok{,}\StringTok{"Friday"}\NormalTok{,}\StringTok{"Saturday"}\NormalTok{, }\StringTok{"Sunday"}\NormalTok{))}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ }\FloatTok{0.00}\NormalTok{, }\OtherTok{NA}\NormalTok{, df}\OperatorTok{$}\NormalTok{value))}
+
+\CommentTok{# Calculate Mean value for all 15 minutes for each weekday}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(weekday, x) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dayTimeMean =} \KeywordTok{mean}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# shrink data frame}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{select}\NormalTok{(x, weekday, timestamp, dayTimeMean) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{arrange}\NormalTok{(weekday, x)}
+
+\CommentTok{# plot graph with mean values}
+\NormalTok{maxValMean <-}\StringTok{ }\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{dayTimeMean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\FloatTok{1.05}
+
+\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight_key}\NormalTok{(}\OperatorTok{~}\NormalTok{weekday) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{plot_ly}\NormalTok{(}\DataTypeTok{x=}\OperatorTok{~}\NormalTok{x,}
+          \DataTypeTok{y=}\OperatorTok{~}\NormalTok{dayTimeMean,}
+          \DataTypeTok{color=}\OperatorTok{~}\NormalTok{weekday,}
+          \DataTypeTok{type=}\StringTok{"scatter"}\NormalTok{,}
+          \DataTypeTok{mode=}\StringTok{"lines"}\NormalTok{,}
+          \DataTypeTok{alpha =} \FloatTok{0.25}\NormalTok{,}
+          \DataTypeTok{colors =} \StringTok{"dodgerblue4"}\NormalTok{,}
+          \DataTypeTok{text =} \OperatorTok{~}\NormalTok{weekday,}
+          \DataTypeTok{hovertemplate =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Time: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\StringTok{"%H:%M"}\NormalTok{),}
+                                \StringTok{"<br>Mean: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\CommentTok{# workaround with add_trace to have fixed y axis when selecting a dedicated day}
+\StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{0}\NormalTok{, }\DataTypeTok{y =} \DecValTok{0}\NormalTok{, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{24}\NormalTok{, }\DataTypeTok{y =}\NormalTok{ maxValMean, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily Profiles - Mean"}\NormalTok{,}
+         \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
+         \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
+           \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
+           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
+\NormalTok{         ),}
+         \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
+             \DataTypeTok{title =} \StringTok{"Power (kW)"}\NormalTok{,}
+             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, maxValMean)}
+\NormalTok{         )}
+\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}
+            \DataTypeTok{off =} \StringTok{"plotly_doubleclick"}\NormalTok{,}
+            \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
+            \DataTypeTok{opacityDim =} \FloatTok{0.7}\NormalTok{,}
+            \DataTypeTok{selected =} \KeywordTok{attrs_selected}\NormalTok{(}\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# this hides elements in the legend}
+\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)), }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf}
+
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
-\hypertarget{task-3}{%
-\subsection{Task}\label{task-3}}
+\hypertarget{task-4}{%
+\subsection{Task}\label{task-4}}
 
 You want to plot a mollier h-x diagram with
 
@@ -1557,8 +1799,8 @@ You want to plot a mollier h-x diagram with
   comfort zone
 \end{itemize}
 
-\hypertarget{basis-3}{%
-\subsection{Basis}\label{basis-3}}
+\hypertarget{basis-4}{%
+\subsection{Basis}\label{basis-4}}
 
 \begin{itemize}
 \tightlist
@@ -1566,8 +1808,8 @@ You want to plot a mollier h-x diagram with
   A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
 \end{itemize}
 
-\hypertarget{solution-3}{%
-\subsection{Solution}\label{solution-3}}
+\hypertarget{solution-4}{%
+\subsection{Solution}\label{solution-4}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
@@ -1623,8 +1865,8 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{sia-180-thermal-comfort}{%
 \section{SIA 180 Thermal Comfort}\label{sia-180-thermal-comfort}}
 
-\hypertarget{task-4}{%
-\subsection{Task}\label{task-4}}
+\hypertarget{task-5}{%
+\subsection{Task}\label{task-5}}
 
 You want to plot a diagram like the one from the SIA 180:2014 which showes
 
@@ -1637,8 +1879,8 @@ You want to plot a diagram like the one from the SIA 180:2014 which showes
   different comfort lines
 \end{itemize}
 
-\hypertarget{basis-4}{%
-\subsection{Basis}\label{basis-4}}
+\hypertarget{basis-5}{%
+\subsection{Basis}\label{basis-5}}
 
 \begin{itemize}
 \item
@@ -1647,8 +1889,8 @@ You want to plot a diagram like the one from the SIA 180:2014 which showes
   A csv file with the outdoor temperature
 \end{itemize}
 
-\hypertarget{solution-4}{%
-\subsection{Solution}\label{solution-4}}
+\hypertarget{solution-5}{%
+\subsection{Solution}\label{solution-5}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
 
@@ -1856,21 +2098,21 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/sia180_1-1.pdf}
 
-\hypertarget{discussion-2}{%
-\subsection{Discussion}\label{discussion-2}}
+\hypertarget{discussion-3}{%
+\subsection{Discussion}\label{discussion-3}}
 
 tbd
 
-\hypertarget{see-also}{%
-\subsection{See Also}\label{see-also}}
+\hypertarget{see-also-1}{%
+\subsection{See Also}\label{see-also-1}}
 
 tbd
 
 \hypertarget{electricity-consumption-residential}{%
 \section{Electricity Consumption Residential}\label{electricity-consumption-residential}}
 
-\hypertarget{task-5}{%
-\subsection{Task}\label{task-5}}
+\hypertarget{task-6}{%
+\subsection{Task}\label{task-6}}
 
 You want to plot an electricity consumption diagram which shows
 
@@ -1884,8 +2126,8 @@ You want to plot an electricity consumption diagram which shows
 
 Additionaly we would like to see the consumption of an average Swiss household.
 
-\hypertarget{basis-5}{%
-\subsection{Basis}\label{basis-5}}
+\hypertarget{basis-6}{%
+\subsection{Basis}\label{basis-6}}
 
 \begin{itemize}
 \tightlist
@@ -1893,8 +2135,8 @@ Additionaly we would like to see the consumption of an average Swiss household.
   A csv file with time series of an electric meter in 15 minute interval.
 \end{itemize}
 
-\hypertarget{solution-5}{%
-\subsection{Solution}\label{solution-5}}
+\hypertarget{solution-6}{%
+\subsection{Solution}\label{solution-6}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2246,13 +2488,13 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/eleplot-1.pdf}
 
-\hypertarget{discussion-3}{%
-\subsection{Discussion}\label{discussion-3}}
+\hypertarget{discussion-4}{%
+\subsection{Discussion}\label{discussion-4}}
 
 tbd
 
-\hypertarget{see-also-1}{%
-\subsection{See Also}\label{see-also-1}}
+\hypertarget{see-also-2}{%
+\subsection{See Also}\label{see-also-2}}
 
 tbd
 
