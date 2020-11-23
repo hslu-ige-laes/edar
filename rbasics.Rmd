@@ -8,7 +8,8 @@ df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
 ```{r rbasics readcsv}
 df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
                stringsAsFactors=FALSE,
-               sep ="," )
+               sep =",",
+               na.strings = c("", "NA"))
 ```
 Attention: By default, strings in the data are treated as factors. 
 read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
