@@ -1,0 +1,13 @@
+## Daily Profiles - Decomposed
+
+```{r dataVisDailyProfilesDecomposed1 plotly, warning=FALSE, message=FALSE, collapse = FALSE}
+library(plotly)
+library(redutils)
+
+data <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+
+p <- plotDailyProfilesDecomposed(data, locTimeZone = "Europe/Zurich")
+
+ggplotly(p)
+```
+

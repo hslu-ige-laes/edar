@@ -36,7 +36,12 @@ df <- df %>%
 # remove negative values which occur beause of change summer/winter time
 df <- df %>% filter(value >= 0)
 
-p <- plotDailyProfilesOverview(df, locTimeZone = "Europe/Zurich")
+p <- plotDailyProfilesOverview(df,
+                               locTimeZone = "Europe/Zurich",
+                               main = "Daily Profiles Overview by Weekday and Season",
+                               ylab = "Energy Consumption (kWh/h)",
+                               col = "black",
+                               confidence = 95.0)
 
 ggplotly(p)
 ```

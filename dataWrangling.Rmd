@@ -12,7 +12,7 @@ df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/cent
 
 ### Year, Month, Day, Day of Week
 To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
-```{r metadata date, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r metadata date, eval = FALSE}
 library(dplyr)
 library(lubridate)
 
@@ -20,7 +20,11 @@ df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
 df$year <- as.Date(cut(df$time, breaks = "year"))
 df$month <- as.Date(cut(df$time, breaks = "month"))
 df$day <- as.Date(cut(df$time, breaks = "day"))
-df$weekday <- weekdays(df$time)
+df$weekday <- wday(df$time,
+                   label = TRUE,
+                   locale = "English",
+                   abbr = TRUE,
+                   week_start = getOption("lubridate.week.start", 1))
 ```
 
 This code first parses the timestamp with a specific timezone. Then three columns are added.
@@ -47,7 +51,7 @@ If you want to change the language, you can give the function dedicated names fo
 
 ```{r metadata season2, warning=FALSE, message=FALSE, collapse = FALSE}
 getSeason(as.Date("2019-04-01"),
-                  seasonNames = c("Winter","Frühling","Sommer","Herbst"))
+                  seasonlab = c("Winter","Frühling","Sommer","Herbst"))
 ```
 
 To apply this function to a whole dataframe we can use the dplyr mutate function. The code below creates a new column named "season":

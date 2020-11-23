@@ -1,0 +1,68 @@
+## Seasonal Plot Polar
+### Task
+Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
+
+```{r out.width='70%', fig.cap='Energy Consumption Before/After Optimization', echo=FALSE}
+knitr::include_graphics("images/plotSeasonalPolar.png")
+```
+
+### Basis
+
+### Solution
+```{r seasonalPlotPolar1, warning=FALSE, message=FALSE, collapse = FALSE}
+library(forecast)
+library(dplyr)
+library(plotly)
+library(htmlwidgets)
+library(ggthemes)
+library(viridis)
+library(lubridate)
+
+# load csv file
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat)
+
+colnames(df) <- c("timestamp", "meterValue")
+
+# calculate consumption value per month
+# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,
+# so the consumption for february first is value(march) - value(february)!
+df <- df %>% mutate(value = lead(meterValue) - meterValue)
+
+# remove counter value column
+df <- df %>% select(-meterValue)
+
+# value correction (outlier because of commissioning)
+df[1,2] <- 600
+
+df.ts <- ts(df %>% select(value) %>% na.omit(), frequency = 12, start = min(year(df$timestamp)))
+
+# create polar plot
+
+numYears = length(unique(year(df$timestamp)))
+
+plot <- ggseasonplot(df.ts,
+                     col = viridis(numYears),
+                     main = "Polar Energy Consumption Overview per Month",
+                     ylab = "Energy Consumption (kWh/month)",
+                     polar = TRUE
+                     )
+
+# show plot (interactive version with plotly not possible)
+plot
+
+```
+
+```{r seasonalPlotPolar2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png
+ggsave("images/plotSeasonalPolar.png", plot)
+```
+
+### Discussion
+
+
+
+
