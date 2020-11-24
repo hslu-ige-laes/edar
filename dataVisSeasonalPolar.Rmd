@@ -2,7 +2,7 @@
 ### Task
 Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
 
-```{r out.width='70%', fig.cap='Energy Consumption Before/After Optimization', echo=FALSE}
+```{r out.width='70%', fig.cap='Seasonal Plot Polar per Month over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotSeasonalPolar.png")
 ```
 
@@ -46,7 +46,7 @@ numYears = length(unique(year(df$timestamp)))
 
 plot <- ggseasonplot(df.ts,
                      col = viridis(numYears),
-                     main = "Polar Energy Consumption Overview per Month",
+                     main = "Seasonal Plot Polar per Month over 10 Years",
                      ylab = "Energy Consumption (kWh/month)",
                      polar = TRUE
                      )

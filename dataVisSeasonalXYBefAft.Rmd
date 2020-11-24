@@ -1,6 +1,6 @@
-## Energy Consumption Before/After per Month
+## Seasonal Plot x/y Before/After
 ### Task
-```{r out.width='70%', fig.cap='Energy Consumption Before/After Optimization', echo=FALSE}
+```{r out.width='70%', fig.cap='Seasonal Plot x/y Before/After', echo=FALSE}
 knitr::include_graphics("images/plotEnergyConsBeforeAfter.png")
 ```
 
@@ -51,13 +51,13 @@ plotly
 
 ```{r energyConsBeforeAfter2, warning=FALSE, message=FALSE, collapse = FALSE}
 # save static plot as png
-ggsave("images/plotEnergyConsBeforeAfter.png", plot)
+ggsave("images/plotSeasonalXYBeforeAfter.png", plot)
 ```
 
 ```{r energyConsBeforeAfter3, eval=FALSE}
 # save interactive plot as html
 library(htmlwidgets)
-htmlwidgets::saveWidget(plotly, "plotlyEnergyConsBeforeAfter.html")
+htmlwidgets::saveWidget(plotly, "plotlySeasonalXYBeforeAfter.html")
 ```
 
 ### Discussion

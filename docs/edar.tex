@@ -1188,7 +1188,7 @@ Please note that the calculation of the periodic median after optimization I and
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Energy Consumption Before/After Optimization}\label{fig:unnamed-chunk-4}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot x/y per Month over 10 Years}\label{fig:unnamed-chunk-4}
 \end{figure}
 
 \hypertarget{basis-1}{%
@@ -1221,14 +1221,14 @@ Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
-\CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
-
 \CommentTok{# remove counter value column}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
 
-\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+\CommentTok{# value correction (outlier because of commissioning)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
 
+\CommentTok{# create time series object for ggseanplot function}
+\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
 
 \CommentTok{# create x/y plot}
 
@@ -1236,7 +1236,7 @@ Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2
 
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
                      \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
-                     \DataTypeTok{main =} \StringTok{"Energy Consumption Overview per Month"}\NormalTok{,}
+                     \DataTypeTok{main =} \StringTok{"Seasonal Plot x/y per Month over 10 years"}\NormalTok{,}
                      \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}
 \NormalTok{                     )}
 
@@ -1280,7 +1280,7 @@ Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2
 Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Energy Consumption Before/After Optimization}\label{fig:unnamed-chunk-5}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-5}
 \end{figure}
 
 \hypertarget{basis-2}{%
@@ -1327,7 +1327,7 @@ Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, cha
 
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
                      \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
-                     \DataTypeTok{main =} \StringTok{"Polar Energy Consumption Overview per Month"}\NormalTok{,}
+                     \DataTypeTok{main =} \StringTok{"Seasonal Plot Polar per Month over 10 Years"}\NormalTok{,}
                      \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}\NormalTok{,}
                      \DataTypeTok{polar =} \OtherTok{TRUE}
 \NormalTok{                     )}
@@ -1349,14 +1349,14 @@ Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, cha
 \hypertarget{discussion-2}{%
 \subsection{Discussion}\label{discussion-2}}
 
-\hypertarget{energy-consumption-beforeafter-per-month}{%
-\section{Energy Consumption Before/After per Month}\label{energy-consumption-beforeafter-per-month}}
+\hypertarget{seasonal-plot-xy-beforeafter}{%
+\section{Seasonal Plot x/y Before/After}\label{seasonal-plot-xy-beforeafter}}
 
 \hypertarget{task-3}{%
 \subsection{Task}\label{task-3}}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Energy Consumption Before/After Optimization}\label{fig:unnamed-chunk-6}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot x/y Before/After}\label{fig:unnamed-chunk-6}
 \end{figure}
 
 \hypertarget{basis-3}{%
@@ -1414,7 +1414,7 @@ Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, cha
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotEnergyConsBeforeAfter.png"}\NormalTok{, plot)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalXYBeforeAfter.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
 
@@ -1422,7 +1422,7 @@ Plot a seasonal polar plot as described in Hyndman and Athanasopoulos (2014, cha
 \begin{Highlighting}[]
 \CommentTok{# save interactive plot as html}
 \KeywordTok{library}\NormalTok{(htmlwidgets)}
-\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlyEnergyConsBeforeAfter.html"}\NormalTok{)}
+\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalXYBeforeAfter.html"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 

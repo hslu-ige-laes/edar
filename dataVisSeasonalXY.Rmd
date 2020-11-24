@@ -2,7 +2,7 @@
 ### Task
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
 
-```{r out.width='70%', fig.cap='Energy Consumption Before/After Optimization', echo=FALSE}
+```{r out.width='70%', fig.cap='Seasonal Plot x/y per Month over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotSeasonalXY.png")
 ```
 
@@ -32,14 +32,14 @@ colnames(df) <- c("timestamp", "meterValue")
 # so the consumption for february first is value(march) - value(february)!
 df <- df %>% mutate(value = lead(meterValue) - meterValue)
 
-# value correction (outlier because of commissioning)
-df[1,2] <- 600
-
 # remove counter value column
 df <- df %>% select(-meterValue)
 
-df.ts <- ts(df %>% select(value) %>% na.omit(), frequency = 12, start = min(year(df$timestamp)))
+# value correction (outlier because of commissioning)
+df[1,2] <- 600
 
+# create time series object for ggseanplot function
+df.ts <- ts(df %>% select(value) %>% na.omit(), frequency = 12, start = min(year(df$timestamp)))
 
 # create x/y plot
 
@@ -47,7 +47,7 @@ numYears = length(unique(year(df$timestamp)))
 
 plot <- ggseasonplot(df.ts,
                      col = viridis(numYears),
-                     main = "Energy Consumption Overview per Month",
+                     main = "Seasonal Plot x/y per Month over 10 years",
                      ylab = "Energy Consumption (kWh/month)"
                      )
 

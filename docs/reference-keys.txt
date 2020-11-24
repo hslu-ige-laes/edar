@@ -57,7 +57,7 @@ task-2
 basis-2
 solution-2
 discussion-2
-energy-consumption-beforeafter-per-month
+seasonal-plot-xy-beforeafter
 task-3
 basis-3
 solution-3
