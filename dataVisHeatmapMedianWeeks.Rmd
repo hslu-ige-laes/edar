@@ -1,0 +1,16 @@
+## Heatmap Median-Weeks
+
+```{r dataVisHeatmapMedianWeeks1, warning=FALSE, message=FALSE, collapse = FALSE, plotly=TRUE}
+library(redutils)
+library(plotly)
+
+data <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+p <- plotHeatmapMedianWeeks(data, locTimeZone = "Europe/Zurich")
+
+# show the static plot
+p
+
+# create the interactive plot (optional, uncomment line)
+#ggplotly(p)
+```
+

@@ -11,10 +11,14 @@ rmd_files: [
   "dataVis.Rmd",
   "dataVisRoomTempRed.Rmd",
   "dataVisSeasonalXY.Rmd",
+  "dataVisSeasonalMonth.Rmd",
   "dataVisSeasonalPolar.Rmd",
   "dataVisSeasonalXYBefAft.Rmd",
   "dataVisDecompositionLong.Rmd",
   "dataVisDecompositionShort.Rmd",
+  "dataVisDecompositionShort.Rmd",
+  "dataVisHeatmapMedianWeeks.Rmd",
+  "dataVisHeatmapCalendar.Rmd",
   "dataVisBldgEngySig.Rmd",
   "dataVisDailyProfOverview.Rmd",
   "dataVisDailyProfOverlayed.Rmd",
@@ -22,7 +26,7 @@ rmd_files: [
   "dataVisDailyProfDecomposed.Rmd",
   "dataVisMollierHx.Rmd",
   "dataVisSia180ThermCmf.Rmd",
-  "dataVisEleConsRes.Rmd",
+  "dataVisEleHousehold.Rmd",
 
   "a1-packages.rmd",
 ]

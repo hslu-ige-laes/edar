@@ -1,6 +1,12 @@
-## Seasonal Plot x/y
+## Seasonal Plot - x/y
 ### Task
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2). This is like a time plot except that the data are plotted against the seasons in separate years.
+Something like a time plot except that the data from each month are
+overlapped.
+Enables the underlying seasonal pattern to be seen more clearly, and
+also allows any substantial departures from the seasonal pattern to
+be easily identified.
+
 
 ```{r out.width='70%', fig.cap='Seasonal Plot x/y per Month over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotSeasonalXY.png")

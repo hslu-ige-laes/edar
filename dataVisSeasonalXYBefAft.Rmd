@@ -1,4 +1,4 @@
-## Seasonal Plot x/y Before/After
+## Seasonal Plot - x/y Before/After
 ### Task
 ```{r out.width='70%', fig.cap='Seasonal Plot x/y Before/After', echo=FALSE}
 knitr::include_graphics("images/plotEnergyConsBeforeAfter.png")
