@@ -1,6 +1,8 @@
 # Getting started
+This chapter get's you up and running with downloading and installing the relevant software. This may seem laborious, but it is necessary and easier than it appears at first glance. components. 
+
 ## Install R and R Studio {#installation}
-Before we can start the first analysis, we have to install "R" and "RStudio". This may seem laborious, but it is necessary and easier than it appears at first glance.
+Before we can start the first analysis, we have to install "R" and "RStudio". 
 
 - "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface
 - "R" may be used without "RStudio", but "RStudio" may not be used without "R"
@@ -41,9 +43,10 @@ The exact installation procedure will vary depending on your Linux operating sys
 Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
 
 - Open "RStudio" just as you would any program, by clicking on its icon
+
 - Copy the following code and paste it into your console (on the bottom left, right of the symbol `>`):
 ```{r install packages, eval=FALSE}
-install.packages("devtools", "tidyverse", "plotly", "lubridate", "r2d3", "checkmate")
+install.packages("devtools", "tidyverse", "plotly", "lubridate", "r2d3")
 install_github("hslu-ige-laes/redutils")
 ```
 - Press `Enter` or `Return`
@@ -54,16 +57,23 @@ The installation of the packages is now in progress and this may take a while, p
 Finally, you have installed "R" and "RStudio" with the first set of packages on your computer.
 
 Let's create the first visualization.
+
 - Open "RStudio" just as you would any program, by clicking on its icon
+
 - Go to the menu on the top left and click to `File / New File / R Script`
+
 - Copy the following code and paste it into your script:
+
 ```{r co2 intro code, eval=FALSE}
 library(graphics)
 plot(co2, ylab = "CO2 (ppm)", las = 1)
 title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
+
 - select all by pressing `Ctrl + A`
+
 - Thren run the code by pressing the `Run` Button or `Ctrl + Enter`
+
 
 You should now get your first visualization:
 
@@ -76,7 +86,8 @@ title(main = "Mauna Loa Atmospheric CO2 Concentration")
 As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Dataset Package</a> provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 
 
 ## What's next?
-Now hopefully, everything has worked fine so far with the installation and your first visualization.
-Congratulations! You have now a running R environment and we can start with more interesting stuff.
+Hopefully everything has worked well so far with the installation and your first visualization.
 
-The following chapters will give you an overview 
+So congratulations!
+
+You have a running R environment, and we can start with more interesting things in the following chapters.

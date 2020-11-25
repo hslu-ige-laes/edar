@@ -9,24 +9,26 @@ rmd_files: [
   "eda.Rmd",
 
   "dataVis.Rmd",
-  "dataVisRoomTempRed.Rmd",
-  "dataVisSeasonalXY.Rmd",
-  "dataVisSeasonalMonth.Rmd",
+  "dataVisSeasonalOverlapping.Rmd",
+  "dataVisSeasonalMiniplots.Rmd",
   "dataVisSeasonalPolar.Rmd",
-  "dataVisSeasonalXYBefAft.Rmd",
+  "dataVisSeasonalOverlappingBefAft.Rmd",
+
+  # not yet redacted
   "dataVisDecompositionLong.Rmd",
   "dataVisDecompositionShort.Rmd",
   "dataVisDecompositionShort.Rmd",
   "dataVisHeatmapMedianWeeks.Rmd",
   "dataVisHeatmapCalendar.Rmd",
-  "dataVisBldgEngySig.Rmd",
   "dataVisDailyProfOverview.Rmd",
   "dataVisDailyProfOverlayed.Rmd",
   "dataVisDailyProfMean.Rmd",
   "dataVisDailyProfDecomposed.Rmd",
+  "dataVisBldgEngySig.Rmd",
   "dataVisMollierHx.Rmd",
   "dataVisSia180ThermCmf.Rmd",
   "dataVisEleHousehold.Rmd",
+  "dataVisRoomTempRed.Rmd",
 
   "a1-packages.rmd",
 ]

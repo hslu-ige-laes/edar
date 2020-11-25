@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.1 Room Temperature Reduction | Energy Data Analysis with R</title>
+  <title>6.17 Room Temperature Reduction | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.1 Room Temperature Reduction | Energy Data Analysis with R" />
+  <meta property="og:title" content="6.17 Room Temperature Reduction | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.1 Room Temperature Reduction | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="6.17 Room Temperature Reduction | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="data-visualizations.html"/>
-<link rel="next" href="seasonal-plot-xy.html"/>
+<link rel="prev" href="electricity-household.html"/>
+<link rel="next" href="packages.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -53,13 +53,6 @@
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
 <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
-<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
-<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
-<script src="libs/dygraphs-1.1.1/shapes.js"></script>
-<script src="libs/moment-2.8.4/moment.js"></script>
-<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
-<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
-<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 <script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
 <script src="libs/typedarray-0.1/typedarray.min.js"></script>
 <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
@@ -70,6 +63,13 @@
 <script src="libs/webcomponents-2.0.0/webcomponents.js"></script>
 <script src="libs/r2d3-binding-0.2.3/r2d3.js"></script>
 <script src="libs/d3v5-5.0.0/d3.min.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
 
 
 <style type="text/css">
@@ -199,81 +199,81 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="data-visualizations.html"><a href="data-visualizations.html"><i class="fa fa-check"></i><b>6</b> Data Visualizations</a><ul>
-<li class="chapter" data-level="6.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>6.1</b> Room Temperature Reduction</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task"><i class="fa fa-check"></i><b>6.1.1</b> Task</a></li>
-<li class="chapter" data-level="6.1.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis"><i class="fa fa-check"></i><b>6.1.2</b> Basis</a></li>
-<li class="chapter" data-level="6.1.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution"><i class="fa fa-check"></i><b>6.1.3</b> Solution</a></li>
-<li class="chapter" data-level="6.1.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion"><i class="fa fa-check"></i><b>6.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.1" data-path="seasonal-plot-overlapping.html"><a href="seasonal-plot-overlapping.html"><i class="fa fa-check"></i><b>6.1</b> Seasonal Plot - Overlapping</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="seasonal-plot-overlapping.html"><a href="seasonal-plot-overlapping.html#goal"><i class="fa fa-check"></i><b>6.1.1</b> Goal</a></li>
+<li class="chapter" data-level="6.1.2" data-path="seasonal-plot-overlapping.html"><a href="seasonal-plot-overlapping.html#data-basis"><i class="fa fa-check"></i><b>6.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="seasonal-plot-overlapping.html"><a href="seasonal-plot-overlapping.html#solution"><i class="fa fa-check"></i><b>6.1.3</b> Solution</a></li>
+<li class="chapter" data-level="6.1.4" data-path="seasonal-plot-overlapping.html"><a href="seasonal-plot-overlapping.html#discussion"><i class="fa fa-check"></i><b>6.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="seasonal-plot-xy.html"><a href="seasonal-plot-xy.html"><i class="fa fa-check"></i><b>6.2</b> Seasonal Plot - x/y</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="seasonal-plot-xy.html"><a href="seasonal-plot-xy.html#task-1"><i class="fa fa-check"></i><b>6.2.1</b> Task</a></li>
-<li class="chapter" data-level="6.2.2" data-path="seasonal-plot-xy.html"><a href="seasonal-plot-xy.html#basis-1"><i class="fa fa-check"></i><b>6.2.2</b> Basis</a></li>
-<li class="chapter" data-level="6.2.3" data-path="seasonal-plot-xy.html"><a href="seasonal-plot-xy.html#solution-1"><i class="fa fa-check"></i><b>6.2.3</b> Solution</a></li>
-<li class="chapter" data-level="6.2.4" data-path="seasonal-plot-xy.html"><a href="seasonal-plot-xy.html#discussion-1"><i class="fa fa-check"></i><b>6.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.2" data-path="seasonal-plot-mini-plots.html"><a href="seasonal-plot-mini-plots.html"><i class="fa fa-check"></i><b>6.2</b> Seasonal Plot - Mini Plots</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="seasonal-plot-mini-plots.html"><a href="seasonal-plot-mini-plots.html#goal-1"><i class="fa fa-check"></i><b>6.2.1</b> Goal</a></li>
+<li class="chapter" data-level="6.2.2" data-path="seasonal-plot-mini-plots.html"><a href="seasonal-plot-mini-plots.html#data-basis-1"><i class="fa fa-check"></i><b>6.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="seasonal-plot-mini-plots.html"><a href="seasonal-plot-mini-plots.html#solution-1"><i class="fa fa-check"></i><b>6.2.3</b> Solution</a></li>
+<li class="chapter" data-level="6.2.4" data-path="seasonal-plot-mini-plots.html"><a href="seasonal-plot-mini-plots.html#discussion-1"><i class="fa fa-check"></i><b>6.2.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="seasonal-plot-monthplot.html"><a href="seasonal-plot-monthplot.html"><i class="fa fa-check"></i><b>6.3</b> Seasonal Plot - Monthplot</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="seasonal-plot-monthplot.html"><a href="seasonal-plot-monthplot.html#task-2"><i class="fa fa-check"></i><b>6.3.1</b> Task</a></li>
-<li class="chapter" data-level="6.3.2" data-path="seasonal-plot-monthplot.html"><a href="seasonal-plot-monthplot.html#basis-2"><i class="fa fa-check"></i><b>6.3.2</b> Basis</a></li>
-<li class="chapter" data-level="6.3.3" data-path="seasonal-plot-monthplot.html"><a href="seasonal-plot-monthplot.html#solution-2"><i class="fa fa-check"></i><b>6.3.3</b> Solution</a></li>
-<li class="chapter" data-level="6.3.4" data-path="seasonal-plot-monthplot.html"><a href="seasonal-plot-monthplot.html#discussion-2"><i class="fa fa-check"></i><b>6.3.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.3" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html"><i class="fa fa-check"></i><b>6.3</b> Seasonal Plot - Polar</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#goal-2"><i class="fa fa-check"></i><b>6.3.1</b> Goal</a></li>
+<li class="chapter" data-level="6.3.2" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#data-basis-2"><i class="fa fa-check"></i><b>6.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.3.3" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#solution-2"><i class="fa fa-check"></i><b>6.3.3</b> Solution</a></li>
+<li class="chapter" data-level="6.3.4" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#discussion-2"><i class="fa fa-check"></i><b>6.3.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html"><i class="fa fa-check"></i><b>6.4</b> Seasonal Plot - Polar</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#task-3"><i class="fa fa-check"></i><b>6.4.1</b> Task</a></li>
-<li class="chapter" data-level="6.4.2" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#basis-3"><i class="fa fa-check"></i><b>6.4.2</b> Basis</a></li>
-<li class="chapter" data-level="6.4.3" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#solution-3"><i class="fa fa-check"></i><b>6.4.3</b> Solution</a></li>
-<li class="chapter" data-level="6.4.4" data-path="seasonal-plot-polar.html"><a href="seasonal-plot-polar.html#discussion-3"><i class="fa fa-check"></i><b>6.4.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>6.4</b> Seasonal Plot - Before/After</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-3"><i class="fa fa-check"></i><b>6.4.1</b> Goal</a></li>
+<li class="chapter" data-level="6.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-3"><i class="fa fa-check"></i><b>6.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-3"><i class="fa fa-check"></i><b>6.4.3</b> Solution</a></li>
+<li class="chapter" data-level="6.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>6.4.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.5" data-path="seasonal-plot-xy-beforeafter.html"><a href="seasonal-plot-xy-beforeafter.html"><i class="fa fa-check"></i><b>6.5</b> Seasonal Plot - x/y Before/After</a><ul>
-<li class="chapter" data-level="6.5.1" data-path="seasonal-plot-xy-beforeafter.html"><a href="seasonal-plot-xy-beforeafter.html#task-4"><i class="fa fa-check"></i><b>6.5.1</b> Task</a></li>
-<li class="chapter" data-level="6.5.2" data-path="seasonal-plot-xy-beforeafter.html"><a href="seasonal-plot-xy-beforeafter.html#basis-4"><i class="fa fa-check"></i><b>6.5.2</b> Basis</a></li>
-<li class="chapter" data-level="6.5.3" data-path="seasonal-plot-xy-beforeafter.html"><a href="seasonal-plot-xy-beforeafter.html#solution-4"><i class="fa fa-check"></i><b>6.5.3</b> Solution</a></li>
-<li class="chapter" data-level="6.5.4" data-path="seasonal-plot-xy-beforeafter.html"><a href="seasonal-plot-xy-beforeafter.html#discussion-4"><i class="fa fa-check"></i><b>6.5.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.5" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html"><i class="fa fa-check"></i><b>6.5</b> Decomposition - Long term</a><ul>
+<li class="chapter" data-level="6.5.1" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#goal-4"><i class="fa fa-check"></i><b>6.5.1</b> Goal</a></li>
+<li class="chapter" data-level="6.5.2" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#basis"><i class="fa fa-check"></i><b>6.5.2</b> Basis</a></li>
+<li class="chapter" data-level="6.5.3" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#solution-4"><i class="fa fa-check"></i><b>6.5.3</b> Solution</a></li>
+<li class="chapter" data-level="6.5.4" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#discussion-4"><i class="fa fa-check"></i><b>6.5.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.5.5" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#see-also"><i class="fa fa-check"></i><b>6.5.5</b> See Also</a></li>
 </ul></li>
-<li class="chapter" data-level="6.6" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html"><i class="fa fa-check"></i><b>6.6</b> Decomposition - Long term</a><ul>
-<li class="chapter" data-level="6.6.1" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#task-5"><i class="fa fa-check"></i><b>6.6.1</b> Task</a></li>
-<li class="chapter" data-level="6.6.2" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#basis-5"><i class="fa fa-check"></i><b>6.6.2</b> Basis</a></li>
-<li class="chapter" data-level="6.6.3" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#solution-5"><i class="fa fa-check"></i><b>6.6.3</b> Solution</a></li>
-<li class="chapter" data-level="6.6.4" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#discussion-5"><i class="fa fa-check"></i><b>6.6.4</b> Discussion</a></li>
-<li class="chapter" data-level="6.6.5" data-path="decomposition-long-term.html"><a href="decomposition-long-term.html#see-also"><i class="fa fa-check"></i><b>6.6.5</b> See Also</a></li>
+<li class="chapter" data-level="6.6" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html"><i class="fa fa-check"></i><b>6.6</b> Decomposition - Short term</a><ul>
+<li class="chapter" data-level="6.6.1" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#task"><i class="fa fa-check"></i><b>6.6.1</b> Task</a></li>
+<li class="chapter" data-level="6.6.2" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#basis-1"><i class="fa fa-check"></i><b>6.6.2</b> Basis</a></li>
+<li class="chapter" data-level="6.6.3" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#solution-5"><i class="fa fa-check"></i><b>6.6.3</b> Solution</a></li>
+<li class="chapter" data-level="6.6.4" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#discussion-5"><i class="fa fa-check"></i><b>6.6.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.6.5" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#see-also-1"><i class="fa fa-check"></i><b>6.6.5</b> See Also</a></li>
 </ul></li>
-<li class="chapter" data-level="6.7" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html"><i class="fa fa-check"></i><b>6.7</b> Decomposition - Short term</a><ul>
-<li class="chapter" data-level="6.7.1" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#task-6"><i class="fa fa-check"></i><b>6.7.1</b> Task</a></li>
-<li class="chapter" data-level="6.7.2" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#basis-6"><i class="fa fa-check"></i><b>6.7.2</b> Basis</a></li>
-<li class="chapter" data-level="6.7.3" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#solution-6"><i class="fa fa-check"></i><b>6.7.3</b> Solution</a></li>
-<li class="chapter" data-level="6.7.4" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#discussion-6"><i class="fa fa-check"></i><b>6.7.4</b> Discussion</a></li>
-<li class="chapter" data-level="6.7.5" data-path="decomposition-short-term.html"><a href="decomposition-short-term.html#see-also-1"><i class="fa fa-check"></i><b>6.7.5</b> See Also</a></li>
+<li class="chapter" data-level="6.7" data-path="heatmap-median-weeks.html"><a href="heatmap-median-weeks.html"><i class="fa fa-check"></i><b>6.7</b> Heatmap Median-Weeks</a></li>
+<li class="chapter" data-level="6.8" data-path="heatmap-calendar.html"><a href="heatmap-calendar.html"><i class="fa fa-check"></i><b>6.8</b> Heatmap Calendar</a><ul>
+<li class="chapter" data-level="6.8.1" data-path="heatmap-calendar.html"><a href="heatmap-calendar.html#discussion-6"><i class="fa fa-check"></i><b>6.8.1</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.8" data-path="heatmap-median-weeks.html"><a href="heatmap-median-weeks.html"><i class="fa fa-check"></i><b>6.8</b> Heatmap Median-Weeks</a></li>
-<li class="chapter" data-level="6.9" data-path="heatmap-calendar.html"><a href="heatmap-calendar.html"><i class="fa fa-check"></i><b>6.9</b> Heatmap Calendar</a><ul>
-<li class="chapter" data-level="6.9.1" data-path="heatmap-calendar.html"><a href="heatmap-calendar.html#discussion-7"><i class="fa fa-check"></i><b>6.9.1</b> Discussion</a></li>
+<li class="chapter" data-level="6.9" data-path="daily-profiles-overview.html"><a href="daily-profiles-overview.html"><i class="fa fa-check"></i><b>6.9</b> Daily Profiles - Overview</a></li>
+<li class="chapter" data-level="6.10" data-path="daily-profiles-overlayed.html"><a href="daily-profiles-overlayed.html"><i class="fa fa-check"></i><b>6.10</b> Daily Profiles - Overlayed</a></li>
+<li class="chapter" data-level="6.11" data-path="daily-profiles-decompose.html"><a href="daily-profiles-decompose.html"><i class="fa fa-check"></i><b>6.11</b> Daily Profiles - Decompose</a></li>
+<li class="chapter" data-level="6.12" data-path="daily-profiles-decomposed.html"><a href="daily-profiles-decomposed.html"><i class="fa fa-check"></i><b>6.12</b> Daily Profiles - Decomposed</a></li>
+<li class="chapter" data-level="6.13" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>6.13</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="6.13.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-1"><i class="fa fa-check"></i><b>6.13.1</b> Task</a></li>
+<li class="chapter" data-level="6.13.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-2"><i class="fa fa-check"></i><b>6.13.2</b> Basis</a></li>
+<li class="chapter" data-level="6.13.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-6"><i class="fa fa-check"></i><b>6.13.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="6.10" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>6.10</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="6.10.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-7"><i class="fa fa-check"></i><b>6.10.1</b> Task</a></li>
-<li class="chapter" data-level="6.10.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-7"><i class="fa fa-check"></i><b>6.10.2</b> Basis</a></li>
-<li class="chapter" data-level="6.10.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-7"><i class="fa fa-check"></i><b>6.10.3</b> Solution</a></li>
+<li class="chapter" data-level="6.14" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>6.14</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="6.14.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-2"><i class="fa fa-check"></i><b>6.14.1</b> Task</a></li>
+<li class="chapter" data-level="6.14.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-3"><i class="fa fa-check"></i><b>6.14.2</b> Basis</a></li>
+<li class="chapter" data-level="6.14.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-7"><i class="fa fa-check"></i><b>6.14.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="6.11" data-path="daily-profiles-overview.html"><a href="daily-profiles-overview.html"><i class="fa fa-check"></i><b>6.11</b> Daily Profiles - Overview</a></li>
-<li class="chapter" data-level="6.12" data-path="daily-profiles-overlayed.html"><a href="daily-profiles-overlayed.html"><i class="fa fa-check"></i><b>6.12</b> Daily Profiles - Overlayed</a></li>
-<li class="chapter" data-level="6.13" data-path="daily-profiles-decompose.html"><a href="daily-profiles-decompose.html"><i class="fa fa-check"></i><b>6.13</b> Daily Profiles - Decompose</a></li>
-<li class="chapter" data-level="6.14" data-path="daily-profiles-decomposed.html"><a href="daily-profiles-decomposed.html"><i class="fa fa-check"></i><b>6.14</b> Daily Profiles - Decomposed</a></li>
-<li class="chapter" data-level="6.15" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>6.15</b> Mollier hx Diagram</a><ul>
-<li class="chapter" data-level="6.15.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-8"><i class="fa fa-check"></i><b>6.15.1</b> Task</a></li>
-<li class="chapter" data-level="6.15.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-8"><i class="fa fa-check"></i><b>6.15.2</b> Basis</a></li>
-<li class="chapter" data-level="6.15.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-8"><i class="fa fa-check"></i><b>6.15.3</b> Solution</a></li>
+<li class="chapter" data-level="6.15" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>6.15</b> SIA 180 Thermal Comfort</a><ul>
+<li class="chapter" data-level="6.15.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-3"><i class="fa fa-check"></i><b>6.15.1</b> Task</a></li>
+<li class="chapter" data-level="6.15.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-4"><i class="fa fa-check"></i><b>6.15.2</b> Basis</a></li>
+<li class="chapter" data-level="6.15.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-8"><i class="fa fa-check"></i><b>6.15.3</b> Solution</a></li>
+<li class="chapter" data-level="6.15.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-7"><i class="fa fa-check"></i><b>6.15.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.15.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>6.15.5</b> See Also</a></li>
 </ul></li>
-<li class="chapter" data-level="6.16" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>6.16</b> SIA 180 Thermal Comfort</a><ul>
-<li class="chapter" data-level="6.16.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-9"><i class="fa fa-check"></i><b>6.16.1</b> Task</a></li>
-<li class="chapter" data-level="6.16.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-9"><i class="fa fa-check"></i><b>6.16.2</b> Basis</a></li>
-<li class="chapter" data-level="6.16.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-9"><i class="fa fa-check"></i><b>6.16.3</b> Solution</a></li>
-<li class="chapter" data-level="6.16.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-8"><i class="fa fa-check"></i><b>6.16.4</b> Discussion</a></li>
-<li class="chapter" data-level="6.16.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>6.16.5</b> See Also</a></li>
+<li class="chapter" data-level="6.16" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>6.16</b> Electricity Household</a><ul>
+<li class="chapter" data-level="6.16.1" data-path="electricity-household.html"><a href="electricity-household.html#task-4"><i class="fa fa-check"></i><b>6.16.1</b> Task</a></li>
+<li class="chapter" data-level="6.16.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-5"><i class="fa fa-check"></i><b>6.16.2</b> Basis</a></li>
+<li class="chapter" data-level="6.16.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-9"><i class="fa fa-check"></i><b>6.16.3</b> Solution</a></li>
+<li class="chapter" data-level="6.16.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-8"><i class="fa fa-check"></i><b>6.16.4</b> Discussion</a></li>
+<li class="chapter" data-level="6.16.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>6.16.5</b> See Also</a></li>
 </ul></li>
-<li class="chapter" data-level="6.17" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>6.17</b> Electricity Household</a><ul>
-<li class="chapter" data-level="6.17.1" data-path="electricity-household.html"><a href="electricity-household.html#task-10"><i class="fa fa-check"></i><b>6.17.1</b> Task</a></li>
-<li class="chapter" data-level="6.17.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-10"><i class="fa fa-check"></i><b>6.17.2</b> Basis</a></li>
-<li class="chapter" data-level="6.17.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-10"><i class="fa fa-check"></i><b>6.17.3</b> Solution</a></li>
-<li class="chapter" data-level="6.17.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-9"><i class="fa fa-check"></i><b>6.17.4</b> Discussion</a></li>
-<li class="chapter" data-level="6.17.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>6.17.5</b> See Also</a></li>
+<li class="chapter" data-level="6.17" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>6.17</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="6.17.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task-5"><i class="fa fa-check"></i><b>6.17.1</b> Task</a></li>
+<li class="chapter" data-level="6.17.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis-6"><i class="fa fa-check"></i><b>6.17.2</b> Basis</a></li>
+<li class="chapter" data-level="6.17.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-10"><i class="fa fa-check"></i><b>6.17.3</b> Solution</a></li>
+<li class="chapter" data-level="6.17.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-9"><i class="fa fa-check"></i><b>6.17.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -303,9 +303,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="room-temperature-reduction" class="section level2">
-<h2><span class="header-section-number">6.1</span> Room Temperature Reduction</h2>
-<div id="task" class="section level3">
-<h3><span class="header-section-number">6.1.1</span> Task</h3>
+<h2><span class="header-section-number">6.17</span> Room Temperature Reduction</h2>
+<div id="task-5" class="section level3">
+<h3><span class="header-section-number">6.17.1</span> Task</h3>
 <p>As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.</p>
 <p>You want to create a time series plot with</p>
 <ul>
@@ -314,126 +314,130 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li><p>the desired setpoint</p></li>
 </ul>
 </div>
-<div id="basis" class="section level3">
-<h3><span class="header-section-number">6.1.2</span> Basis</h3>
+<div id="basis-6" class="section level3">
+<h3><span class="header-section-number">6.17.2</span> Basis</h3>
 <ul>
 <li>Time series data from e.g. a temperature sensor with unaligned time intervals</li>
 </ul>
 </div>
-<div id="solution" class="section level3">
-<h3><span class="header-section-number">6.1.3</span> Solution</h3>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb54-2" title="2"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb54-3" title="3"><span class="kw">library</span>(dygraphs)</a>
-<a class="sourceLine" id="cb54-4" title="4"><span class="kw">library</span>(xts)</a>
-<a class="sourceLine" id="cb54-5" title="5"><span class="kw">library</span>(redutils)</a>
-<a class="sourceLine" id="cb54-6" title="6"><span class="kw">library</span>(RColorBrewer)</a>
-<a class="sourceLine" id="cb54-7" title="7"></a>
-<a class="sourceLine" id="cb54-8" title="8"><span class="co"># Settings</span></a>
-<a class="sourceLine" id="cb54-9" title="9">tempSetpoint =<span class="st"> </span><span class="fl">22.0</span></a>
-<a class="sourceLine" id="cb54-10" title="10"></a>
-<a class="sourceLine" id="cb54-11" title="11">startDate =<span class="st"> &quot;2018-11-01&quot;</span></a>
-<a class="sourceLine" id="cb54-12" title="12">endDate =<span class="st"> &quot;2019-02-01&quot;</span></a>
-<a class="sourceLine" id="cb54-13" title="13"></a>
-<a class="sourceLine" id="cb54-14" title="14">optiDate1 =<span class="st"> &quot;2018-12-17&quot;</span></a>
-<a class="sourceLine" id="cb54-15" title="15">optiLabel1 =<span class="st"> &quot;Optimization I&quot;</span></a>
-<a class="sourceLine" id="cb54-16" title="16"></a>
-<a class="sourceLine" id="cb54-17" title="17">optiDate2 =<span class="st"> &quot;2019-01-03&quot;</span></a>
-<a class="sourceLine" id="cb54-18" title="18">optiLabel2 =<span class="st"> &quot;Optimization II&quot;</span></a>
-<a class="sourceLine" id="cb54-19" title="19"></a>
-<a class="sourceLine" id="cb54-20" title="20">optiDelayDays =<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb54-21" title="21"></a>
-<a class="sourceLine" id="cb54-22" title="22"><span class="co"># read and print data</span></a>
-<a class="sourceLine" id="cb54-23" title="23">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb54-24" title="24">                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb54-25" title="25">                 <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb54-26" title="26"></a>
-<a class="sourceLine" id="cb54-27" title="27"><span class="co"># select temperature and remove empty cells</span></a>
-<a class="sourceLine" id="cb54-28" title="28">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb54-29" title="29"></a>
-<a class="sourceLine" id="cb54-30" title="30"><span class="co"># create column with day for later grouping</span></a>
-<a class="sourceLine" id="cb54-31" title="31">df<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb54-32" title="32">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">cut</span>(df<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;day&quot;</span>))</a>
-<a class="sourceLine" id="cb54-33" title="33">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">as.character</span>(df<span class="op">$</span>day,<span class="st">&quot;%Y-%m-%d&quot;</span>))</a>
-<a class="sourceLine" id="cb54-34" title="34"></a>
-<a class="sourceLine" id="cb54-35" title="35"><span class="co"># filter time range</span></a>
-<a class="sourceLine" id="cb54-36" title="36">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(day <span class="op">&gt;</span><span class="st"> </span>startDate, day <span class="op">&lt;</span><span class="st"> </span>endDate)</a>
-<a class="sourceLine" id="cb54-37" title="37"></a>
-<a class="sourceLine" id="cb54-38" title="38"><span class="co"># calculate daily median, min and max of temperature</span></a>
-<a class="sourceLine" id="cb54-39" title="39">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minDay =</span> <span class="kw">min</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
-<a class="sourceLine" id="cb54-42" title="42">         <span class="dt">medianDay =</span> <span class="kw">median</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
-<a class="sourceLine" id="cb54-43" title="43">         <span class="dt">maxDay =</span> <span class="kw">max</span>(<span class="kw">as.numeric</span>(FlatA_Temp))</a>
-<a class="sourceLine" id="cb54-44" title="44">         ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-45" title="45"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb54-46" title="46"></a>
-<a class="sourceLine" id="cb54-47" title="47"><span class="co"># shrink down to daily values and remove rows with empty values</span></a>
-<a class="sourceLine" id="cb54-48" title="48">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(day, medianDay, minDay, maxDay) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb54-49" title="49"></a>
-<a class="sourceLine" id="cb54-50" title="50"><span class="co"># calculate medians for time ranges</span></a>
-<a class="sourceLine" id="cb54-51" title="51">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-52" title="52"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">ifelse</span>(day <span class="op">&gt;=</span><span class="st"> </span>startDate <span class="op">&amp;</span><span class="st"> </span>day <span class="op">&lt;=</span><span class="st"> </span>optiDate1,</a>
-<a class="sourceLine" id="cb54-53" title="53">                         <span class="st">&quot;Baseline&quot;</span>,</a>
-<a class="sourceLine" id="cb54-54" title="54">                         <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate1) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
-<a class="sourceLine" id="cb54-55" title="55">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>optiDate2),</a>
-<a class="sourceLine" id="cb54-56" title="56">                                <span class="st">&quot;Opti1&quot;</span>,</a>
-<a class="sourceLine" id="cb54-57" title="57">                                <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate2) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
-<a class="sourceLine" id="cb54-58" title="58">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>endDate),</a>
-<a class="sourceLine" id="cb54-59" title="59">                                <span class="st">&quot;Opti2&quot;</span>,</a>
-<a class="sourceLine" id="cb54-60" title="60">                                <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb54-61" title="61">                         )))</a>
-<a class="sourceLine" id="cb54-62" title="62"></a>
-<a class="sourceLine" id="cb54-63" title="63">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-64" title="64"><span class="st">  </span><span class="kw">group_by</span>(period) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-65" title="65"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">medianPeriod =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(period), <span class="ot">NA</span>, <span class="kw">median</span>(medianDay))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-66" title="66"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-67" title="67"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period)</a>
-<a class="sourceLine" id="cb54-68" title="68"></a>
-<a class="sourceLine" id="cb54-69" title="69"><span class="co"># create xts object for plotting</span></a>
-<a class="sourceLine" id="cb54-70" title="70">plotdata &lt;-<span class="st"> </span><span class="kw">xts</span>( <span class="dt">x=</span>df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span>df<span class="op">$</span>day)</a>
-<a class="sourceLine" id="cb54-71" title="71"></a>
-<a class="sourceLine" id="cb54-72" title="72"><span class="co"># plot graph</span></a>
-<a class="sourceLine" id="cb54-73" title="73"><span class="kw">dygraph</span>(plotdata, <span class="dt">main =</span> <span class="st">&quot;Room Temperature Reduction&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-74" title="74"><span class="st">  </span><span class="kw">dyAxis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">drawGrid =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-75" title="75"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;minDay&quot;</span>, <span class="st">&quot;medianDay&quot;</span>, <span class="st">&quot;maxDay&quot;</span>),</a>
-<a class="sourceLine" id="cb54-76" title="76">           <span class="dt">label =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-77" title="77"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;medianPeriod&quot;</span>),</a>
-<a class="sourceLine" id="cb54-78" title="78">           <span class="dt">label =</span> <span class="st">&quot;Median Period&quot;</span>,</a>
-<a class="sourceLine" id="cb54-79" title="79">           <span class="dt">strokePattern =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-80" title="80"><span class="st">  </span><span class="kw">dyOptions</span>(<span class="dt">colors =</span> RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">3</span>, <span class="st">&quot;Set2&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb54-81" title="81"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate1,</a>
-<a class="sourceLine" id="cb54-82" title="82">          <span class="dt">label =</span> optiLabel1,</a>
-<a class="sourceLine" id="cb54-83" title="83">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
-<a class="sourceLine" id="cb54-84" title="84">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
-<a class="sourceLine" id="cb54-85" title="85">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-86" title="86"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate2,</a>
-<a class="sourceLine" id="cb54-87" title="87">          <span class="dt">label =</span> optiLabel2,</a>
-<a class="sourceLine" id="cb54-88" title="88">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
-<a class="sourceLine" id="cb54-89" title="89">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
-<a class="sourceLine" id="cb54-90" title="90">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-91" title="91"><span class="st">  </span><span class="kw">dyLimit</span>(tempSetpoint,</a>
-<a class="sourceLine" id="cb54-92" title="92">          <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb54-93" title="93">          <span class="dt">label =</span> <span class="st">&quot;Target Setpoint&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-94" title="94"><span class="st">  </span><span class="kw">dyRangeSelector</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb54-95" title="95"><span class="st">  </span><span class="kw">dyLegend</span>(<span class="dt">show =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
-<div id="htmlwidget-782efea917eafe6cadaf" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-782efea917eafe6cadaf">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":60,"drawGrid":false,"drawAxis":true},"y":{"drawAxis":true}},"title":"Room Temperature Reduction","labels":["day","Temperature","Median Period"],"retainDateWindow":false,"customBars":true,"series":{"Temperature":{"axis":"y"},"Median Period":{"axis":"y","strokePattern":[7,3]}},"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel","legend":"always","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"scale":"daily","annotations":[],"shadings":[],"events":[{"pos":"2018-12-17T00:00:00.000Z","label":"Optimization I","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":"2019-01-03T00:00:00.000Z","label":"Optimization II","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":22,"label":"Target Setpoint","labelLoc":"left","color":"red","strokePattern":[7,3],"axis":"y"}],"format":"date","data":[["2018-11-02T00:00:00.000Z","2018-11-03T00:00:00.000Z","2018-11-04T00:00:00.000Z","2018-11-05T00:00:00.000Z","2018-11-06T00:00:00.000Z","2018-11-07T00:00:00.000Z","2018-11-08T00:00:00.000Z","2018-11-09T00:00:00.000Z","2018-11-10T00:00:00.000Z","2018-11-11T00:00:00.000Z","2018-11-12T00:00:00.000Z","2018-11-13T00:00:00.000Z","2018-11-14T00:00:00.000Z","2018-11-15T00:00:00.000Z","2018-11-16T00:00:00.000Z","2018-11-17T00:00:00.000Z","2018-11-18T00:00:00.000Z","2018-11-19T00:00:00.000Z","2018-11-20T00:00:00.000Z","2018-11-21T00:00:00.000Z","2018-11-22T00:00:00.000Z","2018-11-23T00:00:00.000Z","2018-11-24T00:00:00.000Z","2018-11-25T00:00:00.000Z","2018-11-26T00:00:00.000Z","2018-11-27T00:00:00.000Z","2018-11-28T00:00:00.000Z","2018-11-29T00:00:00.000Z","2018-11-30T00:00:00.000Z","2018-12-01T00:00:00.000Z","2018-12-02T00:00:00.000Z","2018-12-03T00:00:00.000Z","2018-12-04T00:00:00.000Z","2018-12-05T00:00:00.000Z","2018-12-06T00:00:00.000Z","2018-12-07T00:00:00.000Z","2018-12-08T00:00:00.000Z","2018-12-09T00:00:00.000Z","2018-12-10T00:00:00.000Z","2018-12-11T00:00:00.000Z","2018-12-12T00:00:00.000Z","2018-12-13T00:00:00.000Z","2018-12-14T00:00:00.000Z","2018-12-15T00:00:00.000Z","2018-12-16T00:00:00.000Z","2018-12-17T00:00:00.000Z","2018-12-18T00:00:00.000Z","2018-12-19T00:00:00.000Z","2018-12-20T00:00:00.000Z","2018-12-21T00:00:00.000Z","2018-12-22T00:00:00.000Z","2018-12-23T00:00:00.000Z","2018-12-24T00:00:00.000Z","2018-12-25T00:00:00.000Z","2018-12-26T00:00:00.000Z","2018-12-27T00:00:00.000Z","2018-12-28T00:00:00.000Z","2018-12-29T00:00:00.000Z","2018-12-30T00:00:00.000Z","2018-12-31T00:00:00.000Z","2019-01-01T00:00:00.000Z","2019-01-02T00:00:00.000Z","2019-01-03T00:00:00.000Z","2019-01-04T00:00:00.000Z","2019-01-05T00:00:00.000Z","2019-01-06T00:00:00.000Z","2019-01-07T00:00:00.000Z","2019-01-08T00:00:00.000Z","2019-01-09T00:00:00.000Z","2019-01-10T00:00:00.000Z","2019-01-11T00:00:00.000Z","2019-01-12T00:00:00.000Z","2019-01-13T00:00:00.000Z","2019-01-14T00:00:00.000Z","2019-01-15T00:00:00.000Z","2019-01-16T00:00:00.000Z","2019-01-17T00:00:00.000Z","2019-01-18T00:00:00.000Z","2019-01-19T00:00:00.000Z","2019-01-20T00:00:00.000Z","2019-01-21T00:00:00.000Z","2019-01-22T00:00:00.000Z","2019-01-23T00:00:00.000Z","2019-01-24T00:00:00.000Z","2019-01-25T00:00:00.000Z","2019-01-26T00:00:00.000Z","2019-01-27T00:00:00.000Z","2019-01-28T00:00:00.000Z","2019-01-29T00:00:00.000Z","2019-01-30T00:00:00.000Z","2019-01-31T00:00:00.000Z"],[[23.35,23.62,23.73],[23.12,23.5,23.65],[23.28,23.51,23.92],[23.48,23.66,23.8],[22.28,23.36,23.53],[23.22,23.4,23.68],[23.2,23.36,23.53],[23.03,23.31,23.62],[23.3,23.65,24.07],[23.3,23.8,24.18],[23.55,23.775,23.95],[22.45,23.4,23.7],[23.28,23.4,23.63],[23.22,23.48,23.67],[23.3,23.5,23.8],[23.2,23.38,23.48],[23.02,23.2,23.3],[22.97,23.17,23.62],[20.83,22.9,23.43],[22.9,23.2,23.5],[23.1,23.21,23.5],[21.58,23.22,23.4],[22.67,23.2,23.5],[23.15,23.41,23.8],[23.2,23.4,23.7],[21.15,23.035,23.58],[22.9,23.285,23.53],[23.05,23.2,23.52],[23.07,23.31,23.48],[23.1,23.29,23.53],[23.2,23.43,23.6],[23.1,23.32,23.52],[22.48,23.125,23.33],[23.03,23.39,23.5],[23.17,23.3,23.7],[22.92,23.425,23.72],[23.07,23.45,23.73],[23.18,23.34,23.53],[23.2,23.525,23.8],[22.23,23.26,23.63],[23,23.5,23.8],[23.48,23.5,23.82],[23.32,23.585,23.9],[23.4,23.8,24],[23.12,23.85,24],[23.48,23.7,24],[23.38,23.71,23.98],[23.37,23.6,23.75],[23.2,23.25,23.4],[23,23.1,23.2],[22.8,22.9,23.1],[22.7,22.8,22.85],[22.6,22.84,23.08],[22.7,22.975,23.3],[22.83,23.1,23.2],[22.8,23.125,23.5],[23,23.03,23.3],[22.8,23,23.1],[22.8,23,23.08],[22.7,22.88,22.9],[22.6,22.84,23.1],[22.7,23.13,23.3],[23,23.35,23.6],[22.8,23.04,23.48],[22.53,22.635,22.75],[22.4,22.585,22.7],[22.2,22.45,22.87],[21,22.275,22.62],[21.92,22.18,22.58],[21.95,22.26,22.4],[22.08,22.31,22.52],[21.96,22.24,22.5],[21.93,22.27,22.6],[22.2,22.44,22.7],[20.63,22,22.42],[22,22.07,22.5],[22.08,22.285,22.6],[22.12,22.425,22.92],[22.4,22.685,22.95],[22.45,22.84,23.2],[21.4,22.3,22.8],[20.02,21.8,22.18],[21.8,22.255,22.63],[22.1,22.36,23.03],[22.3,22.585,22.73],[21.7,22.6,22.98],[22.3,22.55,22.83],[21.25,22.49,22.8],[22.03,22.385,23],[21.68,22.365,22.67],[22.18,22.3,22.5]],[[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305]]],"fixedtz":false,"tzone":"UTC"},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<div id="solution-10" class="section level3">
+<h3><span class="header-section-number">6.17.3</span> Solution</h3>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb86-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb86-3" title="3"><span class="kw">library</span>(dygraphs)</a>
+<a class="sourceLine" id="cb86-4" title="4"><span class="kw">library</span>(xts)</a>
+<a class="sourceLine" id="cb86-5" title="5"><span class="kw">library</span>(redutils)</a>
+<a class="sourceLine" id="cb86-6" title="6"><span class="kw">library</span>(RColorBrewer)</a>
+<a class="sourceLine" id="cb86-7" title="7"></a>
+<a class="sourceLine" id="cb86-8" title="8"><span class="co"># Settings</span></a>
+<a class="sourceLine" id="cb86-9" title="9">tempSetpoint =<span class="st"> </span><span class="fl">22.0</span></a>
+<a class="sourceLine" id="cb86-10" title="10"></a>
+<a class="sourceLine" id="cb86-11" title="11">startDate =<span class="st"> &quot;2018-11-01&quot;</span></a>
+<a class="sourceLine" id="cb86-12" title="12">endDate =<span class="st"> &quot;2019-02-01&quot;</span></a>
+<a class="sourceLine" id="cb86-13" title="13"></a>
+<a class="sourceLine" id="cb86-14" title="14">optiDate1 =<span class="st"> &quot;2018-12-17&quot;</span></a>
+<a class="sourceLine" id="cb86-15" title="15">optiLabel1 =<span class="st"> &quot;Optimization I&quot;</span></a>
+<a class="sourceLine" id="cb86-16" title="16"></a>
+<a class="sourceLine" id="cb86-17" title="17">optiDate2 =<span class="st"> &quot;2019-01-03&quot;</span></a>
+<a class="sourceLine" id="cb86-18" title="18">optiLabel2 =<span class="st"> &quot;Optimization II&quot;</span></a>
+<a class="sourceLine" id="cb86-19" title="19"></a>
+<a class="sourceLine" id="cb86-20" title="20">optiDelayDays =<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb86-21" title="21"></a>
+<a class="sourceLine" id="cb86-22" title="22"><span class="co"># read and print data</span></a>
+<a class="sourceLine" id="cb86-23" title="23">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb86-24" title="24">                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb86-25" title="25">                 <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb86-26" title="26"></a>
+<a class="sourceLine" id="cb86-27" title="27"><span class="co"># select temperature and remove empty cells</span></a>
+<a class="sourceLine" id="cb86-28" title="28">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb86-29" title="29"></a>
+<a class="sourceLine" id="cb86-30" title="30"><span class="co"># create column with day for later grouping</span></a>
+<a class="sourceLine" id="cb86-31" title="31">df<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb86-32" title="32">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">cut</span>(df<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;day&quot;</span>))</a>
+<a class="sourceLine" id="cb86-33" title="33">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">as.character</span>(df<span class="op">$</span>day,<span class="st">&quot;%Y-%m-%d&quot;</span>))</a>
+<a class="sourceLine" id="cb86-34" title="34"></a>
+<a class="sourceLine" id="cb86-35" title="35"><span class="co"># filter time range</span></a>
+<a class="sourceLine" id="cb86-36" title="36">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(day <span class="op">&gt;</span><span class="st"> </span>startDate, day <span class="op">&lt;</span><span class="st"> </span>endDate)</a>
+<a class="sourceLine" id="cb86-37" title="37"></a>
+<a class="sourceLine" id="cb86-38" title="38"><span class="co"># calculate daily median, min and max of temperature</span></a>
+<a class="sourceLine" id="cb86-39" title="39">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minDay =</span> <span class="kw">min</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
+<a class="sourceLine" id="cb86-42" title="42">         <span class="dt">medianDay =</span> <span class="kw">median</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
+<a class="sourceLine" id="cb86-43" title="43">         <span class="dt">maxDay =</span> <span class="kw">max</span>(<span class="kw">as.numeric</span>(FlatA_Temp))</a>
+<a class="sourceLine" id="cb86-44" title="44">         ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-45" title="45"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb86-46" title="46"></a>
+<a class="sourceLine" id="cb86-47" title="47"><span class="co"># shrink down to daily values and remove rows with empty values</span></a>
+<a class="sourceLine" id="cb86-48" title="48">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(day, medianDay, minDay, maxDay) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb86-49" title="49"></a>
+<a class="sourceLine" id="cb86-50" title="50"><span class="co"># calculate medians for time ranges</span></a>
+<a class="sourceLine" id="cb86-51" title="51">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-52" title="52"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">ifelse</span>(day <span class="op">&gt;=</span><span class="st"> </span>startDate <span class="op">&amp;</span><span class="st"> </span>day <span class="op">&lt;=</span><span class="st"> </span>optiDate1,</a>
+<a class="sourceLine" id="cb86-53" title="53">                         <span class="st">&quot;Baseline&quot;</span>,</a>
+<a class="sourceLine" id="cb86-54" title="54">                         <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate1) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
+<a class="sourceLine" id="cb86-55" title="55">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>optiDate2),</a>
+<a class="sourceLine" id="cb86-56" title="56">                                <span class="st">&quot;Opti1&quot;</span>,</a>
+<a class="sourceLine" id="cb86-57" title="57">                                <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate2) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
+<a class="sourceLine" id="cb86-58" title="58">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>endDate),</a>
+<a class="sourceLine" id="cb86-59" title="59">                                <span class="st">&quot;Opti2&quot;</span>,</a>
+<a class="sourceLine" id="cb86-60" title="60">                                <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb86-61" title="61">                         )))</a>
+<a class="sourceLine" id="cb86-62" title="62"></a>
+<a class="sourceLine" id="cb86-63" title="63">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-64" title="64"><span class="st">  </span><span class="kw">group_by</span>(period) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-65" title="65"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">medianPeriod =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(period), <span class="ot">NA</span>, <span class="kw">median</span>(medianDay))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-66" title="66"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-67" title="67"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period)</a>
+<a class="sourceLine" id="cb86-68" title="68"></a>
+<a class="sourceLine" id="cb86-69" title="69"><span class="co"># create xts object for plotting</span></a>
+<a class="sourceLine" id="cb86-70" title="70">plotdata &lt;-<span class="st"> </span><span class="kw">xts</span>( <span class="dt">x=</span>df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span>df<span class="op">$</span>day)</a>
+<a class="sourceLine" id="cb86-71" title="71"></a>
+<a class="sourceLine" id="cb86-72" title="72"><span class="co"># plot graph</span></a>
+<a class="sourceLine" id="cb86-73" title="73"><span class="kw">dygraph</span>(plotdata, <span class="dt">main =</span> <span class="st">&quot;Room Temperature Reduction&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-74" title="74"><span class="st">  </span><span class="kw">dyAxis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">drawGrid =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-75" title="75"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;minDay&quot;</span>, <span class="st">&quot;medianDay&quot;</span>, <span class="st">&quot;maxDay&quot;</span>),</a>
+<a class="sourceLine" id="cb86-76" title="76">           <span class="dt">label =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-77" title="77"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;medianPeriod&quot;</span>),</a>
+<a class="sourceLine" id="cb86-78" title="78">           <span class="dt">label =</span> <span class="st">&quot;Median Period&quot;</span>,</a>
+<a class="sourceLine" id="cb86-79" title="79">           <span class="dt">strokePattern =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-80" title="80"><span class="st">  </span><span class="kw">dyOptions</span>(<span class="dt">colors =</span> RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">3</span>, <span class="st">&quot;Set2&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb86-81" title="81"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate1,</a>
+<a class="sourceLine" id="cb86-82" title="82">          <span class="dt">label =</span> optiLabel1,</a>
+<a class="sourceLine" id="cb86-83" title="83">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb86-84" title="84">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
+<a class="sourceLine" id="cb86-85" title="85">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-86" title="86"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate2,</a>
+<a class="sourceLine" id="cb86-87" title="87">          <span class="dt">label =</span> optiLabel2,</a>
+<a class="sourceLine" id="cb86-88" title="88">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb86-89" title="89">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
+<a class="sourceLine" id="cb86-90" title="90">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-91" title="91"><span class="st">  </span><span class="kw">dyLimit</span>(tempSetpoint,</a>
+<a class="sourceLine" id="cb86-92" title="92">          <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb86-93" title="93">          <span class="dt">label =</span> <span class="st">&quot;Target Setpoint&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-94" title="94"><span class="st">  </span><span class="kw">dyRangeSelector</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb86-95" title="95"><span class="st">  </span><span class="kw">dyLegend</span>(<span class="dt">show =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-9ff90e20e55df398ea6e" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-9ff90e20e55df398ea6e">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":60,"drawGrid":false,"drawAxis":true},"y":{"drawAxis":true}},"title":"Room Temperature Reduction","labels":["day","Temperature","Median Period"],"retainDateWindow":false,"customBars":true,"series":{"Temperature":{"axis":"y"},"Median Period":{"axis":"y","strokePattern":[7,3]}},"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel","legend":"always","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"scale":"daily","annotations":[],"shadings":[],"events":[{"pos":"2018-12-17T00:00:00.000Z","label":"Optimization I","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":"2019-01-03T00:00:00.000Z","label":"Optimization II","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":22,"label":"Target Setpoint","labelLoc":"left","color":"red","strokePattern":[7,3],"axis":"y"}],"format":"date","data":[["2018-11-02T00:00:00.000Z","2018-11-03T00:00:00.000Z","2018-11-04T00:00:00.000Z","2018-11-05T00:00:00.000Z","2018-11-06T00:00:00.000Z","2018-11-07T00:00:00.000Z","2018-11-08T00:00:00.000Z","2018-11-09T00:00:00.000Z","2018-11-10T00:00:00.000Z","2018-11-11T00:00:00.000Z","2018-11-12T00:00:00.000Z","2018-11-13T00:00:00.000Z","2018-11-14T00:00:00.000Z","2018-11-15T00:00:00.000Z","2018-11-16T00:00:00.000Z","2018-11-17T00:00:00.000Z","2018-11-18T00:00:00.000Z","2018-11-19T00:00:00.000Z","2018-11-20T00:00:00.000Z","2018-11-21T00:00:00.000Z","2018-11-22T00:00:00.000Z","2018-11-23T00:00:00.000Z","2018-11-24T00:00:00.000Z","2018-11-25T00:00:00.000Z","2018-11-26T00:00:00.000Z","2018-11-27T00:00:00.000Z","2018-11-28T00:00:00.000Z","2018-11-29T00:00:00.000Z","2018-11-30T00:00:00.000Z","2018-12-01T00:00:00.000Z","2018-12-02T00:00:00.000Z","2018-12-03T00:00:00.000Z","2018-12-04T00:00:00.000Z","2018-12-05T00:00:00.000Z","2018-12-06T00:00:00.000Z","2018-12-07T00:00:00.000Z","2018-12-08T00:00:00.000Z","2018-12-09T00:00:00.000Z","2018-12-10T00:00:00.000Z","2018-12-11T00:00:00.000Z","2018-12-12T00:00:00.000Z","2018-12-13T00:00:00.000Z","2018-12-14T00:00:00.000Z","2018-12-15T00:00:00.000Z","2018-12-16T00:00:00.000Z","2018-12-17T00:00:00.000Z","2018-12-18T00:00:00.000Z","2018-12-19T00:00:00.000Z","2018-12-20T00:00:00.000Z","2018-12-21T00:00:00.000Z","2018-12-22T00:00:00.000Z","2018-12-23T00:00:00.000Z","2018-12-24T00:00:00.000Z","2018-12-25T00:00:00.000Z","2018-12-26T00:00:00.000Z","2018-12-27T00:00:00.000Z","2018-12-28T00:00:00.000Z","2018-12-29T00:00:00.000Z","2018-12-30T00:00:00.000Z","2018-12-31T00:00:00.000Z","2019-01-01T00:00:00.000Z","2019-01-02T00:00:00.000Z","2019-01-03T00:00:00.000Z","2019-01-04T00:00:00.000Z","2019-01-05T00:00:00.000Z","2019-01-06T00:00:00.000Z","2019-01-07T00:00:00.000Z","2019-01-08T00:00:00.000Z","2019-01-09T00:00:00.000Z","2019-01-10T00:00:00.000Z","2019-01-11T00:00:00.000Z","2019-01-12T00:00:00.000Z","2019-01-13T00:00:00.000Z","2019-01-14T00:00:00.000Z","2019-01-15T00:00:00.000Z","2019-01-16T00:00:00.000Z","2019-01-17T00:00:00.000Z","2019-01-18T00:00:00.000Z","2019-01-19T00:00:00.000Z","2019-01-20T00:00:00.000Z","2019-01-21T00:00:00.000Z","2019-01-22T00:00:00.000Z","2019-01-23T00:00:00.000Z","2019-01-24T00:00:00.000Z","2019-01-25T00:00:00.000Z","2019-01-26T00:00:00.000Z","2019-01-27T00:00:00.000Z","2019-01-28T00:00:00.000Z","2019-01-29T00:00:00.000Z","2019-01-30T00:00:00.000Z","2019-01-31T00:00:00.000Z"],[[23.35,23.62,23.73],[23.12,23.5,23.65],[23.28,23.51,23.92],[23.48,23.66,23.8],[22.28,23.36,23.53],[23.22,23.4,23.68],[23.2,23.36,23.53],[23.03,23.31,23.62],[23.3,23.65,24.07],[23.3,23.8,24.18],[23.55,23.775,23.95],[22.45,23.4,23.7],[23.28,23.4,23.63],[23.22,23.48,23.67],[23.3,23.5,23.8],[23.2,23.38,23.48],[23.02,23.2,23.3],[22.97,23.17,23.62],[20.83,22.9,23.43],[22.9,23.2,23.5],[23.1,23.21,23.5],[21.58,23.22,23.4],[22.67,23.2,23.5],[23.15,23.41,23.8],[23.2,23.4,23.7],[21.15,23.035,23.58],[22.9,23.285,23.53],[23.05,23.2,23.52],[23.07,23.31,23.48],[23.1,23.29,23.53],[23.2,23.43,23.6],[23.1,23.32,23.52],[22.48,23.125,23.33],[23.03,23.39,23.5],[23.17,23.3,23.7],[22.92,23.425,23.72],[23.07,23.45,23.73],[23.18,23.34,23.53],[23.2,23.525,23.8],[22.23,23.26,23.63],[23,23.5,23.8],[23.48,23.5,23.82],[23.32,23.585,23.9],[23.4,23.8,24],[23.12,23.85,24],[23.48,23.7,24],[23.38,23.71,23.98],[23.37,23.6,23.75],[23.2,23.25,23.4],[23,23.1,23.2],[22.8,22.9,23.1],[22.7,22.8,22.85],[22.6,22.84,23.08],[22.7,22.975,23.3],[22.83,23.1,23.2],[22.8,23.125,23.5],[23,23.03,23.3],[22.8,23,23.1],[22.8,23,23.08],[22.7,22.88,22.9],[22.6,22.84,23.1],[22.7,23.13,23.3],[23,23.35,23.6],[22.8,23.04,23.48],[22.53,22.635,22.75],[22.4,22.585,22.7],[22.2,22.45,22.87],[21,22.275,22.62],[21.92,22.18,22.58],[21.95,22.26,22.4],[22.08,22.31,22.52],[21.96,22.24,22.5],[21.93,22.27,22.6],[22.2,22.44,22.7],[20.63,22,22.42],[22,22.07,22.5],[22.08,22.285,22.6],[22.12,22.425,22.92],[22.4,22.685,22.95],[22.45,22.84,23.2],[21.4,22.3,22.8],[20.02,21.8,22.18],[21.8,22.255,22.63],[22.1,22.36,23.03],[22.3,22.585,22.73],[21.7,22.6,22.98],[22.3,22.55,22.83],[21.25,22.49,22.8],[22.03,22.385,23],[21.68,22.365,22.67],[22.18,22.3,22.5]],[[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305]]],"fixedtz":false,"tzone":"UTC"},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 </div>
-<div id="discussion" class="section level3">
-<h3><span class="header-section-number">6.1.4</span> Discussion</h3>
+<div id="discussion-9" class="section level3">
+<h3><span class="header-section-number">6.17.4</span> Discussion</h3>
 <p>In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.</p>
 <p>Please note that the calculation of the periodic median after optimization I and II starts delayed because it takes time until the building has cooled down.</p>
 
 </div>
 </div>
+<!-- </div> -->
+
+
+
             </section>
 
           </div>
         </div>
       </div>
-<a href="data-visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="seasonal-plot-xy.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="electricity-household.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="packages.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

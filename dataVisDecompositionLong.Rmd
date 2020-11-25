@@ -1,5 +1,5 @@
 ## Decomposition - Long term
-### Task
+### Goal
 tbd
 https://otexts.com/fpp2/tspatterns.html
 Hyndman, R.J., & Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on <current date>
