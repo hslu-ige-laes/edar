@@ -1,6 +1,8 @@
 # Loading Data
 
-Load data from `*.csv` files
+<font size="5">csv-Files</font>
+
+Load data from comma separated files
 
 ```{r eval=FALSE}
 # read data from current folder
@@ -24,6 +26,7 @@ df <- read.csv("datafile.csv",
 
 > Set your cursor to the function name `read.csv()` and press F1. Then you get in R Studio bottom right in the tab `Help` information about other function arguments you can use.
 
+<font size="5">Excel-Files</font>
 
 Load data from `*.xlsx` Excel files:
 
@@ -54,6 +57,8 @@ df <- read.xls("datafile.xls", sheet=2) # Read second sheet
 
 > Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.
 
+
+<font size="5">More detailed sources</font>
 
 More detailed information on how to load data into R you can find here:
 

@@ -39,8 +39,6 @@ The CRAN website provides files to build "R" from source on Debian, Redhat, SUSE
 The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
 
 ### Download and Install RStudio
-"R Studio" is a development environment for "R".
-
 1. Open <a href="https://rstudio.com/products/rstudio/download/" target="_blank">https://rstudio.com/products/rstudio/download/</a> and download "RStudio Desktop Open Source"
 1. Follow the on-screen instructions
 1. Once you have installed "R Studio", you can run it like any other application by clicking the program icon 
