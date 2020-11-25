@@ -1,10 +1,5 @@
-# (PART) R Basics {-}
-
-# Introduction to R Basics
-content tbd
-
-## Loading Data
-### Csv File
+# Loading Data
+## Csv File
 ```{r eval=FALSE}
 df <- read.csv("datafile.csv")
 df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
@@ -20,7 +15,7 @@ read.csv() is a convenience wrapper function around read.table(). If you need mo
 
 <br>
 
-### Excel File
+## Excel File
 ```{r eval=FALSE}
 # Only need to install once
 install.packages("xlsx")

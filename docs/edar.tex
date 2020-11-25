@@ -155,8 +155,21 @@ The book is independently structured and a beginner gets information on how to i
 
 The examples in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
-This book was developed using Yihui Xie's bookdown framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
-The online book is hosted using GitHub's free GitHub Pages. All material for this book is available and can be explored at the book's GitHub repository.
+The book is structured in the follwoing parts:
+
+\begin{itemize}
+\item
+  R Basics
+\item
+  Data Visualizations
+\end{itemize}
+
+The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing.
+
+``Numerical quantities focus on expected values, graphical summaries on unexpected values.''
+John W. Tukey
+
+Recipes for such graphical representations are covered in the part ``Data Visualizations''. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
 
 \hypertarget{why-r-and-rstudio}{%
 \section{Why R and RStudio?}\label{why-r-and-rstudio}}
@@ -187,6 +200,15 @@ There are a number of other useful books available, including:
 \item
   AFIT Data Science Lab R Programming Guide
 \end{itemize}
+
+\hypertarget{acknowledgements}{%
+\section{Acknowledgements}\label{acknowledgements}}
+
+The authors would like to express their sincere thanks to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program ``Buildings and Cities 2018''.
+
+This book was developed using Yihui Xie's bookdown framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
+
+The online book is hosted using GitHub's free GitHub Pages. All material for this book is available and can be explored at the book's GitHub repository.
 
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
@@ -345,19 +367,11 @@ So congratulations!
 
 You have a running R environment, and we can start with more interesting things in the following chapters.
 
-\hypertarget{part-r-basics}{%
-\part{R Basics}\label{part-r-basics}}
-
-\hypertarget{introduction-to-r-basics}{%
-\chapter{Introduction to R Basics}\label{introduction-to-r-basics}}
-
-content tbd
-
 \hypertarget{loading-data}{%
-\section{Loading Data}\label{loading-data}}
+\chapter{Loading Data}\label{loading-data}}
 
 \hypertarget{csv-file}{%
-\subsection{Csv File}\label{csv-file}}
+\section{Csv File}\label{csv-file}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -379,7 +393,7 @@ Attention: By default, strings in the data are treated as factors.
 read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
 
 \hypertarget{excel-file}{%
-\subsection{Excel File}\label{excel-file}}
+\section{Excel File}\label{excel-file}}
 
 \begin{Shaded}
 \begin{Highlighting}[]

@@ -11,6 +11,7 @@ intro
 content
 why-r-and-rstudio
 other-useful-sources
+acknowledgements
 getting-started
 installation
 download-and-install-r
@@ -21,7 +22,6 @@ download-and-install-rstudio
 install-required-packages
 create-an-r-script
 whats-next
-introduction-to-r-basics
 loading-data
 csv-file
 excel-file
