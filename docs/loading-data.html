@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -314,60 +314,47 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="loading-data" class="section level1">
 <h1><span class="header-section-number">Chapter 4</span> Loading Data</h1>
 <p>Load data from <code>*.csv</code> files</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>)</a>
-<a class="sourceLine" id="cb3-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>, <span class="dt">header=</span><span class="ot">FALSE</span>, <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb4-2" title="2">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb4-3" title="3">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>,</a>
-<a class="sourceLine" id="cb4-4" title="4">               <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</a>
-<a class="sourceLine" id="cb4-5" title="5"></a>
-<a class="sourceLine" id="cb4-6" title="6"><span class="co"># show the first lines of the so called &quot;data frame&quot;</span></a>
-<a class="sourceLine" id="cb4-7" title="7"><span class="kw">head</span>(df)</a></code></pre></div>
-<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0</code></pre>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" title="1"><span class="co"># read data from current folder</span></a>
+<a class="sourceLine" id="cb3-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb3-3" title="3"></a>
+<a class="sourceLine" id="cb3-4" title="4"><span class="co"># read data from a specific folder</span></a>
+<a class="sourceLine" id="cb3-5" title="5">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;C:/Desktop/datafile.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb3-6" title="6"></a>
+<a class="sourceLine" id="cb3-7" title="7"><span class="co"># read data from a file in the internet</span></a>
+<a class="sourceLine" id="cb3-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>)</a>
+<a class="sourceLine" id="cb3-9" title="9"></a>
+<a class="sourceLine" id="cb3-10" title="10"><span class="co"># add arguments on how to parse the content</span></a>
+<a class="sourceLine" id="cb3-11" title="11">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;datafile.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb3-12" title="12">               <span class="dt">header=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb3-13" title="13">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb3-14" title="14">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>,</a>
+<a class="sourceLine" id="cb3-15" title="15">               <span class="dt">na.strings =</span> <span class="kw">c</span>(<span class="st">&quot;&quot;</span>, <span class="st">&quot;NA&quot;</span>))</a></code></pre></div>
 <blockquote>
-<p>Attention: By default, strings in the data are treated as factors, so add <code>stringsAsFactors=FALSE</code>
-set your cursor to the function name <code>read.csv()</code> and press F1. Then you get in R Studio bottom right in the tab <code>Help</code> information about other function arguments you can use.</p>
+<p>Attention: By default, strings in the data are treated as factors, so add <code>stringsAsFactors=FALSE</code></p>
+</blockquote>
+<blockquote>
+<p>Set your cursor to the function name <code>read.csv()</code> and press F1. Then you get in R Studio bottom right in the tab <code>Help</code> information about other function arguments you can use.</p>
 </blockquote>
 <p>Load data from <code>*.xlsx</code> Excel files:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" title="1"><span class="co"># Only need to install once</span></a>
-<a class="sourceLine" id="cb6-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
-<a class="sourceLine" id="cb6-3" title="3"></a>
-<a class="sourceLine" id="cb6-4" title="4"><span class="kw">library</span>(xslx)</a>
-<a class="sourceLine" id="cb6-5" title="5"></a>
-<a class="sourceLine" id="cb6-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dv">1</span>)</a>
-<a class="sourceLine" id="cb6-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetIndex=</span><span class="dv">2</span>)</a>
-<a class="sourceLine" id="cb6-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Revenues&quot;</span>)</a>
-<a class="sourceLine" id="cb6-9" title="9"></a>
-<a class="sourceLine" id="cb6-10" title="10"><span class="co"># show the first lines of the so called &quot;data frame&quot;</span></a>
-<a class="sourceLine" id="cb6-11" title="11"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb4"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb4-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb4-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;xlsx&quot;</span>)</a>
+<a class="sourceLine" id="cb4-3" title="3"></a>
+<a class="sourceLine" id="cb4-4" title="4"><span class="kw">library</span>(xslx)</a>
+<a class="sourceLine" id="cb4-5" title="5"></a>
+<a class="sourceLine" id="cb4-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb4-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dt">sheetIndex=</span><span class="dv">2</span>)</a>
+<a class="sourceLine" id="cb4-8" title="8">df &lt;-<span class="st"> </span><span class="kw">read.xlsx</span>(<span class="st">&quot;datafile.xlsx&quot;</span>, <span class="dt">sheetName=</span><span class="st">&quot;Revenues&quot;</span>)</a>
+<a class="sourceLine" id="cb4-9" title="9"></a>
+<a class="sourceLine" id="cb4-10" title="10"><span class="co"># show the first lines of the so called &quot;data frame&quot;</span></a>
+<a class="sourceLine" id="cb4-11" title="11"><span class="kw">head</span>(df)</a></code></pre></div>
 <p>For reading older Excel files in the .xls format, the gdata package has the function read.xls():</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="co"># Only need to install once</span></a>
-<a class="sourceLine" id="cb7-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;gdata&quot;</span>)</a>
-<a class="sourceLine" id="cb7-3" title="3"></a>
-<a class="sourceLine" id="cb7-4" title="4"><span class="kw">library</span>(gdata)</a>
-<a class="sourceLine" id="cb7-5" title="5"><span class="co"># Read first sheet</span></a>
-<a class="sourceLine" id="cb7-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>)</a>
-<a class="sourceLine" id="cb7-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">2</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" title="1"><span class="co"># Only need to install once</span></a>
+<a class="sourceLine" id="cb5-2" title="2"><span class="kw">install.packages</span>(<span class="st">&quot;gdata&quot;</span>)</a>
+<a class="sourceLine" id="cb5-3" title="3"></a>
+<a class="sourceLine" id="cb5-4" title="4"><span class="kw">library</span>(gdata)</a>
+<a class="sourceLine" id="cb5-5" title="5"></a>
+<a class="sourceLine" id="cb5-6" title="6">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>) <span class="co"># Read first sheet</span></a>
+<a class="sourceLine" id="cb5-7" title="7">df &lt;-<span class="st"> </span><span class="kw">read.xls</span>(<span class="st">&quot;datafile.xls&quot;</span>, <span class="dt">sheet=</span><span class="dv">2</span>) <span class="co"># Read second sheet</span></a></code></pre></div>
 <blockquote>
 <p>Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.</p>
 </blockquote>

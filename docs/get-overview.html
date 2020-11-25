@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -321,9 +321,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>Load test data set in a data frame (e.g. from a csv-file)</p>
 </blockquote>
-<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb43-2" title="2">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb43-3" title="3">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb41-2" title="2">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb41-3" title="3">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
 <p><br></p>
 </div>
 <div id="names" class="section level3">
@@ -331,7 +331,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>show the column headers of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
 <pre><code>##  [1] &quot;time&quot;                 &quot;WthStnPress&quot;          &quot;WthStnHum&quot;           
 ##  [4] &quot;WthStnRain&quot;           &quot;WthStnSolRad&quot;         &quot;WthStnTemp&quot;          
 ##  [7] &quot;WthStnWindDir&quot;        &quot;WthStnWindSpd&quot;        &quot;BldgEnergyHotwater&quot;  
@@ -344,7 +344,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>show the structure of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
 <pre><code>## &#39;data.frame&#39;:    16394 obs. of  14 variables:
 ##  $ time                : chr  &quot;2018-09-30T22:00:00.000Z&quot; &quot;2018-09-30T23:00:00.000Z&quot; &quot;2018-10-01T00:00:00.000Z&quot; &quot;2018-10-01T01:00:00.000Z&quot; ...
 ##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
@@ -365,7 +365,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="headtail" class="section level3">
 <h3><span class="header-section-number">6.1.4</span> Head/Tail</h3>
 <p>The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.</p>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
 ## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
@@ -387,7 +387,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4      NA       NA                0.000                   0
 ## 5      NA       NA                0.006                   0
 ## 6      NA       NA                0.000                   0</code></pre>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
 <pre><code>##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
 ## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
 ## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
@@ -423,7 +423,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>reveals details of a specific series</p>
 </blockquote>
-<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
 <pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
 ##   -5.25    5.50   11.25   11.99   17.35   40.30      12</code></pre>
 <p><br></p>

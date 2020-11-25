@@ -1,7 +1,9 @@
 # Getting started
-This chapter get's you up and running with downloading and installing the relevant software and libraries. This may seem laborious, but it is necessary and easier than it appears at first glance. components. 
+The first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
-If you already have R and R Studio installed, please take a look at the <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">hslu-ige-laes/redutils</a> package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
+This may seem laborious, but it is necessary and easier than it appears at first glance.
+
+If you already have "R" and "R Studio" installed, please take a look at the <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">hslu-ige-laes/redutils</a> package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
 
 Finally beginners find in \@ref(createFirstScript) an easy code example which creates a simple time series plot.
 
@@ -57,10 +59,10 @@ install_github("hslu-ige-laes/redutils")
 
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \@ref(packages) what packages are in general and how they can be installed and later loaded into scripts.
 
-## Create an R Script {#createFirstScript}
-Finally, you have installed "R" and "RStudio" with the first set of packages on your computer.
+## Create first R Script {#createFirstScript}
+Finally, you have installed "R" and "RStudio" with some packages on your computer. Good, hopefully everything worked fine up to now.
 
-Let's create the first visualization.
+Let's create the first script with a visualization:
 
 - Open "RStudio" just as you would any program, by clicking on its icon
 
@@ -87,4 +89,4 @@ plot(co2, ylab = "CO2 (ppm)", las = 1)
 title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
 
-As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Dataset Package</a> provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 
+> As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. <a href="https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html" target="_blank">The R Dataset Package</a> provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 

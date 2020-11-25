@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -329,11 +329,11 @@ Figure A.1: Install packages via RStudio GUI
 <p>This will search for the package “ggplot” specified on a server (the so-called CRAN website). If the package exists, it will be downloaded to a library folder on your computer. Here R can access the package in future R sessions without having to reinstall it.</p>
 <p>An other way is to use the install.packages function.
 Open R (if already opened please close all projects) and type the following at the command line:</p>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;ggplot2&quot;</span>)</a></code></pre></div>
 <p>If you want to install a package directly from github, the package “devtools” must be installed first:</p>
-<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
-<a class="sourceLine" id="cb89-2" title="2"><span class="kw">library</span>(devtools)</a>
-<a class="sourceLine" id="cb89-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">install.packages</span>(<span class="st">&quot;devtools&quot;</span>)</a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">library</span>(devtools)</a>
+<a class="sourceLine" id="cb87-3" title="3"><span class="kw">install_github</span>(<span class="st">&quot;hslu-ige-laes/redutils&quot;</span>)</a></code></pre></div>
 </div>
             </section>
 

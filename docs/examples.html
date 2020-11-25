@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -316,13 +316,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="import-csv-file-from-gwf-relay-w60-m-bus-logger" class="section level3">
 <h3><span class="header-section-number">5.3.1</span> Import csv file from GWF Relay W60 M-Bus Logger</h3>
 <p>Some data loggers have a cryptic data format which requires some data wrangling ahead before we can use the time series efficiently. Following an example of a M-Bus data loggger.</p>
-<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb37-2" title="2"></a>
-<a class="sourceLine" id="cb37-3" title="3"><span class="co"># load csv file</span></a>
-<a class="sourceLine" id="cb37-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater_GWF_RelayW60Logger.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb37-5" title="5">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb37-6" title="6">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb37-7" title="7"><span class="kw">head</span>(df,<span class="dv">23</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb35-2" title="2"></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="co"># load csv file</span></a>
+<a class="sourceLine" id="cb35-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater_GWF_RelayW60Logger.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb35-5" title="5">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb35-6" title="6">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb35-7" title="7"><span class="kw">head</span>(df,<span class="dv">23</span>)</a></code></pre></div>
 <pre><code>##       Datum  Zeit Adr ID.Nr. HST Nr.                  Wert Einheit
 ## 1  01.01.10 00:00   1      1 GWF   1                   729     kWh
 ## 2  01.01.10 00:00   1      1 GWF   2                 80.92     m^3
@@ -377,38 +377,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 * In the example “Adr” is the identification of the flat</p>
 <p>We are only interested in Nr. 1 heating energy of the flat and Nr. 12 the impulse count of the additional meter which is the hot water of the flat.</p>
 <p>Following the required steps to parse the data and bring them in a format we can later work with:</p>
-<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># create timestamp out of column &quot;Date&quot; and &quot;Time&quot;</span></a>
-<a class="sourceLine" id="cb39-2" title="2">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timestamp =</span> <span class="kw">paste0</span>(df<span class="op">$</span>Datum, <span class="st">&quot; &quot;</span>, df<span class="op">$</span>Zeit))</a>
-<a class="sourceLine" id="cb39-3" title="3">df<span class="op">$</span>timestamp &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>timestamp,</a>
-<a class="sourceLine" id="cb39-4" title="4">                                <span class="dt">order =</span> <span class="st">&quot;d.m.y H:M&quot;</span>,</a>
-<a class="sourceLine" id="cb39-5" title="5">                                <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb39-6" title="6"></a>
-<a class="sourceLine" id="cb39-7" title="7"></a>
-<a class="sourceLine" id="cb39-8" title="8"><span class="co"># select columns and rearrange</span></a>
-<a class="sourceLine" id="cb39-9" title="9">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr, Nr., Wert, Einheit)</a>
-<a class="sourceLine" id="cb39-10" title="10"></a>
-<a class="sourceLine" id="cb39-11" title="11"><span class="co"># filter out Adr. of interest</span></a>
-<a class="sourceLine" id="cb39-12" title="12">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Nr. <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">12</span>))</a>
-<a class="sourceLine" id="cb39-13" title="13"></a>
-<a class="sourceLine" id="cb39-14" title="14"><span class="co"># rename columns</span></a>
-<a class="sourceLine" id="cb39-15" title="15">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Nr. =</span> <span class="kw">ifelse</span>(Nr. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;Adr&quot;</span>,<span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, Adr), <span class="st">&quot;_energyHeat&quot;</span>), <span class="kw">ifelse</span>(Nr. <span class="op">==</span><span class="st"> </span><span class="dv">12</span>, <span class="kw">paste0</span>(<span class="st">&quot;Adr&quot;</span>,<span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, Adr), <span class="st">&quot;_hotWater&quot;</span>), Nr.)))</a>
-<a class="sourceLine" id="cb39-16" title="16"></a>
-<a class="sourceLine" id="cb39-17" title="17"><span class="co"># convert value to numeric</span></a>
-<a class="sourceLine" id="cb39-18" title="18">df<span class="op">$</span>Wert &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(df<span class="op">$</span>Wert)</a>
-<a class="sourceLine" id="cb39-19" title="19"></a>
-<a class="sourceLine" id="cb39-20" title="20"><span class="co"># multiply HCA-values by factor 10 to get liters and divide by 1000 to get m3</span></a>
-<a class="sourceLine" id="cb39-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Wert =</span> <span class="kw">ifelse</span>((Einheit <span class="op">==</span><span class="st"> &quot;HCA&quot;</span>), Wert <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">/</span><span class="dv">1000</span>, Wert))</a>
-<a class="sourceLine" id="cb39-22" title="22"></a>
-<a class="sourceLine" id="cb39-23" title="23">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Einheit, <span class="op">-</span>Adr)</a>
-<a class="sourceLine" id="cb39-24" title="24"></a>
-<a class="sourceLine" id="cb39-25" title="25"><span class="co"># convert long table into wide table</span></a>
-<a class="sourceLine" id="cb39-26" title="26">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">pivot_wider</span>(df,</a>
-<a class="sourceLine" id="cb39-27" title="27">                                     <span class="dt">names_from =</span> <span class="st">&quot;Nr.&quot;</span>,</a>
-<a class="sourceLine" id="cb39-28" title="28">                                     <span class="dt">values_from =</span> Wert,</a>
-<a class="sourceLine" id="cb39-29" title="29">                                     <span class="dt">names_sep =</span> <span class="st">&quot;_&quot;</span>)</a>
-<a class="sourceLine" id="cb39-30" title="30">)</a></code></pre></div>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="co"># create timestamp out of column &quot;Date&quot; and &quot;Time&quot;</span></a>
+<a class="sourceLine" id="cb37-2" title="2">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">timestamp =</span> <span class="kw">paste0</span>(df<span class="op">$</span>Datum, <span class="st">&quot; &quot;</span>, df<span class="op">$</span>Zeit))</a>
+<a class="sourceLine" id="cb37-3" title="3">df<span class="op">$</span>timestamp &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>timestamp,</a>
+<a class="sourceLine" id="cb37-4" title="4">                                <span class="dt">order =</span> <span class="st">&quot;d.m.y H:M&quot;</span>,</a>
+<a class="sourceLine" id="cb37-5" title="5">                                <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb37-6" title="6"></a>
+<a class="sourceLine" id="cb37-7" title="7"></a>
+<a class="sourceLine" id="cb37-8" title="8"><span class="co"># select columns and rearrange</span></a>
+<a class="sourceLine" id="cb37-9" title="9">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr, Nr., Wert, Einheit)</a>
+<a class="sourceLine" id="cb37-10" title="10"></a>
+<a class="sourceLine" id="cb37-11" title="11"><span class="co"># filter out Adr. of interest</span></a>
+<a class="sourceLine" id="cb37-12" title="12">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(Nr. <span class="op">%in%</span><span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">12</span>))</a>
+<a class="sourceLine" id="cb37-13" title="13"></a>
+<a class="sourceLine" id="cb37-14" title="14"><span class="co"># rename columns</span></a>
+<a class="sourceLine" id="cb37-15" title="15">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Nr. =</span> <span class="kw">ifelse</span>(Nr. <span class="op">==</span><span class="st"> </span><span class="dv">1</span>, <span class="kw">paste0</span>(<span class="st">&quot;Adr&quot;</span>,<span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, Adr), <span class="st">&quot;_energyHeat&quot;</span>), <span class="kw">ifelse</span>(Nr. <span class="op">==</span><span class="st"> </span><span class="dv">12</span>, <span class="kw">paste0</span>(<span class="st">&quot;Adr&quot;</span>,<span class="kw">sprintf</span>(<span class="st">&quot;%02.0f&quot;</span>, Adr), <span class="st">&quot;_hotWater&quot;</span>), Nr.)))</a>
+<a class="sourceLine" id="cb37-16" title="16"></a>
+<a class="sourceLine" id="cb37-17" title="17"><span class="co"># convert value to numeric</span></a>
+<a class="sourceLine" id="cb37-18" title="18">df<span class="op">$</span>Wert &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(df<span class="op">$</span>Wert)</a>
+<a class="sourceLine" id="cb37-19" title="19"></a>
+<a class="sourceLine" id="cb37-20" title="20"><span class="co"># multiply HCA-values by factor 10 to get liters and divide by 1000 to get m3</span></a>
+<a class="sourceLine" id="cb37-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">Wert =</span> <span class="kw">ifelse</span>((Einheit <span class="op">==</span><span class="st"> &quot;HCA&quot;</span>), Wert <span class="op">*</span><span class="st"> </span><span class="dv">10</span><span class="op">/</span><span class="dv">1000</span>, Wert))</a>
+<a class="sourceLine" id="cb37-22" title="22"></a>
+<a class="sourceLine" id="cb37-23" title="23">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Einheit, <span class="op">-</span>Adr)</a>
+<a class="sourceLine" id="cb37-24" title="24"></a>
+<a class="sourceLine" id="cb37-25" title="25"><span class="co"># convert long table into wide table</span></a>
+<a class="sourceLine" id="cb37-26" title="26">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(<span class="kw">pivot_wider</span>(df,</a>
+<a class="sourceLine" id="cb37-27" title="27">                                     <span class="dt">names_from =</span> <span class="st">&quot;Nr.&quot;</span>,</a>
+<a class="sourceLine" id="cb37-28" title="28">                                     <span class="dt">values_from =</span> Wert,</a>
+<a class="sourceLine" id="cb37-29" title="29">                                     <span class="dt">names_sep =</span> <span class="st">&quot;_&quot;</span>)</a>
+<a class="sourceLine" id="cb37-30" title="30">)</a></code></pre></div>
 <p>This is the result:</p>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">head</span>(df.wide)</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">head</span>(df.wide)</a></code></pre></div>
 <pre><code>##    timestamp Adr01_energyHeat Adr01_hotWater Adr02_energyHeat Adr02_hotWater
 ## 1 2010-01-01              729           0.87              751           1.16
 ## 2 2010-02-01             1850           2.18             2276           7.55
@@ -424,9 +424,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 5             5341          27.06             6900           7.74
 ## 6             5802          31.61             7702           9.49</code></pre>
 <p>Finally saving the csv file:</p>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">write.csv2</span>(df.wide,</a>
-<a class="sourceLine" id="cb42-2" title="2">           <span class="dt">file =</span> <span class="st">&quot;flatHeatAndHotWater.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb42-3" title="3">           <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">write.csv2</span>(df.wide,</a>
+<a class="sourceLine" id="cb40-2" title="2">           <span class="dt">file =</span> <span class="st">&quot;flatHeatAndHotWater.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb40-3" title="3">           <span class="dt">row.names =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
 
 </div>
 </div>

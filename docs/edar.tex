@@ -163,13 +163,11 @@ The book is structured in the following parts:
 The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives information about the installation of the program environment and gets a quick practical introduction.
 
 \begin{quote}
-\begin{quote}
 ``Numerical quantities focus on expected values, graphical summaries on unexpected values.''
 John W. Tukey
 \end{quote}
-\end{quote}
 
-Recipes for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
+Examples for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
 
 The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
@@ -217,9 +215,11 @@ The online book is hosted using GitHub's free GitHub Pages. All material for thi
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
-This chapter get's you up and running with downloading and installing the relevant software and libraries. This may seem laborious, but it is necessary and easier than it appears at first glance. components.
+The first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
-If you already have R and R Studio installed, please take a look at the hslu-ige-laes/redutils package on github, which is frequently used throughout this book. Chapter \ref{installationPackages} shows you how to install it.
+This may seem laborious, but it is necessary and easier than it appears at first glance.
+
+If you already have ``R'' and ``R Studio'' installed, please take a look at the hslu-ige-laes/redutils package on github, which is frequently used throughout this book. Chapter \ref{installationPackages} shows you how to install it.
 
 Finally beginners find in \ref{createFirstScript} an easy code example which creates a simple time series plot.
 
@@ -330,11 +330,11 @@ Appendix \ref{packages} gives you an introduction to what a package is and how t
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \ref{packages} what packages are in general and how they can be installed and later loaded into scripts.
 
 \hypertarget{createFirstScript}{%
-\section{Create an R Script}\label{createFirstScript}}
+\section{Create first R Script}\label{createFirstScript}}
 
-Finally, you have installed ``R'' and ``RStudio'' with the first set of packages on your computer.
+Finally, you have installed ``R'' and ``RStudio'' with some packages on your computer. Good, hopefully everything worked fine up to now.
 
-Let's create the first visualization.
+Let's create the first script with a visualization:
 
 \begin{itemize}
 \item
@@ -364,7 +364,9 @@ You should now get your first visualization:
 
 \includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
 
+\begin{quote}
 As you probably noticed, we did not load any data. The basic installation of ``R'' and some packages come with test data. So that is an easy way to test something. The R Dataset Package provides some preinstalled datasets, including the used ``Mauna Loa Atmospheric CO2 Concentration'' dataset.
+\end{quote}
 
 \hypertarget{part-r-basics}{%
 \part{R Basics}\label{part-r-basics}}
@@ -372,9 +374,9 @@ As you probably noticed, we did not load any data. The basic installation of ``R
 \hypertarget{introduction-to-r-basics}{%
 \chapter{Introduction to R Basics}\label{introduction-to-r-basics}}
 
-The goal of this book is not to introduce beginners in R to the programming language and the environment in general. There are many really good sources where you can get acquainted with R if necessary.
+It is not the goal of this book to introduce beginners in R to the programming language and the environment in general. There are many really good sources where you can familiarize yourself with R if needed.
 
-Two sources are recommended which make it easy to get started with R and teach the relevant basics. Choose one that appeals to you and go through the recommended chapter:
+Two sources are recommended to facilitate the introduction to R and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
 \begin{itemize}
 \tightlist
@@ -393,50 +395,30 @@ Load data from \texttt{*.csv} files
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\CommentTok{# read data from current folder}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{, }\DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{, }\DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{,}
+\CommentTok{# read data from a specific folder}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"C:/Desktop/datafile.csv"}\NormalTok{)}
+
+\CommentTok{# read data from a file in the internet}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{)}
+
+\CommentTok{# add arguments on how to parse the content}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{,}
+               \DataTypeTok{header=}\OtherTok{FALSE}\NormalTok{,}
                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                \DataTypeTok{sep =}\StringTok{","}\NormalTok{,}
                \DataTypeTok{na.strings =} \KeywordTok{c}\NormalTok{(}\StringTok{""}\NormalTok{, }\StringTok{"NA"}\NormalTok{))}
-
-\CommentTok{# show the first lines of the so called "data frame"}
-\KeywordTok{head}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0
-\end{verbatim}
-
 \begin{quote}
 Attention: By default, strings in the data are treated as factors, so add \texttt{stringsAsFactors=FALSE}
-set your cursor to the function name \texttt{read.csv()} and press F1. Then you get in R Studio bottom right in the tab \texttt{Help} information about other function arguments you can use.
+\end{quote}
+
+\begin{quote}
+Set your cursor to the function name \texttt{read.csv()} and press F1. Then you get in R Studio bottom right in the tab \texttt{Help} information about other function arguments you can use.
 \end{quote}
 
 Load data from \texttt{*.xlsx} Excel files:
@@ -449,8 +431,8 @@ Load data from \texttt{*.xlsx} Excel files:
 \KeywordTok{library}\NormalTok{(xslx)}
 
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xlsx"}\NormalTok{, }\DecValTok{1}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetIndex=}\DecValTok{2}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheetName=}\StringTok{"Revenues"}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xlsx"}\NormalTok{, }\DataTypeTok{sheetIndex=}\DecValTok{2}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xlsx}\NormalTok{(}\StringTok{"datafile.xlsx"}\NormalTok{, }\DataTypeTok{sheetName=}\StringTok{"Revenues"}\NormalTok{)}
 
 \CommentTok{# show the first lines of the so called "data frame"}
 \KeywordTok{head}\NormalTok{(df)}
@@ -465,9 +447,9 @@ For reading older Excel files in the .xls format, the gdata package has the func
 \KeywordTok{install.packages}\NormalTok{(}\StringTok{"gdata"}\NormalTok{)}
 
 \KeywordTok{library}\NormalTok{(gdata)}
-\CommentTok{# Read first sheet}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{)}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheet=}\DecValTok{2}\NormalTok{)}
+
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{) }\CommentTok{# Read first sheet}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.xls}\NormalTok{(}\StringTok{"datafile.xls"}\NormalTok{, }\DataTypeTok{sheet=}\DecValTok{2}\NormalTok{) }\CommentTok{# Read second sheet}
 \end{Highlighting}
 \end{Shaded}
 

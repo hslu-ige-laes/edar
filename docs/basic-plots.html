@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -317,13 +317,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <h3><span class="header-section-number">6.2.1</span> Scatterplot</h3>
 <div id="plot" class="section level4">
 <h4><span class="header-section-number">6.2.1.1</span> plot()</h4>
-<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co"># load data set</span></a>
-<a class="sourceLine" id="cb54-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb54-3" title="3">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb54-4" title="4">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
-<a class="sourceLine" id="cb54-5" title="5"></a>
-<a class="sourceLine" id="cb54-6" title="6"><span class="co"># crate simple scatterplot</span></a>
-<a class="sourceLine" id="cb54-7" title="7"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co"># load data set</span></a>
+<a class="sourceLine" id="cb52-2" title="2">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb52-3" title="3">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb52-4" title="4">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span>)</a>
+<a class="sourceLine" id="cb52-5" title="5"></a>
+<a class="sourceLine" id="cb52-6" title="6"><span class="co"># crate simple scatterplot</span></a>
+<a class="sourceLine" id="cb52-7" title="7"><span class="kw">plot</span>(df<span class="op">$</span>WthStnTemp, df<span class="op">$</span>BldgEnergyHeating)</a></code></pre></div>
 <p><img src="edar_files/figure-html/scatterplot%20plot-1.png" width="672" /></p>
 
 </div>

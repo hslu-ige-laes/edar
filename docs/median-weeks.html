@@ -163,7 +163,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create first R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
 <li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
@@ -313,17 +313,17 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="median-weeks" class="section level2">
 <h2><span class="header-section-number">9.1</span> Median-Weeks</h2>
-<div class="sourceCode" id="cb70"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb70-1" title="1"><span class="kw">library</span>(redutils)</a>
-<a class="sourceLine" id="cb70-2" title="2"><span class="kw">library</span>(plotly)</a>
-<a class="sourceLine" id="cb70-3" title="3"></a>
-<a class="sourceLine" id="cb70-4" title="4">data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">system.file</span>(<span class="st">&quot;sampleData/eboBookEleMeter.rds&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;redutils&quot;</span>))</a>
-<a class="sourceLine" id="cb70-5" title="5">p &lt;-<span class="st"> </span><span class="kw">plotHeatmapMedianWeeks</span>(data, <span class="dt">locTimeZone =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb70-6" title="6"></a>
-<a class="sourceLine" id="cb70-7" title="7"><span class="co"># show the static plot</span></a>
-<a class="sourceLine" id="cb70-8" title="8">p</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">library</span>(redutils)</a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb68-3" title="3"></a>
+<a class="sourceLine" id="cb68-4" title="4">data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">system.file</span>(<span class="st">&quot;sampleData/eboBookEleMeter.rds&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;redutils&quot;</span>))</a>
+<a class="sourceLine" id="cb68-5" title="5">p &lt;-<span class="st"> </span><span class="kw">plotHeatmapMedianWeeks</span>(data, <span class="dt">locTimeZone =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb68-6" title="6"></a>
+<a class="sourceLine" id="cb68-7" title="7"><span class="co"># show the static plot</span></a>
+<a class="sourceLine" id="cb68-8" title="8">p</a></code></pre></div>
 <p><img src="edar_files/figure-html/dataVisHeatmapMedianWeeks1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb71"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb71-1" title="1"><span class="co"># create the interactive plot (optional, uncomment line)</span></a>
-<a class="sourceLine" id="cb71-2" title="2"><span class="co">#ggplotly(p)</span></a></code></pre></div>
+<div class="sourceCode" id="cb69"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb69-1" title="1"><span class="co"># create the interactive plot (optional, uncomment line)</span></a>
+<a class="sourceLine" id="cb69-2" title="2"><span class="co">#ggplotly(p)</span></a></code></pre></div>
 
 </div>
             </section>

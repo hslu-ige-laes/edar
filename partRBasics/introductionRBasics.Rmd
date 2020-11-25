@@ -1,9 +1,9 @@
 # (PART) R Basics {-}
 
 # Introduction to R Basics
-The goal of this book is not to introduce beginners in R to the programming language and the environment in general. There are many really good sources where you can get acquainted with R if necessary.
+It is not the goal of this book to introduce beginners in R to the programming language and the environment in general. There are many really good sources where you can familiarize yourself with R if needed.
 
-Two sources are recommended which make it easy to get started with R and teach the relevant basics. Choose one that appeals to you and go through the recommended chapter:
+Two sources are recommended to facilitate the introduction to R and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
 - <a href="https://rafalab.github.io/dsbook/r-basics.html" target="_blank">Introduction to Data Science - Chapter 2 "R Basics"</a>
 - <a href="https://smogdr.github.io/edar_coursebook/rprog1.html" target="_blank">Engineering Data Analysis in R - Chapter 2 "The R Programming Environment"</a>
