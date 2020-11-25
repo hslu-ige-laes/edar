@@ -1,0 +1,109 @@
+## Mini Plots
+### Goal
+Plot a seasonal month plot as described in <a href="https://otexts.com/fpp2/seasonal-subseries-plots.html" target="_blank">Hyndman and Athanasopoulos (2014, chapter 2.5)</a>:
+
+```{r out.width='70%', fig.cap='Seasonal Plot with mini Time Plots over 10 Years', echo=FALSE}
+knitr::include_graphics("images/plotSeasonalMiniplots.png")
+```
+
+Here the seasonal patterns for each season are collected together in seprate mini time plots. Be aware that seasons in this context don't correlate with the seasons of the year.
+
+
+### Data Basis
+In general, the values of energy meters, as in our example, increase steadily:
+
+```{r seasonalMiniplots0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Miniplots'}
+library(dplyr)
+library(lubridate)
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat) %>% na.omit()
+df[1,2] <- 1676
+df$timestamp <- parse_date_time(df$timestamp, "YmdHMS", tz = "Europe/Zurich")
+
+# plot data
+plot(df$timestamp, df$Adr02_energyHeat,
+     xlab="Time", ylab="Meter value (kWh)", main="Monthly Raw Data")
+
+
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r seasonalMiniplots1, warning=FALSE, message=FALSE, collapse = FALSE}
+library(forecast)
+library(dplyr)
+library(plotly)
+library(htmlwidgets)
+library(ggthemes)
+library(viridis)
+library(lubridate)
+
+# load csv file
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat)
+
+colnames(df) <- c("timestamp", "meterValue")
+
+# calculate consumption value per month
+# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,
+# so the consumption for february first is value(march) - value(february)!
+df <- df %>% mutate(value = lead(meterValue) - meterValue)
+
+# remove counter value column
+df <- df %>% select(-meterValue)
+
+# value correction (outlier because of commissioning)
+df[1,2] <- 600
+
+# create time series object for ggmonthplot function
+df.ts <- ts(df[-1], frequency = 12, start = min(year(df$timestamp)))
+
+# create x/y plot
+
+numYears = length(unique(year(df$timestamp)))
+
+plot <- ggmonthplot(df.ts,
+                    col = viridis(numYears),
+                    main = "Seasonal Miniplots over 10 years\n",
+                    ylab = "Energy Consumption (kWh/month)\n",
+                    xlab = "Month\n "
+                    )
+
+# change theme (optional)
+plot <- plot + ggthemes::theme_economist()
+
+# make plot interactive (optional)
+plotly <- plotly::ggplotly(plot)
+
+# show plot
+plotly
+
+```
+
+
+```{r seasonalMiniplots2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png
+ggsave("images/plotSeasonalMiniplots.png", plot)
+```
+
+```{r seasonalMiniplots3, eval=FALSE}
+# save interactive plot as html
+library(htmlwidgets)
+htmlwidgets::saveWidget(plotly, "plotlySeasonalMiniplots.html")
+```
+
+### Discussion
+
+* This type of seasonal plot shows the mean value of each month and therefore emphasises on the monthly comparison
+
+* It revelas as well the mean seasonla pattern with the blue lines
+
+
+

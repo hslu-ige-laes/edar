@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 3 Introduction to R Basics | Energy Data Analysis with R</title>
+  <meta name="description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 3 Introduction to R Basics | Energy Data Analysis with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="github-repo" content="hslu-ige-laes/edar" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 3 Introduction to R Basics | Energy Data Analysis with R" />
+  
+  <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
+  
+
+<meta name="author" content="Reto Marek" />
+
+
+<meta name="date" content="2020-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="whats-next.html"/>
+<link rel="next" href="loading-data.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/r2d3-render-0.1.0/r2d3-render.js"></script>
+<script src="libs/webcomponents-2.0.0/webcomponents.js"></script>
+<script src="libs/r2d3-binding-0.2.3/r2d3.js"></script>
+<script src="libs/d3v5-5.0.0/d3.min.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Energy Data Analysis with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>1.1</b> Content</a></li>
+<li class="chapter" data-level="1.2" data-path="why-r-and-rstudio.html"><a href="why-r-and-rstudio.html"><i class="fa fa-check"></i><b>1.2</b> Why R and RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="other-useful-sources.html"><a href="other-useful-sources.html"><i class="fa fa-check"></i><b>1.3</b> Other useful sources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a><ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2.1</b> Install R and R Studio</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="installation.html"><a href="installation.html#download-and-install-r"><i class="fa fa-check"></i><b>2.1.1</b> Download and Install R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="install-required-packages.html"><a href="install-required-packages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
+<li class="chapter" data-level="2.3" data-path="create-an-r-script.html"><a href="create-an-r-script.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.4" data-path="whats-next.html"><a href="whats-next.html"><i class="fa fa-check"></i><b>2.4</b> What’s next?</a></li>
+</ul></li>
+<li class="part"><span><b>I R Basics</b></span></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a><ul>
+<li class="chapter" data-level="3.1" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>3.1</b> Loading Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="loading-data.html"><a href="loading-data.html#csv-file"><i class="fa fa-check"></i><b>3.1.1</b> Csv File</a></li>
+<li class="chapter" data-level="3.1.2" data-path="loading-data.html"><a href="loading-data.html#excel-file"><i class="fa fa-check"></i><b>3.1.2</b> Excel File</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>4</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="4.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>4.1</b> Add Metadata for later filtering</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>4.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="4.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>4.1.2</b> Season of Year</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-frames.html"><a href="data-frames.html#change-row-names"><i class="fa fa-check"></i><b>4.2.1</b> Change Row Names</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-frames.html"><a href="data-frames.html#wide-to-long"><i class="fa fa-check"></i><b>4.2.2</b> Wide to Long</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-frames.html"><a href="data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>4.2.3</b> Long to Wide</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-frames.html"><a href="data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>4.2.4</b> Merge two Dataframes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>4.3</b> Examples</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>4.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="get-overview.html"><a href="get-overview.html"><i class="fa fa-check"></i><b>5.1</b> Get overview</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="get-overview.html"><a href="get-overview.html#load-data"><i class="fa fa-check"></i><b>5.1.1</b> Load data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="get-overview.html"><a href="get-overview.html#names"><i class="fa fa-check"></i><b>5.1.2</b> Names</a></li>
+<li class="chapter" data-level="5.1.3" data-path="get-overview.html"><a href="get-overview.html#structure"><i class="fa fa-check"></i><b>5.1.3</b> Structure</a></li>
+<li class="chapter" data-level="5.1.4" data-path="get-overview.html"><a href="get-overview.html#headtail"><i class="fa fa-check"></i><b>5.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="5.1.5" data-path="get-overview.html"><a href="get-overview.html#five-number-summary"><i class="fa fa-check"></i><b>5.1.5</b> Five number summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="basic-plots.html"><a href="basic-plots.html"><i class="fa fa-check"></i><b>5.2</b> Basic plots</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="basic-plots.html"><a href="basic-plots.html#scatterplot"><i class="fa fa-check"></i><b>5.2.1</b> Scatterplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>6</b> Seasonal Plots</a><ul>
+<li class="chapter" data-level="6.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>6.1</b> Overlapping</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="overlapping.html"><a href="overlapping.html#goal"><i class="fa fa-check"></i><b>6.1.1</b> Goal</a></li>
+<li class="chapter" data-level="6.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis"><i class="fa fa-check"></i><b>6.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="overlapping.html"><a href="overlapping.html#solution"><i class="fa fa-check"></i><b>6.1.3</b> Solution</a></li>
+<li class="chapter" data-level="6.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion"><i class="fa fa-check"></i><b>6.1.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>6.2</b> Mini Plots</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-1"><i class="fa fa-check"></i><b>6.2.1</b> Goal</a></li>
+<li class="chapter" data-level="6.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-1"><i class="fa fa-check"></i><b>6.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-1"><i class="fa fa-check"></i><b>6.2.3</b> Solution</a></li>
+<li class="chapter" data-level="6.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-1"><i class="fa fa-check"></i><b>6.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>6.3</b> Polar</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="polar.html"><a href="polar.html#goal-2"><i class="fa fa-check"></i><b>6.3.1</b> Goal</a></li>
+<li class="chapter" data-level="6.3.2" data-path="polar.html"><a href="polar.html#data-basis-2"><i class="fa fa-check"></i><b>6.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.3.3" data-path="polar.html"><a href="polar.html#solution-2"><i class="fa fa-check"></i><b>6.3.3</b> Solution</a></li>
+<li class="chapter" data-level="6.3.4" data-path="polar.html"><a href="polar.html#discussion-2"><i class="fa fa-check"></i><b>6.3.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>6.4</b> Before/After Optimization</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-3"><i class="fa fa-check"></i><b>6.4.1</b> Goal</a></li>
+<li class="chapter" data-level="6.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-3"><i class="fa fa-check"></i><b>6.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-3"><i class="fa fa-check"></i><b>6.4.3</b> Solution</a></li>
+<li class="chapter" data-level="6.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>6.4.4</b> Discussion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="decomposition.html"><a href="decomposition.html"><i class="fa fa-check"></i><b>7</b> Decomposition</a><ul>
+<li class="chapter" data-level="7.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>7.1</b> Long term</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>7.1.1</b> Goal</a></li>
+<li class="chapter" data-level="7.1.2" data-path="long-term.html"><a href="long-term.html#basis"><i class="fa fa-check"></i><b>7.1.2</b> Basis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>7.1.3</b> Solution</a></li>
+<li class="chapter" data-level="7.1.4" data-path="long-term.html"><a href="long-term.html#discussion-4"><i class="fa fa-check"></i><b>7.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.1.5" data-path="long-term.html"><a href="long-term.html#see-also"><i class="fa fa-check"></i><b>7.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>7.2</b> Short term</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="short-term.html"><a href="short-term.html#task"><i class="fa fa-check"></i><b>7.2.1</b> Task</a></li>
+<li class="chapter" data-level="7.2.2" data-path="short-term.html"><a href="short-term.html#basis-1"><i class="fa fa-check"></i><b>7.2.2</b> Basis</a></li>
+<li class="chapter" data-level="7.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>7.2.3</b> Solution</a></li>
+<li class="chapter" data-level="7.2.4" data-path="short-term.html"><a href="short-term.html#discussion-5"><i class="fa fa-check"></i><b>7.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.2.5" data-path="short-term.html"><a href="short-term.html#see-also-1"><i class="fa fa-check"></i><b>7.2.5</b> See Also</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>8</b> Heat Maps</a><ul>
+<li class="chapter" data-level="8.1" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>8.1</b> Median-Weeks</a></li>
+<li class="chapter" data-level="8.2" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>8.2</b> Calendar</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="calendar.html"><a href="calendar.html#discussion-6"><i class="fa fa-check"></i><b>8.2.1</b> Discussion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="daily-profiles.html"><a href="daily-profiles.html"><i class="fa fa-check"></i><b>9</b> Daily Profiles</a><ul>
+<li class="chapter" data-level="9.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>9.2</b> Overlayed</a></li>
+<li class="chapter" data-level="9.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>9.3</b> Mean</a></li>
+<li class="chapter" data-level="9.4" data-path="decomposed.html"><a href="decomposed.html"><i class="fa fa-check"></i><b>9.4</b> Decomposed</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>10</b> Comfort Plots</a><ul>
+<li class="chapter" data-level="10.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>10.1</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-1"><i class="fa fa-check"></i><b>10.1.1</b> Task</a></li>
+<li class="chapter" data-level="10.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-2"><i class="fa fa-check"></i><b>10.1.2</b> Basis</a></li>
+<li class="chapter" data-level="10.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-6"><i class="fa fa-check"></i><b>10.1.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>10.2</b> SIA 180 Thermal Comfort</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-2"><i class="fa fa-check"></i><b>10.2.1</b> Task</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-3"><i class="fa fa-check"></i><b>10.2.2</b> Basis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-7"><i class="fa fa-check"></i><b>10.2.3</b> Solution</a></li>
+<li class="chapter" data-level="10.2.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-7"><i class="fa fa-check"></i><b>10.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="10.2.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>10.2.5</b> See Also</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous</a><ul>
+<li class="chapter" data-level="11.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>11.1</b> Electricity Household</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="electricity-household.html"><a href="electricity-household.html#task-3"><i class="fa fa-check"></i><b>11.1.1</b> Task</a></li>
+<li class="chapter" data-level="11.1.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-4"><i class="fa fa-check"></i><b>11.1.2</b> Basis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-8"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
+<li class="chapter" data-level="11.1.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-8"><i class="fa fa-check"></i><b>11.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="11.1.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>11.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>11.2</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task-4"><i class="fa fa-check"></i><b>11.2.1</b> Task</a></li>
+<li class="chapter" data-level="11.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis-5"><i class="fa fa-check"></i><b>11.2.2</b> Basis</a></li>
+<li class="chapter" data-level="11.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-9"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
+<li class="chapter" data-level="11.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-9"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>11.3</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-5"><i class="fa fa-check"></i><b>11.3.1</b> Task</a></li>
+<li class="chapter" data-level="11.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-6"><i class="fa fa-check"></i><b>11.3.2</b> Basis</a></li>
+<li class="chapter" data-level="11.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-10"><i class="fa fa-check"></i><b>11.3.3</b> Solution</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>A</b> Packages in R</a><ul>
+<li class="chapter" data-level="A.1" data-path="installing-a-package.html"><a href="installing-a-package.html"><i class="fa fa-check"></i><b>A.1</b> Installing a Package</a></li>
+<li class="chapter" data-level="A.2" data-path="loading-a-package.html"><a href="loading-a-package.html"><i class="fa fa-check"></i><b>A.2</b> Loading a Package</a></li>
+<li class="chapter" data-level="A.3" data-path="upgrading-packages.html"><a href="upgrading-packages.html"><i class="fa fa-check"></i><b>A.3</b> Upgrading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Energy Data Analysis with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="introduction-to-r-basics" class="section level1">
+<h1><span class="header-section-number">Chapter 3</span> Introduction to R Basics</h1>
+<p>content tbd</p>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="whats-next.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="loading-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["edar.pdf", "edar.epub"],
+"toc": {
+"collapse": "section"
+},
+"info": false
+});
+});
+</script>
+
+</body>
+
+</html>

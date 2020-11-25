@@ -1,0 +1,98 @@
+## Before/After Optimization {#dataVisSeasonalBefAft}
+### Goal
+To highlight an energy optimization in a season diagram, we can gray out the seasons before the optimization and only highlight the monthly values after the optimization. To better quantify the success, we can calculate and display the confidence interval of the years before.
+
+In the following we will create the following plot:
+
+```{r out.width='70%', fig.cap='Seasonal Plot Overlapping Before/After', echo=FALSE}
+knitr::include_graphics("images/plotEnergyConsBeforeAfter.png")
+```
+
+### Data Basis
+In general, the values of energy meters, as in our example, increase steadily:
+
+```{r energyConsBeforeAfter0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Overlapping Before/After Optimization'}
+library(dplyr)
+library(lubridate)
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat) %>% na.omit()
+df[1,2] <- 1676
+df$timestamp <- parse_date_time(df$timestamp, "YmdHMS", tz = "Europe/Zurich")
+
+# plot data
+plot(df$timestamp, df$Adr02_energyHeat,
+     xlab="Time", ylab="Meter value (kWh)", main="Monthly Raw Data")
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r energyConsBeforeAfter1, warning=FALSE, message=FALSE, collapse = FALSE}
+library(redutils)
+library(dplyr)
+library(plotly)
+library(htmlwidgets)
+library(ggthemes)
+
+# load csv file
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat)
+
+colnames(df) <- c("timestamp", "meterValue")
+
+# calculate consumption value per month
+# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,
+# so the consumption for february first is value(march) - value(february)!
+df <- df %>% mutate(value = lead(meterValue) - meterValue)
+
+# remove counter value column
+df <- df %>% select(-meterValue)
+
+# value correction (outlier because of commissioning)
+df[1,2] <- 600
+
+# create plot
+plot <- plotSeasonalXYBeforeAfter(df,
+                                  dateOptimization = "2017-09-01",
+                                  locTimeZone = "Europe/Zurich",
+                                  main = "Before/After Optimization",
+                                  ylab = "Energy Consumption \n(kWh/month)"
+                                  )
+
+# change theme (optional)
+plot <- plot + ggthemes::theme_economist()
+
+# make plot interactive (optional)
+plotly <- plotly::ggplotly(plot)
+
+# show plot
+plotly
+
+```
+
+```{r energyConsBeforeAfter2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotSeasonalXYBeforeAfter.png", plot)
+```
+
+```{r energyConsBeforeAfter3, eval=FALSE}
+# save interactive plot as html (optional)
+library(htmlwidgets)
+htmlwidgets::saveWidget(plotly, "plotlySeasonalXYBeforeAfter.html")
+```
+
+### Discussion
+
+* One can clearly see the impact of the optimization
+
+* And as well the too low setting of January 2018 where the thermostat of the flat got deactivated
+
+* The confidence band shows as well the year 2013 which had an unusual high consumption from February to June
+
+

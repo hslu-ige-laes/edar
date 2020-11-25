@@ -1,0 +1,130 @@
+## Short term
+### Task
+tbd
+https://otexts.com/fpp2/tspatterns.html
+Hyndman, R.J., & Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on <current date>
+
+### Basis
+
+* tbd
+* 15min energy consumption meter values over five days
+
+### Solution
+
+
+Create a new script, copy/paste the following code and run it:
+
+```{r dataVisDecompositionShort1, warning=FALSE, message=FALSE, collapse = FALSE}
+library(dplyr)
+library(lubridate)
+library(plotly)
+library(ggplot2)
+library(forecast)
+
+# change language to English, otherwise weekdays are in local language
+Sys.setlocale("LC_TIME", "English")
+
+# load time series data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+
+# rename column names
+colnames(df) <- c("time", "meterValue")
+
+df$time <- parse_date_time(df$time,
+                                orders = "YmdHMS",
+                                tz = "Europe/Zurich")
+df$time <- force_tz(df$time, tzone = "UTC")
+
+# uncomment to filter time range if necessary
+#df <- df %>% filter(Time > "2015-03-01 00:00:00", Time < "2015-04-01 00:00:00")
+
+# Fill missing values with NA
+grid.df <- data.frame(time = seq(min(df$time, na.rm = TRUE),
+                                      max(df$time, na.rm = TRUE),
+                                      by = "15 mins"))
+df <- merge(df, grid.df, all = TRUE)
+
+# convert steadily counting energy meter value from kWh to power in kW
+df <- df %>% 
+  mutate(value = (meterValue - lag(meterValue))*4) %>%
+  select(-meterValue) %>%
+  na.omit()
+
+# remove negative values which occur beause of change summer/winter time
+df <- df %>% filter(value >= 0)
+
+# select time range
+df <- df %>% filter(time >= as.POSIXct("2015-01-26 00:00:00", tz = "UTC"),
+                    time < as.POSIXct("2015-01-31 00:00:00", tz = "UTC"))
+
+# =========== Start of Code ================
+df.ts <- ts(df %>% select(value) %>% na.omit(),
+            frequency = 96)
+
+df.decompose <- df.ts[,1] %>%
+  stl(s.window = 193)
+
+df.decompose <- df.decompose$time.series
+
+df.decompose <- as.data.frame(df.decompose)
+
+df.decompose <- cbind(df, df.decompose)
+
+data <- as.data.frame(tidyr::pivot_longer(df.decompose,
+                                          cols = -time,
+                                          names_to = "component",
+                                          values_to = "value",
+                                          values_drop_na = TRUE)
+)
+data$component <- as.factor(data$component)
+data$component <- factor(data$component, c("value",
+                                           "trend",
+                                           "seasonal",
+                                           "remainder"))
+# prepare data for plot
+
+componentTitles = c("Raw Data","Trend Component", "Seasonal Component", "Remainder")
+
+data <- data %>%
+  mutate(component = recode(component,
+                            value = componentTitles[1],
+                            trend = componentTitles[2],
+                            seasonal = componentTitles[3],
+                            remainder = componentTitles[4]),
+         value = round(data$value, digits = 1)) %>% 
+  rename(Value = value,
+         Time = time)
+
+p <- ggplot(data) +
+  geom_path(aes(x = Time,
+                y = Value
+               ),
+            color = "black",
+            alpha = 0.7) +
+  facet_wrap(~component, ncol = 1, scales = "free_y") +
+  scale_x_datetime(date_breaks = "days" , date_labels = "%a\n%d. %b\n%H:%M") +
+  theme_minimal() +
+  theme(panel.spacing = unit(1, "lines"),
+        legend.position = "none") +
+  labs(x = "") +
+  ggtitle("Time Series Decomposition over 5 days")
+
+ggplotly(p)
+
+```
+
+### Discussion
+* Trend
+  The trend of a time series refers to the general direction in which the time series is moving. Time series can have a positive or a negative trend, but can also have no trend.
+  
+* Seasonal Pattern
+  The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies.
+
+* Remainder
+  The remainder is what’s left of the time series data after removing its trend, cycle, and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
+
+### See Also
+tbd
+

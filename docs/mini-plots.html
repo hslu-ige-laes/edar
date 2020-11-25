@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>6.2 Mini Plots | Energy Data Analysis with R</title>
+  <meta name="description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="6.2 Mini Plots | Energy Data Analysis with R" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="Introduction into energy data analysis and visualization with R." />
+  <meta name="github-repo" content="hslu-ige-laes/edar" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="6.2 Mini Plots | Energy Data Analysis with R" />
+  
+  <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
+  
+
+<meta name="author" content="Reto Marek" />
+
+
+<meta name="date" content="2020-11-25" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="overlapping.html"/>
+<link rel="next" href="polar.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+<script src="libs/plotly-binding-4.9.2.1/plotly.js"></script>
+<script src="libs/typedarray-0.1/typedarray.min.js"></script>
+<link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+<script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+<link href="libs/plotly-htmlwidgets-css-1.52.2/plotly-htmlwidgets.css" rel="stylesheet" />
+<script src="libs/plotly-main-1.52.2/plotly-latest.min.js"></script>
+<script src="libs/r2d3-render-0.1.0/r2d3-render.js"></script>
+<script src="libs/webcomponents-2.0.0/webcomponents.js"></script>
+<script src="libs/r2d3-binding-0.2.3/r2d3.js"></script>
+<script src="libs/d3v5-5.0.0/d3.min.js"></script>
+<link href="libs/dygraphs-1.1.1/dygraph.css" rel="stylesheet" />
+<script src="libs/dygraphs-1.1.1/dygraph-combined.js"></script>
+<script src="libs/dygraphs-1.1.1/shapes.js"></script>
+<script src="libs/moment-2.8.4/moment.js"></script>
+<script src="libs/moment-timezone-0.2.5/moment-timezone-with-data.js"></script>
+<script src="libs/moment-fquarter-1.0.0/moment-fquarter.min.js"></script>
+<script src="libs/dygraphs-binding-1.1.1.6/dygraphs.js"></script>
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Energy Data Analysis with R</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="content.html"><a href="content.html"><i class="fa fa-check"></i><b>1.1</b> Content</a></li>
+<li class="chapter" data-level="1.2" data-path="why-r-and-rstudio.html"><a href="why-r-and-rstudio.html"><i class="fa fa-check"></i><b>1.2</b> Why R and RStudio?</a></li>
+<li class="chapter" data-level="1.3" data-path="other-useful-sources.html"><a href="other-useful-sources.html"><i class="fa fa-check"></i><b>1.3</b> Other useful sources</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="getting-started.html"><a href="getting-started.html"><i class="fa fa-check"></i><b>2</b> Getting started</a><ul>
+<li class="chapter" data-level="2.1" data-path="installation.html"><a href="installation.html"><i class="fa fa-check"></i><b>2.1</b> Install R and R Studio</a><ul>
+<li class="chapter" data-level="2.1.1" data-path="installation.html"><a href="installation.html#download-and-install-r"><i class="fa fa-check"></i><b>2.1.1</b> Download and Install R</a></li>
+<li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="install-required-packages.html"><a href="install-required-packages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
+<li class="chapter" data-level="2.3" data-path="create-an-r-script.html"><a href="create-an-r-script.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
+<li class="chapter" data-level="2.4" data-path="whats-next.html"><a href="whats-next.html"><i class="fa fa-check"></i><b>2.4</b> What’s next?</a></li>
+</ul></li>
+<li class="part"><span><b>I R Basics</b></span></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a><ul>
+<li class="chapter" data-level="3.1" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>3.1</b> Loading Data</a><ul>
+<li class="chapter" data-level="3.1.1" data-path="loading-data.html"><a href="loading-data.html#csv-file"><i class="fa fa-check"></i><b>3.1.1</b> Csv File</a></li>
+<li class="chapter" data-level="3.1.2" data-path="loading-data.html"><a href="loading-data.html#excel-file"><i class="fa fa-check"></i><b>3.1.2</b> Excel File</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>4</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="4.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>4.1</b> Add Metadata for later filtering</a><ul>
+<li class="chapter" data-level="4.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>4.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="4.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>4.1.2</b> Season of Year</a></li>
+</ul></li>
+<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="4.2.1" data-path="data-frames.html"><a href="data-frames.html#change-row-names"><i class="fa fa-check"></i><b>4.2.1</b> Change Row Names</a></li>
+<li class="chapter" data-level="4.2.2" data-path="data-frames.html"><a href="data-frames.html#wide-to-long"><i class="fa fa-check"></i><b>4.2.2</b> Wide to Long</a></li>
+<li class="chapter" data-level="4.2.3" data-path="data-frames.html"><a href="data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>4.2.3</b> Long to Wide</a></li>
+<li class="chapter" data-level="4.2.4" data-path="data-frames.html"><a href="data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>4.2.4</b> Merge two Dataframes</a></li>
+</ul></li>
+<li class="chapter" data-level="4.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>4.3</b> Examples</a><ul>
+<li class="chapter" data-level="4.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>4.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="5.1" data-path="get-overview.html"><a href="get-overview.html"><i class="fa fa-check"></i><b>5.1</b> Get overview</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="get-overview.html"><a href="get-overview.html#load-data"><i class="fa fa-check"></i><b>5.1.1</b> Load data</a></li>
+<li class="chapter" data-level="5.1.2" data-path="get-overview.html"><a href="get-overview.html#names"><i class="fa fa-check"></i><b>5.1.2</b> Names</a></li>
+<li class="chapter" data-level="5.1.3" data-path="get-overview.html"><a href="get-overview.html#structure"><i class="fa fa-check"></i><b>5.1.3</b> Structure</a></li>
+<li class="chapter" data-level="5.1.4" data-path="get-overview.html"><a href="get-overview.html#headtail"><i class="fa fa-check"></i><b>5.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="5.1.5" data-path="get-overview.html"><a href="get-overview.html#five-number-summary"><i class="fa fa-check"></i><b>5.1.5</b> Five number summary</a></li>
+</ul></li>
+<li class="chapter" data-level="5.2" data-path="basic-plots.html"><a href="basic-plots.html"><i class="fa fa-check"></i><b>5.2</b> Basic plots</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="basic-plots.html"><a href="basic-plots.html#scatterplot"><i class="fa fa-check"></i><b>5.2.1</b> Scatterplot</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>6</b> Seasonal Plots</a><ul>
+<li class="chapter" data-level="6.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>6.1</b> Overlapping</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="overlapping.html"><a href="overlapping.html#goal"><i class="fa fa-check"></i><b>6.1.1</b> Goal</a></li>
+<li class="chapter" data-level="6.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis"><i class="fa fa-check"></i><b>6.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.1.3" data-path="overlapping.html"><a href="overlapping.html#solution"><i class="fa fa-check"></i><b>6.1.3</b> Solution</a></li>
+<li class="chapter" data-level="6.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion"><i class="fa fa-check"></i><b>6.1.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>6.2</b> Mini Plots</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-1"><i class="fa fa-check"></i><b>6.2.1</b> Goal</a></li>
+<li class="chapter" data-level="6.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-1"><i class="fa fa-check"></i><b>6.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-1"><i class="fa fa-check"></i><b>6.2.3</b> Solution</a></li>
+<li class="chapter" data-level="6.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-1"><i class="fa fa-check"></i><b>6.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>6.3</b> Polar</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="polar.html"><a href="polar.html#goal-2"><i class="fa fa-check"></i><b>6.3.1</b> Goal</a></li>
+<li class="chapter" data-level="6.3.2" data-path="polar.html"><a href="polar.html#data-basis-2"><i class="fa fa-check"></i><b>6.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.3.3" data-path="polar.html"><a href="polar.html#solution-2"><i class="fa fa-check"></i><b>6.3.3</b> Solution</a></li>
+<li class="chapter" data-level="6.3.4" data-path="polar.html"><a href="polar.html#discussion-2"><i class="fa fa-check"></i><b>6.3.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="6.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>6.4</b> Before/After Optimization</a><ul>
+<li class="chapter" data-level="6.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-3"><i class="fa fa-check"></i><b>6.4.1</b> Goal</a></li>
+<li class="chapter" data-level="6.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-3"><i class="fa fa-check"></i><b>6.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="6.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-3"><i class="fa fa-check"></i><b>6.4.3</b> Solution</a></li>
+<li class="chapter" data-level="6.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>6.4.4</b> Discussion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="decomposition.html"><a href="decomposition.html"><i class="fa fa-check"></i><b>7</b> Decomposition</a><ul>
+<li class="chapter" data-level="7.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>7.1</b> Long term</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>7.1.1</b> Goal</a></li>
+<li class="chapter" data-level="7.1.2" data-path="long-term.html"><a href="long-term.html#basis"><i class="fa fa-check"></i><b>7.1.2</b> Basis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>7.1.3</b> Solution</a></li>
+<li class="chapter" data-level="7.1.4" data-path="long-term.html"><a href="long-term.html#discussion-4"><i class="fa fa-check"></i><b>7.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.1.5" data-path="long-term.html"><a href="long-term.html#see-also"><i class="fa fa-check"></i><b>7.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="7.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>7.2</b> Short term</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="short-term.html"><a href="short-term.html#task"><i class="fa fa-check"></i><b>7.2.1</b> Task</a></li>
+<li class="chapter" data-level="7.2.2" data-path="short-term.html"><a href="short-term.html#basis-1"><i class="fa fa-check"></i><b>7.2.2</b> Basis</a></li>
+<li class="chapter" data-level="7.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>7.2.3</b> Solution</a></li>
+<li class="chapter" data-level="7.2.4" data-path="short-term.html"><a href="short-term.html#discussion-5"><i class="fa fa-check"></i><b>7.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.2.5" data-path="short-term.html"><a href="short-term.html#see-also-1"><i class="fa fa-check"></i><b>7.2.5</b> See Also</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>8</b> Heat Maps</a><ul>
+<li class="chapter" data-level="8.1" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>8.1</b> Median-Weeks</a></li>
+<li class="chapter" data-level="8.2" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>8.2</b> Calendar</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="calendar.html"><a href="calendar.html#discussion-6"><i class="fa fa-check"></i><b>8.2.1</b> Discussion</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="9" data-path="daily-profiles.html"><a href="daily-profiles.html"><i class="fa fa-check"></i><b>9</b> Daily Profiles</a><ul>
+<li class="chapter" data-level="9.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
+<li class="chapter" data-level="9.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>9.2</b> Overlayed</a></li>
+<li class="chapter" data-level="9.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>9.3</b> Mean</a></li>
+<li class="chapter" data-level="9.4" data-path="decomposed.html"><a href="decomposed.html"><i class="fa fa-check"></i><b>9.4</b> Decomposed</a></li>
+</ul></li>
+<li class="chapter" data-level="10" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>10</b> Comfort Plots</a><ul>
+<li class="chapter" data-level="10.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>10.1</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-1"><i class="fa fa-check"></i><b>10.1.1</b> Task</a></li>
+<li class="chapter" data-level="10.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-2"><i class="fa fa-check"></i><b>10.1.2</b> Basis</a></li>
+<li class="chapter" data-level="10.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-6"><i class="fa fa-check"></i><b>10.1.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="10.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>10.2</b> SIA 180 Thermal Comfort</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-2"><i class="fa fa-check"></i><b>10.2.1</b> Task</a></li>
+<li class="chapter" data-level="10.2.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-3"><i class="fa fa-check"></i><b>10.2.2</b> Basis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-7"><i class="fa fa-check"></i><b>10.2.3</b> Solution</a></li>
+<li class="chapter" data-level="10.2.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-7"><i class="fa fa-check"></i><b>10.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="10.2.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>10.2.5</b> See Also</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous</a><ul>
+<li class="chapter" data-level="11.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>11.1</b> Electricity Household</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="electricity-household.html"><a href="electricity-household.html#task-3"><i class="fa fa-check"></i><b>11.1.1</b> Task</a></li>
+<li class="chapter" data-level="11.1.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-4"><i class="fa fa-check"></i><b>11.1.2</b> Basis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-8"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
+<li class="chapter" data-level="11.1.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-8"><i class="fa fa-check"></i><b>11.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="11.1.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>11.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="11.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>11.2</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task-4"><i class="fa fa-check"></i><b>11.2.1</b> Task</a></li>
+<li class="chapter" data-level="11.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis-5"><i class="fa fa-check"></i><b>11.2.2</b> Basis</a></li>
+<li class="chapter" data-level="11.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-9"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
+<li class="chapter" data-level="11.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-9"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>11.3</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-5"><i class="fa fa-check"></i><b>11.3.1</b> Task</a></li>
+<li class="chapter" data-level="11.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-6"><i class="fa fa-check"></i><b>11.3.2</b> Basis</a></li>
+<li class="chapter" data-level="11.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-10"><i class="fa fa-check"></i><b>11.3.3</b> Solution</a></li>
+</ul></li>
+</ul></li>
+<li class="appendix"><span><b>Appendix</b></span></li>
+<li class="chapter" data-level="A" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>A</b> Packages in R</a><ul>
+<li class="chapter" data-level="A.1" data-path="installing-a-package.html"><a href="installing-a-package.html"><i class="fa fa-check"></i><b>A.1</b> Installing a Package</a></li>
+<li class="chapter" data-level="A.2" data-path="loading-a-package.html"><a href="loading-a-package.html"><i class="fa fa-check"></i><b>A.2</b> Loading a Package</a></li>
+<li class="chapter" data-level="A.3" data-path="upgrading-packages.html"><a href="upgrading-packages.html"><i class="fa fa-check"></i><b>A.3</b> Upgrading Packages</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Energy Data Analysis with R</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="mini-plots" class="section level2">
+<h2><span class="header-section-number">6.2</span> Mini Plots</h2>
+<div id="goal-1" class="section level3">
+<h3><span class="header-section-number">6.2.1</span> Goal</h3>
+<p>Plot a seasonal month plot as described in <a href="https://otexts.com/fpp2/seasonal-subseries-plots.html" target="_blank">Hyndman and Athanasopoulos (2014, chapter 2.5)</a>:</p>
+<div class="figure"><span id="fig:unnamed-chunk-5"></span>
+<img src="images/plotSeasonalMiniplots.png" alt="Seasonal Plot with mini Time Plots over 10 Years" width="70%" />
+<p class="caption">
+Figure 6.3: Seasonal Plot with mini Time Plots over 10 Years
+</p>
+</div>
+<p>Here the seasonal patterns for each season are collected together in seprate mini time plots. Be aware that seasons in this context don’t correlate with the seasons of the year.</p>
+</div>
+<div id="data-basis-1" class="section level3">
+<h3><span class="header-section-number">6.2.2</span> Data Basis</h3>
+<p>In general, the values of energy meters, as in our example, increase steadily:</p>
+<div class="figure"><span id="fig:seasonalMiniplots0"></span>
+<img src="edar_files/figure-html/seasonalMiniplots0-1.png" alt="Raw Data for Seasonal Miniplots" width="672" />
+<p class="caption">
+Figure 6.4: Raw Data for Seasonal Miniplots
+</p>
+</div>
+</div>
+<div id="solution-1" class="section level3">
+<h3><span class="header-section-number">6.2.3</span> Solution</h3>
+<p>Create a new script, copy/paste the following code and run it:</p>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">library</span>(forecast)</a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="kw">library</span>(htmlwidgets)</a>
+<a class="sourceLine" id="cb57-5" title="5"><span class="kw">library</span>(ggthemes)</a>
+<a class="sourceLine" id="cb57-6" title="6"><span class="kw">library</span>(viridis)</a>
+<a class="sourceLine" id="cb57-7" title="7"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb57-8" title="8"></a>
+<a class="sourceLine" id="cb57-9" title="9"><span class="co"># load csv file</span></a>
+<a class="sourceLine" id="cb57-10" title="10">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb57-11" title="11">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb57-12" title="12"></a>
+<a class="sourceLine" id="cb57-13" title="13"><span class="co"># filter flat</span></a>
+<a class="sourceLine" id="cb57-14" title="14">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr02_energyHeat)</a>
+<a class="sourceLine" id="cb57-15" title="15"></a>
+<a class="sourceLine" id="cb57-16" title="16"><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;meterValue&quot;</span>)</a>
+<a class="sourceLine" id="cb57-17" title="17"></a>
+<a class="sourceLine" id="cb57-18" title="18"><span class="co"># calculate consumption value per month</span></a>
+<a class="sourceLine" id="cb57-19" title="19"><span class="co"># pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,</span></a>
+<a class="sourceLine" id="cb57-20" title="20"><span class="co"># so the consumption for february first is value(march) - value(february)!</span></a>
+<a class="sourceLine" id="cb57-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">lead</span>(meterValue) <span class="op">-</span><span class="st"> </span>meterValue)</a>
+<a class="sourceLine" id="cb57-22" title="22"></a>
+<a class="sourceLine" id="cb57-23" title="23"><span class="co"># remove counter value column</span></a>
+<a class="sourceLine" id="cb57-24" title="24">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>meterValue)</a>
+<a class="sourceLine" id="cb57-25" title="25"></a>
+<a class="sourceLine" id="cb57-26" title="26"><span class="co"># value correction (outlier because of commissioning)</span></a>
+<a class="sourceLine" id="cb57-27" title="27">df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">600</span></a>
+<a class="sourceLine" id="cb57-28" title="28"></a>
+<a class="sourceLine" id="cb57-29" title="29"><span class="co"># create time series object for ggmonthplot function</span></a>
+<a class="sourceLine" id="cb57-30" title="30">df.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(df[<span class="op">-</span><span class="dv">1</span>], <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb57-31" title="31"></a>
+<a class="sourceLine" id="cb57-32" title="32"><span class="co"># create x/y plot</span></a>
+<a class="sourceLine" id="cb57-33" title="33"></a>
+<a class="sourceLine" id="cb57-34" title="34">numYears =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb57-35" title="35"></a>
+<a class="sourceLine" id="cb57-36" title="36">plot &lt;-<span class="st"> </span><span class="kw">ggmonthplot</span>(df.ts,</a>
+<a class="sourceLine" id="cb57-37" title="37">                    <span class="dt">col =</span> <span class="kw">viridis</span>(numYears),</a>
+<a class="sourceLine" id="cb57-38" title="38">                    <span class="dt">main =</span> <span class="st">&quot;Seasonal Miniplots over 10 years</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb57-39" title="39">                    <span class="dt">ylab =</span> <span class="st">&quot;Energy Consumption (kWh/month)</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb57-40" title="40">                    <span class="dt">xlab =</span> <span class="st">&quot;Month</span><span class="ch">\n</span><span class="st"> &quot;</span></a>
+<a class="sourceLine" id="cb57-41" title="41">                    )</a>
+<a class="sourceLine" id="cb57-42" title="42"></a>
+<a class="sourceLine" id="cb57-43" title="43"><span class="co"># change theme (optional)</span></a>
+<a class="sourceLine" id="cb57-44" title="44">plot &lt;-<span class="st"> </span>plot <span class="op">+</span><span class="st"> </span>ggthemes<span class="op">::</span><span class="kw">theme_economist</span>()</a>
+<a class="sourceLine" id="cb57-45" title="45"></a>
+<a class="sourceLine" id="cb57-46" title="46"><span class="co"># make plot interactive (optional)</span></a>
+<a class="sourceLine" id="cb57-47" title="47">plotly &lt;-<span class="st"> </span>plotly<span class="op">::</span><span class="kw">ggplotly</span>(plot)</a>
+<a class="sourceLine" id="cb57-48" title="48"></a>
+<a class="sourceLine" id="cb57-49" title="49"><span class="co"># show plot</span></a>
+<a class="sourceLine" id="cb57-50" title="50">plotly</a></code></pre></div>
+<div id="htmlwidget-916666eb647f6dd63369" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-916666eb647f6dd63369">{"x":{"data":[{"x":[1.025,1.13082010582011,1.23664021164021,1.34246031746032,1.44828042328042,1.55410052910053,1.65992063492063,1.76574074074074,1.87156084656085,1.97738095238095,null,2.025,2.13082010582011,2.23664021164021,2.34246031746032,2.44828042328042,2.55410052910053,2.65992063492063,2.76574074074074,2.87156084656085,2.97738095238095,null,3.025,3.13082010582011,3.23664021164021,3.34246031746032,3.44828042328042,3.55410052910053,3.65992063492063,3.76574074074074,3.87156084656085,3.97738095238095,null,4.025,4.13082010582011,4.23664021164021,4.34246031746032,4.44828042328042,4.55410052910053,4.65992063492063,4.76574074074074,4.87156084656085,4.97738095238095,null,5.025,5.13082010582011,5.23664021164021,5.34246031746032,5.44828042328042,5.55410052910053,5.65992063492063,5.76574074074074,5.87156084656085,5.97738095238095,null,6.025,6.13082010582011,6.23664021164021,6.34246031746032,6.44828042328042,6.55410052910053,6.65992063492063,6.76574074074074,6.87156084656085,6.97738095238095,null,7.025,7.13082010582011,7.23664021164021,7.34246031746032,7.44828042328042,7.55410052910053,7.65992063492063,7.76574074074074,7.87156084656085,7.97738095238095,null,8.025,8.13082010582011,8.23664021164021,8.34246031746032,8.44828042328042,8.55410052910053,8.65992063492063,8.76574074074074,8.87156084656085,8.97738095238095,null,9.025,9.13082010582011,9.23664021164021,9.34246031746032,9.44828042328042,9.55410052910053,9.65992063492063,9.76574074074074,9.87156084656085,9.97738095238095,null,10.025,10.1308201058201,10.2366402116402,10.3424603174603,10.4482804232804,10.5541005291005,10.6599206349206,10.7657407407407,10.8715608465608,10.977380952381,null,11.025,11.1308201058201,11.2366402116402,11.3424603174603,11.4482804232804,11.5541005291005,11.6599206349206,11.7657407407407,11.8715608465608,11.977380952381,null,12.025,12.1308201058201,12.2366402116402,12.3424603174603,12.4482804232804,12.5541005291005,12.6599206349206,12.7657407407407,12.8715608465608,12.977380952381],"y":[600,644,583,940,975,1021,668,851,0,552,null,550,574,850,987,722,932,576,643,76,250,null,528,435,535,911,655,889,619,571,34,423,null,259,269,466,628,531,538,463,406,4,185,null,27,178,222,516,345,297,316,249,0,98,null,0,55,116,235,125,106,164,55,0,9,null,0,7,75,30,127,17,65,65,0,3,null,0,0,50,89,153,114,94,75,0,0,null,62,0,129,274,216,420,161,298,0,4,null,346,324,560,433,324,785,487,376,325,9,null,448,555,722,943,603,871,638,387,294,423,null,655,658,933,979,833,763,757,441,379,null],"text":["season: 1<br />time:  1.025000<br />y:  600","season: 1<br />time:  1.130820<br />y:  644","season: 1<br />time:  1.236640<br />y:  583","season: 1<br />time:  1.342460<br />y:  940","season: 1<br />time:  1.448280<br />y:  975","season: 1<br />time:  1.554101<br />y: 1021","season: 1<br />time:  1.659921<br />y:  668","season: 1<br />time:  1.765741<br />y:  851","season: 1<br />time:  1.871561<br />y:    0","season: 1<br />time:  1.977381<br />y:  552",null,"season: 2<br />time:  2.025000<br />y:  550","season: 2<br />time:  2.130820<br />y:  574","season: 2<br />time:  2.236640<br />y:  850","season: 2<br />time:  2.342460<br />y:  987","season: 2<br />time:  2.448280<br />y:  722","season: 2<br />time:  2.554101<br />y:  932","season: 2<br />time:  2.659921<br />y:  576","season: 2<br />time:  2.765741<br />y:  643","season: 2<br />time:  2.871561<br />y:   76","season: 2<br />time:  2.977381<br />y:  250",null,"season: 3<br />time:  3.025000<br />y:  528","season: 3<br />time:  3.130820<br />y:  435","season: 3<br />time:  3.236640<br />y:  535","season: 3<br />time:  3.342460<br />y:  911","season: 3<br />time:  3.448280<br />y:  655","season: 3<br />time:  3.554101<br />y:  889","season: 3<br />time:  3.659921<br />y:  619","season: 3<br />time:  3.765741<br />y:  571","season: 3<br />time:  3.871561<br />y:   34","season: 3<br />time:  3.977381<br />y:  423",null,"season: 4<br />time:  4.025000<br />y:  259","season: 4<br />time:  4.130820<br />y:  269","season: 4<br />time:  4.236640<br />y:  466","season: 4<br />time:  4.342460<br />y:  628","season: 4<br />time:  4.448280<br />y:  531","season: 4<br />time:  4.554101<br />y:  538","season: 4<br />time:  4.659921<br />y:  463","season: 4<br />time:  4.765741<br />y:  406","season: 4<br />time:  4.871561<br />y:    4","season: 4<br />time:  4.977381<br />y:  185",null,"season: 5<br />time:  5.025000<br />y:   27","season: 5<br />time:  5.130820<br />y:  178","season: 5<br />time:  5.236640<br />y:  222","season: 5<br />time:  5.342460<br />y:  516","season: 5<br />time:  5.448280<br />y:  345","season: 5<br />time:  5.554101<br />y:  297","season: 5<br />time:  5.659921<br />y:  316","season: 5<br />time:  5.765741<br />y:  249","season: 5<br />time:  5.871561<br />y:    0","season: 5<br />time:  5.977381<br />y:   98",null,"season: 6<br />time:  6.025000<br />y:    0","season: 6<br />time:  6.130820<br />y:   55","season: 6<br />time:  6.236640<br />y:  116","season: 6<br />time:  6.342460<br />y:  235","season: 6<br />time:  6.448280<br />y:  125","season: 6<br />time:  6.554101<br />y:  106","season: 6<br />time:  6.659921<br />y:  164","season: 6<br />time:  6.765741<br />y:   55","season: 6<br />time:  6.871561<br />y:    0","season: 6<br />time:  6.977381<br />y:    9",null,"season: 7<br />time:  7.025000<br />y:    0","season: 7<br />time:  7.130820<br />y:    7","season: 7<br />time:  7.236640<br />y:   75","season: 7<br />time:  7.342460<br />y:   30","season: 7<br />time:  7.448280<br />y:  127","season: 7<br />time:  7.554101<br />y:   17","season: 7<br />time:  7.659921<br />y:   65","season: 7<br />time:  7.765741<br />y:   65","season: 7<br />time:  7.871561<br />y:    0","season: 7<br />time:  7.977381<br />y:    3",null,"season: 8<br />time:  8.025000<br />y:    0","season: 8<br />time:  8.130820<br />y:    0","season: 8<br />time:  8.236640<br />y:   50","season: 8<br />time:  8.342460<br />y:   89","season: 8<br />time:  8.448280<br />y:  153","season: 8<br />time:  8.554101<br />y:  114","season: 8<br />time:  8.659921<br />y:   94","season: 8<br />time:  8.765741<br />y:   75","season: 8<br />time:  8.871561<br />y:    0","season: 8<br />time:  8.977381<br />y:    0",null,"season: 9<br />time:  9.025000<br />y:   62","season: 9<br />time:  9.130820<br />y:    0","season: 9<br />time:  9.236640<br />y:  129","season: 9<br />time:  9.342460<br />y:  274","season: 9<br />time:  9.448280<br />y:  216","season: 9<br />time:  9.554101<br />y:  420","season: 9<br />time:  9.659921<br />y:  161","season: 9<br />time:  9.765741<br />y:  298","season: 9<br />time:  9.871561<br />y:    0","season: 9<br />time:  9.977381<br />y:    4",null,"season: 10<br />time: 10.025000<br />y:  346","season: 10<br />time: 10.130820<br />y:  324","season: 10<br />time: 10.236640<br />y:  560","season: 10<br />time: 10.342460<br />y:  433","season: 10<br />time: 10.448280<br />y:  324","season: 10<br />time: 10.554101<br />y:  785","season: 10<br />time: 10.659921<br />y:  487","season: 10<br />time: 10.765741<br />y:  376","season: 10<br />time: 10.871561<br />y:  325","season: 10<br />time: 10.977381<br />y:    9",null,"season: 11<br />time: 11.025000<br />y:  448","season: 11<br />time: 11.130820<br />y:  555","season: 11<br />time: 11.236640<br />y:  722","season: 11<br />time: 11.342460<br />y:  943","season: 11<br />time: 11.448280<br />y:  603","season: 11<br />time: 11.554101<br />y:  871","season: 11<br />time: 11.659921<br />y:  638","season: 11<br />time: 11.765741<br />y:  387","season: 11<br />time: 11.871561<br />y:  294","season: 11<br />time: 11.977381<br />y:  423",null,"season: 12<br />time: 12.025000<br />y:  655","season: 12<br />time: 12.130820<br />y:  658","season: 12<br />time: 12.236640<br />y:  933","season: 12<br />time: 12.342460<br />y:  979","season: 12<br />time: 12.448280<br />y:  833","season: 12<br />time: 12.554101<br />y:  763","season: 12<br />time: 12.659921<br />y:  757","season: 12<br />time: 12.765741<br />y:  441","season: 12<br />time: 12.871561<br />y:  379","season: 12<br />time: 12.977381<br />y:   NA"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[1.025,1.13082010582011,1.23664021164021,1.34246031746032,1.44828042328042,1.55410052910053,1.65992063492063,1.76574074074074,1.87156084656085,1.97738095238095,null,2.025,2.13082010582011,2.23664021164021,2.34246031746032,2.44828042328042,2.55410052910053,2.65992063492063,2.76574074074074,2.87156084656085,2.97738095238095,null,3.025,3.13082010582011,3.23664021164021,3.34246031746032,3.44828042328042,3.55410052910053,3.65992063492063,3.76574074074074,3.87156084656085,3.97738095238095,null,4.025,4.13082010582011,4.23664021164021,4.34246031746032,4.44828042328042,4.55410052910053,4.65992063492063,4.76574074074074,4.87156084656085,4.97738095238095,null,5.025,5.13082010582011,5.23664021164021,5.34246031746032,5.44828042328042,5.55410052910053,5.65992063492063,5.76574074074074,5.87156084656085,5.97738095238095,null,6.025,6.13082010582011,6.23664021164021,6.34246031746032,6.44828042328042,6.55410052910053,6.65992063492063,6.76574074074074,6.87156084656085,6.97738095238095,null,7.025,7.13082010582011,7.23664021164021,7.34246031746032,7.44828042328042,7.55410052910053,7.65992063492063,7.76574074074074,7.87156084656085,7.97738095238095,null,8.025,8.13082010582011,8.23664021164021,8.34246031746032,8.44828042328042,8.55410052910053,8.65992063492063,8.76574074074074,8.87156084656085,8.97738095238095,null,9.025,9.13082010582011,9.23664021164021,9.34246031746032,9.44828042328042,9.55410052910053,9.65992063492063,9.76574074074074,9.87156084656085,9.97738095238095,null,10.025,10.1308201058201,10.2366402116402,10.3424603174603,10.4482804232804,10.5541005291005,10.6599206349206,10.7657407407407,10.8715608465608,10.977380952381,null,11.025,11.1308201058201,11.2366402116402,11.3424603174603,11.4482804232804,11.5541005291005,11.6599206349206,11.7657407407407,11.8715608465608,11.977380952381,null,12.025,12.1308201058201,12.2366402116402,12.3424603174603,12.4482804232804,12.5541005291005,12.6599206349206,12.7657407407407,12.8715608465608,12.977380952381],"y":[683.4,683.4,683.4,683.4,683.4,683.4,683.4,683.4,683.4,683.4,null,616,616,616,616,616,616,616,616,616,616,null,560,560,560,560,560,560,560,560,560,560,null,374.9,374.9,374.9,374.9,374.9,374.9,374.9,374.9,374.9,374.9,null,224.8,224.8,224.8,224.8,224.8,224.8,224.8,224.8,224.8,224.8,null,86.5,86.5,86.5,86.5,86.5,86.5,86.5,86.5,86.5,86.5,null,38.9,38.9,38.9,38.9,38.9,38.9,38.9,38.9,38.9,38.9,null,57.5,57.5,57.5,57.5,57.5,57.5,57.5,57.5,57.5,57.5,null,156.4,156.4,156.4,156.4,156.4,156.4,156.4,156.4,156.4,156.4,null,396.9,396.9,396.9,396.9,396.9,396.9,396.9,396.9,396.9,396.9,null,588.4,588.4,588.4,588.4,588.4,588.4,588.4,588.4,588.4,588.4,null,null,null,null,null,null,null,null,null,null,null],"text":["avg: 683.4<br />season: 1<br />time:  1.025000<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.130820<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.236640<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.342460<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.448280<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.554101<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.659921<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.765741<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.871561<br />y: 683.4","avg: 683.4<br />season: 1<br />time:  1.977381<br />y: 683.4",null,"avg: 616.0<br />season: 2<br />time:  2.025000<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.130820<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.236640<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.342460<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.448280<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.554101<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.659921<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.765741<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.871561<br />y: 616.0","avg: 616.0<br />season: 2<br />time:  2.977381<br />y: 616.0",null,"avg: 560.0<br />season: 3<br />time:  3.025000<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.130820<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.236640<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.342460<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.448280<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.554101<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.659921<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.765741<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.871561<br />y: 560.0","avg: 560.0<br />season: 3<br />time:  3.977381<br />y: 560.0",null,"avg: 374.9<br />season: 4<br />time:  4.025000<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.130820<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.236640<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.342460<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.448280<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.554101<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.659921<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.765741<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.871561<br />y: 374.9","avg: 374.9<br />season: 4<br />time:  4.977381<br />y: 374.9",null,"avg: 224.8<br />season: 5<br />time:  5.025000<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.130820<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.236640<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.342460<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.448280<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.554101<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.659921<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.765741<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.871561<br />y: 224.8","avg: 224.8<br />season: 5<br />time:  5.977381<br />y: 224.8",null,"avg:  86.5<br />season: 6<br />time:  6.025000<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.130820<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.236640<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.342460<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.448280<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.554101<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.659921<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.765741<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.871561<br />y:  86.5","avg:  86.5<br />season: 6<br />time:  6.977381<br />y:  86.5",null,"avg:  38.9<br />season: 7<br />time:  7.025000<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.130820<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.236640<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.342460<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.448280<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.554101<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.659921<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.765741<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.871561<br />y:  38.9","avg:  38.9<br />season: 7<br />time:  7.977381<br />y:  38.9",null,"avg:  57.5<br />season: 8<br />time:  8.025000<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.130820<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.236640<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.342460<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.448280<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.554101<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.659921<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.765741<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.871561<br />y:  57.5","avg:  57.5<br />season: 8<br />time:  8.977381<br />y:  57.5",null,"avg: 156.4<br />season: 9<br />time:  9.025000<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.130820<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.236640<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.342460<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.448280<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.554101<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.659921<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.765741<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.871561<br />y: 156.4","avg: 156.4<br />season: 9<br />time:  9.977381<br />y: 156.4",null,"avg: 396.9<br />season: 10<br />time: 10.025000<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.130820<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.236640<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.342460<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.448280<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.554101<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.659921<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.765741<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.871561<br />y: 396.9","avg: 396.9<br />season: 10<br />time: 10.977381<br />y: 396.9",null,"avg: 588.4<br />season: 11<br />time: 11.025000<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.130820<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.236640<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.342460<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.448280<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.554101<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.659921<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.765741<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.871561<br />y: 588.4","avg: 588.4<br />season: 11<br />time: 11.977381<br />y: 588.4",null,"avg:    NA<br />season: 12<br />time: 12.025000<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.130820<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.236640<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.342460<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.448280<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.554101<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.659921<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.765741<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.871561<br />y:    NA","avg:    NA<br />season: 12<br />time: 12.977381<br />y:    NA"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,170,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":53.8580323785803,"r":13.2835201328352,"b":38.5222083852221,"l":50.4773765047738},"plot_bgcolor":"transparent","paper_bgcolor":"rgba(213,228,235,1)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"<b> Seasonal Miniplots over 10 years<br /> <\/b>","font":{"color":"rgba(0,0,0,1)","family":"","size":21.9178082191781},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[0.427380952380952,13.575],"tickmode":"array","ticktext":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"tickvals":[1.5,2.5,3.5,4.5,5.5,6.5,7.5,8.5,9.5,10.5,11.5,12.5],"categoryorder":"array","categoryarray":["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"],"nticks":null,"ticks":"outside","tickcolor":"rgba(0,0,0,1)","ticklen":-6.6417600664176,"tickwidth":0.66417600664176,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"tickangle":-0,"showline":true,"linecolor":"rgba(0,0,0,1)","linewidth":0.531340805313408,"showgrid":false,"gridcolor":null,"gridwidth":0,"zeroline":false,"anchor":"y","title":{"text":"Month<br /> ","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-51.05,1072.05],"tickmode":"array","ticktext":["0","250","500","750","1000"],"tickvals":[0,250,500,750,1000],"categoryorder":"array","categoryarray":["0","250","500","750","1000"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":-6.6417600664176,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(255,255,255,1)","gridwidth":1.16230801162308,"zeroline":false,"anchor":"x","title":{"text":"Energy Consumption (kWh/month)<br />","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":"transparent","bordercolor":"transparent","borderwidth":1.88976377952756,"font":{"color":"rgba(0,0,0,1)","family":"","size":18.2648401826484}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"55d041ad70b":{"x":{},"y":{},"type":"scatter"},"55d039e931e1":{"y":{},"x":{},"y.1":{}}},"cur_data":"55d041ad70b","visdat":{"55d041ad70b":["function (y) ","x"],"55d039e931e1":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># save static plot as png</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotSeasonalMiniplots.png&quot;</span>, plot)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="co"># save interactive plot as html</span></a>
+<a class="sourceLine" id="cb59-2" title="2"><span class="kw">library</span>(htmlwidgets)</a>
+<a class="sourceLine" id="cb59-3" title="3">htmlwidgets<span class="op">::</span><span class="kw">saveWidget</span>(plotly, <span class="st">&quot;plotlySeasonalMiniplots.html&quot;</span>)</a></code></pre></div>
+</div>
+<div id="discussion-1" class="section level3">
+<h3><span class="header-section-number">6.2.4</span> Discussion</h3>
+<ul>
+<li><p>This type of seasonal plot shows the mean value of each month and therefore emphasises on the monthly comparison</p></li>
+<li><p>It revelas as well the mean seasonla pattern with the blue lines</p></li>
+</ul>
+
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="overlapping.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="polar.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": false,
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": null,
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["edar.pdf", "edar.epub"],
+"toc": {
+"collapse": "section"
+},
+"info": false
+});
+});
+</script>
+
+</body>
+
+</html>

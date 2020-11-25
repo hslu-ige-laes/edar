@@ -1,36 +1,44 @@
 book_filename: "edar.Rmd"
 repo: https://github.com/hslu-ige-laes/edar
 rmd_files: [
+
   "index.rmd",
 
   "gettingStarted.Rmd",
-  "rBasics.Rmd",
-  "dataWrangling.Rmd",
-  "eda.Rmd",
 
-  "dataVis.Rmd",
-  "dataVisSeasonalOverlapping.Rmd",
-  "dataVisSeasonalMiniplots.Rmd",
-  "dataVisSeasonalPolar.Rmd",
-  "dataVisSeasonalOverlappingBefAft.Rmd",
+  "partRBasics/_partRBasics.Rmd",
+  "partRBasics/loadingData.Rmd",
+  "partRBasics/dataWrangling.Rmd",
+  "partRBasics/eda.Rmd",
 
+  "partDataVis/_partDataVis.Rmd",
+  "partDataVis/seasonal.Rmd",
+  "partDataVis/seasonalOverlapping.Rmd",
+  "partDataVis/seasonalMiniplots.Rmd",
+  "partDataVis/seasonalPolar.Rmd",
+  "partDataVis/seasonalOverlappingBefAft.Rmd",
+  "partDataVis/decomposition.Rmd",
   # not yet redacted
-  "dataVisDecompositionLong.Rmd",
-  "dataVisDecompositionShort.Rmd",
-  "dataVisDecompositionShort.Rmd",
-  "dataVisHeatmapMedianWeeks.Rmd",
-  "dataVisHeatmapCalendar.Rmd",
-  "dataVisDailyProfOverview.Rmd",
-  "dataVisDailyProfOverlayed.Rmd",
-  "dataVisDailyProfMean.Rmd",
-  "dataVisDailyProfDecomposed.Rmd",
-  "dataVisBldgEngySig.Rmd",
-  "dataVisMollierHx.Rmd",
-  "dataVisSia180ThermCmf.Rmd",
-  "dataVisEleHousehold.Rmd",
-  "dataVisRoomTempRed.Rmd",
+  "partDataVis/decompositionLong.Rmd",
+  "partDataVis/decompositionShort.Rmd",
+  "partDataVis/heatmap.Rmd",
+  "partDataVis/heatmapMedianWeeks.Rmd",
+  "partDataVis/heatmapCalendar.Rmd",
+  "partDataVis/dailyProf.Rmd",
+  "partDataVis/dailyProfOverview.Rmd",
+  "partDataVis/dailyProfOverlayed.Rmd",
+  "partDataVis/dailyProfMean.Rmd",
+  "partDataVis/dailyProfDecomposed.Rmd",
+  "partDataVis/comfort.Rmd",
+  "partDataVis/comfortMollierHx.Rmd",
+  "partDataVis/comfortSia180ThermCmf.Rmd",
+  "partDataVis/misc.Rmd",
+  "partDataVis/eleHousehold.Rmd",
+  "partDataVis/roomTempRed.Rmd",
+  "partDataVis/bldgEngySigScatter.Rmd",
 
   "a1-packages.rmd",
+  "references.rmd",
 ]
 language:
   ui:

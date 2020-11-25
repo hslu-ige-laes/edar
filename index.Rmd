@@ -24,9 +24,18 @@ The book is independently structured and a beginner gets information on how to i
 
 The examples in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
-This book was developed using Yihui Xie's <a href="https://bookdown.org" target="_blank">bookdown</a> framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
-The online book is hosted using GitHub's free <a href="https://pages.github.com" target="_blank">GitHub Pages</a>. All material for this book is available and can be explored at the book's <a href="https://github.com/hslu-ige-laes/edar" target="_blank">GitHub repository</a>.
+The book is structured in the follwoing parts:
 
+* R Basics
+
+* Data Visualizations
+
+The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing. 
+
+  "Numerical quantities focus on expected values, graphical summaries on unexpected values."
+  John W. Tukey
+
+Recipes for such graphical representations are covered in the part "Data Visualizations". The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
 
 ## Why R and RStudio?
 In a study commissioned by the Swiss Federal Office of Energy, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and create visualizations. Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics there is limited. The change to an environment like "R" seems to be difficult for many. In the market there are numerous books which make the change to "R" for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
@@ -45,7 +54,10 @@ There are a number of other useful books available, including:
 - <a href="https://otexts.com/fpp2/" target="_blank">Forecasting: Principles and Practice</a>
 - <a href="https://afit-r.github.io/" target="_blank">AFIT Data Science Lab R Programming Guide</a>
 
+## Acknowledgements
+The authors would like to express their sincere thanks to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
 
+This book was developed using Yihui Xie's <a href="https://bookdown.org" target="_blank">bookdown</a> framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 
-
+The online book is hosted using GitHub's free <a href="https://pages.github.com" target="_blank">GitHub Pages</a>. All material for this book is available and can be explored at the book's <a href="https://github.com/hslu-ige-laes/edar" target="_blank">GitHub repository</a>.
 
