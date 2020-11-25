@@ -1,5 +1,14 @@
 # Data Wrangling
-text tbd
+This chapter gives an overview of the most important data manipulation functions used throughout this book.
+
+Experienced readers will find more information about data imports here:
+- <a href="https://rafalab.github.io/dsbook/tidyverse.html#summarizing-data" target="_blank">Introduction to Data Science - Chapter 4 "The tidyverse"</a>
+- <a href="https://smogdr.github.io/edar_coursebook/rprog2.html#data-cleaning" target="_blank">Engineering Data Analysis in R - Chapter 3.5 "Data Cleaning"</a>
+<font size="5">csv-Files</font>
+- <a href="https://smogdr.github.io/edar_coursebook/rprog2.html#piping" target="_blank">Engineering Data Analysis in R - Chapter 3.6 "Piping"</a>
+<font size="5">csv-Files</font>
+
+It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
 ## Add Metadata for later filtering
 Firstly we have to load a dataset into a dataframe:
@@ -65,40 +74,86 @@ df <- dplyr::mutate(df, season = getSeason(df$time))
 head(df,1)
 tail(df,1)
 ```
-## Data Frames
-Firstly we have to load a dataset into a dataframe:
-```{r metadata dataframe, warning=FALSE, message=FALSE, collapse = FALSE}
-# load data set
+## Manipulating Data Frames
+The `dplyr` package from the `tidyverse` introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember.
+
+### Change Row Names
+```{r eval=FALSE}
+# rename columns
+names(df) <- c("timestamp","humidity","temp_c")
+```
+
+### Adding a column with `mutate()`
+```{r eval=FALSE}
+library(dplyr)
+
+# add new column with temperature conversion from celsius to fahrenheit
+df <- mutate(df, temp_f = temp_c * 1.8 + 32)
+
+# This code does the same, but only with a pipe
+df <- df %>% 
+  mutate(df, temp_f = temp_c * 1.8 + 32)
+
+```
+
+### Subsetting with `filter()`
+```{r eval=FALSE}
+library(dplyr)
+
+# add new column with temperature conversion from celsius to fahrenheit
+df <- filter(df,
+             timestamp >= "2020-01-01 00:00:00",
+             timestamp <= "2020-12-31 23:45:00")
+
+df.high <- filter(df, temp_c > 30)
+```
+
+> Note: Whether you put the whole code on one line or split it after a comma does not have an effect on the computation, it is only more readable when the lines aren't too wide.
+
+### Add/remove columns with `select()`
+```{r eval=FALSE}
+library(dplyr)
+
+# Based on the upper example we remove the celsius column after calculation
+df <- select(df, -temp_c)
+
+# Create new data frame
+df.new <- select(df, timestamp, temp_f)
+
+# use select() in a so called dplyr pipe
+df <- df %>% 
+  mutate(df, temp_f = temp_c * 1.8 + 32) %>% 
+  select(-temp_c)
+```
+
+## The pipe `%>%`
+With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: `%>%`.
+
+Details can be found a href="https://rafalab.github.io/dsbook/tidyverse.html" target="_blank">Introduction to Data Science - Chapter 4.5</a>
+
+### Wide to Long
+```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
+library(tidyr)
+
+# load test data set
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                stringsAsFactors=FALSE,
                sep =";")
-```
-### Change Row Names
-```{r change row names, warning=FALSE, message=FALSE, collapse = FALSE}
-# Print the header and the first line
-head(df, 1)
-
-# rename columns and print the header and the first line
-names(df) <- c("timestamp","Hum_A","Temp_A","Hum_B","Temp_B","Hum_C","Temp_C","Hum_D", "Temp_D")
-head(df, 1)
-```
-### Wide to Long
-```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
 
 # create a copy of the dataframe and print the header and the first five line
 head(df, 5)
 
 # convert wide to long format
 df.long <- as.data.frame(tidyr::pivot_longer(df,
-                                             cols = -timestamp,
+                                             cols = -time,
                                              names_to = "sensor",
                                              values_to = "value",
-                                             values_drop_na = TRUE)
-                         )
+                                             values_drop_na = TRUE))
 
 # long format
 head(df.long, 16)
 ```
+
 ### Long to Wide
 ```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = FALSE}
 # long format
@@ -113,6 +168,7 @@ df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
 # wide format
 head(df.wide)
 ```
+
 ### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 ```{r dataframe merge, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)
@@ -138,6 +194,7 @@ dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time,
 # merge the two files into a new data frame and keep only rows where all values are available
 df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
 
+head(df)
 ```
 
 ## Examples

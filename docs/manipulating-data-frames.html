@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Daily Profiles | Energy Data Analysis with R</title>
+  <title>5.2 Manipulating Data Frames | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Daily Profiles | Energy Data Analysis with R" />
+  <meta property="og:title" content="5.2 Manipulating Data Frames | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Daily Profiles | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="5.2 Manipulating Data Frames | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="calendar.html"/>
-<link rel="next" href="overview.html"/>
+<link rel="prev" href="add-metadata-for-later-filtering.html"/>
+<link rel="next" href="the-pipe.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -314,18 +314,62 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="daily-profiles" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Daily Profiles</h1>
-<p>tbd</p>
-<!--chapter:end:partDataVis/dailyProf.Rmd-->
+<div id="manipulating-data-frames" class="section level2">
+<h2><span class="header-section-number">5.2</span> Manipulating Data Frames</h2>
+<p>The <code>dplyr</code> package from the <code>tidyverse</code> introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember.</p>
+<div id="change-row-names" class="section level3">
+<h3><span class="header-section-number">5.2.1</span> Change Row Names</h3>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># rename columns</span></a>
+<a class="sourceLine" id="cb21-2" title="2"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>,<span class="st">&quot;humidity&quot;</span>,<span class="st">&quot;temp_c&quot;</span>)</a></code></pre></div>
+</div>
+<div id="adding-a-column-with-mutate" class="section level3">
+<h3><span class="header-section-number">5.2.2</span> Adding a column with <code>mutate()</code></h3>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb22-2" title="2"></a>
+<a class="sourceLine" id="cb22-3" title="3"><span class="co"># add new column with temperature conversion from celsius to fahrenheit</span></a>
+<a class="sourceLine" id="cb22-4" title="4">df &lt;-<span class="st"> </span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a>
+<a class="sourceLine" id="cb22-5" title="5"></a>
+<a class="sourceLine" id="cb22-6" title="6"><span class="co"># This code does the same, but only with a pipe</span></a>
+<a class="sourceLine" id="cb22-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb22-8" title="8"><span class="st">  </span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a></code></pre></div>
+</div>
+<div id="subsetting-with-filter" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Subsetting with <code>filter()</code></h3>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb23-2" title="2"></a>
+<a class="sourceLine" id="cb23-3" title="3"><span class="co"># add new column with temperature conversion from celsius to fahrenheit</span></a>
+<a class="sourceLine" id="cb23-4" title="4">df &lt;-<span class="st"> </span><span class="kw">filter</span>(df,</a>
+<a class="sourceLine" id="cb23-5" title="5">             timestamp <span class="op">&gt;=</span><span class="st"> &quot;2020-01-01 00:00:00&quot;</span>,</a>
+<a class="sourceLine" id="cb23-6" title="6">             timestamp <span class="op">&lt;=</span><span class="st"> &quot;2020-12-31 23:45:00&quot;</span>)</a>
+<a class="sourceLine" id="cb23-7" title="7"></a>
+<a class="sourceLine" id="cb23-8" title="8">df.high &lt;-<span class="st"> </span><span class="kw">filter</span>(df, temp_c <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a></code></pre></div>
+<blockquote>
+<p>Note: Whether you put the whole code on one line or split it after a comma does not have an effect on the computation, it is only more readable when the lines aren’t too wide.</p>
+</blockquote>
+</div>
+<div id="addremove-columns-with-select" class="section level3">
+<h3><span class="header-section-number">5.2.4</span> Add/remove columns with <code>select()</code></h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb24-2" title="2"></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co"># Based on the upper example we remove the celsius column after calculation</span></a>
+<a class="sourceLine" id="cb24-4" title="4">df &lt;-<span class="st"> </span><span class="kw">select</span>(df, <span class="op">-</span>temp_c)</a>
+<a class="sourceLine" id="cb24-5" title="5"></a>
+<a class="sourceLine" id="cb24-6" title="6"><span class="co"># Create new data frame</span></a>
+<a class="sourceLine" id="cb24-7" title="7">df.new &lt;-<span class="st"> </span><span class="kw">select</span>(df, timestamp, temp_f)</a>
+<a class="sourceLine" id="cb24-8" title="8"></a>
+<a class="sourceLine" id="cb24-9" title="9"><span class="co"># use select() in a so called dplyr pipe</span></a>
+<a class="sourceLine" id="cb24-10" title="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-11" title="11"><span class="st">  </span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb24-12" title="12"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>temp_c)</a></code></pre></div>
+</div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="calendar.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="overview.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="add-metadata-for-later-filtering.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="the-pipe.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

@@ -1,5 +1,9 @@
 # Loading Data
+This chapter introduces two functions that can be used to load data from csv-files and Excel-files.
 
+Experienced readers will find more information about data imports here:
+- <a href="https://rafalab.github.io/dsbook/importing-data.html" target="_blank">Introduction to Data Science - Chapter 5 "Importing data"</a>
+- <a href="https://smogdr.github.io/edar_coursebook/rprog2.html" target="_blank">Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"</a>
 <font size="5">csv-Files</font>
 
 Load data from comma separated files
@@ -12,7 +16,7 @@ df <- read.csv("datafile.csv")
 df <- read.csv("C:/Desktop/datafile.csv")
 
 # read data from a file in the internet
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv")
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatElectricity.csv")
 
 # add arguments on how to parse the content
 df <- read.csv("datafile.csv",
@@ -25,6 +29,9 @@ df <- read.csv("datafile.csv",
 > Attention: By default, strings in the data are treated as factors, so add `stringsAsFactors=FALSE`
 
 > Set your cursor to the function name `read.csv()` and press F1. Then you get in R Studio bottom right in the tab `Help` information about other function arguments you can use.
+
+> Note that the function read.csv() has the default `sep =","` and read.csv2() has the default `sep =";"`
+
 
 <font size="5">Excel-Files</font>
 
@@ -56,12 +63,4 @@ df <- read.xls("datafile.xls", sheet=2) # Read second sheet
 ```
 
 > Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.
-
-
-<font size="5">More detailed sources</font>
-
-More detailed information on how to load data into R you can find here:
-
-- <a href="https://rafalab.github.io/dsbook/importing-data.html" target="_blank">Introduction to Data Science - Chapter 5 "Importing data"</a>
-- <a href="https://smogdr.github.io/edar_coursebook/rprog2.html" target="_blank">Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"</a>
 

@@ -44,7 +44,7 @@ The exact installation procedure will vary depending on your Linux operating sys
 1. Once you have installed "R Studio", you can run it like any other application by clicking the program icon 
 
 ## Install required packages {#installationPackages}
-Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
+Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them.
 
 - Open "RStudio" just as you would any program, by clicking on its icon
 

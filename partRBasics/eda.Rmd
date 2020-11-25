@@ -1,23 +1,25 @@
 # Explorative Data Analysis
-## Get overview
+Explorative Data Analysis (EDA) is a technique based on the human characteristic of visual pattern recognition. The purpose of EDA is simple: to learn more about data by visualizing it in different ways. John W. Tukey, considered the founder of exploratory data analysis, once wrote: 
 
-> Get an overview of the whole data set and specific series of it
+> “Exploratory data analysis is graphical detective work.” - John W. Tukey
+
+## Get overview
+A first step is getting an overview of the whole data set and specific series of it.
 
 ### Load data
 
 > Load test data set in a data frame (e.g. from a csv-file)
 
-```{r eda readcsv}
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
-               stringsAsFactors=FALSE,
-               sep ="," )
+```{r eda readcsv, echo=FALSE, results='hide'}
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                stringsAsFactors=FALSE)
 ```
 
 <br>
 
 ### Names
 
-> show the column headers of the data frame
+> show the column headers of a data frame
 
 ```{r eda names}
 names(df)
@@ -36,7 +38,7 @@ str(df)
 <br>
 
 ### Head/Tail
-The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.
+> Show the first and last values
 
 ```{r eda head}
 head(df)
@@ -46,29 +48,19 @@ head(df)
 tail(df)
 ```
 
+> Note: if you want to show only the first three entries, you can type `head(df,3)`
+
 <br>
 
 ### Five number summary
 
-> reveals details of a specific series
+> reveals details like object classes
 
 ```{r eda summary, warning=FALSE, message=FALSE, collapse = FALSE}
-summary(df$WthStnTemp)
+summary(df)
 ```
 
 <br>
 
-
-
-## Basic plots
-### Scatterplot
-#### plot()
-```{r scatterplot plot, warning=FALSE, message=FALSE, collapse = FALSE}
-# load data set
-df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv",
-               stringsAsFactors=FALSE,
-               sep =",")
-
-# crate simple scatterplot
-plot(df$WthStnTemp, df$BldgEnergyHeating)
-```
+## Quickly Exploring Data
+There is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book. Please refer to the <a href="https://r-graphics.org/chapter-quick" target="_blank">R Graphics Cookbook from Winston Chang - Chapter 2 "Quickly Exploring Data"</a>.

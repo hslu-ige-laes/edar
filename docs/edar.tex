@@ -163,8 +163,7 @@ The book is structured in the following parts:
 The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives information about the installation of the program environment and gets a quick practical introduction.
 
 \begin{quote}
-``Numerical quantities focus on expected values, graphical summaries on unexpected values.''
-John W. Tukey
+``Numerical quantities focus on expected values, graphical summaries on unexpected values.'' - John W. Tukey
 \end{quote}
 
 Examples for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
@@ -289,8 +288,6 @@ The exact installation procedure will vary depending on your Linux operating sys
 \hypertarget{download-and-install-rstudio}{%
 \subsection{Download and Install RStudio}\label{download-and-install-rstudio}}
 
-``R Studio'' is a development environment for ``R''.
-
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
@@ -305,7 +302,7 @@ The exact installation procedure will vary depending on your Linux operating sys
 \hypertarget{installationPackages}{%
 \section{Install required packages}\label{installationPackages}}
 
-Appendix \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
+Appendix \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them.
 
 \begin{itemize}
 \item
@@ -374,9 +371,9 @@ As you probably noticed, we did not load any data. The basic installation of ``R
 \hypertarget{introduction-to-r-basics}{%
 \chapter{Introduction to R Basics}\label{introduction-to-r-basics}}
 
-It is not the goal of this book to introduce beginners in R to the programming language and the environment in general. There are many really good sources where you can familiarize yourself with R if needed.
+It is not the goal of this book to introduce beginners to the programming language ``R'' and the environment in general. There are many really good sources where you can familiarize yourself with ``R'' if needed.
 
-Two sources are recommended to facilitate the introduction to R and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
+Two sources are recommended to facilitate the introduction to ``R'' and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
 \begin{itemize}
 \tightlist
@@ -391,6 +388,11 @@ The part ``R-Basics'' in this book is additive to the basics referenced above an
 \hypertarget{loading-data}{%
 \chapter{Loading Data}\label{loading-data}}
 
+This chapter introduces two functions that can be used to load data from csv-files and Excel-files.
+
+Experienced readers will find more information about data imports here:
+- Introduction to Data Science - Chapter 5 ``Importing data''
+- Engineering Data Analysis in R - Chapter 3 ``Getting and Cleaning Data''
 csv-Files
 
 Load data from comma separated files
@@ -404,7 +406,7 @@ Load data from comma separated files
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"C:/Desktop/datafile.csv"}\NormalTok{)}
 
 \CommentTok{# read data from a file in the internet}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatElectricity.csv"}\NormalTok{)}
 
 \CommentTok{# add arguments on how to parse the content}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"datafile.csv"}\NormalTok{,}
@@ -421,6 +423,10 @@ Attention: By default, strings in the data are treated as factors, so add \textt
 
 \begin{quote}
 Set your cursor to the function name \texttt{read.csv()} and press F1. Then you get in R Studio bottom right in the tab \texttt{Help} information about other function arguments you can use.
+\end{quote}
+
+\begin{quote}
+Note that the function read.csv() has the default \texttt{sep\ =","} and read.csv2() has the default \texttt{sep\ =";"}
 \end{quote}
 
 Excel-Files
@@ -461,22 +467,19 @@ For reading older Excel files in the .xls format, the gdata package has the func
 Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you'll need ActiveState Perl. The Community Edition can be obtained for free.
 \end{quote}
 
-More detailed sources
-
-More detailed information on how to load data into R you can find here:
-
-\begin{itemize}
-\tightlist
-\item
-  Introduction to Data Science - Chapter 5 ``Importing data''
-\item
-  Engineering Data Analysis in R - Chapter 3 ``Getting and Cleaning Data''
-\end{itemize}
-
 \hypertarget{data-wrangling}{%
 \chapter{Data Wrangling}\label{data-wrangling}}
 
-text tbd
+This chapter gives an overview of the most important data manipulation functions used throughout this book.
+
+Experienced readers will find more information about data imports here:
+- Introduction to Data Science - Chapter 4 ``The tidyverse''
+- Engineering Data Analysis in R - Chapter 3.5 ``Data Cleaning''
+csv-Files
+- Engineering Data Analysis in R - Chapter 3.6 ``Piping''
+csv-Files
+
+It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
 \hypertarget{add-metadata-for-later-filtering}{%
 \section{Add Metadata for later filtering}\label{add-metadata-for-later-filtering}}
@@ -604,78 +607,124 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 ## 21865 2020-09-17 11:00:00               28.1   Fall
 \end{verbatim}
 
-\hypertarget{data-frames}{%
-\section{Data Frames}\label{data-frames}}
+\hypertarget{manipulating-data-frames}{%
+\section{Manipulating Data Frames}\label{manipulating-data-frames}}
 
-Firstly we have to load a dataset into a dataframe:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
+The \texttt{dplyr} package from the \texttt{tidyverse} introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember.
 
 \hypertarget{change-row-names}{%
 \subsection{Change Row Names}\label{change-row-names}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# Print the header and the first line}
-\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
+\CommentTok{# rename columns}
+\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{,}\StringTok{"humidity"}\NormalTok{,}\StringTok{"temp_c"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
-## 1 2018-10-03 00:00:00        53      24.43      38.8       22.4        44
-##   FlatC_Temp FlatD_Hum FlatD_Temp
-## 1       24.5        49      24.43
-\end{verbatim}
+\hypertarget{adding-a-column-with-mutate}{%
+\subsection{\texorpdfstring{Adding a column with \texttt{mutate()}}{Adding a column with mutate()}}\label{adding-a-column-with-mutate}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# rename columns and print the header and the first line}
-\KeywordTok{names}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{,}\StringTok{"Hum_A"}\NormalTok{,}\StringTok{"Temp_A"}\NormalTok{,}\StringTok{"Hum_B"}\NormalTok{,}\StringTok{"Temp_B"}\NormalTok{,}\StringTok{"Hum_C"}\NormalTok{,}\StringTok{"Temp_C"}\NormalTok{,}\StringTok{"Hum_D"}\NormalTok{, }\StringTok{"Temp_D"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(df, }\DecValTok{1}\NormalTok{)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{# add new column with temperature conversion from celsius to fahrenheit}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{temp_f =}\NormalTok{ temp_c }\OperatorTok{*}\StringTok{ }\FloatTok{1.8} \OperatorTok{+}\StringTok{ }\DecValTok{32}\NormalTok{)}
+
+\CommentTok{# This code does the same, but only with a pipe}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{temp_f =}\NormalTok{ temp_c }\OperatorTok{*}\StringTok{ }\FloatTok{1.8} \OperatorTok{+}\StringTok{ }\DecValTok{32}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
-\begin{verbatim}
-##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
-## 1 2018-10-03 00:00:00    53  24.43  38.8   22.4    44   24.5    49  24.43
-\end{verbatim}
+\hypertarget{subsetting-with-filter}{%
+\subsection{\texorpdfstring{Subsetting with \texttt{filter()}}{Subsetting with filter()}}\label{subsetting-with-filter}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{# add new column with temperature conversion from celsius to fahrenheit}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df,}
+\NormalTok{             timestamp }\OperatorTok{>=}\StringTok{ "2020-01-01 00:00:00"}\NormalTok{,}
+\NormalTok{             timestamp }\OperatorTok{<=}\StringTok{ "2020-12-31 23:45:00"}\NormalTok{)}
+
+\NormalTok{df.high <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, temp_c }\OperatorTok{>}\StringTok{ }\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{quote}
+Note: Whether you put the whole code on one line or split it after a comma does not have an effect on the computation, it is only more readable when the lines aren't too wide.
+\end{quote}
+
+\hypertarget{addremove-columns-with-select}{%
+\subsection{\texorpdfstring{Add/remove columns with \texttt{select()}}{Add/remove columns with select()}}\label{addremove-columns-with-select}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{# Based on the upper example we remove the celsius column after calculation}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{select}\NormalTok{(df, }\OperatorTok{-}\NormalTok{temp_c)}
+
+\CommentTok{# Create new data frame}
+\NormalTok{df.new <-}\StringTok{ }\KeywordTok{select}\NormalTok{(df, timestamp, temp_f)}
+
+\CommentTok{# use select() in a so called dplyr pipe}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{temp_f =}\NormalTok{ temp_c }\OperatorTok{*}\StringTok{ }\FloatTok{1.8} \OperatorTok{+}\StringTok{ }\DecValTok{32}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{temp_c)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{the-pipe}{%
+\section{\texorpdfstring{The pipe \texttt{\%\textgreater{}\%}}{The pipe \%\textgreater\%}}\label{the-pipe}}
+
+With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: \texttt{\%\textgreater{}\%}.
+
+Details can be found a href=``\url{https://rafalab.github.io/dsbook/tidyverse.html}'' target="\_blank"\textgreater Introduction to Data Science - Chapter 4.5
 
 \hypertarget{wide-to-long}{%
 \subsection{Wide to Long}\label{wide-to-long}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{# load test data set}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
 \CommentTok{# create a copy of the dataframe and print the header and the first five line}
 \KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
-## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0   24.5  49.0  24.43
-## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0   24.5  49.0  24.40
-## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7   24.5  48.3  24.38
-## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0   24.5  48.0  24.33
-## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2   24.5  47.7  24.30
+##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
+## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
+## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
+## 3 2018-10-03 02:00:00      53.0      24.40      39.3      22.40      44.7
+## 4 2018-10-03 03:00:00      53.0      24.40      40.3      22.40      45.0
+## 5 2018-10-03 04:00:00      53.3      24.40      41.0      22.37      45.2
+##   FlatC_Temp FlatD_Hum FlatD_Temp
+## 1       24.5      49.0      24.43
+## 2       24.5      49.0      24.40
+## 3       24.5      48.3      24.38
+## 4       24.5      48.0      24.33
+## 5       24.5      47.7      24.30
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# convert wide to long format}
 \NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
-                                             \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{timestamp,}
+                                             \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
                                              \DataTypeTok{names_to =} \StringTok{"sensor"}\NormalTok{,}
                                              \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
-                                             \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{)}
-\NormalTok{                         )}
+                                             \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{))}
 
 \CommentTok{# long format}
 \KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
@@ -683,23 +732,23 @@ Firstly we have to load a dataset into a dataframe:
 \end{Shaded}
 
 \begin{verbatim}
-##              timestamp sensor value
-## 1  2018-10-03 00:00:00  Hum_A 53.00
-## 2  2018-10-03 00:00:00 Temp_A 24.43
-## 3  2018-10-03 00:00:00  Hum_B 38.80
-## 4  2018-10-03 00:00:00 Temp_B 22.40
-## 5  2018-10-03 00:00:00  Hum_C 44.00
-## 6  2018-10-03 00:00:00 Temp_C 24.50
-## 7  2018-10-03 00:00:00  Hum_D 49.00
-## 8  2018-10-03 00:00:00 Temp_D 24.43
-## 9  2018-10-03 01:00:00  Hum_A 53.00
-## 10 2018-10-03 01:00:00 Temp_A 24.40
-## 11 2018-10-03 01:00:00  Hum_B 38.80
-## 12 2018-10-03 01:00:00 Temp_B 22.40
-## 13 2018-10-03 01:00:00  Hum_C 44.00
-## 14 2018-10-03 01:00:00 Temp_C 24.50
-## 15 2018-10-03 01:00:00  Hum_D 49.00
-## 16 2018-10-03 01:00:00 Temp_D 24.40
+##                   time     sensor value
+## 1  2018-10-03 00:00:00  FlatA_Hum 53.00
+## 2  2018-10-03 00:00:00 FlatA_Temp 24.43
+## 3  2018-10-03 00:00:00  FlatB_Hum 38.80
+## 4  2018-10-03 00:00:00 FlatB_Temp 22.40
+## 5  2018-10-03 00:00:00  FlatC_Hum 44.00
+## 6  2018-10-03 00:00:00 FlatC_Temp 24.50
+## 7  2018-10-03 00:00:00  FlatD_Hum 49.00
+## 8  2018-10-03 00:00:00 FlatD_Temp 24.43
+## 9  2018-10-03 01:00:00  FlatA_Hum 53.00
+## 10 2018-10-03 01:00:00 FlatA_Temp 24.40
+## 11 2018-10-03 01:00:00  FlatB_Hum 38.80
+## 12 2018-10-03 01:00:00 FlatB_Temp 22.40
+## 13 2018-10-03 01:00:00  FlatC_Hum 44.00
+## 14 2018-10-03 01:00:00 FlatC_Temp 24.50
+## 15 2018-10-03 01:00:00  FlatD_Hum 49.00
+## 16 2018-10-03 01:00:00 FlatD_Temp 24.40
 \end{verbatim}
 
 \hypertarget{long-to-wide}{%
@@ -713,13 +762,13 @@ Firstly we have to load a dataset into a dataframe:
 \end{Shaded}
 
 \begin{verbatim}
-##             timestamp sensor value
-## 1 2018-10-03 00:00:00  Hum_A 53.00
-## 2 2018-10-03 00:00:00 Temp_A 24.43
-## 3 2018-10-03 00:00:00  Hum_B 38.80
-## 4 2018-10-03 00:00:00 Temp_B 22.40
-## 5 2018-10-03 00:00:00  Hum_C 44.00
-## 6 2018-10-03 00:00:00 Temp_C 24.50
+##                  time     sensor value
+## 1 2018-10-03 00:00:00  FlatA_Hum 53.00
+## 2 2018-10-03 00:00:00 FlatA_Temp 24.43
+## 3 2018-10-03 00:00:00  FlatB_Hum 38.80
+## 4 2018-10-03 00:00:00 FlatB_Temp 22.40
+## 5 2018-10-03 00:00:00  FlatC_Hum 44.00
+## 6 2018-10-03 00:00:00 FlatC_Temp 24.50
 \end{verbatim}
 
 \begin{Shaded}
@@ -736,13 +785,20 @@ Firstly we have to load a dataset into a dataframe:
 \end{Shaded}
 
 \begin{verbatim}
-##             timestamp Hum_A Temp_A Hum_B Temp_B Hum_C Temp_C Hum_D Temp_D
-## 1 2018-10-03 00:00:00  53.0  24.43  38.8  22.40  44.0  24.50  49.0  24.43
-## 2 2018-10-03 01:00:00  53.0  24.40  38.8  22.40  44.0  24.50  49.0  24.40
-## 3 2018-10-03 02:00:00  53.0  24.40  39.3  22.40  44.7  24.50  48.3  24.38
-## 4 2018-10-03 03:00:00  53.0  24.40  40.3  22.40  45.0  24.50  48.0  24.33
-## 5 2018-10-03 04:00:00  53.3  24.40  41.0  22.37  45.2  24.50  47.7  24.30
-## 6 2018-10-03 05:00:00  53.7  24.40  41.2  22.30  47.2  24.57  47.2  24.30
+##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
+## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
+## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
+## 3 2018-10-03 02:00:00      53.0      24.40      39.3      22.40      44.7
+## 4 2018-10-03 03:00:00      53.0      24.40      40.3      22.40      45.0
+## 5 2018-10-03 04:00:00      53.3      24.40      41.0      22.37      45.2
+## 6 2018-10-03 05:00:00      53.7      24.40      41.2      22.30      47.2
+##   FlatC_Temp FlatD_Hum FlatD_Temp
+## 1      24.50      49.0      24.43
+## 2      24.50      49.0      24.40
+## 3      24.50      48.3      24.38
+## 4      24.50      48.0      24.33
+## 5      24.50      47.7      24.30
+## 6      24.57      47.2      24.30
 \end{verbatim}
 
 \hypertarget{DATAWRANGLING-MERGE-TWO-DATAFRAMES}{%
@@ -772,8 +828,27 @@ Firstly we have to load a dataset into a dataframe:
 
 \CommentTok{# merge the two files into a new data frame and keep only rows where all values are available}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfFlatTempHum, }\DataTypeTok{by =} \StringTok{"time"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\KeywordTok{head}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+##                  time centralOutsideTemp FlatA_Hum FlatA_Temp FlatB_Hum
+## 1 2018-10-03 00:00:00              11.80      53.0      24.43      38.8
+## 2 2018-10-03 01:00:00              11.25      53.0      24.40      38.8
+## 3 2018-10-03 02:00:00              11.45      53.0      24.40      39.3
+## 4 2018-10-03 03:00:00              11.40      53.0      24.40      40.3
+## 5 2018-10-03 04:00:00              11.10      53.3      24.40      41.0
+## 6 2018-10-03 05:00:00              11.05      53.7      24.40      41.2
+##   FlatB_Temp FlatC_Hum FlatC_Temp FlatD_Hum FlatD_Temp
+## 1      22.40      44.0      24.50      49.0      24.43
+## 2      22.40      44.0      24.50      49.0      24.40
+## 3      22.40      44.7      24.50      48.3      24.38
+## 4      22.40      45.0      24.50      48.0      24.33
+## 5      22.37      45.2      24.50      47.7      24.30
+## 6      22.30      47.2      24.57      47.2      24.30
+\end{verbatim}
 
 \hypertarget{examples}{%
 \section{Examples}\label{examples}}
@@ -928,12 +1003,16 @@ Finally saving the csv file:
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}
 
+Explorative Data Analysis (EDA) is a technique based on the human characteristic of visual pattern recognition. The purpose of EDA is simple: to learn more about data by visualizing it in different ways. John W. Tukey, considered the founder of exploratory data analysis, once wrote:
+
+\begin{quote}
+``Exploratory data analysis is graphical detective work.'' - John W. Tukey
+\end{quote}
+
 \hypertarget{get-overview}{%
 \section{Get overview}\label{get-overview}}
 
-\begin{quote}
-Get an overview of the whole data set and specific series of it
-\end{quote}
+A first step is getting an overview of the whole data set and specific series of it.
 
 \hypertarget{load-data}{%
 \subsection{Load data}\label{load-data}}
@@ -942,19 +1021,11 @@ Get an overview of the whole data set and specific series of it
 Load test data set in a data frame (e.g.~from a csv-file)
 \end{quote}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{","}\NormalTok{ )}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{names}{%
 \subsection{Names}\label{names}}
 
 \begin{quote}
-show the column headers of the data frame
+show the column headers of a data frame
 \end{quote}
 
 \begin{Shaded}
@@ -964,11 +1035,7 @@ show the column headers of the data frame
 \end{Shaded}
 
 \begin{verbatim}
-##  [1] "time"                 "WthStnPress"          "WthStnHum"           
-##  [4] "WthStnRain"           "WthStnSolRad"         "WthStnTemp"          
-##  [7] "WthStnWindDir"        "WthStnWindSpd"        "BldgEnergyHotwater"  
-## [10] "BldgEnergyHeating"    "FlatHum"              "FlatTemp"            
-## [13] "FlatVolFlowColdwater" "FlatVolFlowHotwater"
+## [1] "time"               "centralOutsideTemp"
 \end{verbatim}
 
 \hypertarget{structure}{%
@@ -985,27 +1052,17 @@ show the structure of the data frame
 \end{Shaded}
 
 \begin{verbatim}
-## 'data.frame':    16394 obs. of  14 variables:
-##  $ time                : chr  "2018-09-30T22:00:00.000Z" "2018-09-30T23:00:00.000Z" "2018-10-01T00:00:00.000Z" "2018-10-01T01:00:00.000Z" ...
-##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
-##  $ WthStnHum           : num  87 87.5 87.5 86.5 88 89 86.5 81 78 80.5 ...
-##  $ WthStnRain          : num  0.8 1.1 0.5 0.5 0.6 0.1 0.2 0 0 0 ...
-##  $ WthStnSolRad        : num  0 0 0 0 0 0 0 0 3 24.5 ...
-##  $ WthStnTemp          : num  12.8 12.4 11.9 11.9 11.6 ...
-##  $ WthStnWindDir       : num  157.5 11.2 146.2 157.5 146.2 ...
-##  $ WthStnWindSpd       : num  3.2 1.6 2.4 0.8 2.4 0.8 0.8 3.2 4 3.2 ...
-##  $ BldgEnergyHotwater  : num  0 19 0 0 0 ...
-##  $ BldgEnergyHeating   : num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ FlatHum             : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ FlatTemp            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ FlatVolFlowColdwater: num  0.006 0 0 0 0.006 ...
-##  $ FlatVolFlowHotwater : num  0 0 0 0 0 ...
+## 'data.frame':    21865 obs. of  2 variables:
+##  $ time              : chr  "2018-03-21 11:00:00" "2018-03-21 12:00:00" "2018-03-21 13:00:00" "2018-03-21 14:00:00" ...
+##  $ centralOutsideTemp: chr  "5.2" "6.7" "6.4" "6" ...
 \end{verbatim}
 
 \hypertarget{headtail}{%
 \subsection{Head/Tail}\label{headtail}}
 
-The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.
+\begin{quote}
+Show the first and last values
+\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1014,27 +1071,13 @@ The head and tail functions are generic, so they will work whether your data is 
 \end{Shaded}
 
 \begin{verbatim}
-##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0
+##                  time centralOutsideTemp
+## 1 2018-03-21 11:00:00                5.2
+## 2 2018-03-21 12:00:00                6.7
+## 3 2018-03-21 13:00:00                6.4
+## 4 2018-03-21 14:00:00                  6
+## 5 2018-03-21 15:00:00               5.25
+## 6 2018-03-21 16:00:00                4.7
 \end{verbatim}
 
 \begin{Shaded}
@@ -1044,76 +1087,43 @@ The head and tail functions are generic, so they will work whether your data is 
 \end{Shaded}
 
 \begin{verbatim}
-##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
-## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
-## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0
-## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0
-## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0
-## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA
-##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater
-## 16389     22.000        162.00      0.000000                 NA
-## 16390     20.175        124.25      1.609340                 NA
-## 16391     19.350        125.00      0.402335                 NA
-## 16392     19.900         93.00      1.609340                 NA
-## 16393     20.625        116.25      2.414010                 NA
-## 16394         NA            NA            NA                 NA
-##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater
-## 16389                NA      NA       NA                   NA
-## 16390                NA      NA       NA                   NA
-## 16391                NA      NA       NA                   NA
-## 16392                NA      NA       NA                   NA
-## 16393                NA      NA       NA                   NA
-## 16394                NA      NA       NA                   NA
-##       FlatVolFlowHotwater
-## 16389                  NA
-## 16390                  NA
-## 16391                  NA
-## 16392                  NA
-## 16393                  NA
-## 16394                  NA
+##                      time centralOutsideTemp
+## 21860 2020-09-17 06:00:00               16.6
+## 21861 2020-09-17 07:00:00               19.3
+## 21862 2020-09-17 08:00:00              21.85
+## 21863 2020-09-17 09:00:00               24.6
+## 21864 2020-09-17 10:00:00              26.65
+## 21865 2020-09-17 11:00:00               28.1
 \end{verbatim}
+
+\begin{quote}
+Note: if you want to show only the first three entries, you can type \texttt{head(df,3)}
+\end{quote}
 
 \hypertarget{five-number-summary}{%
 \subsection{Five number summary}\label{five-number-summary}}
 
 \begin{quote}
-reveals details of a specific series
+reveals details like object classes
 \end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{summary}\NormalTok{(df}\OperatorTok{$}\NormalTok{WthStnTemp)}
+\KeywordTok{summary}\NormalTok{(df)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA's 
-##   -5.25    5.50   11.25   11.99   17.35   40.30      12
+##      time           centralOutsideTemp
+##  Length:21865       Length:21865      
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character
 \end{verbatim}
 
-\hypertarget{basic-plots}{%
-\section{Basic plots}\label{basic-plots}}
+\hypertarget{quickly-exploring-data}{%
+\section{Quickly Exploring Data}\label{quickly-exploring-data}}
 
-\hypertarget{scatterplot}{%
-\subsection{Scatterplot}\label{scatterplot}}
-
-\hypertarget{plot}{%
-\subsubsection{plot()}\label{plot}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# load data set}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{","}\NormalTok{)}
-
-\CommentTok{# crate simple scatterplot}
-\KeywordTok{plot}\NormalTok{(df}\OperatorTok{$}\NormalTok{WthStnTemp, df}\OperatorTok{$}\NormalTok{BldgEnergyHeating)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/scatterplot plot-1.pdf}
+There is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book. Please refer to the R Graphics Cookbook from Winston Chang - Chapter 2 ``Quickly Exploring Data''.
 
 \hypertarget{part-data-visualizations}{%
 \part{Data Visualizations}\label{part-data-visualizations}}
@@ -1132,7 +1142,7 @@ tbd
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-4}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-8}
 \end{figure}
 
 This is like a standard time series plot except that the data are plotted against the ``seasons'' for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1249,7 +1259,7 @@ Hints:
 Plot a seasonal month plot as described in Hyndman and Athanasopoulos (2014, chapter 2.5):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-5}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-9}
 \end{figure}
 
 Here the seasonal patterns for each season are collected together in seprate mini time plots. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1361,7 +1371,7 @@ Create a new script, copy/paste the following code and run it:
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-6}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-10}
 \end{figure}
 
 This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1457,7 +1467,7 @@ To highlight an energy optimization in a season diagram, we can gray out the sea
 In the following we will create the following plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-7}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-11}
 \end{figure}
 
 \hypertarget{data-basis-3}{%

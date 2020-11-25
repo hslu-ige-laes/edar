@@ -32,7 +32,7 @@
   
   
 <link rel="prev" href="explorative-data-analysis.html"/>
-<link rel="next" href="basic-plots.html"/>
+<link rel="next" href="quickly-exploring-data.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -173,14 +173,19 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>5.1.1</b> Year, Month, Day, Day of Week</a></li>
 <li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.2</b> Season of Year</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>5.2</b> Data Frames</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="data-frames.html"><a href="data-frames.html#change-row-names"><i class="fa fa-check"></i><b>5.2.1</b> Change Row Names</a></li>
-<li class="chapter" data-level="5.2.2" data-path="data-frames.html"><a href="data-frames.html#wide-to-long"><i class="fa fa-check"></i><b>5.2.2</b> Wide to Long</a></li>
-<li class="chapter" data-level="5.2.3" data-path="data-frames.html"><a href="data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>5.2.3</b> Long to Wide</a></li>
-<li class="chapter" data-level="5.2.4" data-path="data-frames.html"><a href="data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>5.2.4</b> Merge two Dataframes</a></li>
+<li class="chapter" data-level="5.2" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html"><i class="fa fa-check"></i><b>5.2</b> Manipulating Data Frames</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#change-row-names"><i class="fa fa-check"></i><b>5.2.1</b> Change Row Names</a></li>
+<li class="chapter" data-level="5.2.2" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#adding-a-column-with-mutate"><i class="fa fa-check"></i><b>5.2.2</b> Adding a column with <code>mutate()</code></a></li>
+<li class="chapter" data-level="5.2.3" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#subsetting-with-filter"><i class="fa fa-check"></i><b>5.2.3</b> Subsetting with <code>filter()</code></a></li>
+<li class="chapter" data-level="5.2.4" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#addremove-columns-with-select"><i class="fa fa-check"></i><b>5.2.4</b> Add/remove columns with <code>select()</code></a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>5.3</b> Examples</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>5.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
+<li class="chapter" data-level="5.3" data-path="the-pipe.html"><a href="the-pipe.html"><i class="fa fa-check"></i><b>5.3</b> The pipe <code>%&gt;%</code></a><ul>
+<li class="chapter" data-level="5.3.1" data-path="the-pipe.html"><a href="the-pipe.html#wide-to-long"><i class="fa fa-check"></i><b>5.3.1</b> Wide to Long</a></li>
+<li class="chapter" data-level="5.3.2" data-path="the-pipe.html"><a href="the-pipe.html#long-to-wide"><i class="fa fa-check"></i><b>5.3.2</b> Long to Wide</a></li>
+<li class="chapter" data-level="5.3.3" data-path="the-pipe.html"><a href="the-pipe.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>5.3.3</b> Merge two Dataframes</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>5.4</b> Examples</a><ul>
+<li class="chapter" data-level="5.4.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>5.4.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
 </ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Explorative Data Analysis</a><ul>
@@ -191,9 +196,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.4" data-path="get-overview.html"><a href="get-overview.html#headtail"><i class="fa fa-check"></i><b>6.1.4</b> Head/Tail</a></li>
 <li class="chapter" data-level="6.1.5" data-path="get-overview.html"><a href="get-overview.html#five-number-summary"><i class="fa fa-check"></i><b>6.1.5</b> Five number summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="basic-plots.html"><a href="basic-plots.html"><i class="fa fa-check"></i><b>6.2</b> Basic plots</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="basic-plots.html"><a href="basic-plots.html#scatterplot"><i class="fa fa-check"></i><b>6.2.1</b> Scatterplot</a></li>
-</ul></li>
+<li class="chapter" data-level="6.2" data-path="quickly-exploring-data.html"><a href="quickly-exploring-data.html"><i class="fa fa-check"></i><b>6.2</b> Quickly Exploring Data</a></li>
 </ul></li>
 <li class="part"><span><b>II Data Visualizations</b></span></li>
 <li class="chapter" data-level="7" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>7</b> Seasonal Plots</a><ul>
@@ -313,30 +316,21 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="get-overview" class="section level2">
 <h2><span class="header-section-number">6.1</span> Get overview</h2>
-<blockquote>
-<p>Get an overview of the whole data set and specific series of it</p>
-</blockquote>
+<p>A first step is getting an overview of the whole data set and specific series of it.</p>
 <div id="load-data" class="section level3">
 <h3><span class="header-section-number">6.1.1</span> Load data</h3>
 <blockquote>
 <p>Load test data set in a data frame (e.g. from a csv-file)</p>
 </blockquote>
-<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/retomarek/r/raw/master/datasets/buildingMonitoringTestDataSet.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb41-2" title="2">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb41-3" title="3">               <span class="dt">sep =</span><span class="st">&quot;,&quot;</span> )</a></code></pre></div>
 <p><br></p>
 </div>
 <div id="names" class="section level3">
 <h3><span class="header-section-number">6.1.2</span> Names</h3>
 <blockquote>
-<p>show the column headers of the data frame</p>
+<p>show the column headers of a data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
-<pre><code>##  [1] &quot;time&quot;                 &quot;WthStnPress&quot;          &quot;WthStnHum&quot;           
-##  [4] &quot;WthStnRain&quot;           &quot;WthStnSolRad&quot;         &quot;WthStnTemp&quot;          
-##  [7] &quot;WthStnWindDir&quot;        &quot;WthStnWindSpd&quot;        &quot;BldgEnergyHotwater&quot;  
-## [10] &quot;BldgEnergyHeating&quot;    &quot;FlatHum&quot;              &quot;FlatTemp&quot;            
-## [13] &quot;FlatVolFlowColdwater&quot; &quot;FlatVolFlowHotwater&quot;</code></pre>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="kw">names</span>(df)</a></code></pre></div>
+<pre><code>## [1] &quot;time&quot;               &quot;centralOutsideTemp&quot;</code></pre>
 <p><br></p>
 </div>
 <div id="structure" class="section level3">
@@ -344,88 +338,48 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <blockquote>
 <p>show the structure of the data frame</p>
 </blockquote>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
-<pre><code>## &#39;data.frame&#39;:    16394 obs. of  14 variables:
-##  $ time                : chr  &quot;2018-09-30T22:00:00.000Z&quot; &quot;2018-09-30T23:00:00.000Z&quot; &quot;2018-10-01T00:00:00.000Z&quot; &quot;2018-10-01T01:00:00.000Z&quot; ...
-##  $ WthStnPress         : num  1012 1012 1011 1011 1011 ...
-##  $ WthStnHum           : num  87 87.5 87.5 86.5 88 89 86.5 81 78 80.5 ...
-##  $ WthStnRain          : num  0.8 1.1 0.5 0.5 0.6 0.1 0.2 0 0 0 ...
-##  $ WthStnSolRad        : num  0 0 0 0 0 0 0 0 3 24.5 ...
-##  $ WthStnTemp          : num  12.8 12.4 11.9 11.9 11.6 ...
-##  $ WthStnWindDir       : num  157.5 11.2 146.2 157.5 146.2 ...
-##  $ WthStnWindSpd       : num  3.2 1.6 2.4 0.8 2.4 0.8 0.8 3.2 4 3.2 ...
-##  $ BldgEnergyHotwater  : num  0 19 0 0 0 ...
-##  $ BldgEnergyHeating   : num  0 0 0 0 0 0 0 0 0 0 ...
-##  $ FlatHum             : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ FlatTemp            : num  NA NA NA NA NA NA NA NA NA NA ...
-##  $ FlatVolFlowColdwater: num  0.006 0 0 0 0.006 ...
-##  $ FlatVolFlowHotwater : num  0 0 0 0 0 ...</code></pre>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="kw">str</span>(df)</a></code></pre></div>
+<pre><code>## &#39;data.frame&#39;:    21865 obs. of  2 variables:
+##  $ time              : chr  &quot;2018-03-21 11:00:00&quot; &quot;2018-03-21 12:00:00&quot; &quot;2018-03-21 13:00:00&quot; &quot;2018-03-21 14:00:00&quot; ...
+##  $ centralOutsideTemp: chr  &quot;5.2&quot; &quot;6.7&quot; &quot;6.4&quot; &quot;6&quot; ...</code></pre>
 <p><br></p>
 </div>
 <div id="headtail" class="section level3">
 <h3><span class="header-section-number">6.1.4</span> Head/Tail</h3>
-<p>The head and tail functions are generic, so they will work whether your data is stored in a simple data frane, a zoo object, or an xts object.</p>
-<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
-<pre><code>##                       time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 1 2018-09-30T22:00:00.000Z     1012.30      87.0        0.8            0
-## 2 2018-09-30T23:00:00.000Z     1011.90      87.5        1.1            0
-## 3 2018-10-01T00:00:00.000Z     1011.45      87.5        0.5            0
-## 4 2018-10-01T01:00:00.000Z     1010.90      86.5        0.5            0
-## 5 2018-10-01T02:00:00.000Z     1010.55      88.0        0.6            0
-## 6 2018-10-01T03:00:00.000Z     1010.20      89.0        0.1            0
-##   WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater BldgEnergyHeating
-## 1      12.80        157.50           3.2                  0                 0
-## 2      12.35         11.25           1.6                 19                 0
-## 3      11.90        146.25           2.4                  0                 0
-## 4      11.90        157.50           0.8                  0                 0
-## 5      11.60        146.25           2.4                  0                 0
-## 6      11.75         22.50           0.8                  0                 0
-##   FlatHum FlatTemp FlatVolFlowColdwater FlatVolFlowHotwater
-## 1      NA       NA                0.006                   0
-## 2      NA       NA                0.000                   0
-## 3      NA       NA                0.000                   0
-## 4      NA       NA                0.000                   0
-## 5      NA       NA                0.006                   0
-## 6      NA       NA                0.000                   0</code></pre>
-<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
-<pre><code>##                           time WthStnPress WthStnHum WthStnRain WthStnSolRad
-## 16389 2020-08-13T18:00:00.000Z    1011.650     74.75    2.19964            9
-## 16390 2020-08-13T19:00:00.000Z    1012.000     79.00    2.19964            0
-## 16391 2020-08-13T20:00:00.000Z    1011.950     78.25    2.19964            0
-## 16392 2020-08-13T21:00:00.000Z    1012.025     76.50    2.19964            0
-## 16393 2020-08-13T22:00:00.000Z    1012.250     73.00    0.00000            0
-## 16394 2020-08-13T23:00:00.000Z          NA        NA         NA           NA
-##       WthStnTemp WthStnWindDir WthStnWindSpd BldgEnergyHotwater
-## 16389     22.000        162.00      0.000000                 NA
-## 16390     20.175        124.25      1.609340                 NA
-## 16391     19.350        125.00      0.402335                 NA
-## 16392     19.900         93.00      1.609340                 NA
-## 16393     20.625        116.25      2.414010                 NA
-## 16394         NA            NA            NA                 NA
-##       BldgEnergyHeating FlatHum FlatTemp FlatVolFlowColdwater
-## 16389                NA      NA       NA                   NA
-## 16390                NA      NA       NA                   NA
-## 16391                NA      NA       NA                   NA
-## 16392                NA      NA       NA                   NA
-## 16393                NA      NA       NA                   NA
-## 16394                NA      NA       NA                   NA
-##       FlatVolFlowHotwater
-## 16389                  NA
-## 16390                  NA
-## 16391                  NA
-## 16392                  NA
-## 16393                  NA
-## 16394                  NA</code></pre>
+<blockquote>
+<p>Show the first and last values</p>
+</blockquote>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="kw">head</span>(df)</a></code></pre></div>
+<pre><code>##                  time centralOutsideTemp
+## 1 2018-03-21 11:00:00                5.2
+## 2 2018-03-21 12:00:00                6.7
+## 3 2018-03-21 13:00:00                6.4
+## 4 2018-03-21 14:00:00                  6
+## 5 2018-03-21 15:00:00               5.25
+## 6 2018-03-21 16:00:00                4.7</code></pre>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1"><span class="kw">tail</span>(df)</a></code></pre></div>
+<pre><code>##                      time centralOutsideTemp
+## 21860 2020-09-17 06:00:00               16.6
+## 21861 2020-09-17 07:00:00               19.3
+## 21862 2020-09-17 08:00:00              21.85
+## 21863 2020-09-17 09:00:00               24.6
+## 21864 2020-09-17 10:00:00              26.65
+## 21865 2020-09-17 11:00:00               28.1</code></pre>
+<blockquote>
+<p>Note: if you want to show only the first three entries, you can type <code>head(df,3)</code></p>
+</blockquote>
 <p><br></p>
 </div>
 <div id="five-number-summary" class="section level3">
 <h3><span class="header-section-number">6.1.5</span> Five number summary</h3>
 <blockquote>
-<p>reveals details of a specific series</p>
+<p>reveals details like object classes</p>
 </blockquote>
-<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="kw">summary</span>(df<span class="op">$</span>WthStnTemp)</a></code></pre></div>
-<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max.    NA&#39;s 
-##   -5.25    5.50   11.25   11.99   17.35   40.30      12</code></pre>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="kw">summary</span>(df)</a></code></pre></div>
+<pre><code>##      time           centralOutsideTemp
+##  Length:21865       Length:21865      
+##  Class :character   Class :character  
+##  Mode  :character   Mode  :character</code></pre>
 <p><br></p>
 </div>
 </div>
@@ -435,7 +389,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
         </div>
       </div>
 <a href="explorative-data-analysis.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="basic-plots.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quickly-exploring-data.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
