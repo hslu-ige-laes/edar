@@ -1,7 +1,7 @@
-# (PART) R Basics {-}
-
 # Loading Data
-## Csv File
+
+Load data from `*.csv` files
+
 ```{r eval=FALSE}
 df <- read.csv("datafile.csv")
 df <- read.csv("datafile.csv", header=FALSE, stringsAsFactors=FALSE)
@@ -11,13 +11,17 @@ df <- read.csv("https://github.com/retomarek/r/raw/master/datasets/buildingMonit
                stringsAsFactors=FALSE,
                sep =",",
                na.strings = c("", "NA"))
+
+# show the first lines of the so called "data frame"
+head(df)
 ```
-Attention: By default, strings in the data are treated as factors. 
-read.csv() is a convenience wrapper function around read.table(). If you need more control over the input, see ?read.table
 
-<br>
+> Attention: By default, strings in the data are treated as factors, so add `stringsAsFactors=FALSE`
+> set your cursor to the function name `read.csv()` and press F1. Then you get in R Studio bottom right in the tab `Help` information about other function arguments you can use.
 
-## Excel File
+
+Load data from `*.xlsx` Excel files:
+
 ```{r eval=FALSE}
 # Only need to install once
 install.packages("xlsx")
@@ -27,6 +31,9 @@ library(xslx)
 df <- read.xlsx("datafile.xlsx", 1)
 df <- read.xlsx("datafile.xls", sheetIndex=2)
 df <- read.xlsx("datafile.xls", sheetName="Revenues")
+
+# show the first lines of the so called "data frame"
+head(df)
 ```
 
 For reading older Excel files in the .xls format, the gdata package has the function read.xls():
@@ -40,8 +47,10 @@ df <- read.xls("datafile.xls")
 df <- read.xls("datafile.xls", sheet=2)
 ```
 
-Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.
+> Both the xlsx and gdata packages require other software to be installed on your computer. For xlsx, you need to install Java on your machine. For gdata, you need Perl, which comes as standard on Linux and Mac OS X, but not Windows. On Windows, you’ll need ActiveState Perl. The Community Edition can be obtained for free.
 
-<br>
+More detailed information on how to load data into R you can find here:
 
+- <a href="https://rafalab.github.io/dsbook/importing-data.html" target="_blank">Introduction to Data Science - Chapter 5 "Importing data"</a>
+- <a href="https://smogdr.github.io/edar_coursebook/rprog2.html" target="_blank">Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"</a>
 

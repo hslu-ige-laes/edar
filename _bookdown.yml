@@ -6,6 +6,7 @@ rmd_files: [
 
   "gettingStarted.Rmd",
 
+  "partRBasics/introductionRBasics.Rmd",
   "partRBasics/loadingData.Rmd",
   "partRBasics/dataWrangling.Rmd",
   "partRBasics/eda.Rmd",

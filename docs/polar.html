@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>6.3 Polar | Energy Data Analysis with R</title>
+  <title>7.3 Polar | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="6.3 Polar | Energy Data Analysis with R" />
+  <meta property="og:title" content="7.3 Polar | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="6.3 Polar | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="7.3 Polar | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -162,129 +162,126 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="2.1.1" data-path="installation.html"><a href="installation.html#download-and-install-r"><i class="fa fa-check"></i><b>2.1.1</b> Download and Install R</a></li>
 <li class="chapter" data-level="2.1.2" data-path="installation.html"><a href="installation.html#download-and-install-rstudio"><i class="fa fa-check"></i><b>2.1.2</b> Download and Install RStudio</a></li>
 </ul></li>
-<li class="chapter" data-level="2.2" data-path="install-required-packages.html"><a href="install-required-packages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
-<li class="chapter" data-level="2.3" data-path="create-an-r-script.html"><a href="create-an-r-script.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
-<li class="chapter" data-level="2.4" data-path="whats-next.html"><a href="whats-next.html"><i class="fa fa-check"></i><b>2.4</b> What’s next?</a></li>
+<li class="chapter" data-level="2.2" data-path="installationPackages.html"><a href="installationPackages.html"><i class="fa fa-check"></i><b>2.2</b> Install required packages</a></li>
+<li class="chapter" data-level="2.3" data-path="createFirstScript.html"><a href="createFirstScript.html"><i class="fa fa-check"></i><b>2.3</b> Create an R Script</a></li>
 </ul></li>
 <li class="part"><span><b>I R Basics</b></span></li>
-<li class="chapter" data-level="3" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>3</b> Loading Data</a><ul>
-<li class="chapter" data-level="3.1" data-path="csv-file.html"><a href="csv-file.html"><i class="fa fa-check"></i><b>3.1</b> Csv File</a></li>
-<li class="chapter" data-level="3.2" data-path="excel-file.html"><a href="excel-file.html"><i class="fa fa-check"></i><b>3.2</b> Excel File</a></li>
+<li class="chapter" data-level="3" data-path="introduction-to-r-basics.html"><a href="introduction-to-r-basics.html"><i class="fa fa-check"></i><b>3</b> Introduction to R Basics</a></li>
+<li class="chapter" data-level="4" data-path="loading-data.html"><a href="loading-data.html"><i class="fa fa-check"></i><b>4</b> Loading Data</a></li>
+<li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a><ul>
+<li class="chapter" data-level="5.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>5.1</b> Add Metadata for later filtering</a><ul>
+<li class="chapter" data-level="5.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>5.1.1</b> Year, Month, Day, Day of Week</a></li>
+<li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.2</b> Season of Year</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>4</b> Data Wrangling</a><ul>
-<li class="chapter" data-level="4.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>4.1</b> Add Metadata for later filtering</a><ul>
-<li class="chapter" data-level="4.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>4.1.1</b> Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="4.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>4.1.2</b> Season of Year</a></li>
+<li class="chapter" data-level="5.2" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>5.2</b> Data Frames</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-frames.html"><a href="data-frames.html#change-row-names"><i class="fa fa-check"></i><b>5.2.1</b> Change Row Names</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-frames.html"><a href="data-frames.html#wide-to-long"><i class="fa fa-check"></i><b>5.2.2</b> Wide to Long</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-frames.html"><a href="data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>5.2.3</b> Long to Wide</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-frames.html"><a href="data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>5.2.4</b> Merge two Dataframes</a></li>
 </ul></li>
-<li class="chapter" data-level="4.2" data-path="data-frames.html"><a href="data-frames.html"><i class="fa fa-check"></i><b>4.2</b> Data Frames</a><ul>
-<li class="chapter" data-level="4.2.1" data-path="data-frames.html"><a href="data-frames.html#change-row-names"><i class="fa fa-check"></i><b>4.2.1</b> Change Row Names</a></li>
-<li class="chapter" data-level="4.2.2" data-path="data-frames.html"><a href="data-frames.html#wide-to-long"><i class="fa fa-check"></i><b>4.2.2</b> Wide to Long</a></li>
-<li class="chapter" data-level="4.2.3" data-path="data-frames.html"><a href="data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>4.2.3</b> Long to Wide</a></li>
-<li class="chapter" data-level="4.2.4" data-path="data-frames.html"><a href="data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>4.2.4</b> Merge two Dataframes</a></li>
-</ul></li>
-<li class="chapter" data-level="4.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>4.3</b> Examples</a><ul>
-<li class="chapter" data-level="4.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>4.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
+<li class="chapter" data-level="5.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>5.3</b> Examples</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>5.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="5" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>5</b> Explorative Data Analysis</a><ul>
-<li class="chapter" data-level="5.1" data-path="get-overview.html"><a href="get-overview.html"><i class="fa fa-check"></i><b>5.1</b> Get overview</a><ul>
-<li class="chapter" data-level="5.1.1" data-path="get-overview.html"><a href="get-overview.html#load-data"><i class="fa fa-check"></i><b>5.1.1</b> Load data</a></li>
-<li class="chapter" data-level="5.1.2" data-path="get-overview.html"><a href="get-overview.html#names"><i class="fa fa-check"></i><b>5.1.2</b> Names</a></li>
-<li class="chapter" data-level="5.1.3" data-path="get-overview.html"><a href="get-overview.html#structure"><i class="fa fa-check"></i><b>5.1.3</b> Structure</a></li>
-<li class="chapter" data-level="5.1.4" data-path="get-overview.html"><a href="get-overview.html#headtail"><i class="fa fa-check"></i><b>5.1.4</b> Head/Tail</a></li>
-<li class="chapter" data-level="5.1.5" data-path="get-overview.html"><a href="get-overview.html#five-number-summary"><i class="fa fa-check"></i><b>5.1.5</b> Five number summary</a></li>
+<li class="chapter" data-level="6" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="6.1" data-path="get-overview.html"><a href="get-overview.html"><i class="fa fa-check"></i><b>6.1</b> Get overview</a><ul>
+<li class="chapter" data-level="6.1.1" data-path="get-overview.html"><a href="get-overview.html#load-data"><i class="fa fa-check"></i><b>6.1.1</b> Load data</a></li>
+<li class="chapter" data-level="6.1.2" data-path="get-overview.html"><a href="get-overview.html#names"><i class="fa fa-check"></i><b>6.1.2</b> Names</a></li>
+<li class="chapter" data-level="6.1.3" data-path="get-overview.html"><a href="get-overview.html#structure"><i class="fa fa-check"></i><b>6.1.3</b> Structure</a></li>
+<li class="chapter" data-level="6.1.4" data-path="get-overview.html"><a href="get-overview.html#headtail"><i class="fa fa-check"></i><b>6.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="6.1.5" data-path="get-overview.html"><a href="get-overview.html#five-number-summary"><i class="fa fa-check"></i><b>6.1.5</b> Five number summary</a></li>
 </ul></li>
-<li class="chapter" data-level="5.2" data-path="basic-plots.html"><a href="basic-plots.html"><i class="fa fa-check"></i><b>5.2</b> Basic plots</a><ul>
-<li class="chapter" data-level="5.2.1" data-path="basic-plots.html"><a href="basic-plots.html#scatterplot"><i class="fa fa-check"></i><b>5.2.1</b> Scatterplot</a></li>
+<li class="chapter" data-level="6.2" data-path="basic-plots.html"><a href="basic-plots.html"><i class="fa fa-check"></i><b>6.2</b> Basic plots</a><ul>
+<li class="chapter" data-level="6.2.1" data-path="basic-plots.html"><a href="basic-plots.html#scatterplot"><i class="fa fa-check"></i><b>6.2.1</b> Scatterplot</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Data Visualizations</b></span></li>
-<li class="chapter" data-level="6" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>6</b> Seasonal Plots</a><ul>
-<li class="chapter" data-level="6.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>6.1</b> Overlapping</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="overlapping.html"><a href="overlapping.html#goal"><i class="fa fa-check"></i><b>6.1.1</b> Goal</a></li>
-<li class="chapter" data-level="6.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis"><i class="fa fa-check"></i><b>6.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="6.1.3" data-path="overlapping.html"><a href="overlapping.html#solution"><i class="fa fa-check"></i><b>6.1.3</b> Solution</a></li>
-<li class="chapter" data-level="6.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion"><i class="fa fa-check"></i><b>6.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="7" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>7</b> Seasonal Plots</a><ul>
+<li class="chapter" data-level="7.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>7.1</b> Overlapping</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="overlapping.html"><a href="overlapping.html#goal"><i class="fa fa-check"></i><b>7.1.1</b> Goal</a></li>
+<li class="chapter" data-level="7.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis"><i class="fa fa-check"></i><b>7.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="7.1.3" data-path="overlapping.html"><a href="overlapping.html#solution"><i class="fa fa-check"></i><b>7.1.3</b> Solution</a></li>
+<li class="chapter" data-level="7.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion"><i class="fa fa-check"></i><b>7.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>6.2</b> Mini Plots</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-1"><i class="fa fa-check"></i><b>6.2.1</b> Goal</a></li>
-<li class="chapter" data-level="6.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-1"><i class="fa fa-check"></i><b>6.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="6.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-1"><i class="fa fa-check"></i><b>6.2.3</b> Solution</a></li>
-<li class="chapter" data-level="6.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-1"><i class="fa fa-check"></i><b>6.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>7.2</b> Mini Plots</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-1"><i class="fa fa-check"></i><b>7.2.1</b> Goal</a></li>
+<li class="chapter" data-level="7.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-1"><i class="fa fa-check"></i><b>7.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="7.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-1"><i class="fa fa-check"></i><b>7.2.3</b> Solution</a></li>
+<li class="chapter" data-level="7.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-1"><i class="fa fa-check"></i><b>7.2.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>6.3</b> Polar</a><ul>
-<li class="chapter" data-level="6.3.1" data-path="polar.html"><a href="polar.html#goal-2"><i class="fa fa-check"></i><b>6.3.1</b> Goal</a></li>
-<li class="chapter" data-level="6.3.2" data-path="polar.html"><a href="polar.html#data-basis-2"><i class="fa fa-check"></i><b>6.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="6.3.3" data-path="polar.html"><a href="polar.html#solution-2"><i class="fa fa-check"></i><b>6.3.3</b> Solution</a></li>
-<li class="chapter" data-level="6.3.4" data-path="polar.html"><a href="polar.html#discussion-2"><i class="fa fa-check"></i><b>6.3.4</b> Discussion</a></li>
+<li class="chapter" data-level="7.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>7.3</b> Polar</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="polar.html"><a href="polar.html#goal-2"><i class="fa fa-check"></i><b>7.3.1</b> Goal</a></li>
+<li class="chapter" data-level="7.3.2" data-path="polar.html"><a href="polar.html#data-basis-2"><i class="fa fa-check"></i><b>7.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="7.3.3" data-path="polar.html"><a href="polar.html#solution-2"><i class="fa fa-check"></i><b>7.3.3</b> Solution</a></li>
+<li class="chapter" data-level="7.3.4" data-path="polar.html"><a href="polar.html#discussion-2"><i class="fa fa-check"></i><b>7.3.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="6.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>6.4</b> Before/After Optimization</a><ul>
-<li class="chapter" data-level="6.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-3"><i class="fa fa-check"></i><b>6.4.1</b> Goal</a></li>
-<li class="chapter" data-level="6.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-3"><i class="fa fa-check"></i><b>6.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="6.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-3"><i class="fa fa-check"></i><b>6.4.3</b> Solution</a></li>
-<li class="chapter" data-level="6.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>6.4.4</b> Discussion</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="7" data-path="decomposition.html"><a href="decomposition.html"><i class="fa fa-check"></i><b>7</b> Decomposition</a><ul>
-<li class="chapter" data-level="7.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>7.1</b> Long term</a><ul>
-<li class="chapter" data-level="7.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>7.1.1</b> Goal</a></li>
-<li class="chapter" data-level="7.1.2" data-path="long-term.html"><a href="long-term.html#basis"><i class="fa fa-check"></i><b>7.1.2</b> Basis</a></li>
-<li class="chapter" data-level="7.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>7.1.3</b> Solution</a></li>
-<li class="chapter" data-level="7.1.4" data-path="long-term.html"><a href="long-term.html#discussion-4"><i class="fa fa-check"></i><b>7.1.4</b> Discussion</a></li>
-<li class="chapter" data-level="7.1.5" data-path="long-term.html"><a href="long-term.html#see-also"><i class="fa fa-check"></i><b>7.1.5</b> See Also</a></li>
-</ul></li>
-<li class="chapter" data-level="7.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>7.2</b> Short term</a><ul>
-<li class="chapter" data-level="7.2.1" data-path="short-term.html"><a href="short-term.html#task"><i class="fa fa-check"></i><b>7.2.1</b> Task</a></li>
-<li class="chapter" data-level="7.2.2" data-path="short-term.html"><a href="short-term.html#basis-1"><i class="fa fa-check"></i><b>7.2.2</b> Basis</a></li>
-<li class="chapter" data-level="7.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>7.2.3</b> Solution</a></li>
-<li class="chapter" data-level="7.2.4" data-path="short-term.html"><a href="short-term.html#discussion-5"><i class="fa fa-check"></i><b>7.2.4</b> Discussion</a></li>
-<li class="chapter" data-level="7.2.5" data-path="short-term.html"><a href="short-term.html#see-also-1"><i class="fa fa-check"></i><b>7.2.5</b> See Also</a></li>
+<li class="chapter" data-level="7.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>7.4</b> Before/After Optimization</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-3"><i class="fa fa-check"></i><b>7.4.1</b> Goal</a></li>
+<li class="chapter" data-level="7.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-3"><i class="fa fa-check"></i><b>7.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="7.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-3"><i class="fa fa-check"></i><b>7.4.3</b> Solution</a></li>
+<li class="chapter" data-level="7.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>7.4.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>8</b> Heat Maps</a><ul>
-<li class="chapter" data-level="8.1" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>8.1</b> Median-Weeks</a></li>
-<li class="chapter" data-level="8.2" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>8.2</b> Calendar</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="calendar.html"><a href="calendar.html#discussion-6"><i class="fa fa-check"></i><b>8.2.1</b> Discussion</a></li>
+<li class="chapter" data-level="8" data-path="decomposition.html"><a href="decomposition.html"><i class="fa fa-check"></i><b>8</b> Decomposition</a><ul>
+<li class="chapter" data-level="8.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>8.1</b> Long term</a><ul>
+<li class="chapter" data-level="8.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>8.1.1</b> Goal</a></li>
+<li class="chapter" data-level="8.1.2" data-path="long-term.html"><a href="long-term.html#basis"><i class="fa fa-check"></i><b>8.1.2</b> Basis</a></li>
+<li class="chapter" data-level="8.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>8.1.3</b> Solution</a></li>
+<li class="chapter" data-level="8.1.4" data-path="long-term.html"><a href="long-term.html#discussion-4"><i class="fa fa-check"></i><b>8.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="8.1.5" data-path="long-term.html"><a href="long-term.html#see-also"><i class="fa fa-check"></i><b>8.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="8.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>8.2</b> Short term</a><ul>
+<li class="chapter" data-level="8.2.1" data-path="short-term.html"><a href="short-term.html#task"><i class="fa fa-check"></i><b>8.2.1</b> Task</a></li>
+<li class="chapter" data-level="8.2.2" data-path="short-term.html"><a href="short-term.html#basis-1"><i class="fa fa-check"></i><b>8.2.2</b> Basis</a></li>
+<li class="chapter" data-level="8.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>8.2.3</b> Solution</a></li>
+<li class="chapter" data-level="8.2.4" data-path="short-term.html"><a href="short-term.html#discussion-5"><i class="fa fa-check"></i><b>8.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="8.2.5" data-path="short-term.html"><a href="short-term.html#see-also-1"><i class="fa fa-check"></i><b>8.2.5</b> See Also</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="9" data-path="daily-profiles.html"><a href="daily-profiles.html"><i class="fa fa-check"></i><b>9</b> Daily Profiles</a><ul>
-<li class="chapter" data-level="9.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>9.1</b> Overview</a></li>
-<li class="chapter" data-level="9.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>9.2</b> Overlayed</a></li>
-<li class="chapter" data-level="9.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>9.3</b> Mean</a></li>
-<li class="chapter" data-level="9.4" data-path="decomposed.html"><a href="decomposed.html"><i class="fa fa-check"></i><b>9.4</b> Decomposed</a></li>
-</ul></li>
-<li class="chapter" data-level="10" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>10</b> Comfort Plots</a><ul>
-<li class="chapter" data-level="10.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>10.1</b> Mollier hx Diagram</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-1"><i class="fa fa-check"></i><b>10.1.1</b> Task</a></li>
-<li class="chapter" data-level="10.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-2"><i class="fa fa-check"></i><b>10.1.2</b> Basis</a></li>
-<li class="chapter" data-level="10.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-6"><i class="fa fa-check"></i><b>10.1.3</b> Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="10.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>10.2</b> SIA 180 Thermal Comfort</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-2"><i class="fa fa-check"></i><b>10.2.1</b> Task</a></li>
-<li class="chapter" data-level="10.2.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-3"><i class="fa fa-check"></i><b>10.2.2</b> Basis</a></li>
-<li class="chapter" data-level="10.2.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-7"><i class="fa fa-check"></i><b>10.2.3</b> Solution</a></li>
-<li class="chapter" data-level="10.2.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-7"><i class="fa fa-check"></i><b>10.2.4</b> Discussion</a></li>
-<li class="chapter" data-level="10.2.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>10.2.5</b> See Also</a></li>
+<li class="chapter" data-level="9" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>9</b> Heat Maps</a><ul>
+<li class="chapter" data-level="9.1" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>9.1</b> Median-Weeks</a></li>
+<li class="chapter" data-level="9.2" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>9.2</b> Calendar</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="calendar.html"><a href="calendar.html#discussion-6"><i class="fa fa-check"></i><b>9.2.1</b> Discussion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>11</b> Miscellaneous</a><ul>
-<li class="chapter" data-level="11.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>11.1</b> Electricity Household</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="electricity-household.html"><a href="electricity-household.html#task-3"><i class="fa fa-check"></i><b>11.1.1</b> Task</a></li>
-<li class="chapter" data-level="11.1.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-4"><i class="fa fa-check"></i><b>11.1.2</b> Basis</a></li>
-<li class="chapter" data-level="11.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-8"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
-<li class="chapter" data-level="11.1.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-8"><i class="fa fa-check"></i><b>11.1.4</b> Discussion</a></li>
-<li class="chapter" data-level="11.1.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>11.1.5</b> See Also</a></li>
+<li class="chapter" data-level="10" data-path="daily-profiles.html"><a href="daily-profiles.html"><i class="fa fa-check"></i><b>10</b> Daily Profiles</a><ul>
+<li class="chapter" data-level="10.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>10.1</b> Overview</a></li>
+<li class="chapter" data-level="10.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>10.2</b> Overlayed</a></li>
+<li class="chapter" data-level="10.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>10.3</b> Mean</a></li>
+<li class="chapter" data-level="10.4" data-path="decomposed.html"><a href="decomposed.html"><i class="fa fa-check"></i><b>10.4</b> Decomposed</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>11.2</b> Room Temperature Reduction</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task-4"><i class="fa fa-check"></i><b>11.2.1</b> Task</a></li>
-<li class="chapter" data-level="11.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis-5"><i class="fa fa-check"></i><b>11.2.2</b> Basis</a></li>
-<li class="chapter" data-level="11.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-9"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
-<li class="chapter" data-level="11.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-9"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="11" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>11</b> Comfort Plots</a><ul>
+<li class="chapter" data-level="11.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>11.1</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#task-1"><i class="fa fa-check"></i><b>11.1.1</b> Task</a></li>
+<li class="chapter" data-level="11.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#basis-2"><i class="fa fa-check"></i><b>11.1.2</b> Basis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-6"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="11.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>11.3</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="11.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-5"><i class="fa fa-check"></i><b>11.3.1</b> Task</a></li>
-<li class="chapter" data-level="11.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-6"><i class="fa fa-check"></i><b>11.3.2</b> Basis</a></li>
-<li class="chapter" data-level="11.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-10"><i class="fa fa-check"></i><b>11.3.3</b> Solution</a></li>
+<li class="chapter" data-level="11.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>11.2</b> SIA 180 Thermal Comfort</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#task-2"><i class="fa fa-check"></i><b>11.2.1</b> Task</a></li>
+<li class="chapter" data-level="11.2.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#basis-3"><i class="fa fa-check"></i><b>11.2.2</b> Basis</a></li>
+<li class="chapter" data-level="11.2.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-7"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
+<li class="chapter" data-level="11.2.4" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#discussion-7"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="11.2.5" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#see-also-2"><i class="fa fa-check"></i><b>11.2.5</b> See Also</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>12</b> Miscellaneous</a><ul>
+<li class="chapter" data-level="12.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>12.1</b> Electricity Household</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="electricity-household.html"><a href="electricity-household.html#task-3"><i class="fa fa-check"></i><b>12.1.1</b> Task</a></li>
+<li class="chapter" data-level="12.1.2" data-path="electricity-household.html"><a href="electricity-household.html#basis-4"><i class="fa fa-check"></i><b>12.1.2</b> Basis</a></li>
+<li class="chapter" data-level="12.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-8"><i class="fa fa-check"></i><b>12.1.3</b> Solution</a></li>
+<li class="chapter" data-level="12.1.4" data-path="electricity-household.html"><a href="electricity-household.html#discussion-8"><i class="fa fa-check"></i><b>12.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="12.1.5" data-path="electricity-household.html"><a href="electricity-household.html#see-also-3"><i class="fa fa-check"></i><b>12.1.5</b> See Also</a></li>
+</ul></li>
+<li class="chapter" data-level="12.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>12.2</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#task-4"><i class="fa fa-check"></i><b>12.2.1</b> Task</a></li>
+<li class="chapter" data-level="12.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#basis-5"><i class="fa fa-check"></i><b>12.2.2</b> Basis</a></li>
+<li class="chapter" data-level="12.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-9"><i class="fa fa-check"></i><b>12.2.3</b> Solution</a></li>
+<li class="chapter" data-level="12.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-9"><i class="fa fa-check"></i><b>12.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>12.3</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#task-5"><i class="fa fa-check"></i><b>12.3.1</b> Task</a></li>
+<li class="chapter" data-level="12.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#basis-6"><i class="fa fa-check"></i><b>12.3.2</b> Basis</a></li>
+<li class="chapter" data-level="12.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-10"><i class="fa fa-check"></i><b>12.3.3</b> Solution</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -315,82 +312,82 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="polar" class="section level2">
-<h2><span class="header-section-number">6.3</span> Polar</h2>
+<h2><span class="header-section-number">7.3</span> Polar</h2>
 <div id="goal-2" class="section level3">
-<h3><span class="header-section-number">6.3.1</span> Goal</h3>
+<h3><span class="header-section-number">7.3.1</span> Goal</h3>
 <p>Plot a seasonal plot as described in <a href="https://otexts.com/fpp2/seasonal-plots.html" target="_blank">Hyndman and Athanasopoulos (2014, chapter 2.4)</a>:</p>
 <div class="figure"><span id="fig:unnamed-chunk-6"></span>
 <img src="images/plotSeasonalPolar.png" alt="Seasonal Plot Polar per Month over 10 Years" width="70%" />
 <p class="caption">
-Figure 6.5: Seasonal Plot Polar per Month over 10 Years
+Figure 7.5: Seasonal Plot Polar per Month over 10 Years
 </p>
 </div>
 <p>This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don’t correlate with the seasons of the year.</p>
 </div>
 <div id="data-basis-2" class="section level3">
-<h3><span class="header-section-number">6.3.2</span> Data Basis</h3>
+<h3><span class="header-section-number">7.3.2</span> Data Basis</h3>
 <p>In general, the values of energy meters, as in our example, increase steadily:</p>
 <div class="figure"><span id="fig:seasonalPlotPolar00"></span>
 <img src="edar_files/figure-html/seasonalPlotPolar00-1.png" alt="Raw Data for Seasonal Plot Polar" width="672" />
 <p class="caption">
-Figure 6.6: Raw Data for Seasonal Plot Polar
+Figure 7.6: Raw Data for Seasonal Plot Polar
 </p>
 </div>
 </div>
 <div id="solution-2" class="section level3">
-<h3><span class="header-section-number">6.3.3</span> Solution</h3>
+<h3><span class="header-section-number">7.3.3</span> Solution</h3>
 <p>Create a new script, copy/paste the following code and run it:</p>
-<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1"><span class="kw">library</span>(forecast)</a>
-<a class="sourceLine" id="cb60-2" title="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb60-3" title="3"><span class="kw">library</span>(plotly)</a>
-<a class="sourceLine" id="cb60-4" title="4"><span class="kw">library</span>(htmlwidgets)</a>
-<a class="sourceLine" id="cb60-5" title="5"><span class="kw">library</span>(ggthemes)</a>
-<a class="sourceLine" id="cb60-6" title="6"><span class="kw">library</span>(viridis)</a>
-<a class="sourceLine" id="cb60-7" title="7"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb60-8" title="8"></a>
-<a class="sourceLine" id="cb60-9" title="9"><span class="co"># load csv file</span></a>
-<a class="sourceLine" id="cb60-10" title="10">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb60-11" title="11">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb60-12" title="12"></a>
-<a class="sourceLine" id="cb60-13" title="13"><span class="co"># filter flat</span></a>
-<a class="sourceLine" id="cb60-14" title="14">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr02_energyHeat)</a>
-<a class="sourceLine" id="cb60-15" title="15"></a>
-<a class="sourceLine" id="cb60-16" title="16"><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;meterValue&quot;</span>)</a>
-<a class="sourceLine" id="cb60-17" title="17"></a>
-<a class="sourceLine" id="cb60-18" title="18"><span class="co"># calculate consumption value per month</span></a>
-<a class="sourceLine" id="cb60-19" title="19"><span class="co"># pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,</span></a>
-<a class="sourceLine" id="cb60-20" title="20"><span class="co"># so the consumption for february first is value(march) - value(february)!</span></a>
-<a class="sourceLine" id="cb60-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">lead</span>(meterValue) <span class="op">-</span><span class="st"> </span>meterValue)</a>
-<a class="sourceLine" id="cb60-22" title="22"></a>
-<a class="sourceLine" id="cb60-23" title="23"><span class="co"># remove counter value column</span></a>
-<a class="sourceLine" id="cb60-24" title="24">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>meterValue)</a>
-<a class="sourceLine" id="cb60-25" title="25"></a>
-<a class="sourceLine" id="cb60-26" title="26"><span class="co"># value correction (outlier because of commissioning)</span></a>
-<a class="sourceLine" id="cb60-27" title="27">df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">600</span></a>
-<a class="sourceLine" id="cb60-28" title="28"></a>
-<a class="sourceLine" id="cb60-29" title="29">df.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>(), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
-<a class="sourceLine" id="cb60-30" title="30"></a>
-<a class="sourceLine" id="cb60-31" title="31"><span class="co"># create polar plot</span></a>
-<a class="sourceLine" id="cb60-32" title="32"></a>
-<a class="sourceLine" id="cb60-33" title="33">numYears =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
-<a class="sourceLine" id="cb60-34" title="34"></a>
-<a class="sourceLine" id="cb60-35" title="35">plot &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(df.ts,</a>
-<a class="sourceLine" id="cb60-36" title="36">                     <span class="dt">col =</span> <span class="kw">viridis</span>(numYears),</a>
-<a class="sourceLine" id="cb60-37" title="37">                     <span class="dt">main =</span> <span class="st">&quot;Seasonal Plot Polar per Month over 10 Years</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
-<a class="sourceLine" id="cb60-38" title="38">                     <span class="dt">ylab =</span> <span class="st">&quot;Energy Consumption (kWh/month)&quot;</span>,</a>
-<a class="sourceLine" id="cb60-39" title="39">                     <span class="dt">polar =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb60-40" title="40">                     )</a>
-<a class="sourceLine" id="cb60-41" title="41"></a>
-<a class="sourceLine" id="cb60-42" title="42"><span class="co"># show plot (interactive version with plotly unfortunately not possible)</span></a>
-<a class="sourceLine" id="cb60-43" title="43">plot</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="kw">library</span>(forecast)</a>
+<a class="sourceLine" id="cb61-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb61-3" title="3"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb61-4" title="4"><span class="kw">library</span>(htmlwidgets)</a>
+<a class="sourceLine" id="cb61-5" title="5"><span class="kw">library</span>(ggthemes)</a>
+<a class="sourceLine" id="cb61-6" title="6"><span class="kw">library</span>(viridis)</a>
+<a class="sourceLine" id="cb61-7" title="7"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb61-8" title="8"></a>
+<a class="sourceLine" id="cb61-9" title="9"><span class="co"># load csv file</span></a>
+<a class="sourceLine" id="cb61-10" title="10">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb61-11" title="11">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb61-12" title="12"></a>
+<a class="sourceLine" id="cb61-13" title="13"><span class="co"># filter flat</span></a>
+<a class="sourceLine" id="cb61-14" title="14">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr02_energyHeat)</a>
+<a class="sourceLine" id="cb61-15" title="15"></a>
+<a class="sourceLine" id="cb61-16" title="16"><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;meterValue&quot;</span>)</a>
+<a class="sourceLine" id="cb61-17" title="17"></a>
+<a class="sourceLine" id="cb61-18" title="18"><span class="co"># calculate consumption value per month</span></a>
+<a class="sourceLine" id="cb61-19" title="19"><span class="co"># pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,</span></a>
+<a class="sourceLine" id="cb61-20" title="20"><span class="co"># so the consumption for february first is value(march) - value(february)!</span></a>
+<a class="sourceLine" id="cb61-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">lead</span>(meterValue) <span class="op">-</span><span class="st"> </span>meterValue)</a>
+<a class="sourceLine" id="cb61-22" title="22"></a>
+<a class="sourceLine" id="cb61-23" title="23"><span class="co"># remove counter value column</span></a>
+<a class="sourceLine" id="cb61-24" title="24">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>meterValue)</a>
+<a class="sourceLine" id="cb61-25" title="25"></a>
+<a class="sourceLine" id="cb61-26" title="26"><span class="co"># value correction (outlier because of commissioning)</span></a>
+<a class="sourceLine" id="cb61-27" title="27">df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">600</span></a>
+<a class="sourceLine" id="cb61-28" title="28"></a>
+<a class="sourceLine" id="cb61-29" title="29">df.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>(), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb61-30" title="30"></a>
+<a class="sourceLine" id="cb61-31" title="31"><span class="co"># create polar plot</span></a>
+<a class="sourceLine" id="cb61-32" title="32"></a>
+<a class="sourceLine" id="cb61-33" title="33">numYears =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb61-34" title="34"></a>
+<a class="sourceLine" id="cb61-35" title="35">plot &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(df.ts,</a>
+<a class="sourceLine" id="cb61-36" title="36">                     <span class="dt">col =</span> <span class="kw">viridis</span>(numYears),</a>
+<a class="sourceLine" id="cb61-37" title="37">                     <span class="dt">main =</span> <span class="st">&quot;Seasonal Plot Polar per Month over 10 Years</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb61-38" title="38">                     <span class="dt">ylab =</span> <span class="st">&quot;Energy Consumption (kWh/month)&quot;</span>,</a>
+<a class="sourceLine" id="cb61-39" title="39">                     <span class="dt">polar =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb61-40" title="40">                     )</a>
+<a class="sourceLine" id="cb61-41" title="41"></a>
+<a class="sourceLine" id="cb61-42" title="42"><span class="co"># show plot (interactive version with plotly unfortunately not possible)</span></a>
+<a class="sourceLine" id="cb61-43" title="43">plot</a></code></pre></div>
 <p><img src="edar_files/figure-html/seasonalPlotPolar1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
-<a class="sourceLine" id="cb61-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotSeasonalPolar.png&quot;</span>, plot)</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
+<a class="sourceLine" id="cb62-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotSeasonalPolar.png&quot;</span>, plot)</a></code></pre></div>
 </div>
 <div id="discussion-2" class="section level3">
-<h3><span class="header-section-number">6.3.4</span> Discussion</h3>
+<h3><span class="header-section-number">7.3.4</span> Discussion</h3>
 <p>This representation emphasizes the high consumption in summer very well, which could undoubtedly be reduced in a residential building. The Years 2018 and 2019 show, that this optimization was done.</p>
-<p>To emphasize this optimization please refer to the next chapter <a href="dataVisSeasonalBefAft.html#dataVisSeasonalBefAft">6.4</a>.</p>
+<p>To emphasize this optimization please refer to the next chapter <a href="dataVisSeasonalBefAft.html#dataVisSeasonalBefAft">7.4</a>.</p>
 
 </div>
 </div>

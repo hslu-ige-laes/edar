@@ -19,12 +19,10 @@ windows
 mac-osx
 linux
 download-and-install-rstudio
-install-required-packages
-create-an-r-script
-whats-next
+installationPackages
+createFirstScript
+introduction-to-r-basics
 loading-data
-csv-file
-excel-file
 data-wrangling
 add-metadata-for-later-filtering
 year-month-day-day-of-week
