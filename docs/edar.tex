@@ -170,7 +170,7 @@ The freely available programming language ``R'' and its graphical user interface
 
 A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book.
 
-There are a number of other useful books available on general R programming, including:
+There are a number of other useful books available, including:
 
 \begin{itemize}
 \tightlist
@@ -182,15 +182,21 @@ There are a number of other useful books available on general R programming, inc
   Hands-On Programming with R
 \item
   Engineering Data Analysis in R
+\item
+  Forecasting: Principles and Practice
+\item
+  AFIT Data Science Lab R Programming Guide
 \end{itemize}
 
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
+This chapter get's you up and running with downloading and installing the relevant software. This may seem laborious, but it is necessary and easier than it appears at first glance. components.
+
 \hypertarget{installation}{%
 \section{Install R and R Studio}\label{installation}}
 
-Before we can start the first analysis, we have to install ``R'' and ``RStudio''. This may seem laborious, but it is necessary and easier than it appears at first glance.
+Before we can start the first analysis, we have to install ``R'' and ``RStudio''.
 
 \begin{itemize}
 \tightlist
@@ -272,7 +278,6 @@ The exact installation procedure will vary depending on your Linux operating sys
 Appendix \ref{packages} gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them now.
 
 \begin{itemize}
-\tightlist
 \item
   Open ``RStudio'' just as you would any program, by clicking on its icon
 \item
@@ -281,7 +286,7 @@ Appendix \ref{packages} gives you an introduction to what a package is and how t
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"r2d3"}\NormalTok{, }\StringTok{"checkmate"}\NormalTok{)}
+\KeywordTok{install.packages}\NormalTok{(}\StringTok{"devtools"}\NormalTok{, }\StringTok{"tidyverse"}\NormalTok{, }\StringTok{"plotly"}\NormalTok{, }\StringTok{"lubridate"}\NormalTok{, }\StringTok{"r2d3"}\NormalTok{)}
 \KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -300,9 +305,15 @@ The installation of the packages is now in progress and this may take a while, p
 Finally, you have installed ``R'' and ``RStudio'' with the first set of packages on your computer.
 
 Let's create the first visualization.
-- Open ``RStudio'' just as you would any program, by clicking on its icon
-- Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
-- Copy the following code and paste it into your script:
+
+\begin{itemize}
+\item
+  Open ``RStudio'' just as you would any program, by clicking on its icon
+\item
+  Go to the menu on the top left and click to \texttt{File\ /\ New\ File\ /\ R\ Script}
+\item
+  Copy the following code and paste it into your script:
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -313,7 +324,6 @@ Let's create the first visualization.
 \end{Shaded}
 
 \begin{itemize}
-\tightlist
 \item
   select all by pressing \texttt{Ctrl\ +\ A}
 \item
@@ -329,10 +339,11 @@ As you probably noticed, we did not load any data. The basic installation of ``R
 \hypertarget{whats-next}{%
 \section{What's next?}\label{whats-next}}
 
-Now hopefully, everything has worked fine so far with the installation and your first visualization.
-Congratulations! You have now a running R environment and we can start with more interesting stuff.
+Hopefully everything has worked well so far with the installation and your first visualization.
 
-The following chapters will give you an overview
+So congratulations!
+
+You have a running R environment, and we can start with more interesting things in the following chapters.
 
 \hypertarget{r-basics}{%
 \chapter{R Basics}\label{r-basics}}
@@ -1175,8 +1186,15 @@ Here the seasonal patterns for each season are collected together in seprate min
 
 In general, the values of energy meters, as in our example, increase steadily:
 
+\begin{figure}
+\centering
 \includegraphics{edar_files/figure-latex/seasonalMiniplots0-1.pdf}
-\#\#\# Solution
+\caption{\label{fig:seasonalMiniplots0}Raw Data for Seasonal Miniplots}
+\end{figure}
+
+\hypertarget{solution-1}{%
+\subsection{Solution}\label{solution-1}}
+
 Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
@@ -1286,8 +1304,8 @@ In general, the values of energy meters, as in our example, increase steadily:
 \caption{\label{fig:seasonalPlotPolar00}Raw Data for Seasonal Plot Polar}
 \end{figure}
 
-\hypertarget{solution-1}{%
-\subsection{Solution}\label{solution-1}}
+\hypertarget{solution-2}{%
+\subsection{Solution}\label{solution-2}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -1380,8 +1398,8 @@ In general, the values of energy meters, as in our example, increase steadily:
 \caption{\label{fig:energyConsBeforeAfter0}Raw Data for Seasonal Plot Overlapping Before/After Optimization}
 \end{figure}
 
-\hypertarget{solution-2}{%
-\subsection{Solution}\label{solution-2}}
+\hypertarget{solution-3}{%
+\subsection{Solution}\label{solution-3}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -1482,8 +1500,8 @@ Hyndman, R.J., \& Athanasopoulos, G. (2018) Forecasting: principles and practice
   monthly energy consumption meter values over 10 years
 \end{itemize}
 
-\hypertarget{solution-3}{%
-\subsection{Solution}\label{solution-3}}
+\hypertarget{solution-4}{%
+\subsection{Solution}\label{solution-4}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -1592,8 +1610,8 @@ Hyndman, R.J., \& Athanasopoulos, G. (2018) Forecasting: principles and practice
   15min energy consumption meter values over five days
 \end{itemize}
 
-\hypertarget{solution-4}{%
-\subsection{Solution}\label{solution-4}}
+\hypertarget{solution-5}{%
+\subsection{Solution}\label{solution-5}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2194,8 +2212,8 @@ You want to create a scatter plot with
   Energy consumption time series from a energy meter with steadily increasing meter values
 \end{itemize}
 
-\hypertarget{solution-5}{%
-\subsection{Solution}\label{solution-5}}
+\hypertarget{solution-6}{%
+\subsection{Solution}\label{solution-6}}
 
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 
@@ -2308,8 +2326,8 @@ You want to plot a mollier h-x diagram with
   A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
 \end{itemize}
 
-\hypertarget{solution-6}{%
-\subsection{Solution}\label{solution-6}}
+\hypertarget{solution-7}{%
+\subsection{Solution}\label{solution-7}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
@@ -2389,8 +2407,8 @@ You want to plot a diagram like the one from the SIA 180:2014 which showes
   A csv file with the outdoor temperature
 \end{itemize}
 
-\hypertarget{solution-7}{%
-\subsection{Solution}\label{solution-7}}
+\hypertarget{solution-8}{%
+\subsection{Solution}\label{solution-8}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
 
@@ -2635,8 +2653,8 @@ Additionaly we would like to see the consumption of an average Swiss household.
   A csv file with time series of an electric meter in 15 minute interval.
 \end{itemize}
 
-\hypertarget{solution-8}{%
-\subsection{Solution}\label{solution-8}}
+\hypertarget{solution-9}{%
+\subsection{Solution}\label{solution-9}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -3027,8 +3045,8 @@ You want to create a time series plot with
   Time series data from e.g.~a temperature sensor with unaligned time intervals
 \end{itemize}
 
-\hypertarget{solution-9}{%
-\subsection{Solution}\label{solution-9}}
+\hypertarget{solution-10}{%
+\subsection{Solution}\label{solution-10}}
 
 \begin{Shaded}
 \begin{Highlighting}[]

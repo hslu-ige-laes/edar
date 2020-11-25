@@ -1,4 +1,4 @@
-## Daily Profiles - Decompose
+## Daily Profiles - Mean
 
 ```{r dataVisDailyProfilesMean1 plotly, warning=FALSE, message=FALSE, collapse = FALSE}
 # change language to English, otherwise weekdays are in local language

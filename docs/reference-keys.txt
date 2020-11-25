@@ -84,7 +84,7 @@ heatmap-calendar
 discussion-6
 daily-profiles---overview
 daily-profiles---overlayed
-daily-profiles---decompose
+daily-profiles---mean
 daily-profiles---decomposed
 building-energy-signature
 task-1

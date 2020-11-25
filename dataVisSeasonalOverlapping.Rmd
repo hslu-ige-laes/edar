@@ -108,5 +108,3 @@ Hints:
 
 * click once to activate/deactivate a year
 
-
-

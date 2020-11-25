@@ -29,6 +29,7 @@ plot(df$timestamp, df$Adr02_energyHeat,
 
 
 ```
+
 ### Solution
 Create a new script, copy/paste the following code and run it:
 
@@ -83,7 +84,9 @@ plotly <- plotly::ggplotly(plot)
 
 # show plot
 plotly
+
 ```
+
 
 ```{r seasonalMiniplots2, warning=FALSE, message=FALSE, collapse = FALSE}
 # save static plot as png
