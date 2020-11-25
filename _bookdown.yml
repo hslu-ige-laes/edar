@@ -6,12 +6,10 @@ rmd_files: [
 
   "gettingStarted.Rmd",
 
-  "partRBasics/_partRBasics.Rmd",
   "partRBasics/loadingData.Rmd",
   "partRBasics/dataWrangling.Rmd",
   "partRBasics/eda.Rmd",
 
-  "partDataVis/_partDataVis.Rmd",
   "partDataVis/seasonal.Rmd",
   "partDataVis/seasonalOverlapping.Rmd",
   "partDataVis/seasonalMiniplots.Rmd",
