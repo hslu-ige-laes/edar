@@ -1,17 +1,31 @@
 ## Long term
 ### Goal
-tbd
-https://otexts.com/fpp2/tspatterns.html
-Hyndman, R.J., & Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on <current date>
+Decompose a long term time series of ten years monthly data.
 
-### Basis
+```{r out.width='70%', fig.cap='Decomposition of long time series over 10 Years', echo=FALSE}
+knitr::include_graphics("images/plotDecompositionLong.png")
+```
 
-* tbd
-* monthly energy consumption meter values over 10 years
+### Data Basis
+In general, the values of energy meters, as in our example, increase steadily:
+
+```{r dataVisDecompositionLong0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Long Term'}
+library(dplyr)
+library(lubridate)
+df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
+                stringsAsFactors=FALSE)
+
+# filter flat
+df <- df %>% select(timestamp, Adr02_energyHeat) %>% na.omit()
+df[1,2] <- 1676
+df$timestamp <- parse_date_time(df$timestamp, "YmdHMS", tz = "Europe/Zurich")
+
+# plot data
+plot(df$timestamp, df$Adr02_energyHeat,
+     xlab="Time", ylab="Meter value (kWh)", main="Monthly Interval Raw Data")
+```
 
 ### Solution
-
-
 Create a new script, copy/paste the following code and run it:
 
 ```{r dataVisDecompositionLong1, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -67,7 +81,7 @@ data$component <- factor(data$Component, c("value",
                                            "remainder"))
 data$Value <- round(data$Value, digits = 1)
 
-p <- ggplot(data) +
+plot <- ggplot(data) +
   geom_path(aes(x = Time,
                 y = Value
   ),
@@ -81,13 +95,20 @@ p <- ggplot(data) +
   labs(x = "") +
   ggtitle("Time Series Decomposition over 10 Years")
 
-ggplotly(p)
+ggplotly(plot)
 
 ```
 
-### Discussion
-tbd
+```{r dataVisDecompositionLong2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotDecompositionLong.png", plot)
+```
 
-### See Also
-tbd
+### Discussion
+
+* Energy optimization in mid-2017 is clearly visible in the trend and also in the magnitude of the seasonal pattern
+
+* And as well in the remainder the too low setting of January 2018 where the thermostat of the flat got deactivated
+
+* The trend shows as well an higher consumption in June 2013
 

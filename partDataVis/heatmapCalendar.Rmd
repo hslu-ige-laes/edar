@@ -1,6 +1,29 @@
 ## Calendar
+### Goal
+Create a calendar heat map with daily energy consumption values.
 
-```{r dataVisHeatmapCalendar, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r out.width='70%', fig.cap='Calendar Heat Map', echo=FALSE}
+knitr::include_graphics("images/plotHeatMapCalendar.png")
+```
+
+### Data Basis
+Daily energy consumption values of one whole year in an interval of 15mins.
+
+```{r dataVisHeatmapCalendar1, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term'}
+library(dplyr)
+library(lubridate)
+# load time series data
+df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+
+# plot data
+plot(df$time, df$value,
+     xlab="Time", ylab="Energy Consumption (kWh)", main="15min Interval Raw Data", type = "l")
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r dataVisHeatmapCalendar2, warning=FALSE, message=FALSE, collapse = FALSE}
 library(ggplot2)
 library(ggTimeSeries)
 library(plotly)
@@ -28,7 +51,7 @@ data.plot <- data %>%
   select(-value) %>% 
   unique()
 
-p <- ggplot_calendar_heatmap(data.plot,
+plot <- ggplot_calendar_heatmap(data.plot,
                              "day",
                              "calcVal",
                              monthBorderSize = 1,
@@ -44,8 +67,16 @@ p <- ggplot_calendar_heatmap(data.plot,
   facet_wrap(~Year, ncol = 1) +
   ggtitle("Calendar Plot Energy Consumption\n")
 
-p
+plot
 
+# create the interactive plot (optional, uncomment line)
+#ggplotly(plot)
+
+```
+
+```{r dataVisHeatmapCalendar3, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotHeatMapCalendar.png", plot)
 ```
 
 ### Discussion

@@ -2,11 +2,12 @@
 This chapter gives an overview of the most important data manipulation functions used throughout this book.
 
 Experienced readers will find more information about data imports here:
+
 - <a href="https://rafalab.github.io/dsbook/tidyverse.html#summarizing-data" target="_blank">Introduction to Data Science - Chapter 4 "The tidyverse"</a>
+
 - <a href="https://smogdr.github.io/edar_coursebook/rprog2.html#data-cleaning" target="_blank">Engineering Data Analysis in R - Chapter 3.5 "Data Cleaning"</a>
-<font size="5">csv-Files</font>
+
 - <a href="https://smogdr.github.io/edar_coursebook/rprog2.html#piping" target="_blank">Engineering Data Analysis in R - Chapter 3.6 "Piping"</a>
-<font size="5">csv-Files</font>
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
@@ -21,7 +22,7 @@ df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/cent
 ```
 
 ### Year, Month, Day, Day of Week
-To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
+To e.g. group, filter and aggregate data we need eventually the date splitted up in day, month and year:
 ```{r metadata date, eval = FALSE}
 library(dplyr)
 library(lubridate)
@@ -40,8 +41,6 @@ df$weekday <- wday(df$time,
 This code first parses the timestamp with a specific timezone. Then three columns are added.
 
 Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards. 
-
-\newpage
 
 ```{r metadata date output, warning=FALSE, message=FALSE, collapse = FALSE}
 head(df,2)
@@ -126,10 +125,10 @@ df <- df %>%
   select(-temp_c)
 ```
 
-## The pipe `%>%`
-With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: `%>%`.
+### The pipe `%>%`
+With the package `dplyr` we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: `%>%`.
 
-Details can be found a href="https://rafalab.github.io/dsbook/tidyverse.html" target="_blank">Introduction to Data Science - Chapter 4.5</a>
+Details can be found in <a href="https://rafalab.github.io/dsbook/tidyverse.html" target="_blank">Introduction to Data Science - Chapter 4.5</a>
 
 ### Wide to Long
 ```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -195,73 +194,4 @@ dfFlatTempHum$time <- parse_date_time(dfFlatTempHum$time,
 df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
 
 head(df)
-```
-
-## Examples
-### Import csv file from GWF Relay W60 M-Bus Logger
-Some data loggers have a cryptic data format which requires some data wrangling ahead before we can use the time series efficiently. Following an example of a M-Bus data loggger.
-
-```{r w60 read csv, warning=FALSE, message=FALSE, collapse = FALSE}
-library(tidyr)
-
-# load csv file
-df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater_GWF_RelayW60Logger.csv",
-               stringsAsFactors=FALSE,
-               sep =",")
-head(df,23)
-```
-
-Please note
- * The Date and Time are in separate columns
- * The HCA-Unit value has a factor of 10, so the above HCA-value of 87 are in 10 liters Units and result in 87 * 10 = 870 liter
- * In the example "Adr" is the identification of the flat
- 
-We are only interested in Nr. 1 heating energy of the flat and Nr. 12 the impulse count of the additional meter which is the hot water of the flat.
-
-Following the required steps to parse the data and bring them in a format we can later work with:
-
-```{r w60 parsing, warning=FALSE, message=FALSE, collapse = FALSE}
-
-# create timestamp out of column "Date" and "Time"
-df <- df %>% mutate(timestamp = paste0(df$Datum, " ", df$Zeit))
-df$timestamp <- parse_date_time(df$timestamp,
-                                order = "d.m.y H:M",
-                                tz = "Europe/Zurich")
-
-
-# select columns and rearrange
-df <- df %>% select(timestamp, Adr, Nr., Wert, Einheit)
-
-# filter out Adr. of interest
-df <- df %>% filter(Nr. %in% c(1,12))
-
-# rename columns
-df <- df %>% mutate(Nr. = ifelse(Nr. == 1, paste0("Adr",sprintf("%02.0f", Adr), "_energyHeat"), ifelse(Nr. == 12, paste0("Adr",sprintf("%02.0f", Adr), "_hotWater"), Nr.)))
-
-# convert value to numeric
-df$Wert <- as.numeric(df$Wert)
-
-# multiply HCA-values by factor 10 to get liters and divide by 1000 to get m3
-df <- df %>% mutate(Wert = ifelse((Einheit == "HCA"), Wert * 10/1000, Wert))
-
-df <- df %>% select(-Einheit, -Adr)
-
-# convert long table into wide table
-df.wide <- as.data.frame(pivot_wider(df,
-                                     names_from = "Nr.",
-                                     values_from = Wert,
-                                     names_sep = "_")
-)
-```
-
-This is the result:
-```{r w60 result, warning=FALSE, message=FALSE, collapse = FALSE}
-head(df.wide)
-```
-
-Finally saving the csv file:
-```{r w60 save csv, eval=FALSE}
-write.csv2(df.wide,
-           file = "flatHeatAndHotWater.csv",
-           row.names = FALSE)
 ```

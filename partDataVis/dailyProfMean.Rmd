@@ -1,5 +1,28 @@
 ## Mean
+### Goal
+Create a plot of mean data per week.
 
+```{r out.width='70%', fig.cap='Mean Daily Profiles per Weekday', echo=FALSE}
+knitr::include_graphics("images/plotDailyProfMean.png")
+```
+
+### Data Basis
+Energy consumption values of one whole year in an interval of 15mins.
+
+```{r dataVisDailyProfilesMean0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term'}
+library(dplyr)
+library(lubridate)
+# load time series data
+df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+
+# plot data
+plot(df$time, df$value,
+     xlab="Time", ylab="Energy Consumption (kWh)", main="15min Interval Raw Data", type = "l")
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+  
 ```{r dataVisDailyProfilesMean1 plotly, warning=FALSE, message=FALSE, collapse = FALSE}
 # change language to English, otherwise weekdays are in local language
 Sys.setlocale("LC_TIME", "English")
@@ -9,45 +32,18 @@ library(dplyr)
 library(lubridate)
 
 # load time series data
-df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv",
-               stringsAsFactors=FALSE,
-               sep =";")
-
-# rename column names
-colnames(df) <- c("timestamp", "meterValue")
-
-df$timestamp <- parse_date_time(df$timestamp,
-                                orders = "YmdHMS",
-                                tz = "Europe/Zurich")
-df$timestamp <- force_tz(df$timestamp, tzone = "UTC")
-
-# uncomment to filter time range if necessary
-#df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")
-
-# Fill missing values with NA
-grid.df <- data.frame(timestamp = seq(min(df$timestamp, na.rm = TRUE),
-                                      max(df$timestamp, na.rm = TRUE),
-                                      by = "15 mins"))
-df <- merge(df, grid.df, all = TRUE)
-
-# convert steadily counting energy meter value from kWh to power in kW
-df <- df %>% 
-  mutate(value = (meterValue - lag(meterValue))*4) %>%
-  select(-meterValue) %>%
-  na.omit()
-
-# remove negative values which occur beause of change summer/winter time
-df <- df %>% filter(value >= 0)
+df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+df <- mutate(df, value = value * 4)
 
 # add metadata for later grouping and visualization purposes
 df$x <- hour(df$timestamp) + minute(df$timestamp)/60 + second(df$timestamp) / 3600
 df$weekday <- weekdays(df$timestamp)
 df$weekday <- factor(df$weekday, c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday"))
 
-df <- df %>% mutate(value = ifelse(x == 0.00, NA, df$value))
+df <- df %>% dplyr::mutate(value = ifelse(x == 0.00, NA, df$value))
 
 # Calculate Mean value for all 15 minutes for each weekday
-df <- df %>% group_by(weekday, x) %>% mutate(dayTimeMean = mean(value)) %>% ungroup()
+df <- df %>% group_by(weekday, x) %>% dplyr::mutate(dayTimeMean = mean(value)) %>% ungroup()
 
 # shrink data frame
 df <- df %>%
@@ -93,4 +89,12 @@ df %>%
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
 
 ```
+
+```{r dataVisDailyProfilesMean2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotDailyProfMean.png", plot)
+```
+
+
+
 

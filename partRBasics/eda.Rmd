@@ -3,12 +3,11 @@ Explorative Data Analysis (EDA) is a technique based on the human characteristic
 
 > “Exploratory data analysis is graphical detective work.” - John W. Tukey
 
-## Get overview
+## Get Overview of Data
 A first step is getting an overview of the whole data set and specific series of it.
 
 ### Load data
-
-> Load test data set in a data frame (e.g. from a csv-file)
+Load test data set in a data frame (e.g. from a csv-file)
 
 ```{r eda readcsv, echo=FALSE, results='hide'}
 df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
@@ -18,8 +17,7 @@ df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/cen
 <br>
 
 ### Names
-
-> show the column headers of a data frame
+Show the column headers of a data frame
 
 ```{r eda names}
 names(df)
@@ -28,8 +26,7 @@ names(df)
 <br>
 
 ### Structure
-
-> show the structure of the data frame
+Show the structure of the data frame
 
 ```{r eda str}
 str(df)
@@ -38,7 +35,7 @@ str(df)
 <br>
 
 ### Head/Tail
-> Show the first and last values
+Show the first and last values
 
 ```{r eda head}
 head(df)
@@ -54,7 +51,7 @@ tail(df)
 
 ### Five number summary
 
-> reveals details like object classes
+Reveals details like object classes
 
 ```{r eda summary, warning=FALSE, message=FALSE, collapse = FALSE}
 summary(df)
@@ -63,4 +60,6 @@ summary(df)
 <br>
 
 ## Quickly Exploring Data
-There is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book. Please refer to the <a href="https://r-graphics.org/chapter-quick" target="_blank">R Graphics Cookbook from Winston Chang - Chapter 2 "Quickly Exploring Data"</a>.
+Please refer to the <a href="https://r-graphics.org/chapter-quick" target="_blank">R Graphics Cookbook from Winston Chang - Chapter 2 "Quickly Exploring Data"</a>.
+
+This is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book. 

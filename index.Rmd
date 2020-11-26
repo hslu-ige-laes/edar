@@ -21,17 +21,17 @@ This book gives you an overview of the statistical software R and its ability to
 It is aimed at R beginners as well as exerienced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a> and <a href="https://smogdr.github.io/edar_coursebook/" target="_blank">Engineering Data Analysis in R</a>. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
 
 ## Content
-The book is structured in the following parts:
+The book is structured in the following parts main parts:
 
 * R Basics
 
 * Data Visualizations
 
-The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing. An "R-beginner" receives information about the installation of the program environment and gets a quick practical introduction.
+The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An "R-beginner" receives information about the installation of the program environment and gets a quick practical introduction.
 
 > "Numerical quantities focus on expected values, graphical summaries on unexpected values." - John W. Tukey
 
-Examples for such graphical representations are covered in the part "Data Visualizations" which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
+Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. Examples for such graphical representations are covered in the part "Data Visualizations" which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
 
 The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
@@ -42,10 +42,10 @@ Excel users are pushing the program to its limits with the ever-increasing data 
 
 The freely available programming language "R" and its graphical user interface "RStudio" offer many more possibilities for data analysis and data visualization.
 
-## Other useful sources
+## Further Reading
 A really good source is <a href="http://r4ds.had.co.nz" target="_blank">R for Data Science</a> by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
 
-There are a number of other useful books available, including:
+There are a number of recommendable free online books available, including:
 
 - <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a>
 - <a href="https://rafalab.github.io/dsbook/" target="_blank">Introduction to Data Science - Data Analysis and Prediction Algorithms with R</a>
@@ -55,7 +55,7 @@ There are a number of other useful books available, including:
 - <a href="https://afit-r.github.io/" target="_blank">AFIT Data Science Lab R Programming Guide</a>
 
 ## Acknowledgements
-The authors would like to express their sincere thanks to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
+The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
 
 This book was developed using Yihui Xie's <a href="https://bookdown.org" target="_blank">bookdown</a> framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 

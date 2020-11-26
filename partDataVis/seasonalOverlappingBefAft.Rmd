@@ -89,7 +89,7 @@ htmlwidgets::saveWidget(plotly, "plotlySeasonalXYBeforeAfter.html")
 
 ### Discussion
 
-* One can clearly see the impact of the optimization
+* One can clearly see the impact of the optimization in mid-2017
 
 * And as well the too low setting of January 2018 where the thermostat of the flat got deactivated
 

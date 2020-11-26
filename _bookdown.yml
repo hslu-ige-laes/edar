@@ -9,6 +9,7 @@ rmd_files: [
   "partRBasics/introductionRBasics.Rmd",
   "partRBasics/loadingData.Rmd",
   "partRBasics/dataWrangling.Rmd",
+  #"partRBasics/dataWrangling_Examples.Rmd", # work in progress
   "partRBasics/eda.Rmd",
 
   "partDataVis/seasonal.Rmd",
@@ -16,21 +17,26 @@ rmd_files: [
   "partDataVis/seasonalMiniplots.Rmd",
   "partDataVis/seasonalPolar.Rmd",
   "partDataVis/seasonalOverlappingBefAft.Rmd",
+
   "partDataVis/decomposition.Rmd",
-  # not yet redacted
   "partDataVis/decompositionLong.Rmd",
   "partDataVis/decompositionShort.Rmd",
+
   "partDataVis/heatmap.Rmd",
-  "partDataVis/heatmapMedianWeeks.Rmd",
   "partDataVis/heatmapCalendar.Rmd",
+  "partDataVis/heatmapMedianWeeks.Rmd",
+
   "partDataVis/dailyProf.Rmd",
   "partDataVis/dailyProfOverview.Rmd",
   "partDataVis/dailyProfOverlayed.Rmd",
   "partDataVis/dailyProfMean.Rmd",
   "partDataVis/dailyProfDecomposed.Rmd",
+
+  # below not yet redacted
   "partDataVis/comfort.Rmd",
   "partDataVis/comfortMollierHx.Rmd",
   "partDataVis/comfortSia180ThermCmf.Rmd",
+
   "partDataVis/misc.Rmd",
   "partDataVis/eleHousehold.Rmd",
   "partDataVis/roomTempRed.Rmd",

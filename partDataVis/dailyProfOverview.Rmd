@@ -1,5 +1,28 @@
 ## Overview
+### Goal
+Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie.
 
+```{r out.width='70%', fig.cap='Overview of Daily Profiles by Weekday and Season', echo=FALSE}
+knitr::include_graphics("images/plotDailyProfOverview.png")
+```
+
+### Data Basis
+Energy consumption values of one whole year in an interval of 15mins.
+
+```{r dataVisDailyProfilesOverview0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term'}
+library(dplyr)
+library(lubridate)
+# load time series data
+df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
+
+# plot data
+plot(df$time, df$value,
+     xlab="Time", ylab="Energy Consumption (kWh)", main="15min Interval Raw Data", type = "l")
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+  
 ```{r dataVisDailyProfilesOverview1, warning=FALSE, message=FALSE, collapse = FALSE}
 library(ggplot2)
 library(dplyr)
@@ -9,40 +32,20 @@ library(ggplot2)
 library(plotly)
 
 # load time series data
-df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv",
-               stringsAsFactors=FALSE,
-               sep =";")
+df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
 
-# rename column names
-colnames(df) <- c("timestamp", "meterValue")
-
-df$timestamp <- parse_date_time(df$timestamp,
-                                orders = "YmdHMS",
-                                tz = "Europe/Zurich")
-df$timestamp <- force_tz(df$timestamp, tzone = "UTC")
-
-# Fill missing values with NA
-grid.df <- data.frame(timestamp = seq(min(df$timestamp, na.rm = TRUE),
-                                      max(df$timestamp, na.rm = TRUE),
-                                      by = "15 mins"))
-df <- merge(df, grid.df, all = TRUE)
-
-# convert steadily counting energy meter value from kWh to power in kW
-df <- df %>% 
-  mutate(value = (meterValue - lag(meterValue))*4) %>%
-  select(-meterValue) %>%
-  na.omit()
-
-# remove negative values which occur beause of change summer/winter time
-df <- df %>% filter(value >= 0)
-
-p <- plotDailyProfilesOverview(df,
+plot <- plotDailyProfilesOverview(df,
                                locTimeZone = "Europe/Zurich",
                                main = "Daily Profiles Overview by Weekday and Season",
-                               ylab = "Energy Consumption (kWh/h)",
+                               ylab = "Power (kW)",
                                col = "black",
                                confidence = 95.0)
 
-ggplotly(p)
+ggplotly(plot)
+```
+
+```{r dataVisDailyProfilesOverview2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotDailyProfOverview.png", plot)
 ```
 

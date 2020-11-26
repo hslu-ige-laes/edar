@@ -1,17 +1,43 @@
 ## Short term
-### Task
-tbd
-https://otexts.com/fpp2/tspatterns.html
-Hyndman, R.J., & Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on <current date>
+### Goal
+Decompose a short term time series of e.g. 5 days 15min data.
 
-### Basis
+```{r out.width='70%', fig.cap='Seasonal Plot Overlapping per Month over 10 Years', echo=FALSE}
+knitr::include_graphics("images/plotDecompositionShort.png")
+```
 
-* tbd
-* 15min energy consumption meter values over five days
+### Data Basis
+In general, the values of energy meters, as in our example, increase steadily:
+
+```{r dataVisDecompositionShort0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term'}
+library(dplyr)
+library(lubridate)
+# load time series data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+
+# rename column names
+colnames(df) <- c("time", "meterValue")
+
+df$time <- parse_date_time(df$time,
+                                orders = "YmdHMS",
+                                tz = "Europe/Zurich")
+df$time <- force_tz(df$time, tzone = "UTC")
+
+# uncomment to filter time range if necessary
+#df <- df %>% filter(Time > "2015-03-01 00:00:00", Time < "2015-04-01 00:00:00")
+
+# select time range
+df <- df %>% filter(time >= as.POSIXct("2015-01-26 00:00:00", tz = "UTC"),
+                    time < as.POSIXct("2015-01-31 00:00:00", tz = "UTC"))
+
+# plot data
+plot(df$time, df$meterValue,
+     xlab="Time", ylab="Meter value (kWh)", main="15min Interval Raw Data")
+```
 
 ### Solution
-
-
 Create a new script, copy/paste the following code and run it:
 
 ```{r dataVisDecompositionShort1, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -97,7 +123,7 @@ data <- data %>%
   rename(Value = value,
          Time = time)
 
-p <- ggplot(data) +
+plot <- ggplot(data) +
   geom_path(aes(x = Time,
                 y = Value
                ),
@@ -111,20 +137,11 @@ p <- ggplot(data) +
   labs(x = "") +
   ggtitle("Time Series Decomposition over 5 days")
 
-ggplotly(p)
+ggplotly(plot)
 
 ```
 
-### Discussion
-* Trend
-  The trend of a time series refers to the general direction in which the time series is moving. Time series can have a positive or a negative trend, but can also have no trend.
-  
-* Seasonal Pattern
-  The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies.
-
-* Remainder
-  The remainder is what’s left of the time series data after removing its trend, cycle, and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
-
-### See Also
-tbd
-
+```{r dataVisDecompositionShort2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/plotDecompositionShort.png", plot)
+```

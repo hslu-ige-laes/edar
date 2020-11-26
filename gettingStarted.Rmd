@@ -1,5 +1,6 @@
 # Getting started
-The first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
+Before we can start with the analysis described in the later chapters, we have to installed "R".
+Therefore the first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
@@ -57,7 +58,7 @@ install_github("hslu-ige-laes/redutils")
 
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \@ref(packages) what packages are in general and how they can be installed and later loaded into scripts.
 
-## Create first R Script {#createFirstScript}
+## Create your first R Script {#createFirstScript}
 Finally, you have installed "R" and "RStudio" with some packages on your computer. Good, hopefully everything worked fine up to now.
 
 Let's create the first script with a visualization:

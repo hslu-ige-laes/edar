@@ -1,2 +1,17 @@
-# Decomposition
-tbd
+# Time Series Decomposition
+Typical time series result from the interaction of regular and random causes. The regular causes can vary periodically (seasonally) and/or contain long-term trends. Random influences are often called noise.
+
+Decomposition deconstructs time series into its components "trend", "seasonality" and "randomness." For further data analysis it is often necessary to decompose the trend and the seasonal component from the raw data. Therefore, a large part of the time series analyses deals with corresponding procedures. Sometimes the remaining Randomness is of interest and sometimes a detrended series as in chapter \@ref(dailyProfilesDecomposed).
+
+<br>
+<font size="5">Trend Component</font>
+The trend component of a time series refers to the general direction in which the time series is moving in the long term. Time series can have a positive or a negative trend, but can also have no trend.
+A trend exists when there is a persistent increasing and/or decreasing direction in the data.
+
+<br>
+<font size="5">Seasonal Component</font>
+The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies. Seasonality occurs over a fixed and known period (e.g., the quarter of the year, the month, or day of the week).
+
+<br>
+<font size="5">Random/Remainder/Irregular Component</font>
+The remainder is what’s left of the time series data after removing its trend and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.

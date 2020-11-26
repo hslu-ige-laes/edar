@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-25}
+\date{2020-11-26}
 
 \begin{document}
 \maketitle
@@ -151,7 +151,7 @@ It is aimed at R beginners as well as exerienced R users and is strongly inspire
 \hypertarget{content}{%
 \section{Content}\label{content}}
 
-The book is structured in the following parts:
+The book is structured in the following parts main parts:
 
 \begin{itemize}
 \item
@@ -160,13 +160,13 @@ The book is structured in the following parts:
   Data Visualizations
 \end{itemize}
 
-The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Basically only simple and quickly created visualizations are presented in this part, which are used in the context of an explorative data analysis. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives information about the installation of the program environment and gets a quick practical introduction.
+The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives information about the installation of the program environment and gets a quick practical introduction.
 
 \begin{quote}
 ``Numerical quantities focus on expected values, graphical summaries on unexpected values.'' - John W. Tukey
 \end{quote}
 
-Examples for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
+Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. Examples for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
 
 The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
@@ -179,12 +179,12 @@ Excel users are pushing the program to its limits with the ever-increasing data 
 
 The freely available programming language ``R'' and its graphical user interface ``RStudio'' offer many more possibilities for data analysis and data visualization.
 
-\hypertarget{other-useful-sources}{%
-\section{Other useful sources}\label{other-useful-sources}}
+\hypertarget{further-reading}{%
+\section{Further Reading}\label{further-reading}}
 
 A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book.
 
-There are a number of other useful books available, including:
+There are a number of recommendable free online books available, including:
 
 \begin{itemize}
 \tightlist
@@ -205,7 +205,7 @@ There are a number of other useful books available, including:
 \hypertarget{acknowledgements}{%
 \section{Acknowledgements}\label{acknowledgements}}
 
-The authors would like to express their sincere thanks to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program ``Buildings and Cities 2018''.
+The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program ``Buildings and Cities 2018''.
 
 This book was developed using Yihui Xie's bookdown framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 
@@ -214,7 +214,8 @@ The online book is hosted using GitHub's free GitHub Pages. All material for thi
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
-The first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
+Before we can start with the analysis described in the later chapters, we have to installed ``R''.
+Therefore the first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
@@ -327,7 +328,7 @@ Appendix \ref{packages} gives you an introduction to what a package is and how t
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \ref{packages} what packages are in general and how they can be installed and later loaded into scripts.
 
 \hypertarget{createFirstScript}{%
-\section{Create first R Script}\label{createFirstScript}}
+\section{Create your first R Script}\label{createFirstScript}}
 
 Finally, you have installed ``R'' and ``RStudio'' with some packages on your computer. Good, hopefully everything worked fine up to now.
 
@@ -383,7 +384,9 @@ Two sources are recommended to facilitate the introduction to ``R'' and to learn
   Engineering Data Analysis in R - Chapter 2 ``The R Programming Environment''
 \end{itemize}
 
-The part ``R-Basics'' in this book is additive to the basics referenced above and focuses on practical examples of how data can be loaded, transformed and analyzed.
+Throughout the book, reference is made to these two continuative sources and you only need to read the one that appeals to you more. In the referenced chapters, these cover similar content.
+
+The part ``R-Basics'' in this book is a short overview of the basics referenced above and focuses on practical examples of how data can be loaded, transformed and analyzed.
 
 \hypertarget{loading-data}{%
 \chapter{Loading Data}\label{loading-data}}
@@ -391,8 +394,14 @@ The part ``R-Basics'' in this book is additive to the basics referenced above an
 This chapter introduces two functions that can be used to load data from csv-files and Excel-files.
 
 Experienced readers will find more information about data imports here:
-- Introduction to Data Science - Chapter 5 ``Importing data''
-- Engineering Data Analysis in R - Chapter 3 ``Getting and Cleaning Data''
+
+\begin{itemize}
+\item
+  Introduction to Data Science - Chapter 5 ``Importing data''
+\item
+  Engineering Data Analysis in R - Chapter 3 ``Getting and Cleaning Data''
+\end{itemize}
+
 csv-Files
 
 Load data from comma separated files
@@ -473,11 +482,15 @@ Both the xlsx and gdata packages require other software to be installed on your 
 This chapter gives an overview of the most important data manipulation functions used throughout this book.
 
 Experienced readers will find more information about data imports here:
-- Introduction to Data Science - Chapter 4 ``The tidyverse''
-- Engineering Data Analysis in R - Chapter 3.5 ``Data Cleaning''
-csv-Files
-- Engineering Data Analysis in R - Chapter 3.6 ``Piping''
-csv-Files
+
+\begin{itemize}
+\item
+  Introduction to Data Science - Chapter 4 ``The tidyverse''
+\item
+  Engineering Data Analysis in R - Chapter 3.5 ``Data Cleaning''
+\item
+  Engineering Data Analysis in R - Chapter 3.6 ``Piping''
+\end{itemize}
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
@@ -498,7 +511,7 @@ Firstly we have to load a dataset into a dataframe:
 \hypertarget{year-month-day-day-of-week}{%
 \subsection{Year, Month, Day, Day of Week}\label{year-month-day-day-of-week}}
 
-To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:
+To e.g.~group, filter and aggregate data we need eventually the date splitted up in day, month and year:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -520,8 +533,6 @@ To group, filter and aggregate data we need to have a the date splitted up in da
 This code first parses the timestamp with a specific timezone. Then three columns are added.
 
 Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards.
-
-\newpage
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -679,11 +690,11 @@ Note: Whether you put the whole code on one line or split it after a comma does 
 \end{Shaded}
 
 \hypertarget{the-pipe}{%
-\section{\texorpdfstring{The pipe \texttt{\%\textgreater{}\%}}{The pipe \%\textgreater\%}}\label{the-pipe}}
+\subsection{\texorpdfstring{The pipe \texttt{\%\textgreater{}\%}}{The pipe \%\textgreater\%}}\label{the-pipe}}
 
-With dplyr we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: \texttt{\%\textgreater{}\%}.
+With the package \texttt{dplyr} we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: \texttt{\%\textgreater{}\%}.
 
-Details can be found a href=``\url{https://rafalab.github.io/dsbook/tidyverse.html}'' target="\_blank"\textgreater Introduction to Data Science - Chapter 4.5
+Details can be found in Introduction to Data Science - Chapter 4.5
 
 \hypertarget{wide-to-long}{%
 \subsection{Wide to Long}\label{wide-to-long}}
@@ -1009,24 +1020,20 @@ Explorative Data Analysis (EDA) is a technique based on the human characteristic
 ``Exploratory data analysis is graphical detective work.'' - John W. Tukey
 \end{quote}
 
-\hypertarget{get-overview}{%
-\section{Get overview}\label{get-overview}}
+\hypertarget{get-overview-of-data}{%
+\section{Get Overview of Data}\label{get-overview-of-data}}
 
 A first step is getting an overview of the whole data set and specific series of it.
 
 \hypertarget{load-data}{%
 \subsection{Load data}\label{load-data}}
 
-\begin{quote}
 Load test data set in a data frame (e.g.~from a csv-file)
-\end{quote}
 
 \hypertarget{names}{%
 \subsection{Names}\label{names}}
 
-\begin{quote}
-show the column headers of a data frame
-\end{quote}
+Show the column headers of a data frame
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1041,9 +1048,7 @@ show the column headers of a data frame
 \hypertarget{structure}{%
 \subsection{Structure}\label{structure}}
 
-\begin{quote}
-show the structure of the data frame
-\end{quote}
+Show the structure of the data frame
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1060,9 +1065,7 @@ show the structure of the data frame
 \hypertarget{headtail}{%
 \subsection{Head/Tail}\label{headtail}}
 
-\begin{quote}
 Show the first and last values
-\end{quote}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1103,9 +1106,7 @@ Note: if you want to show only the first three entries, you can type \texttt{hea
 \hypertarget{five-number-summary}{%
 \subsection{Five number summary}\label{five-number-summary}}
 
-\begin{quote}
-reveals details like object classes
-\end{quote}
+Reveals details like object classes
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1123,7 +1124,9 @@ reveals details like object classes
 \hypertarget{quickly-exploring-data}{%
 \section{Quickly Exploring Data}\label{quickly-exploring-data}}
 
-There is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book. Please refer to the R Graphics Cookbook from Winston Chang - Chapter 2 ``Quickly Exploring Data''.
+Please refer to the R Graphics Cookbook from Winston Chang - Chapter 2 ``Quickly Exploring Data''.
+
+This is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book.
 
 \hypertarget{part-data-visualizations}{%
 \part{Data Visualizations}\label{part-data-visualizations}}
@@ -1131,7 +1134,9 @@ There is a great resource where you can find everything you need to know about c
 \hypertarget{seasonal-plots}{%
 \chapter{Seasonal Plots}\label{seasonal-plots}}
 
-tbd
+Seasonal plots are a graphical tool to visualize and detect seasonality in a time series. Based on a selected periodicity it emphasizes the seasonal patterns and also shows the changes in seasonality over time. Especially, it allows to detect changes between different seasons.
+
+However, this plot is only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
 
 \hypertarget{overlapping}{%
 \section{Overlapping}\label{overlapping}}
@@ -1555,7 +1560,7 @@ Create a new script, copy/paste the following code and run it:
 
 \begin{itemize}
 \item
-  One can clearly see the impact of the optimization
+  One can clearly see the impact of the optimization in mid-2017
 \item
   And as well the too low setting of January 2018 where the thermostat of the flat got deactivated
 \item
@@ -1565,7 +1570,19 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{decomposition}{%
 \chapter{Decomposition}\label{decomposition}}
 
-tbd
+Typical time series result from the interaction of regular and random causes. The regular causes can vary periodically (seasonally) and/or contain long-term trends. Random influences are often called noise.
+
+Decomposition deconstructs time series into its components ``trend'', ``seasonality'' and ``randomness.'' For further data analysis it is often necessary to decompose the trend and the seasonal component from the raw data. Therefore, a large part of the time series analyses deals with corresponding procedures. Sometimes the remaining Randomness is of interest and sometimes a detrended series as in chapter \ref{dailyProfilesDecomposed}.
+
+Trend Component
+The trend component of a time series refers to the general direction in which the time series is moving in the long term. Time series can have a positive or a negative trend, but can also have no trend.
+A trend exists when there is a persistent increasing and/or decreasing direction in the data.
+
+Seasonal Component
+The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies. Seasonality occurs over a fixed and known period (e.g., the quarter of the year, the month, or day of the week).
+
+Random/Remainder/Irregular Component
+The remainder is what's left of the time series data after removing its trend and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
 
 \hypertarget{long-term}{%
 \section{Long term}\label{long-term}}
@@ -1573,20 +1590,22 @@ tbd
 \hypertarget{goal-4}{%
 \subsection{Goal}\label{goal-4}}
 
-tbd
-\url{https://otexts.com/fpp2/tspatterns.html}
-Hyndman, R.J., \& Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on
+Decompose a long term time series of ten years monthly data.
 
-\hypertarget{basis}{%
-\subsection{Basis}\label{basis}}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionLong} \caption{Decomposition of long time series over 10 Years}\label{fig:unnamed-chunk-12}
+\end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  tbd
-\item
-  monthly energy consumption meter values over 10 years
-\end{itemize}
+\hypertarget{data-basis-4}{%
+\subsection{Data Basis}\label{data-basis-4}}
+
+In general, the values of energy meters, as in our example, increase steadily:
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDecompositionLong0-1.pdf}
+\caption{\label{fig:dataVisDecompositionLong0}Raw Data for Decomposition Plot Long Term}
+\end{figure}
 
 \hypertarget{solution-4}{%
 \subsection{Solution}\label{solution-4}}
@@ -1647,7 +1666,7 @@ Create a new script, copy/paste the following code and run it:
                                            \StringTok{"remainder"}\NormalTok{))}
 \NormalTok{data}\OperatorTok{$}\NormalTok{Value <-}\StringTok{ }\KeywordTok{round}\NormalTok{(data}\OperatorTok{$}\NormalTok{Value, }\DataTypeTok{digits =} \DecValTok{1}\NormalTok{)}
 
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_path}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Time,}
                 \DataTypeTok{y =}\NormalTok{ Value}
 \NormalTok{  ),}
@@ -1661,42 +1680,53 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Time Series Decomposition over 10 Years"}\NormalTok{)}
 
-\KeywordTok{ggplotly}\NormalTok{(p)}
+\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{edar_files/figure-latex/dataVisDecompositionLong1-1.pdf}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDecompositionLong.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{discussion-4}{%
 \subsection{Discussion}\label{discussion-4}}
 
-tbd
-
-\hypertarget{see-also}{%
-\subsection{See Also}\label{see-also}}
-
-tbd
+\begin{itemize}
+\item
+  Energy optimization in mid-2017 is clearly visible in the trend and also in the magnitude of the seasonal pattern
+\item
+  And as well in the remainder the too low setting of January 2018 where the thermostat of the flat got deactivated
+\item
+  The trend shows as well an higher consumption in June 2013
+\end{itemize}
 
 \hypertarget{short-term}{%
 \section{Short term}\label{short-term}}
 
-\hypertarget{task}{%
-\subsection{Task}\label{task}}
+\hypertarget{goal-5}{%
+\subsection{Goal}\label{goal-5}}
 
-tbd
-\url{https://otexts.com/fpp2/tspatterns.html}
-Hyndman, R.J., \& Athanasopoulos, G. (2018) Forecasting: principles and practice, 2nd edition, OTexts: Melbourne, Australia. OTexts.com/fpp2. Accessed on
+Decompose a short term time series of e.g.~5 days 15min data.
 
-\hypertarget{basis-1}{%
-\subsection{Basis}\label{basis-1}}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionShort} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-13}
+\end{figure}
 
-\begin{itemize}
-\tightlist
-\item
-  tbd
-\item
-  15min energy consumption meter values over five days
-\end{itemize}
+\hypertarget{data-basis-5}{%
+\subsection{Data Basis}\label{data-basis-5}}
+
+In general, the values of energy meters, as in our example, increase steadily:
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDecompositionShort0-1.pdf}
+\caption{\label{fig:dataVisDecompositionShort0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
 
 \hypertarget{solution-5}{%
 \subsection{Solution}\label{solution-5}}
@@ -1795,7 +1825,7 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\KeywordTok{rename}\NormalTok{(}\DataTypeTok{Value =}\NormalTok{ value,}
          \DataTypeTok{Time =}\NormalTok{ time)}
 
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{geom_path}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ Time,}
                 \DataTypeTok{y =}\NormalTok{ Value}
 \NormalTok{               ),}
@@ -1809,64 +1839,51 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{""}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Time Series Decomposition over 5 days"}\NormalTok{)}
 
-\KeywordTok{ggplotly}\NormalTok{(p)}
+\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{edar_files/figure-latex/dataVisDecompositionShort1-1.pdf}
 
-\hypertarget{discussion-5}{%
-\subsection{Discussion}\label{discussion-5}}
-
-\begin{itemize}
-\item
-  Trend
-  The trend of a time series refers to the general direction in which the time series is moving. Time series can have a positive or a negative trend, but can also have no trend.
-\item
-  Seasonal Pattern
-  The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies.
-\item
-  Remainder
-  The remainder is what's left of the time series data after removing its trend, cycle, and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
-\end{itemize}
-
-\hypertarget{see-also-1}{%
-\subsection{See Also}\label{see-also-1}}
-
-tbd
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDecompositionShort.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{heat-maps}{%
 \chapter{Heat Maps}\label{heat-maps}}
 
-tbd
-
-\hypertarget{median-weeks}{%
-\section{Median-Weeks}\label{median-weeks}}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(plotly)}
-
-\NormalTok{data <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
-\NormalTok{p <-}\StringTok{ }\KeywordTok{plotHeatmapMedianWeeks}\NormalTok{(data, }\DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
-\CommentTok{# show the static plot}
-\NormalTok{p}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/dataVisHeatmapMedianWeeks1-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# create the interactive plot (optional, uncomment line)}
-\CommentTok{#ggplotly(p)}
-\end{Highlighting}
-\end{Shaded}
+Temporal patterns can show at what time certain devices are exposed to how much load. Heatmaps show quantitative values based on two axes. These can be day and hours, month and day, etc. The cell at the intersection contains the corresponding value. Depending on the context, this can be an average value, a maximum/minimum value, etc. This representation allows the viewer to see short-term patterns and long-term trends in the data with a higher temporal granularity.
 
 \hypertarget{calendar}{%
 \section{Calendar}\label{calendar}}
+
+\hypertarget{goal-6}{%
+\subsection{Goal}\label{goal-6}}
+
+Create a calendar heat map with daily energy consumption values.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-14}
+\end{figure}
+
+\hypertarget{data-basis-6}{%
+\subsection{Data Basis}\label{data-basis-6}}
+
+Daily energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisHeatmapCalendar1-1.pdf}
+\caption{\label{fig:dataVisHeatmapCalendar1}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-6}{%
+\subsection{Solution}\label{solution-6}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1897,7 +1914,7 @@ tbd
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{value) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{unique}\NormalTok{()}
 
-\NormalTok{p <-}\StringTok{ }\KeywordTok{ggplot_calendar_heatmap}\NormalTok{(data.plot,}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot_calendar_heatmap}\NormalTok{(data.plot,}
                              \StringTok{"day"}\NormalTok{,}
                              \StringTok{"calcVal"}\NormalTok{,}
                              \DataTypeTok{monthBorderSize =} \DecValTok{1}\NormalTok{,}
@@ -1913,14 +1930,28 @@ tbd
 \StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\NormalTok{Year, }\DataTypeTok{ncol =} \DecValTok{1}\NormalTok{) }\OperatorTok{+}
 \StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Calendar Plot Energy Consumption}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{)}
 
-\NormalTok{p}
+\NormalTok{plot}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/dataVisHeatmapCalendar-1.pdf}
+\includegraphics{edar_files/figure-latex/dataVisHeatmapCalendar2-1.pdf}
 
-\hypertarget{discussion-6}{%
-\subsection{Discussion}\label{discussion-6}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create the interactive plot (optional, uncomment line)}
+\CommentTok{#ggplotly(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotHeatMapCalendar.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-5}{%
+\subsection{Discussion}\label{discussion-5}}
 
 Some findings:
 
@@ -1939,13 +1970,109 @@ Some findings:
   On Fridays in general less consumption
 \end{itemize}
 
-\hypertarget{daily-profiles}{%
-\chapter{Daily Profiles}\label{daily-profiles}}
+\hypertarget{median-weeks}{%
+\section{Median-Weeks}\label{median-weeks}}
 
-tbd
+\hypertarget{goal-7}{%
+\subsection{Goal}\label{goal-7}}
+
+Create an energy consumption heat map of a typical weeks depending on the season of the year.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-15}
+\end{figure}
+
+\hypertarget{data-basis-7}{%
+\subsection{Data Basis}\label{data-basis-7}}
+
+Daily energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisHeatmapMedianWeeks0-1.pdf}
+\caption{\label{fig:dataVisHeatmapMedianWeeks0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-7}{%
+\subsection{Solution}\label{solution-7}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(redutils)}
+\KeywordTok{library}\NormalTok{(plotly)}
+
+\NormalTok{data <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotHeatmapMedianWeeks}\NormalTok{(data, }\DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# show the static plot}
+\NormalTok{plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/dataVisHeatmapMedianWeeks1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# create the interactive plot (optional, uncomment line)}
+\CommentTok{#ggplotly(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotHeatMapMedianWeeks.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-6}{%
+\subsection{Discussion}\label{discussion-6}}
+
+Some findings:
+
+\begin{itemize}
+\item
+  Increased consumption at midnight, but not visible in Summer, probably heating affected
+\item
+  Clearly less consumption at weekends, starting already friday afternoon
+\item
+  High peaks on Tuesdays and Thursdays in summer
+\end{itemize}
+
+\hypertarget{typical-daily-profiles}{%
+\chapter{Typical Daily Profiles}\label{typical-daily-profiles}}
+
+An important step in exploratory data analysis is the recognition of patterns. For this purpose, the data are first aggregated to hourly values, averaged and displayed as typical daily patterns. The daily profiles can be displayed separately for the weekdays and the seasons. This chapter shows some useful visualizations to accommodate this recognition.
 
 \hypertarget{overview}{%
 \section{Overview}\label{overview}}
+
+\hypertarget{goal-8}{%
+\subsection{Goal}\label{goal-8}}
+
+Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-16}
+\end{figure}
+
+\hypertarget{data-basis-8}{%
+\subsection{Data Basis}\label{data-basis-8}}
+
+Energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverview0-1.pdf}
+\caption{\label{fig:dataVisDailyProfilesOverview0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-8}{%
+\subsection{Solution}\label{solution-8}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1957,48 +2084,55 @@ tbd
 \KeywordTok{library}\NormalTok{(plotly)}
 
 \CommentTok{# load time series data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
 
-\CommentTok{# rename column names}
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
-                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
-                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
-
-\CommentTok{# Fill missing values with NA}
-\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
-\CommentTok{# remove negative values which occur beause of change summer/winter time}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{>=}\StringTok{ }\DecValTok{0}\NormalTok{)}
-
-\NormalTok{p <-}\StringTok{ }\KeywordTok{plotDailyProfilesOverview}\NormalTok{(df,}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotDailyProfilesOverview}\NormalTok{(df,}
                                \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
                                \DataTypeTok{main =} \StringTok{"Daily Profiles Overview by Weekday and Season"}\NormalTok{,}
-                               \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/h)"}\NormalTok{,}
+                               \DataTypeTok{ylab =} \StringTok{"Power (kW)"}\NormalTok{,}
                                \DataTypeTok{col =} \StringTok{"black"}\NormalTok{,}
                                \DataTypeTok{confidence =} \FloatTok{95.0}\NormalTok{)}
 
-\KeywordTok{ggplotly}\NormalTok{(p)}
+\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
 \includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverview1-1.pdf}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDailyProfOverview.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{overlayed}{%
 \section{Overlayed}\label{overlayed}}
+
+\hypertarget{goal-9}{%
+\subsection{Goal}\label{goal-9}}
+
+Create a plot of all data per week by season of the year.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-17}
+\end{figure}
+
+\hypertarget{data-basis-9}{%
+\subsection{Data Basis}\label{data-basis-9}}
+
+Energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverlayed0-1.pdf}
+\caption{\label{fig:dataVisDailyProfilesOverlayed0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-9}{%
+\subsection{Solution}\label{solution-9}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2018,35 +2152,8 @@ tbd
 \KeywordTok{library}\NormalTok{(lubridate)}
 
 \CommentTok{# load time series data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\CommentTok{# rename column names}
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
-                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
-                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
-
-\CommentTok{# uncomment to filter time range if necessary}
-\CommentTok{#df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")}
-
-\CommentTok{# Fill missing values with NA}
-\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
-\CommentTok{# remove negative values which occur beause of change summer/winter time}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{>=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{*}\StringTok{ }\DecValTok{4}\NormalTok{)}
 
 \CommentTok{# add metadata for later grouping and visualization purposes}
 \NormalTok{df}\OperatorTok{$}\NormalTok{x <-}\StringTok{ }\KeywordTok{hour}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{+}\StringTok{ }\KeywordTok{minute}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}\OperatorTok{/}\DecValTok{60} \OperatorTok{+}\StringTok{ }\KeywordTok{second}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{/}\StringTok{ }\DecValTok{3600}
@@ -2101,64 +2208,33 @@ tbd
 
 \includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverlayed1-1.pdf}
 
-Next we want to create an overview with the mean values for each 15 minute slot per day.
-
-Append the following code at the end of your script:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# Calculate Mean value for all 15 minutes for each weekday}
-\NormalTok{df2 <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(weekday, x) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dayTimeMean =} \KeywordTok{mean}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
-
-\CommentTok{# shrink data frame}
-\NormalTok{df2 <-}\StringTok{ }\NormalTok{df2 }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(x, weekday, timestamp, dayTimeMean) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{na.omit}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{arrange}\NormalTok{(weekday, x)}
-
-\CommentTok{# plot graph with mean values}
-\NormalTok{maxValMean <-}\StringTok{ }\KeywordTok{max}\NormalTok{(df2}\OperatorTok{$}\NormalTok{dayTimeMean, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)}\OperatorTok{*}\FloatTok{1.05}
-
-\NormalTok{df2 }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{highlight_key}\NormalTok{(}\OperatorTok{~}\NormalTok{weekday) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{plot_ly}\NormalTok{(}\DataTypeTok{x=}\OperatorTok{~}\NormalTok{x,}
-          \DataTypeTok{y=}\OperatorTok{~}\NormalTok{dayTimeMean,}
-          \DataTypeTok{color=}\OperatorTok{~}\NormalTok{weekday,}
-          \DataTypeTok{type=}\StringTok{"scatter"}\NormalTok{,}
-          \DataTypeTok{mode=}\StringTok{"lines"}\NormalTok{,}
-          \DataTypeTok{alpha =} \FloatTok{0.25}\NormalTok{,}
-          \DataTypeTok{colors =} \StringTok{"dodgerblue4"}\NormalTok{,}
-          \DataTypeTok{text =} \OperatorTok{~}\NormalTok{weekday,}
-          \DataTypeTok{hovertemplate =} \KeywordTok{paste}\NormalTok{(}\StringTok{"Time: "}\NormalTok{, }\KeywordTok{format}\NormalTok{(df2}\OperatorTok{$}\NormalTok{timestamp, }\StringTok{"%H:%M"}\NormalTok{),}
-                                \StringTok{"<br>Mean: %\{y:.0f\}"}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\CommentTok{# workaround with add_trace to have fixed y axis when selecting a dedicated day}
-\StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{0}\NormalTok{, }\DataTypeTok{y =} \DecValTok{0}\NormalTok{, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{add_trace}\NormalTok{(}\DataTypeTok{x =} \DecValTok{24}\NormalTok{, }\DataTypeTok{y =}\NormalTok{ maxValMean, }\DataTypeTok{type =} \StringTok{"scatter"}\NormalTok{, }\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{, }\DataTypeTok{opacity=}\DecValTok{0}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Superimposed Mean Profiles of Power Consumption per 15 min"}\NormalTok{,}
-         \DataTypeTok{showlegend =} \OtherTok{TRUE}\NormalTok{,}
-         \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
-           \DataTypeTok{title =} \StringTok{"Hour of day"}\NormalTok{,}
-           \DataTypeTok{tickvals =} \KeywordTok{list}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{3}\NormalTok{, }\DecValTok{6}\NormalTok{, }\DecValTok{9}\NormalTok{, }\DecValTok{12}\NormalTok{, }\DecValTok{15}\NormalTok{, }\DecValTok{18}\NormalTok{, }\DecValTok{21}\NormalTok{)}
-\NormalTok{         ),}
-         \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}
-             \DataTypeTok{title =} \StringTok{"Power (kW)"}\NormalTok{,}
-             \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{, maxValMean)}
-\NormalTok{         )}
-\NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{highlight}\NormalTok{(}\DataTypeTok{on =} \StringTok{"plotly_hover"}\NormalTok{,}
-            \DataTypeTok{off =} \StringTok{"plotly_doubleclick"}\NormalTok{,}
-            \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
-            \DataTypeTok{opacityDim =} \FloatTok{0.7}\NormalTok{,}
-            \DataTypeTok{selected =} \KeywordTok{attrs_selected}\NormalTok{(}\DataTypeTok{showlegend =} \OtherTok{FALSE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }\CommentTok{# this hides elements in the legend}
-\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)), }\DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/energyprofiles2 plotly-1.pdf}
-
 \hypertarget{mean}{%
 \section{Mean}\label{mean}}
+
+\hypertarget{goal-10}{%
+\subsection{Goal}\label{goal-10}}
+
+Create a plot of mean data per week.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-18}
+\end{figure}
+
+\hypertarget{data-basis-10}{%
+\subsection{Data Basis}\label{data-basis-10}}
+
+Energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesMean0-1.pdf}
+\caption{\label{fig:dataVisDailyProfilesMean0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-10}{%
+\subsection{Solution}\label{solution-10}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -2178,45 +2254,18 @@ Append the following code at the end of your script:
 \KeywordTok{library}\NormalTok{(lubridate)}
 
 \CommentTok{# load time series data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/eboBookEleMeter.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\CommentTok{# rename column names}
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
-                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
-                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{force_tz}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{tzone =} \StringTok{"UTC"}\NormalTok{)}
-
-\CommentTok{# uncomment to filter time range if necessary}
-\CommentTok{#df <- df %>% filter(timestamp > "2015-03-01 00:00:00", timestamp < "2015-04-01 00:00:00")}
-
-\CommentTok{# Fill missing values with NA}
-\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{timestamp =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{),}
-                                      \DataTypeTok{by =} \StringTok{"15 mins"}\NormalTok{))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# convert steadily counting energy meter value from kWh to power in kW}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ (meterValue }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(meterValue))}\OperatorTok{*}\DecValTok{4}\NormalTok{) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
-
-\CommentTok{# remove negative values which occur beause of change summer/winter time}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{filter}\NormalTok{(value }\OperatorTok{>=}\StringTok{ }\DecValTok{0}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{*}\StringTok{ }\DecValTok{4}\NormalTok{)}
 
 \CommentTok{# add metadata for later grouping and visualization purposes}
 \NormalTok{df}\OperatorTok{$}\NormalTok{x <-}\StringTok{ }\KeywordTok{hour}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{+}\StringTok{ }\KeywordTok{minute}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}\OperatorTok{/}\DecValTok{60} \OperatorTok{+}\StringTok{ }\KeywordTok{second}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp) }\OperatorTok{/}\StringTok{ }\DecValTok{3600}
 \NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{weekdays}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)}
 \NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{factor}\NormalTok{(df}\OperatorTok{$}\NormalTok{weekday, }\KeywordTok{c}\NormalTok{(}\StringTok{"Monday"}\NormalTok{,}\StringTok{"Tuesday"}\NormalTok{,}\StringTok{"Wednesday"}\NormalTok{,}\StringTok{"Thursday"}\NormalTok{,}\StringTok{"Friday"}\NormalTok{,}\StringTok{"Saturday"}\NormalTok{, }\StringTok{"Sunday"}\NormalTok{))}
 
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ }\FloatTok{0.00}\NormalTok{, }\OtherTok{NA}\NormalTok{, df}\OperatorTok{$}\NormalTok{value))}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{ifelse}\NormalTok{(x }\OperatorTok{==}\StringTok{ }\FloatTok{0.00}\NormalTok{, }\OtherTok{NA}\NormalTok{, df}\OperatorTok{$}\NormalTok{value))}
 
 \CommentTok{# Calculate Mean value for all 15 minutes for each weekday}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(weekday, x) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dayTimeMean =} \KeywordTok{mean}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{group_by}\NormalTok{(weekday, x) }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{dayTimeMean =} \KeywordTok{mean}\NormalTok{(value)) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{ungroup}\NormalTok{()}
 
 \CommentTok{# shrink data frame}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}
@@ -2265,17 +2314,51 @@ Append the following code at the end of your script:
 
 \includegraphics{edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf}
 
-\hypertarget{decomposed}{%
-\section{Decomposed}\label{decomposed}}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDailyProfMean.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{dailyProfilesDecomposed}{%
+\section{Decomposed}\label{dailyProfilesDecomposed}}
+
+\hypertarget{goal-11}{%
+\subsection{Goal}\label{goal-11}}
+
+Create a plot of detrended mean data per week.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-19}
+\end{figure}
+
+\hypertarget{data-basis-11}{%
+\subsection{Data Basis}\label{data-basis-11}}
+
+Energy consumption values of one whole year in an interval of 15mins.
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/dataVisDailyProfilesDecomposed0-1.pdf}
+\caption{\label{fig:dataVisDailyProfilesDecomposed0}Raw Data for Decomposition Plot Short Term}
+\end{figure}
+
+\hypertarget{solution-11}{%
+\subsection{Solution}\label{solution-11}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(plotly)}
 \KeywordTok{library}\NormalTok{(redutils)}
 
-\NormalTok{data <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
+\CommentTok{# load time series data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{readRDS}\NormalTok{(}\KeywordTok{system.file}\NormalTok{(}\StringTok{"sampleData/eboBookEleMeter.rds"}\NormalTok{, }\DataTypeTok{package =} \StringTok{"redutils"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{mutate}\NormalTok{(df, }\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{*}\StringTok{ }\DecValTok{4}\NormalTok{)}
 
-\NormalTok{p <-}\StringTok{ }\KeywordTok{plotDailyProfilesDecomposed}\NormalTok{(data, }\DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{p <-}\StringTok{ }\KeywordTok{plotDailyProfilesDecomposed}\NormalTok{(df, }\DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{)}
 
 \KeywordTok{ggplotly}\NormalTok{(p)}
 \end{Highlighting}
@@ -2283,16 +2366,23 @@ Append the following code at the end of your script:
 
 \includegraphics{edar_files/figure-latex/dataVisDailyProfilesDecomposed1 plotly-1.pdf}
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDailyProfDecomposed.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{comfort-plots}{%
 \chapter{Comfort Plots}\label{comfort-plots}}
 
-tbd
+Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
 
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
-\hypertarget{task-1}{%
-\subsection{Task}\label{task-1}}
+\hypertarget{task}{%
+\subsection{Task}\label{task}}
 
 You want to plot a mollier h-x diagram with
 
@@ -2305,8 +2395,8 @@ You want to plot a mollier h-x diagram with
   comfort zone
 \end{itemize}
 
-\hypertarget{basis-2}{%
-\subsection{Basis}\label{basis-2}}
+\hypertarget{basis}{%
+\subsection{Basis}\label{basis}}
 
 \begin{itemize}
 \tightlist
@@ -2314,8 +2404,8 @@ You want to plot a mollier h-x diagram with
   A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
 \end{itemize}
 
-\hypertarget{solution-6}{%
-\subsection{Solution}\label{solution-6}}
+\hypertarget{solution-12}{%
+\subsection{Solution}\label{solution-12}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
@@ -2371,8 +2461,8 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{sia-180-thermal-comfort}{%
 \section{SIA 180 Thermal Comfort}\label{sia-180-thermal-comfort}}
 
-\hypertarget{task-2}{%
-\subsection{Task}\label{task-2}}
+\hypertarget{task-1}{%
+\subsection{Task}\label{task-1}}
 
 You want to plot a diagram like the one from the SIA 180:2014 which showes
 
@@ -2385,8 +2475,8 @@ You want to plot a diagram like the one from the SIA 180:2014 which showes
   different comfort lines
 \end{itemize}
 
-\hypertarget{basis-3}{%
-\subsection{Basis}\label{basis-3}}
+\hypertarget{basis-1}{%
+\subsection{Basis}\label{basis-1}}
 
 \begin{itemize}
 \item
@@ -2395,8 +2485,8 @@ You want to plot a diagram like the one from the SIA 180:2014 which showes
   A csv file with the outdoor temperature
 \end{itemize}
 
-\hypertarget{solution-7}{%
-\subsection{Solution}\label{solution-7}}
+\hypertarget{solution-13}{%
+\subsection{Solution}\label{solution-13}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
 
@@ -2609,21 +2699,21 @@ Create a new script, copy/paste the following code and run it:
 
 tbd
 
-\hypertarget{see-also-2}{%
-\subsection{See Also}\label{see-also-2}}
+\hypertarget{see-also}{%
+\subsection{See Also}\label{see-also}}
 
 tbd
 
 \hypertarget{miscellaneous}{%
 \chapter{Miscellaneous}\label{miscellaneous}}
 
-tbd
+Finally, some visualizations that did not fit into any of the above chapters and are not worth a separate chapter. But these are not less interesting\ldots{}
 
 \hypertarget{electricity-household}{%
 \section{Electricity Household}\label{electricity-household}}
 
-\hypertarget{task-3}{%
-\subsection{Task}\label{task-3}}
+\hypertarget{task-2}{%
+\subsection{Task}\label{task-2}}
 
 You want to plot an electricity consumption diagram which shows
 
@@ -2637,8 +2727,8 @@ You want to plot an electricity consumption diagram which shows
 
 Additionaly we would like to see the consumption of an average Swiss household.
 
-\hypertarget{basis-4}{%
-\subsection{Basis}\label{basis-4}}
+\hypertarget{basis-2}{%
+\subsection{Basis}\label{basis-2}}
 
 \begin{itemize}
 \tightlist
@@ -2646,8 +2736,8 @@ Additionaly we would like to see the consumption of an average Swiss household.
   A csv file with time series of an electric meter in 15 minute interval.
 \end{itemize}
 
-\hypertarget{solution-8}{%
-\subsection{Solution}\label{solution-8}}
+\hypertarget{solution-14}{%
+\subsection{Solution}\label{solution-14}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -3005,16 +3095,16 @@ Create a new script, copy/paste the following code and run it:
 
 tbd
 
-\hypertarget{see-also-3}{%
-\subsection{See Also}\label{see-also-3}}
+\hypertarget{see-also-1}{%
+\subsection{See Also}\label{see-also-1}}
 
 tbd
 
 \hypertarget{room-temperature-reduction}{%
 \section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
-\hypertarget{task-4}{%
-\subsection{Task}\label{task-4}}
+\hypertarget{task-3}{%
+\subsection{Task}\label{task-3}}
 
 As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
 
@@ -3029,8 +3119,8 @@ You want to create a time series plot with
   the desired setpoint
 \end{itemize}
 
-\hypertarget{basis-5}{%
-\subsection{Basis}\label{basis-5}}
+\hypertarget{basis-3}{%
+\subsection{Basis}\label{basis-3}}
 
 \begin{itemize}
 \tightlist
@@ -3038,8 +3128,8 @@ You want to create a time series plot with
   Time series data from e.g.~a temperature sensor with unaligned time intervals
 \end{itemize}
 
-\hypertarget{solution-9}{%
-\subsection{Solution}\label{solution-9}}
+\hypertarget{solution-15}{%
+\subsection{Solution}\label{solution-15}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3153,8 +3243,8 @@ Please note that the calculation of the periodic median after optimization I and
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
 
-\hypertarget{task-5}{%
-\subsection{Task}\label{task-5}}
+\hypertarget{goal-12}{%
+\subsection{Goal}\label{goal-12}}
 
 You want to create a scatter plot with
 
@@ -3167,18 +3257,20 @@ You want to create a scatter plot with
   points colored according to season
 \end{itemize}
 
-\hypertarget{basis-6}{%
-\subsection{Basis}\label{basis-6}}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-21}
+\end{figure}
 
-\begin{itemize}
-\item
-  Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals
-\item
-  Energy consumption time series from a energy meter with steadily increasing meter values
-\end{itemize}
+\hypertarget{data-basis-12}{%
+\subsection{Data Basis}\label{data-basis-12}}
 
-\hypertarget{solution-10}{%
-\subsection{Solution}\label{solution-10}}
+Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals:
+
+\includegraphics{edar_files/figure-latex/energysignature0-1.pdf}
+\includegraphics{edar_files/figure-latex/energysignature1-1.pdf}
+
+\hypertarget{solution-16}{%
+\subsection{Solution}\label{solution-16}}
 
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 
@@ -3263,7 +3355,21 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/energysignature ggplot-1.pdf}
+\includegraphics{edar_files/figure-latex/energysignature2-1.pdf}
+
+\hypertarget{discussion-10}{%
+\subsection{Discussion}\label{discussion-10}}
+
+This visualization allows a quick detection of malfunctions and provides valuable information on the energy efficiency of the building.
+
+\begin{itemize}
+\item
+  A constant indoor temperature is assumed.
+\item
+  It is also assumed that the outside temperature is the parameter with the greatest influence on heating energy consumption.
+\item
+  This method is suitable for buildings with stable internal heat loads and relatively low passive solar heat loads.
+\end{itemize}
 
 \hypertarget{appendix-appendix}{%
 \appendix}

@@ -2,8 +2,12 @@
 This chapter introduces two functions that can be used to load data from csv-files and Excel-files.
 
 Experienced readers will find more information about data imports here:
+
 - <a href="https://rafalab.github.io/dsbook/importing-data.html" target="_blank">Introduction to Data Science - Chapter 5 "Importing data"</a>
+
 - <a href="https://smogdr.github.io/edar_coursebook/rprog2.html" target="_blank">Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"</a>
+
+<br>
 <font size="5">csv-Files</font>
 
 Load data from comma separated files
@@ -32,7 +36,7 @@ df <- read.csv("datafile.csv",
 
 > Note that the function read.csv() has the default `sep =","` and read.csv2() has the default `sep =";"`
 
-
+<br>
 <font size="5">Excel-Files</font>
 
 Load data from `*.xlsx` Excel files:
