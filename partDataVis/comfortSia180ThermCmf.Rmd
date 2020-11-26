@@ -1,25 +1,44 @@
 ## SIA 180 Thermal Comfort
-### Task
-You want to plot a diagram like the one from the SIA 180:2014 which showes
+### Goal
+You want to plot a diagram like the one from the SIA 180:2014
 
-* scatter plot of indoor- and outdoor temperature sensor data (indoor mean of day, outdoor mean of last 48 hours)
+```{r out.width='70%', fig.cap='Thermal Comfort according to SIA 180:2014', echo=FALSE}
+knitr::include_graphics("images/comfortSia180ThermCmf.png")
+```
 
-* points colored according to season
+### Data Basis
+```{r comfortSia180ThermCmf0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Room and Outdoor Temperaturefor SIA180 Thermal Comfort Plot'}
+library(dplyr)
+library(lubridate)
+# read and print data
+dfTempOa <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
 
-* different comfort lines
+dfTempOa$time <- parse_date_time(dfTempOa$time,
+                                      order = "YmdHMS",
+                                      tz = "UTC")
 
-### Basis
 
-* A csv file with time series from multiple temperature and humidity sensors in °C
+dfTempR <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                       stringsAsFactors=FALSE,
+                       sep =";")
 
-* A csv file with the outdoor temperature
+dfTempR$time <- parse_date_time(dfTempR$time,
+                                   order = "YmdHMS",
+                                   tz = "UTC")
+# plot temp data
+plot(dfTempOa$time, dfTempOa$centralOutsideTemp,
+     xlab="Time", ylab="Outside Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+
+plot(dfTempR$time, dfTempR$FlatA_Temp,
+     xlab="Time", ylab="Room Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+```
 
 ### Solution
-The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
-
 Create a new script, copy/paste the following code and run it:
 
-```{r sia180_1, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r comfortSia180ThermCmf1, warning=FALSE, message=FALSE, collapse = FALSE}
 library(redutils)
 library(dplyr)
 library(lubridate)
@@ -192,13 +211,14 @@ data %>%
               )
   ) %>%
   layout(
-    xaxis = list(title = "Moving average outdoor temperature in \u00B0C over 48 hours",
+    title = "Thermal Comfort according to SIA 180:2014",
+    xaxis = list(title = "Moving average outdoor temperature over last 48 hours (\u00B0C)",
                  range = c(minx, maxx),
                  zeroline = FALSE,
                  tick0 = minx,
                  dtick = 2,
                  titlefont = list(size = 14, color = "darkgrey")),
-    yaxis = list(title = "Room Temperature in \u00B0C",
+    yaxis = list(title = "Room Temperature (\u00B0C)",
                  range = c(miny, maxy),
                  dtick = 1,
                  titlefont = list(size = 14, color = "darkgrey")),
@@ -212,15 +232,9 @@ data %>%
   plotly::config(modeBarButtons = list(list("toImage")),
                  displaylogo = FALSE,
                  toImageButtonOptions = list(
-                   format = "svg"
+                   format = "png"
                  )
   )
 
 ```
-
-### Discussion
-tbd
-
-### See Also
-tbd
 

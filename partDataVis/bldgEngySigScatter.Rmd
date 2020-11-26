@@ -13,7 +13,6 @@ knitr::include_graphics("images/plotBldgEngySigScatter.png")
 ```
 
 ### Data Basis
-
 Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals:
 
 ```{r energysignature0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot'}

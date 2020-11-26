@@ -130,7 +130,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-11-26}
+\date{2020-11-27}
 
 \begin{document}
 \maketitle
@@ -139,10 +139,8 @@
 \setcounter{tocdepth}{1}
 \tableofcontents
 }
-\hypertarget{intro}{%
-\chapter{Introduction}\label{intro}}
-
-Preface
+\hypertarget{preface}{%
+\chapter{Preface}\label{preface}}
 
 This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
@@ -2237,28 +2235,19 @@ Satisfied and healthy residents are important, thus an energetic optimization sh
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
-\hypertarget{task}{%
-\subsection{Task}\label{task}}
+\hypertarget{goal-12}{%
+\subsection{Goal}\label{goal-12}}
 
-You want to plot a mollier h-x diagram with
+You want to plot a mollier h-x diagram:
 
-\begin{itemize}
-\item
-  scatter plot of temperature- and humidity sensor data (mean values per day)
-\item
-  points colored according to season
-\item
-  comfort zone
-\end{itemize}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-20}
+\end{figure}
 
-\hypertarget{basis}{%
-\subsection{Basis}\label{basis}}
+\hypertarget{data-basis-12}{%
+\subsection{Data Basis}\label{data-basis-12}}
 
-\begin{itemize}
-\tightlist
-\item
-  A csv file with time series from multiple temperature and humidity sensors in °C and \%rH
-\end{itemize}
+\includegraphics{edar_files/figure-latex/mollierhx0-1.pdf} \includegraphics{edar_files/figure-latex/mollierhx0-2.pdf}
 
 \hypertarget{solution-12}{%
 \subsection{Solution}\label{solution-12}}
@@ -2308,43 +2297,41 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(day, tempMean, humMean) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
 \CommentTok{# plot mollier hx diagram}
-\KeywordTok{plotMollierHx}\NormalTok{(data)}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotMollierHx}\NormalTok{(data)}
+
+\NormalTok{plot}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/mollier hx-1.pdf}
+\includegraphics{edar_files/figure-latex/mollierhx1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{library}\NormalTok{(r2d3)}
+\KeywordTok{save_d3_png}\NormalTok{(plot, }\StringTok{"images/comfortMollierHx.png"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
 
 \hypertarget{sia-180-thermal-comfort}{%
 \section{SIA 180 Thermal Comfort}\label{sia-180-thermal-comfort}}
 
-\hypertarget{task-1}{%
-\subsection{Task}\label{task-1}}
+\hypertarget{goal-13}{%
+\subsection{Goal}\label{goal-13}}
 
-You want to plot a diagram like the one from the SIA 180:2014 which showes
+You want to plot a diagram like the one from the SIA 180:2014
 
-\begin{itemize}
-\item
-  scatter plot of indoor- and outdoor temperature sensor data (indoor mean of day, outdoor mean of last 48 hours)
-\item
-  points colored according to season
-\item
-  different comfort lines
-\end{itemize}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-22}
+\end{figure}
 
-\hypertarget{basis-1}{%
-\subsection{Basis}\label{basis-1}}
+\hypertarget{data-basis-13}{%
+\subsection{Data Basis}\label{data-basis-13}}
 
-\begin{itemize}
-\item
-  A csv file with time series from multiple temperature and humidity sensors in °C
-\item
-  A csv file with the outdoor temperature
-\end{itemize}
+\includegraphics{edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf} \includegraphics{edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf}
 
 \hypertarget{solution-13}{%
 \subsection{Solution}\label{solution-13}}
-
-The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered, aggregated per day and merged.
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2522,13 +2509,14 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{              )}
 \NormalTok{  ) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}
-    \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Moving average outdoor temperature in \textbackslash{}u00B0C over 48 hours"}\NormalTok{,}
+    \DataTypeTok{title =} \StringTok{"Thermal Comfort according to SIA 180:2014"}\NormalTok{,}
+    \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Moving average outdoor temperature over last 48 hours (\textbackslash{}u00B0C)"}\NormalTok{,}
                  \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(minx, maxx),}
                  \DataTypeTok{zeroline =} \OtherTok{FALSE}\NormalTok{,}
                  \DataTypeTok{tick0 =}\NormalTok{ minx,}
                  \DataTypeTok{dtick =} \DecValTok{2}\NormalTok{,}
                  \DataTypeTok{titlefont =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{size =} \DecValTok{14}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkgrey"}\NormalTok{)),}
-    \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Room Temperature in \textbackslash{}u00B0C"}\NormalTok{,}
+    \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Room Temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
                  \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(miny, maxy),}
                  \DataTypeTok{dtick =} \DecValTok{1}\NormalTok{,}
                  \DataTypeTok{titlefont =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{size =} \DecValTok{14}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkgrey"}\NormalTok{)),}
@@ -2542,23 +2530,13 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)),}
                  \DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{,}
                  \DataTypeTok{toImageButtonOptions =} \KeywordTok{list}\NormalTok{(}
-                   \DataTypeTok{format =} \StringTok{"svg"}
+                   \DataTypeTok{format =} \StringTok{"png"}
 \NormalTok{                 )}
 \NormalTok{  )}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/sia180_1-1.pdf}
-
-\hypertarget{discussion-7}{%
-\subsection{Discussion}\label{discussion-7}}
-
-tbd
-
-\hypertarget{see-also}{%
-\subsection{See Also}\label{see-also}}
-
-tbd
+\includegraphics{edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf}
 
 \hypertarget{miscellaneous}{%
 \chapter{Miscellaneous}\label{miscellaneous}}
@@ -2568,10 +2546,10 @@ Finally, some visualizations that did not fit into any of the above chapters and
 \hypertarget{electricity-household}{%
 \section{Electricity Household}\label{electricity-household}}
 
-\hypertarget{task-2}{%
-\subsection{Task}\label{task-2}}
+\hypertarget{goal-14}{%
+\subsection{Goal}\label{goal-14}}
 
-You want to plot an electricity consumption diagram which shows
+You want to plot an electricity consumption diagram with:
 
 \begin{itemize}
 \tightlist
@@ -2583,14 +2561,24 @@ You want to plot an electricity consumption diagram which shows
 
 Additionaly we would like to see the consumption of an average Swiss household.
 
-\hypertarget{basis-2}{%
-\subsection{Basis}\label{basis-2}}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-23}
+\end{figure}
+
+\hypertarget{data-basis-14}{%
+\subsection{Data Basis}\label{data-basis-14}}
 
 \begin{itemize}
 \tightlist
 \item
   A csv file with time series of an electric meter in 15 minute interval.
 \end{itemize}
+
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/eleHousehold10-1.pdf}
+\caption{\label{fig:eleHousehold10}Raw Data for Electricity Household Plot}
+\end{figure}
 
 \hypertarget{solution-14}{%
 \subsection{Solution}\label{solution-14}}
@@ -2920,6 +2908,7 @@ Create a new script, copy/paste the following code and run it:
     \DataTypeTok{font =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{color =} \StringTok{"black"}\NormalTok{)}
 \NormalTok{  ) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}
+    \DataTypeTok{title =} \StringTok{"Electricity Household"}\NormalTok{,}
     \DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}
       \DataTypeTok{title =} \StringTok{""}
 \NormalTok{    ),}
@@ -2937,30 +2926,20 @@ Create a new script, copy/paste the following code and run it:
 \StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)),}
                  \DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{,}
                  \DataTypeTok{toImageButtonOptions =} \KeywordTok{list}\NormalTok{(}
-                   \DataTypeTok{format =} \StringTok{"svg"}
+                   \DataTypeTok{format =} \StringTok{"png"}
 \NormalTok{                 )}
 \NormalTok{  )}
 \NormalTok{fig}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/eleplot-1.pdf}
-
-\hypertarget{discussion-8}{%
-\subsection{Discussion}\label{discussion-8}}
-
-tbd
-
-\hypertarget{see-also-1}{%
-\subsection{See Also}\label{see-also-1}}
-
-tbd
+\includegraphics{edar_files/figure-latex/eleHousehold1-1.pdf}
 
 \hypertarget{room-temperature-reduction}{%
 \section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
-\hypertarget{task-3}{%
-\subsection{Task}\label{task-3}}
+\hypertarget{goal-15}{%
+\subsection{Goal}\label{goal-15}}
 
 As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
 
@@ -2975,8 +2954,12 @@ You want to create a time series plot with
   the desired setpoint
 \end{itemize}
 
-\hypertarget{basis-3}{%
-\subsection{Basis}\label{basis-3}}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-24}
+\end{figure}
+
+\hypertarget{data-basis-15}{%
+\subsection{Data Basis}\label{data-basis-15}}
 
 \begin{itemize}
 \tightlist
@@ -2984,8 +2967,16 @@ You want to create a time series plot with
   Time series data from e.g.~a temperature sensor with unaligned time intervals
 \end{itemize}
 
+\begin{figure}
+\centering
+\includegraphics{edar_files/figure-latex/roomTempRed0-1.pdf}
+\caption{\label{fig:roomTempRed0}Raw Data Temperature for Room Temperature Reduction Plot}
+\end{figure}
+
 \hypertarget{solution-15}{%
 \subsection{Solution}\label{solution-15}}
+
+Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -3087,10 +3078,10 @@ You want to create a time series plot with
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/tempreduction-1.pdf}
+\includegraphics{edar_files/figure-latex/roomTempRed1-1.pdf}
 
-\hypertarget{discussion-9}{%
-\subsection{Discussion}\label{discussion-9}}
+\hypertarget{discussion-7}{%
+\subsection{Discussion}\label{discussion-7}}
 
 In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.
 
@@ -3099,8 +3090,8 @@ Please note that the calculation of the periodic median after optimization I and
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
 
-\hypertarget{goal-12}{%
-\subsection{Goal}\label{goal-12}}
+\hypertarget{goal-16}{%
+\subsection{Goal}\label{goal-16}}
 
 You want to create a scatter plot with
 
@@ -3114,11 +3105,11 @@ You want to create a scatter plot with
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-21}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-25}
 \end{figure}
 
-\hypertarget{data-basis-12}{%
-\subsection{Data Basis}\label{data-basis-12}}
+\hypertarget{data-basis-16}{%
+\subsection{Data Basis}\label{data-basis-16}}
 
 Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals:
 
@@ -3213,8 +3204,8 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/energysignature2-1.pdf}
 
-\hypertarget{discussion-10}{%
-\subsection{Discussion}\label{discussion-10}}
+\hypertarget{discussion-8}{%
+\subsection{Discussion}\label{discussion-8}}
 
 This visualization allows a quick detection of malfunctions and provides valuable information on the energy efficiency of the building.
 

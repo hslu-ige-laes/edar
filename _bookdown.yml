@@ -32,7 +32,6 @@ rmd_files: [
   "partDataVis/dailyProfMean.Rmd",
   "partDataVis/dailyProfDecomposed.Rmd",
 
-  # below not yet redacted
   "partDataVis/comfort.Rmd",
   "partDataVis/comfortMollierHx.Rmd",
   "partDataVis/comfortSia180ThermCmf.Rmd",

@@ -1,20 +1,43 @@
 ## Electricity Household
-### Task
-You want to plot an electricity consumption diagram which shows
+### Goal
+You want to plot an electricity consumption diagram with:
 
 * upper plot with daily energy consumption in kWh/day
 * lower plot with standby-losses in Watts
 
 Additionaly we would like to see the consumption of an average Swiss household.
 
-### Basis
+```{r out.width='70%', fig.cap='Plot Electricity Household', echo=FALSE}
+knitr::include_graphics("images/eleHousehold.png")
+```
+
+### Data Basis
 
 * A csv file with time series of an electric meter in 15 minute interval.
+
+```{r eleHousehold10, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Electricity Household Plot'}
+library(dplyr)
+library(lubridate)
+# load time series data and aggregate mean values
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatElectricity.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "UTC")
+
+# select room
+df <- df %>% select(time, FlatC_Ele)
+# plot data
+plot(df$time, df$FlatC_Ele,
+     xlab="Time", ylab="Electric Meter Value (kWh)", main="15min Interval Raw Data", type = "l")
+```
 
 ### Solution
 Create a new script, copy/paste the following code and run it:
 
-```{r eleplot, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r eleHousehold1, warning=FALSE, message=FALSE, collapse = FALSE}
 library(redutils)
 library(dplyr)
 library(lubridate)
@@ -336,6 +359,7 @@ fig2 <- df %>%
     font = list(color = "black")
   ) %>% 
   layout(
+    title = "Electricity Household",
     xaxis = list(
       title = ""
     ),
@@ -353,14 +377,9 @@ fig <- subplot(fig1, fig2, nrows = 2, shareX = TRUE, heights = c(1-ratio, ratio)
   plotly::config(modeBarButtons = list(list("toImage")),
                  displaylogo = FALSE,
                  toImageButtonOptions = list(
-                   format = "svg"
+                   format = "png"
                  )
   )
 fig
 ```
 
-### Discussion
-tbd
-
-### See Also
-tbd

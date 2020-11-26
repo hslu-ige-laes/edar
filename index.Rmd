@@ -13,9 +13,8 @@ description: "Introduction into energy data analysis and visualization with R."
 
 ---
 
-# Introduction {#intro}
- <font size="5"> Preface </font>
- 
+# Preface {#preface}
+
 This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
 It is aimed at R beginners as well as exerienced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a> and <a href="https://smogdr.github.io/edar_coursebook/" target="_blank">Engineering Data Analysis in R</a>. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 

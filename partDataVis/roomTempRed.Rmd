@@ -1,5 +1,5 @@
 ## Room Temperature Reduction
-### Task
+### Goal
 As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
 
 You want to create a time series plot with
@@ -10,13 +10,38 @@ You want to create a time series plot with
 
 * the desired setpoint
 
-### Basis
+```{r out.width='70%', fig.cap='Room Temperature Reduction Plot', echo=FALSE}
+knitr::include_graphics("images/roomTempRed.png")
+```
+
+### Data Basis
 
 * Time series data from e.g. a temperature sensor with unaligned time intervals
 
-### Solution
+```{r roomTempRed0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature for Room Temperature Reduction Plot'}
+library(dplyr)
+library(lubridate)
+# read and print data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
 
-```{r tempreduction, warning=FALSE, message=FALSE, collapse = FALSE}
+# select temperature and remove empty cells
+df <- df %>% select(time, FlatA_Temp) %>% na.omit()
+
+# create column with day for later grouping
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+
+# plot temp data
+plot(df$time, df$FlatA_Temp,
+     xlab="Time", ylab="Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+
+```
+
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r roomTempRed1, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)
 library(lubridate)
 library(dygraphs)

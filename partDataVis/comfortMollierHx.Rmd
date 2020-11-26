@@ -1,16 +1,34 @@
 ## Mollier hx Diagram
-### Task
-You want to plot a mollier h-x diagram with
+### Goal
+You want to plot a mollier h-x diagram:
 
-* scatter plot of temperature- and humidity sensor data (mean values per day)
+```{r out.width='70%', fig.cap='Mollier hx Diagram with comfort zone', echo=FALSE}
+knitr::include_graphics("images/comfortMollierHx.png")
+```
 
-* points colored according to season
+### Data Basis
 
-* comfort zone
+```{r mollierhx0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature and Humidity for Mollier hx Diagram'}
+library(dplyr)
+library(lubridate)
+# read and print data
+data <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
 
-### Basis
+# select temperature and humidity and remove empty cells
+data <- data %>% select(time, FlatA_Temp, FlatA_Hum) %>% na.omit()
 
-* A csv file with time series from multiple temperature and humidity sensors in °C and %rH
+# create column with day for later grouping
+data$time <- parse_date_time(data$time, "YmdHMS", tz = "Europe/Zurich")
+
+# plot temp data
+plot(data$time, data$FlatA_Temp,
+     xlab="Time", ylab="Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+
+plot(data$time, data$FlatA_Hum,
+     xlab="Time", ylab="Rel. Humidity (%rH)", main="Hourly Interval Raw Data", type = "l")
+```
 
 ### Solution
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
@@ -25,7 +43,7 @@ install_github("hslu-ige-laes/redutils")
 ```
 Create a new script, copy/paste the following code and run it:
 
-```{r mollier hx, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r mollierhx1, warning=FALSE, message=FALSE, collapse = FALSE}
 library(redutils)
 library(dplyr)
 library(lubridate)
@@ -54,6 +72,13 @@ data <- data %>%
 data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 
 # plot mollier hx diagram
-plotMollierHx(data)
+plot <- plotMollierHx(data)
+
+plot
 ```
 
+```{r mollierhx2, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+library(r2d3)
+save_d3_png(plot, "images/comfortMollierHx.png")
+```
