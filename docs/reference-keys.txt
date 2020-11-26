@@ -6,6 +6,7 @@ fig:unnamed-chunk-10
 fig:seasonalPlotPolar00
 fig:unnamed-chunk-11
 fig:energyConsBeforeAfter0
+fig:decompositionTOa
 fig:unnamed-chunk-12
 fig:dataVisDecompositionLong0
 fig:unnamed-chunk-13

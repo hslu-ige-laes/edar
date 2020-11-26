@@ -10,8 +10,13 @@ A first step is getting an overview of the whole data set and specific series of
 Load test data set in a data frame (e.g. from a csv-file)
 
 ```{r eda readcsv, echo=FALSE, results='hide'}
-df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
-                stringsAsFactors=FALSE)
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv",
+                         stringsAsFactors=FALSE,
+                         sep =";")
+
+df$time <- parse_date_time(df$time,
+                           orders = "YmdHMS",
+                           tz = "Europe/Zurich")
 ```
 
 <br>
@@ -54,7 +59,7 @@ tail(df)
 Reveals details like object classes
 
 ```{r eda summary, warning=FALSE, message=FALSE, collapse = FALSE}
-summary(df)
+summary(df$supplyTempHeating)
 ```
 
 <br>

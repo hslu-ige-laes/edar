@@ -183,9 +183,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.7" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>5.2.7</b> Long to Wide</a></li>
 <li class="chapter" data-level="5.2.8" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>5.2.8</b> Merge two Dataframes</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>5.3</b> Examples</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="examples.html"><a href="examples.html#import-csv-file-from-gwf-relay-w60-m-bus-logger"><i class="fa fa-check"></i><b>5.3.1</b> Import csv file from GWF Relay W60 M-Bus Logger</a></li>
-</ul></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Explorative Data Analysis</a><ul>
 <li class="chapter" data-level="6.1" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html"><i class="fa fa-check"></i><b>6.1</b> Get Overview of Data</a><ul>
@@ -224,7 +221,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="7.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-3"><i class="fa fa-check"></i><b>7.4.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="8" data-path="decomposition.html"><a href="decomposition.html"><i class="fa fa-check"></i><b>8</b> Decomposition</a><ul>
+<li class="chapter" data-level="8" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>8</b> Time Series Decomposition</a><ul>
 <li class="chapter" data-level="8.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>8.1</b> Long term</a><ul>
 <li class="chapter" data-level="8.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>8.1.1</b> Goal</a></li>
 <li class="chapter" data-level="8.1.2" data-path="long-term.html"><a href="long-term.html#data-basis-4"><i class="fa fa-check"></i><b>8.1.2</b> Data Basis</a></li>
@@ -344,7 +341,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb6-4" title="4">               <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a></code></pre></div>
 <div id="year-month-day-day-of-week" class="section level3">
 <h3><span class="header-section-number">5.1.1</span> Year, Month, Day, Day of Week</h3>
-<p>To group, filter and aggregate data we need to have a the date splitted up in day, month and year separately:</p>
+<p>To e.g. group, filter and aggregate data we need eventually the date splitted up in day, month and year:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb7-2" title="2"><span class="kw">library</span>(lubridate)</a>
 <a class="sourceLine" id="cb7-3" title="3"></a>
@@ -359,7 +356,6 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb7-12" title="12">                   <span class="dt">week_start =</span> <span class="kw">getOption</span>(<span class="st">&quot;lubridate.week.start&quot;</span>, <span class="dv">1</span>))</a></code></pre></div>
 <p>This code first parses the timestamp with a specific timezone. Then three columns are added.</p>
 <p>Please note that the month also contains the year and a day. This is useful for a later step where you can group the series afterwards.</p>
-<div style="page-break-after: always;"></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" title="1"><span class="kw">head</span>(df,<span class="dv">2</span>)</a></code></pre></div>
 <pre><code>##                  time centralOutsideTemp
 ## 1 2018-03-21 11:00:00                5.2

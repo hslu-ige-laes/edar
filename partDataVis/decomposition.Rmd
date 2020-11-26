@@ -15,3 +15,29 @@ The seasonal component for time series data refers to its tendency to rise and f
 <br>
 <font size="5">Random/Remainder/Irregular Component</font>
 The remainder is what’s left of the time series data after removing its trend and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
+
+
+An exemplary decomposition of an outside temperature time series over 7 days:
+```{r decompositionTOa, echo=FALSE, fig.cap='Time Series Decomposition Outside Temperature over 7 days', message=FALSE, warning=FALSE, collapse=FALSE}
+library(dplyr)
+library(lubridate)
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "Europe/Zurich")
+df$hour <- as_datetime(cut(df$time, breaks = "hour"))
+
+df <- df %>% 
+  filter(hour >= "2020-03-01", hour <= "2020-03-07") %>% 
+  group_by(hour) %>% 
+  mutate(mean = mean(centralOutsideTemp, na.rm = TRUE)) %>% 
+  ungroup() %>% 
+  select(-centralOutsideTemp, -time) %>% 
+  unique() %>% 
+  na.omit()
+
+df.ts <- ts(df[-1], frequency = 24)
+plot(decompose(df.ts))
+```
