@@ -144,7 +144,7 @@
 
 This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-It is aimed at R beginners as well as exerienced R users and is strongly inspired by the R Graphics Cookbook and Engineering Data Analysis in R. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy.
+It is aimed at R beginners as well as exerienced R users and is strongly inspired by the \href{R\%20Graphics\%20Cookbook}{https://r-graphics.org/} and \href{Engineering\%20Data\%20Analysis\%20in\%20R}{https://smogdr.github.io/edar\_coursebook/}. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy.
 
 \hypertarget{content}{%
 \section{Content}\label{content}}
@@ -179,24 +179,24 @@ The freely available programming language ``R'' and its graphical user interface
 \hypertarget{further-reading}{%
 \section{Further Reading}\label{further-reading}}
 
-A really good source is R for Data Science by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book.
+A really good source is \href{R\%20for\%20Data\%20Science}{http://r4ds.had.co.nz} by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book.
 
 There are a number of recommendable free online books available, including:
 
 \begin{itemize}
 \tightlist
 \item
-  R Graphics Cookbook
+  \href{R\%20Graphics\%20Cookbook}{https://r-graphics.org/}
 \item
-  Introduction to Data Science - Data Analysis and Prediction Algorithms with R
+  \href{Introduction\%20to\%20Data\%20Science\%20-\%20Data\%20Analysis\%20and\%20Prediction\%20Algorithms\%20with\%20R}{https://rafalab.github.io/dsbook/}
 \item
-  Hands-On Programming with R
+  \href{Hands-On\%20Programming\%20with\%20R}{https://rstudio-education.github.io/hopr/}
 \item
-  Engineering Data Analysis in R
+  \href{Engineering\%20Data\%20Analysis\%20in\%20R}{https://smogdr.github.io/edar\_coursebook/}
 \item
-  Forecasting: Principles and Practice
+  \href{Forecasting:\%20Principles\%20and\%20Practice}{https://otexts.com/fpp2/}
 \item
-  AFIT Data Science Lab R Programming Guide
+  \href{AFIT\%20Data\%20Science\%20Lab\%20R\%20Programming\%20Guide}{https://afit-r.github.io/}
 \end{itemize}
 
 \hypertarget{acknowledgements}{%
@@ -204,9 +204,9 @@ There are a number of recommendable free online books available, including:
 
 The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program ``Buildings and Cities 2018''.
 
-This book was developed using Yihui Xie's bookdown framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
+This book was developed using Yihui Xie's \href{bookdown}{https://bookdown.org} framework. The book is built using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 
-The online book is hosted using GitHub's free GitHub Pages. All material for this book is available and can be explored at the book's GitHub repository.
+The online book is hosted using GitHub's free \href{GitHub\%20Pages}{https://pages.github.com}. All material for this book is available and can be explored at the book's \href{GitHub\%20repository}{https://github.com/hslu-ige-laes/edar}.
 
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
@@ -216,7 +216,7 @@ Therefore the first two parts of this chapter get you up and running with downlo
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
-If you already have ``R'' and ``R Studio'' installed, please take a look at the hslu-ige-laes/redutils package on github, which is frequently used throughout this book. Chapter \ref{installationPackages} shows you how to install it.
+If you already have ``R'' and ``R Studio'' installed, please take a look at the \href{hslu-ige-laes/redutils}{https://cran.r-project.org/bin/windows/base/} package on github, which is frequently used throughout this book. Chapter \ref{installationPackages} shows you how to install it.
 
 Finally ``R-beginners'' find in \ref{createFirstScript} an easy code example which creates a simple time series plot.
 
@@ -246,7 +246,7 @@ Windows
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Open https://cran.r-project.org/bin/windows/base/ and press the link ``Download R\ldots{}''
+  Open \url{https://cran.r-project.org/bin/windows/base/} and press the link ``Download R\ldots{}''
 \item
   Run the downloaded installer file and follow the installation wizard
 \end{enumerate}
@@ -254,7 +254,7 @@ Windows
 The wizard will install ``R'' into your \texttt{Program\ Files} folders and adds a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
 
 Mac OSX
-1. Open https://cran.r-project.org/bin/macosx/ and download the latest \texttt{*.pkg} file
+1. Open \url{https://cran.r-project.org/bin/macosx/} and download the latest \texttt{*.pkg} file
 1. Run the downloaded installer file and follow the installation wizard
 
 The installer allows you to customize your installation. However the default values will be suitable for most users.
@@ -267,7 +267,7 @@ The CRAN website provides files to build ``R'' from source on Debian, Redhat, SU
 \begin{itemize}
 \tightlist
 \item
-  Open https://cran.r-project.org/bin/linux/ and then follow the directory trail to the version of Linux you wish to install R on top of
+  Open \url{https://cran.r-project.org/bin/linux/} and then follow the directory trail to the version of Linux you wish to install R on top of
 \end{itemize}
 
 The exact installation procedure will vary depending on your Linux operating system. CRAN supports the process by grouping each set of source files with documentation or README files that explain how to install on your system.
@@ -279,7 +279,7 @@ The exact installation procedure will vary depending on your Linux operating sys
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  Open https://rstudio.com/products/rstudio/download/ and download ``RStudio Desktop Open Source''
+  Open \url{https://rstudio.com/products/rstudio/download/} and download ``RStudio Desktop Open Source''
 \item
   Follow the on-screen instructions
 \item
@@ -349,7 +349,7 @@ You should now get your first visualization:
 \includegraphics{edar_files/figure-latex/co2 intro graph-1.pdf}
 
 \begin{quote}
-As you probably noticed, we did not load any data. The basic installation of ``R'' and some packages come with test data. So that is an easy way to test something. The R Dataset Package provides some preinstalled datasets, including the used ``Mauna Loa Atmospheric CO2 Concentration'' dataset.
+As you probably noticed, we did not load any data. The basic installation of ``R'' and some packages come with test data. So that is an easy way to test something. \href{The\%20R\%20Dataset\%20Package}{https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html} provides some preinstalled datasets, including the used ``Mauna Loa Atmospheric CO2 Concentration'' dataset.
 \end{quote}
 
 \hypertarget{part-r-basics}{%
@@ -367,9 +367,9 @@ Two sources are recommended to facilitate the introduction to ``R'' and to learn
 \begin{itemize}
 \tightlist
 \item
-  Introduction to Data Science - Chapter 2 ``R Basics''
+  \href{Introduction\%20to\%20Data\%20Science\%20-\%20Chapter\%202}{https://rafalab.github.io/dsbook/r-basics.html}
 \item
-  Engineering Data Analysis in R - Chapter 2 ``The R Programming Environment''
+  \href{Engineering\%20Data\%20Analysis\%20in\%20R\%20-\%20Chapter\%202}{https://smogdr.github.io/edar\_coursebook/rprog1.html}
 \end{itemize}
 
 Throughout the book, reference is made to these two continuative sources and you only need to read the one that appeals to you more. In the referenced chapters, these cover similar content.
@@ -383,9 +383,9 @@ Experienced readers will find more information about data imports here:
 
 \begin{itemize}
 \item
-  Introduction to Data Science - Chapter 5 ``Importing data''
+  \href{Introduction\%20to\%20Data\%20Science\%20-\%20Chapter\%205}{https://rafalab.github.io/dsbook/importing-data.html}
 \item
-  Engineering Data Analysis in R - Chapter 3 ``Getting and Cleaning Data''
+  \href{Engineering\%20Data\%20Analysis\%20in\%20R\%20-\%20Chapter\%203}{https://smogdr.github.io/edar\_coursebook/rprog2.html}
 \end{itemize}
 
 csv-Files
@@ -471,11 +471,11 @@ Experienced readers will find more information about data imports here:
 
 \begin{itemize}
 \item
-  Introduction to Data Science - Chapter 4 ``The tidyverse''
+  \href{Introduction\%20to\%20Data\%20Science\%20-\%20Chapter\%204}{https://rafalab.github.io/dsbook/tidyverse.html\#summarizing-data}
 \item
-  Engineering Data Analysis in R - Chapter 3.5 ``Data Cleaning''
+  \href{Engineering\%20Data\%20Analysis\%20in\%20R\%20-\%20Chapter\%203.5}{https://smogdr.github.io/edar\_coursebook/rprog2.html\#data-cleaning}
 \item
-  Engineering Data Analysis in R - Chapter 3.6 ``Piping''
+  \href{Engineering\%20Data\%20Analysis\%20in\%20R\%20-\%20Chapter\%203.6}{https://smogdr.github.io/edar\_coursebook/rprog2.html\#piping}
 \end{itemize}
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
@@ -680,7 +680,7 @@ Note: Whether you put the whole code on one line or split it after a comma does 
 
 With the package \texttt{dplyr} we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: \texttt{\%\textgreater{}\%}.
 
-Details can be found in Introduction to Data Science - Chapter 4.5
+Details can be found in \href{Introduction\%20to\%20Data\%20Science\%20-\%20Chapter\%204.5}{https://rafalab.github.io/dsbook/tidyverse.html}
 
 \hypertarget{wide-to-long}{%
 \subsection{Wide to Long}\label{wide-to-long}}
@@ -963,7 +963,7 @@ Reveals details like object classes
 \hypertarget{quickly-exploring-data}{%
 \section{Quickly Exploring Data}\label{quickly-exploring-data}}
 
-Please refer to the R Graphics Cookbook from Winston Chang - Chapter 2 ``Quickly Exploring Data''.
+Please refer to the \href{R\%20Graphics\%20Cookbook\%20from\%20Winston\%20Chang\%20-\%20Chapter\%202}{https://r-graphics.org/chapter-quick}.
 
 This is a great resource where you can find everything you need to know about creating basic plots.
 
@@ -989,7 +989,7 @@ This chapter shows some useful types of seasonal plots.
 \hypertarget{goal}{%
 \subsection{Goal}\label{goal}}
 
-Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
+Plot a seasonal plot as described in \href{Hyndman\%20and\%20Athanasopoulos\%20(2014,\%20chapter\%202.4)}{https://otexts.com/fpp2/seasonal-plots.html}:
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-9}
@@ -1106,7 +1106,7 @@ Hints:
 \hypertarget{goal-1}{%
 \subsection{Goal}\label{goal-1}}
 
-Plot a seasonal month plot as described in Hyndman and Athanasopoulos (2014, chapter 2.5):
+Plot a seasonal month plot as described in \href{Hyndman\%20and\%20Athanasopoulos\%20(2014,\%20chapter\%202.5)}{https://otexts.com/fpp2/seasonal-subseries-plots.html}:
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-10}
@@ -1218,7 +1218,7 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{goal-2}{%
 \subsection{Goal}\label{goal-2}}
 
-Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
+Plot a seasonal plot as described in \href{Hyndman\%20and\%20Athanasopoulos\%20(2014,\%20chapter\%202.4)}{https://otexts.com/fpp2/seasonal-plots.html}:
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-11}
@@ -2181,7 +2181,7 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{goal-11}{%
 \subsection{Goal}\label{goal-11}}
 
-Create a plot of detrended mean data per week.
+Create a plot of detrended mean data per week as recommended in \href{\%22Building\%20electricity\%20consumption:\%20Data\%20analytics\%20of\%20building\%20operations\%20with\%20classical\%20time\%20series\%20decomposition\%20and\%20case\%20based\%20subsetting\%22,\%20Pickering\%20et\%20al,\%202018}{https://doi.org/10.1016/j.enbuild.2018.07.056}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-20}
@@ -3136,46 +3136,58 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
                           \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                           \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
 \NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time,}
                                       \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
                                       \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
 \NormalTok{dfOutsideTemp}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfOutsideTemp}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{tempMean =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
 \NormalTok{dfOutsideTemp <-}\StringTok{ }\NormalTok{dfOutsideTemp }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(day, tempMean) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralHeating.csv"}\NormalTok{,}
                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(time, energyHeatingMeter) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
 \NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time,}
                                      \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
                                      \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
 \NormalTok{dfHeatEnergy}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfHeatEnergy}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyMax =} \KeywordTok{max}\NormalTok{(energyHeatingMeter)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(day, energyMax) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
 \NormalTok{dfHeatEnergy <-}\StringTok{ }\NormalTok{dfHeatEnergy }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{energyCons =}\NormalTok{ energyMax }\OperatorTok{-}\StringTok{ }\KeywordTok{lag}\NormalTok{(energyMax)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{energyMax) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
 \CommentTok{# merge the data in a tidy format}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfOutsideTemp, dfHeatEnergy, }\DataTypeTok{by =} \StringTok{"day"}\NormalTok{)}
+
 \CommentTok{# calculate season}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{season =}\NormalTok{ redutils}\OperatorTok{::}\KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{day))}
+
 \CommentTok{# static chart with ggplot}
-\NormalTok{p <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}
 \StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ tempMean,}
                           \DataTypeTok{y =}\NormalTok{ energyCons,}
                           \DataTypeTok{color =}\NormalTok{ season,}
@@ -3192,8 +3204,9 @@ Create a new script, copy/paste the following code and run it:
           \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
           \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
 \NormalTok{        )}
+
 \CommentTok{# interactive chart}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(p, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot, }\DataTypeTok{tooltip =} \KeywordTok{c}\NormalTok{(}\StringTok{"text"}\NormalTok{)) }\OperatorTok{%>%}
 \StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{xaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Outside temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
                       \DataTypeTok{range =} \KeywordTok{c}\NormalTok{(}\KeywordTok{min}\NormalTok{(}\OperatorTok{-}\DecValTok{5}\NormalTok{,}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean)), }\KeywordTok{max}\NormalTok{(}\DecValTok{35}\NormalTok{,}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{tempMean))), }\DataTypeTok{zeroline =}\NormalTok{ F),}
          \DataTypeTok{yaxis =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{title =} \StringTok{"Daily energy consumption (kWh/d)"}\NormalTok{,}
@@ -3294,7 +3307,5 @@ R packages are often constantly updated on CRAN or GitHub, so you may want to up
 \KeywordTok{update.packages}\NormalTok{(}\DataTypeTok{ask =} \OtherTok{FALSE}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
-
-  \bibliography{book.bib,packages.bib}
 
 \end{document}

@@ -1,6 +1,6 @@
 ## Decomposed {#dailyProfilesDecomposed}
 ### Goal
-Create a plot of detrended mean data per week as recommended in <a href="https://doi.org/10.1016/j.enbuild.2018.07.056" target="_blank">"Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting", Pickering et al, 2018</a>
+Create a plot of detrended mean data per week as recommended in [https://doi.org/10.1016/j.enbuild.2018.07.056]("Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting", Pickering et al, 2018){target="_blank"}
 
 ```{r out.width='70%', fig.cap='Mean Daily Profiles per Weekday', echo=FALSE}
 knitr::include_graphics("images/plotDailyProfDecomposed.png")

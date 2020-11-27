@@ -65,6 +65,6 @@ summary(df$supplyTempHeating)
 <br>
 
 ## Quickly Exploring Data
-Please refer to the <a href="https://r-graphics.org/chapter-quick" target="_blank">R Graphics Cookbook from Winston Chang - Chapter 2 "Quickly Exploring Data"</a>.
+Please refer to the [https://r-graphics.org/chapter-quick](R Graphics Cookbook from Winston Chang - Chapter 2 "Quickly Exploring Data"){target="_blank"}.
 
 This is a great resource where you can find everything you need to know about creating basic plots.

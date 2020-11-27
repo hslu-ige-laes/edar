@@ -8,7 +8,7 @@ It is not the goal of this book to fully introduce beginners to the programming 
 
 Two sources are recommended to facilitate the introduction to "R" and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
-- <a href="https://rafalab.github.io/dsbook/r-basics.html" target="_blank">Introduction to Data Science - Chapter 2 "R Basics"</a>
-- <a href="https://smogdr.github.io/edar_coursebook/rprog1.html" target="_blank">Engineering Data Analysis in R - Chapter 2 "The R Programming Environment"</a>
+- [https://rafalab.github.io/dsbook/r-basics.html](Introduction to Data Science - Chapter 2 "R Basics"){target="_blank"}
+- [https://smogdr.github.io/edar_coursebook/rprog1.html](Engineering Data Analysis in R - Chapter 2 "The R Programming Environment"){target="_blank"}
 
 Throughout the book, reference is made to these two continuative sources and you only need to read the one that appeals to you more. In the referenced chapters, these cover similar content.

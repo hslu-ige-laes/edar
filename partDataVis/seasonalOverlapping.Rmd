@@ -1,6 +1,6 @@
 ## Overlapping
 ### Goal
-Plot a seasonal plot as described in <a href="https://otexts.com/fpp2/seasonal-plots.html" target="_blank">Hyndman and Athanasopoulos (2014, chapter 2.4)</a>:
+Plot a seasonal plot as described in [https://otexts.com/fpp2/seasonal-plots.html](Hyndman and Athanasopoulos (2014, chapter 2.4)){target="_blank"}:
 
 ```{r out.width='70%', fig.cap='Seasonal Plot Overlapping per Month over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotSeasonalXY.png")

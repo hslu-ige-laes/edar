@@ -17,7 +17,7 @@ description: "Introduction into energy data analysis and visualization with R."
 
 This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-It is aimed at R beginners as well as exerienced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a> and <a href="https://smogdr.github.io/edar_coursebook/" target="_blank">Engineering Data Analysis in R</a>. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
+It is aimed at R beginners as well as exerienced R users and is strongly inspired by the [https://r-graphics.org/](R Graphics Cookbook){target="_blank"} and [https://smogdr.github.io/edar_coursebook/](Engineering Data Analysis in R){target="_blank"}. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
 
 ## Content
 The book is structured in the following main parts:
@@ -41,21 +41,21 @@ Excel users are pushing the program to its limits with the ever-increasing data 
 The freely available programming language "R" and its graphical user interface "RStudio" offer many more possibilities for data analysis and data visualization.
 
 ## Further Reading
-A really good source is <a href="http://r4ds.had.co.nz" target="_blank">R for Data Science</a> by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
+A really good source is [http://r4ds.had.co.nz](R for Data Science){target="_blank"} by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
 
 There are a number of recommendable free online books available, including:
 
-- <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a>
-- <a href="https://rafalab.github.io/dsbook/" target="_blank">Introduction to Data Science - Data Analysis and Prediction Algorithms with R</a>
-- <a href="https://rstudio-education.github.io/hopr/" target="_blank">Hands-On Programming with R</a>
-- <a href="https://smogdr.github.io/edar_coursebook/" target="_blank">Engineering Data Analysis in R</a>
-- <a href="https://otexts.com/fpp2/" target="_blank">Forecasting: Principles and Practice</a>
-- <a href="https://afit-r.github.io/" target="_blank">AFIT Data Science Lab R Programming Guide</a>
+- [https://r-graphics.org/](R Graphics Cookbook){target="_blank"}
+- [https://rafalab.github.io/dsbook/](Introduction to Data Science - Data Analysis and Prediction Algorithms with R){target="_blank"}
+- [https://rstudio-education.github.io/hopr/](Hands-On Programming with R){target="_blank"}
+- [https://smogdr.github.io/edar_coursebook/](Engineering Data Analysis in R){target="_blank"}
+- [https://otexts.com/fpp2/](Forecasting: Principles and Practice){target="_blank"}
+- [https://afit-r.github.io/](AFIT Data Science Lab R Programming Guide){target="_blank"}
 
 ## Acknowledgements
 The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
 
-This book was developed using Yihui Xie's <a href="https://bookdown.org" target="_blank">bookdown</a> framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
+This book was developed using Yihui Xie's [https://bookdown.org](bookdown){target="_blank"} framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 
-The online book is hosted using GitHub's free <a href="https://pages.github.com" target="_blank">GitHub Pages</a>. All material for this book is available and can be explored at the book's <a href="https://github.com/hslu-ige-laes/edar" target="_blank">GitHub repository</a>.
+The online book is hosted using GitHub's free [https://pages.github.com](GitHub Pages){target="_blank"}. All material for this book is available and can be explored at the book's [https://github.com/hslu-ige-laes/edar](GitHub repository){target="_blank"}.
 
