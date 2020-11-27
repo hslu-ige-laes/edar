@@ -1,3 +1,4 @@
+\newpage
 ## Mini Plots
 ### Goal
 Plot a seasonal month plot as described in [Hyndman and Athanasopoulos (2014, chapter 2.5)](https://otexts.com/fpp2/seasonal-subseries-plots.html){target="_blank"}:

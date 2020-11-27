@@ -1,3 +1,4 @@
+\newpage
 ## Calendar
 ### Goal
 Create a calendar heat map with daily energy consumption values.

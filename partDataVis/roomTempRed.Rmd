@@ -1,3 +1,4 @@
+\newpage
 ## Room Temperature Reduction
 ### Goal
 As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.

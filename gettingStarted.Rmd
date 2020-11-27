@@ -16,6 +16,7 @@ Before we can start the first analysis, we have to install "R" and "RStudio".
 - Both, "R" and "RStudio" are free of charge and there are no licencse fees
 - When you later make an analysis and visualizations, you only work in the graphical user interface "RStudio"
 
+\newpage
 ### Download and Install R
 <br>
 <font size="5">Windows</font><br>
@@ -47,6 +48,7 @@ The exact installation procedure will vary depending on your Linux operating sys
 1. Follow the on-screen instructions
 1. Once you have installed "R Studio", you can run it like any other application by clicking the program icon 
 
+\newpage
 ## Install required packages {#installationPackages}
 Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them.
 
@@ -61,6 +63,7 @@ install_github("hslu-ige-laes/redutils")
 
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \@ref(packages) what packages are in general and how they can be installed and later loaded into scripts.
 
+\newpage
 ## Create your first R Script {#createFirstScript}
 Finally, you have installed "R" and "RStudio" with some packages on your computer. Good, hopefully everything worked fine up to now.
 

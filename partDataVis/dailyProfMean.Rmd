@@ -1,3 +1,4 @@
+\newpage
 ## Mean
 ### Goal
 Create a plot of mean data per week.

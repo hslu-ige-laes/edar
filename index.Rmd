@@ -52,6 +52,7 @@ There are a number of recommendable free online books available, including:
 - [Forecasting: Principles and Practice](https://otexts.com/fpp2/){target="_blank"}
 - [AFIT Data Science Lab R Programming Guide](https://afit-r.github.io/){target="_blank"}
 
+\newpage
 ## Acknowledgements
 The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
 

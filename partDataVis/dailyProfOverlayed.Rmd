@@ -1,3 +1,4 @@
+\newpage
 ## Overlayed
 ### Goal
 Create a plot of all data per week by season of the year.

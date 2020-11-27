@@ -1,3 +1,4 @@
+\newpage
 ## Before/After Optimization {#dataVisSeasonalBefAft}
 ### Goal
 To highlight an energy optimization in a season diagram, we can gray out the seasons before the optimization and only highlight the monthly values after the optimization. To better quantify the success, we can calculate and display the confidence interval of the years before.

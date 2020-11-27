@@ -199,6 +199,8 @@ There are a number of recommendable free online books available, including:
   \href{https://afit-r.github.io/}{AFIT Data Science Lab R Programming Guide}
 \end{itemize}
 
+\newpage
+
 \hypertarget{acknowledgements}{%
 \section{Acknowledgements}\label{acknowledgements}}
 
@@ -236,6 +238,8 @@ Before we can start the first analysis, we have to install ``R'' and ``RStudio''
 \item
   When you later make an analysis and visualizations, you only work in the graphical user interface ``RStudio''
 \end{itemize}
+
+\newpage
 
 \hypertarget{download-and-install-r}{%
 \subsection{Download and Install R}\label{download-and-install-r}}
@@ -286,6 +290,8 @@ The exact installation procedure will vary depending on your Linux operating sys
   Once you have installed ``R Studio'', you can run it like any other application by clicking the program icon
 \end{enumerate}
 
+\newpage
+
 \hypertarget{installationPackages}{%
 \section{Install required packages}\label{installationPackages}}
 
@@ -312,6 +318,8 @@ Appendix \ref{packages} gives you an introduction to what a package is and how t
 \end{itemize}
 
 The installation of the packages is now in progress and this may take a while, please be patient. In the meantime you can read in appendix \ref{packages} what packages are in general and how they can be installed and later loaded into scripts.
+
+\newpage
 
 \hypertarget{createFirstScript}{%
 \section{Create your first R Script}\label{createFirstScript}}
@@ -480,6 +488,8 @@ Experienced readers will find more information about data imports here:
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
+\newpage
+
 \hypertarget{add-metadata-for-later-filtering}{%
 \section{Add Metadata for later filtering}\label{add-metadata-for-later-filtering}}
 
@@ -603,6 +613,8 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 ##                      time centralOutsideTemp season
 ## 21865 2020-09-17 11:00:00               28.1   Fall
 \end{verbatim}
+
+\newpage
 
 \hypertarget{manipulating-data-frames}{%
 \section{Manipulating Data Frames}\label{manipulating-data-frames}}
@@ -1100,6 +1112,8 @@ Hints:
   click once to activate/deactivate a year
 \end{itemize}
 
+\newpage
+
 \hypertarget{mini-plots}{%
 \section{Mini Plots}\label{mini-plots}}
 
@@ -1212,6 +1226,8 @@ Create a new script, copy/paste the following code and run it:
   It revelas as well the mean seasonla pattern with the blue lines
 \end{itemize}
 
+\newpage
+
 \hypertarget{polar}{%
 \section{Polar}\label{polar}}
 
@@ -1305,6 +1321,8 @@ Create a new script, copy/paste the following code and run it:
 This representation emphasizes the high consumption in summer very well, which could undoubtedly be reduced in a residential building. The Years 2018 and 2019 show, that this optimization was done.
 
 To emphasize this optimization please refer to the next chapter \ref{dataVisSeasonalBefAft}.
+
+\newpage
 
 \hypertarget{dataVisSeasonalBefAft}{%
 \section{Before/After Optimization}\label{dataVisSeasonalBefAft}}
@@ -1434,6 +1452,8 @@ An exemplary decomposition of an outside temperature time series over 7 days:
 
 This chapter shows how a time series can be decomposed and presented interactively.
 
+\newpage
+
 \hypertarget{long-term}{%
 \section{Long term}\label{long-term}}
 
@@ -1554,6 +1574,8 @@ Create a new script, copy/paste the following code and run it:
 \item
   The trend shows as well an higher consumption in June 2013
 \end{itemize}
+
+\newpage
 
 \hypertarget{short-term}{%
 \section{Short term}\label{short-term}}
@@ -1709,6 +1731,8 @@ Temporal patterns can show at what time certain devices are exposed to how much 
 
 This chapter shows different types of heat maps which are useful for energy data analysis and pattern recognition.
 
+\newpage
+
 \hypertarget{calendar}{%
 \section{Calendar}\label{calendar}}
 
@@ -1822,6 +1846,8 @@ Some findings:
   On Fridays in general less consumption
 \end{itemize}
 
+\newpage
+
 \hypertarget{median-weeks}{%
 \section{Median-Weeks}\label{median-weeks}}
 
@@ -1900,6 +1926,8 @@ An important step in energy data analysis is the recognition of patterns. For th
 
 This chapter shows some useful visualizations to accommodate this recognition.
 
+\newpage
+
 \hypertarget{overview}{%
 \section{Overview}\label{overview}}
 
@@ -1959,6 +1987,8 @@ Create a new script, copy/paste the following code and run it:
 \KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDailyProfOverview.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
 
 \hypertarget{overlayed}{%
 \section{Overlayed}\label{overlayed}}
@@ -2061,6 +2091,8 @@ Create a new script, copy/paste the following code and run it:
 \end{Shaded}
 
 \includegraphics{edar_files/figure-latex/dataVisDailyProfilesOverlayed1-1.pdf}
+
+\newpage
 
 \hypertarget{mean}{%
 \section{Mean}\label{mean}}
@@ -2175,6 +2207,8 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
+\newpage
+
 \hypertarget{dailyProfilesDecomposed}{%
 \section{Decomposed}\label{dailyProfilesDecomposed}}
 
@@ -2233,6 +2267,8 @@ Create a new script, copy/paste the following code and run it:
 Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
 
 This chapter shows how to create some popular comfort plots.
+
+\newpage
 
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
@@ -2314,6 +2350,8 @@ Create a new script, copy/paste the following code and run it:
 \KeywordTok{save_d3_png}\NormalTok{(plot, }\StringTok{"images/comfortMollierHx.png"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
 
 \hypertarget{sia-180-thermal-comfort}{%
 \section{SIA 180 Thermal Comfort}\label{sia-180-thermal-comfort}}
@@ -2544,6 +2582,8 @@ Create a new script, copy/paste the following code and run it:
 \chapter{Miscellaneous}\label{miscellaneous}}
 
 Finally, some visualizations that did not fit into any of the above chapters and are not (yet) worth a separate chapter. But these are not less interesting\ldots{}
+
+\newpage
 
 \hypertarget{electricity-household}{%
 \section{Electricity Household}\label{electricity-household}}
@@ -2937,6 +2977,8 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/eleHousehold1-1.pdf}
 
+\newpage
+
 \hypertarget{room-temperature-reduction}{%
 \section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
@@ -3088,6 +3130,8 @@ Create a new script, copy/paste the following code and run it:
 In this example we used the dygraph package to create the graph. This package is fast and allows to show a rangeslider on the bottom of the graph. The exact same graph but without a slider is as well possible with ggplot.
 
 Please note that the calculation of the periodic median after optimization I and II starts delayed because it takes time until the building has cooled down.
+
+\newpage
 
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
@@ -3244,6 +3288,8 @@ Many functions of R are not pre-installed and must be loaded manually. R package
 
 The following chapters describe how to install, load, update and use packages.
 
+\newpage
+
 \hypertarget{installing-a-package}{%
 \section{Installing a Package}\label{installing-a-package}}
 
@@ -3285,6 +3331,8 @@ If you want to install a package directly from github, the package ``devtools'' 
 \KeywordTok{install_github}\NormalTok{(}\StringTok{"hslu-ige-laes/redutils"}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
+
+\newpage
 
 \hypertarget{loading-a-package}{%
 \section{Loading a Package}\label{loading-a-package}}

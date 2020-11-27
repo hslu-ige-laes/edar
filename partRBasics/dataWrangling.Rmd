@@ -11,6 +11,7 @@ Experienced readers will find more information about data imports here:
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
+\newpage
 ## Add Metadata for later filtering
 Firstly we have to load a dataset into a dataframe:
 ```{r metadata dataset, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -73,6 +74,8 @@ df <- dplyr::mutate(df, season = getSeason(df$time))
 head(df,1)
 tail(df,1)
 ```
+
+\newpage
 ## Manipulating Data Frames
 The `dplyr` package from the `tidyverse` introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember.
 

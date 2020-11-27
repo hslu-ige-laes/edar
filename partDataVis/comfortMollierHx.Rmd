@@ -1,3 +1,4 @@
+\newpage
 ## Mollier hx Diagram
 ### Goal
 You want to plot a mollier h-x diagram:

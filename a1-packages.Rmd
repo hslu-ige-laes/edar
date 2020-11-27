@@ -5,6 +5,7 @@ Many functions of R are not pre-installed and must be loaded manually. R package
 
 The following chapters describe how to install, load, update and use packages.
 
+\newpage
 ## Installing a Package
 The easiest way to install an R Package is to use the RStudio tab "Packages":
 
@@ -36,6 +37,7 @@ library(devtools)
 install_github("hslu-ige-laes/redutils")
 ```
 
+\newpage
 ## Loading a Package
 If you have installed a package, its functions are not yet available in your R project. To use an R package in your sript, you must load it with the following command:
 
