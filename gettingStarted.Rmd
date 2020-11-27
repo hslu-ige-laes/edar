@@ -1,12 +1,12 @@
 # Getting started
-Before we can start with the analysis described in the later chapters, we have to installed "R".
+Before we can start with the analysis described in the later chapters, we have to install "R".
 Therefore the first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
 If you already have "R" and "R Studio" installed, please take a look at the <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">hslu-ige-laes/redutils</a> package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
 
-Finally beginners find in \@ref(createFirstScript) an easy code example which creates a simple time series plot.
+Finally "R-beginners" find in \@ref(createFirstScript) an easy code example which creates a simple time series plot.
 
 ## Install R and R Studio {#installation}
 Before we can start the first analysis, we have to install "R" and "RStudio". 
@@ -17,20 +17,23 @@ Before we can start the first analysis, we have to install "R" and "RStudio".
 - When you later make an analysis and visualizations, you only work in the graphical user interface "RStudio"
 
 ### Download and Install R
-#### Windows
+<br>
+<font size="5">Windows</font><br>
 
 1. Open <a href="https://cran.r-project.org/bin/windows/base/" target="_blank">https://cran.r-project.org/bin/windows/base/</a> and press the link "Download R..."
 1. Run the downloaded installer file and follow the installation wizard
 
 The wizard will install "R" into your `Program Files` folders and adds a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
 
-#### Mac OSX
+<br>
+<font size="5">Mac OSX</font><br>
 1. Open <a href="https://cran.r-project.org/bin/macosx/" target="_blank">https://cran.r-project.org/bin/macosx/</a> and download the latest `*.pkg` file
 1. Run the downloaded installer file and follow the installation wizard
 
 The installer allows you to customize your installation. However the default values will be suitable for most users.
 
-#### Linux
+<br>
+<font size="5">Liux</font><br>
 "R" is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
 
 The CRAN website provides files to build "R" from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”

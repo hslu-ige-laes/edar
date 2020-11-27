@@ -149,7 +149,7 @@ It is aimed at R beginners as well as exerienced R users and is strongly inspire
 \hypertarget{content}{%
 \section{Content}\label{content}}
 
-The book is structured in the following parts main parts:
+The book is structured in the following main parts:
 
 \begin{itemize}
 \item
@@ -158,15 +158,14 @@ The book is structured in the following parts main parts:
   Data Visualizations
 \end{itemize}
 
-The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives information about the installation of the program environment and gets a quick practical introduction.
+The part ``R Basics'' covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An ``R-beginner'' receives as well information about the installation of the program environment and gets a quick and practical introduction.
 
 \begin{quote}
 ``Numerical quantities focus on expected values, graphical summaries on unexpected values.'' - John W. Tukey
 \end{quote}
 
-Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. Examples for such graphical representations are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
-
-The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
+Such so called ``graphical summaries'' are covered in the part ``Data Visualizations'' which brings the calculated numbers to life. Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
+The recipes in this part will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
 \hypertarget{why-r-and-rstudio}{%
 \section{Why R and RStudio?}\label{why-r-and-rstudio}}
@@ -212,14 +211,14 @@ The online book is hosted using GitHub's free GitHub Pages. All material for thi
 \hypertarget{getting-started}{%
 \chapter{Getting started}\label{getting-started}}
 
-Before we can start with the analysis described in the later chapters, we have to installed ``R''.
+Before we can start with the analysis described in the later chapters, we have to install ``R''.
 Therefore the first two parts of this chapter get you up and running with downloading and installing the relevant software and packages.
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
 If you already have ``R'' and ``R Studio'' installed, please take a look at the hslu-ige-laes/redutils package on github, which is frequently used throughout this book. Chapter \ref{installationPackages} shows you how to install it.
 
-Finally beginners find in \ref{createFirstScript} an easy code example which creates a simple time series plot.
+Finally ``R-beginners'' find in \ref{createFirstScript} an easy code example which creates a simple time series plot.
 
 \hypertarget{installation}{%
 \section{Install R and R Studio}\label{installation}}
@@ -241,8 +240,7 @@ Before we can start the first analysis, we have to install ``R'' and ``RStudio''
 \hypertarget{download-and-install-r}{%
 \subsection{Download and Install R}\label{download-and-install-r}}
 
-\hypertarget{windows}{%
-\subsubsection{Windows}\label{windows}}
+Windows
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -255,23 +253,13 @@ Before we can start the first analysis, we have to install ``R'' and ``RStudio''
 
 The wizard will install ``R'' into your \texttt{Program\ Files} folders and adds a shortcut in your Start menu. Note that you will need to have all necessary administration rights to install new software on your machine.
 
-\hypertarget{mac-osx}{%
-\subsubsection{Mac OSX}\label{mac-osx}}
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Open https://cran.r-project.org/bin/macosx/ and download the latest \texttt{*.pkg} file
-\item
-  Run the downloaded installer file and follow the installation wizard
-\end{enumerate}
+Mac OSX
+1. Open https://cran.r-project.org/bin/macosx/ and download the latest \texttt{*.pkg} file
+1. Run the downloaded installer file and follow the installation wizard
 
 The installer allows you to customize your installation. However the default values will be suitable for most users.
 
-\hypertarget{linux}{%
-\subsubsection{Linux}\label{linux}}
-
+Liux
 ``R'' is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
 
 The CRAN website provides files to build ``R'' from source on Debian, Redhat, SUSE, and Ubuntu systems under the link ``Download R for Linux''
@@ -370,7 +358,9 @@ As you probably noticed, we did not load any data. The basic installation of ``R
 \hypertarget{introduction-to-r-basics}{%
 \chapter{Introduction to R Basics}\label{introduction-to-r-basics}}
 
-It is not the goal of this book to introduce beginners to the programming language ``R'' and the environment in general. There are many really good sources where you can familiarize yourself with ``R'' if needed.
+The following chapters of the part ``R-Basics'' is a short overview of the fundamental principles for understanding the code presented in the recipes in part ``Data Visualizations''. It focuses on practical examples of how data can be loaded, transformed and analyzed.
+
+It is not the goal of this book to fully introduce beginners to the programming language ``R'' and the environment in general. There are many really good sources where you can familiarize yourself with ``R'' if needed.
 
 Two sources are recommended to facilitate the introduction to ``R'' and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
@@ -383,8 +373,6 @@ Two sources are recommended to facilitate the introduction to ``R'' and to learn
 \end{itemize}
 
 Throughout the book, reference is made to these two continuative sources and you only need to read the one that appeals to you more. In the referenced chapters, these cover similar content.
-
-The part ``R-Basics'' in this book is a short overview of the basics referenced above and focuses on practical examples of how data can be loaded, transformed and analyzed.
 
 \hypertarget{loading-data}{%
 \chapter{Loading Data}\label{loading-data}}
@@ -977,7 +965,7 @@ Reveals details like object classes
 
 Please refer to the R Graphics Cookbook from Winston Chang - Chapter 2 ``Quickly Exploring Data''.
 
-This is a great resource where you can find everything you need to know about creating basic plots. Therefore this topic is not covered again in this book.
+This is a great resource where you can find everything you need to know about creating basic plots.
 
 \hypertarget{part-data-visualizations}{%
 \part{Data Visualizations}\label{part-data-visualizations}}
@@ -987,7 +975,13 @@ This is a great resource where you can find everything you need to know about cr
 
 Seasonal plots are a graphical tool to visualize and detect seasonality in a time series. Based on a selected periodicity it emphasizes the seasonal patterns and also shows the changes in seasonality over time. Especially, it allows to detect changes between different seasons.
 
-However, this plot is only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-8}
+\end{figure}
+
+However, such plots are only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
+
+This chapter shows some useful types of seasonal plots.
 
 \hypertarget{overlapping}{%
 \section{Overlapping}\label{overlapping}}
@@ -998,7 +992,7 @@ However, this plot is only useful if the period of the seasonality is already kn
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-8}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-9}
 \end{figure}
 
 This is like a standard time series plot except that the data are plotted against the ``seasons'' for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1115,7 +1109,7 @@ Hints:
 Plot a seasonal month plot as described in Hyndman and Athanasopoulos (2014, chapter 2.5):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-9}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-10}
 \end{figure}
 
 Here the seasonal patterns for each season are collected together in seprate mini time plots. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1227,7 +1221,7 @@ Create a new script, copy/paste the following code and run it:
 Plot a seasonal plot as described in Hyndman and Athanasopoulos (2014, chapter 2.4):
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-10}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-11}
 \end{figure}
 
 This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -1323,7 +1317,7 @@ To highlight an energy optimization in a season diagram, we can gray out the sea
 In the following we will create the following plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-11}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-12}
 \end{figure}
 
 \hypertarget{data-basis-3}{%
@@ -1438,6 +1432,8 @@ The remainder is what's left of the time series data after removing its trend an
 An exemplary decomposition of an outside temperature time series over 7 days:
 \includegraphics{edar_files/figure-latex/decompositionTOa-1.pdf}
 
+This chapter shows how a time series can be decomposed and presented interactively.
+
 \hypertarget{long-term}{%
 \section{Long term}\label{long-term}}
 
@@ -1447,7 +1443,7 @@ An exemplary decomposition of an outside temperature time series over 7 days:
 Decompose a long term time series of ten years monthly data.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDecompositionLong} \caption{Decomposition of long time series over 10 Years}\label{fig:unnamed-chunk-12}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionLong} \caption{Decomposition of long time series over 10 Years}\label{fig:unnamed-chunk-13}
 \end{figure}
 
 \hypertarget{data-basis-4}{%
@@ -1568,7 +1564,7 @@ Create a new script, copy/paste the following code and run it:
 Decompose a short term time series of e.g.~5 days 15min data.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDecompositionShort} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-13}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionShort} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-14}
 \end{figure}
 
 \hypertarget{data-basis-5}{%
@@ -1711,6 +1707,8 @@ Create a new script, copy/paste the following code and run it:
 
 Temporal patterns can show at what time certain devices are exposed to how much load. Heatmaps show quantitative values based on two axes. These can be day and hours, month and day, etc. The cell at the intersection contains the corresponding value. Depending on the context, this can be an average value, a maximum/minimum value, etc. This representation allows the viewer to see short-term patterns and long-term trends in the data with a higher temporal granularity.
 
+This chapter shows different types of heat maps which are useful for energy data analysis and pattern recognition.
+
 \hypertarget{calendar}{%
 \section{Calendar}\label{calendar}}
 
@@ -1720,7 +1718,7 @@ Temporal patterns can show at what time certain devices are exposed to how much 
 Create a calendar heat map with daily energy consumption values.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-14}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-15}
 \end{figure}
 
 \hypertarget{data-basis-6}{%
@@ -1833,7 +1831,7 @@ Some findings:
 Create an energy consumption heat map of a typical weeks depending on the season of the year.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-15}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-16}
 \end{figure}
 
 \hypertarget{data-basis-7}{%
@@ -1898,7 +1896,9 @@ Some findings:
 \hypertarget{typical-daily-profiles}{%
 \chapter{Typical Daily Profiles}\label{typical-daily-profiles}}
 
-An important step in exploratory data analysis is the recognition of patterns. For this purpose, the data are first aggregated to hourly values, averaged and displayed as typical daily patterns. The daily profiles can be displayed separately for the weekdays and the seasons. This chapter shows some useful visualizations to accommodate this recognition.
+An important step in energy data analysis is the recognition of patterns. For this purpose, the data are first aggregated to hourly values, averaged and displayed as typical daily patterns. The daily profiles can be displayed separately for the weekdays and the seasons.
+
+This chapter shows some useful visualizations to accommodate this recognition.
 
 \hypertarget{overview}{%
 \section{Overview}\label{overview}}
@@ -1909,7 +1909,7 @@ An important step in exploratory data analysis is the recognition of patterns. F
 Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-16}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-17}
 \end{figure}
 
 \hypertarget{data-basis-8}{%
@@ -1969,7 +1969,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of all data per week by season of the year.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-17}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-18}
 \end{figure}
 
 \hypertarget{data-basis-9}{%
@@ -2071,7 +2071,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of mean data per week.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-18}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-19}
 \end{figure}
 
 \hypertarget{data-basis-10}{%
@@ -2184,7 +2184,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of detrended mean data per week.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-19}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-20}
 \end{figure}
 
 \hypertarget{data-basis-11}{%
@@ -2232,6 +2232,8 @@ Create a new script, copy/paste the following code and run it:
 
 Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
 
+This chapter shows how to create some popular comfort plots.
+
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
@@ -2241,7 +2243,7 @@ Satisfied and healthy residents are important, thus an energetic optimization sh
 You want to plot a mollier h-x diagram:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-20}
+\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-21}
 \end{figure}
 
 \hypertarget{data-basis-12}{%
@@ -2322,7 +2324,7 @@ Create a new script, copy/paste the following code and run it:
 You want to plot a diagram like the one from the SIA 180:2014
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-22}
+\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-23}
 \end{figure}
 
 \hypertarget{data-basis-13}{%
@@ -2541,7 +2543,7 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{miscellaneous}{%
 \chapter{Miscellaneous}\label{miscellaneous}}
 
-Finally, some visualizations that did not fit into any of the above chapters and are not worth a separate chapter. But these are not less interesting\ldots{}
+Finally, some visualizations that did not fit into any of the above chapters and are not (yet) worth a separate chapter. But these are not less interesting\ldots{}
 
 \hypertarget{electricity-household}{%
 \section{Electricity Household}\label{electricity-household}}
@@ -2562,7 +2564,7 @@ You want to plot an electricity consumption diagram with:
 Additionaly we would like to see the consumption of an average Swiss household.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-23}
+\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-24}
 \end{figure}
 
 \hypertarget{data-basis-14}{%
@@ -2955,7 +2957,7 @@ You want to create a time series plot with
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-24}
+\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-25}
 \end{figure}
 
 \hypertarget{data-basis-15}{%
@@ -3105,7 +3107,7 @@ You want to create a scatter plot with
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-25}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-26}
 \end{figure}
 
 \hypertarget{data-basis-16}{%

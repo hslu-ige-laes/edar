@@ -20,19 +20,18 @@ This book gives you an overview of the statistical software R and its ability to
 It is aimed at R beginners as well as exerienced R users and is strongly inspired by the <a href="https://r-graphics.org/" target="_blank">R Graphics Cookbook</a> and <a href="https://smogdr.github.io/edar_coursebook/" target="_blank">Engineering Data Analysis in R</a>. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
 
 ## Content
-The book is structured in the following parts main parts:
+The book is structured in the following main parts:
 
 * R Basics
 
 * Data Visualizations
 
-The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An "R-beginner" receives information about the installation of the program environment and gets a quick practical introduction.
+The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An "R-beginner" receives as well information about the installation of the program environment and gets a quick and practical introduction.
 
 > "Numerical quantities focus on expected values, graphical summaries on unexpected values." - John W. Tukey
 
-Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. Examples for such graphical representations are covered in the part "Data Visualizations" which brings the calculated numbers to life. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
-
-The recipes in this book will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
+Such so called "graphical summaries" are covered in the part "Data Visualizations" which brings the calculated numbers to life. Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
+The recipes in this part will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
 
 ## Why R and RStudio?
 In a study commissioned by the Swiss Federal Office of Energy, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and create visualizations.

@@ -1,2 +1,4 @@
 # Comfort Plots
 Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
+
+This chapter shows how to create some popular comfort plots.

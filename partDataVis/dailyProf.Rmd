@@ -1,3 +1,5 @@
 # Typical Daily Profiles
-An important step in exploratory data analysis is the recognition of patterns. For this purpose, the data are first aggregated to hourly values, averaged and displayed as typical daily patterns. The daily profiles can be displayed separately for the weekdays and the seasons. This chapter shows some useful visualizations to accommodate this recognition.
+An important step in energy data analysis is the recognition of patterns. For this purpose, the data are first aggregated to hourly values, averaged and displayed as typical daily patterns. The daily profiles can be displayed separately for the weekdays and the seasons.
+
+This chapter shows some useful visualizations to accommodate this recognition.
 
