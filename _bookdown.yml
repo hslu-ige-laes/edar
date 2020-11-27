@@ -42,7 +42,7 @@ rmd_files: [
   "partDataVis/bldgEngySigScatter.Rmd",
 
   "a1-packages.rmd",
-  "references.rmd",
+  #"references.rmd",
 ]
 language:
   ui:
