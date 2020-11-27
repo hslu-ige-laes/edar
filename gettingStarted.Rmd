@@ -4,7 +4,7 @@ Therefore the first two parts of this chapter get you up and running with downlo
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
-If you already have "R" and "R Studio" installed, please take a look at the [https://cran.r-project.org/bin/windows/base/](hslu-ige-laes/redutils){target="_blank"} package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
+If you already have "R" and "R Studio" installed, please take a look at the [https://github.com/hslu-ige-laes/redutils](https://github.com/hslu-ige-laes/redutils){target="_blank"} package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
 
 Finally "R-beginners" find in \@ref(createFirstScript) an easy code example which creates a simple time series plot.
 
@@ -91,4 +91,4 @@ plot(co2, ylab = "CO2 (ppm)", las = 1)
 title(main = "Mauna Loa Atmospheric CO2 Concentration")
 ```
 
-> As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. [https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html](The R Dataset Package){target="_blank"} provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 
+> As you probably noticed, we did not load any data. The basic installation of "R" and some packages come with test data. So that is an easy way to test something. [The R Dataset Package](https://stat.ethz.ch/R-manual/R-devel/library/datasets/html/00Index.html){target="_blank"} provides some preinstalled datasets, including the used "Mauna Loa Atmospheric CO2 Concentration" dataset. 

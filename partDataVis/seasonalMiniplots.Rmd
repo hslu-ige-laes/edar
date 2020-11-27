@@ -1,6 +1,6 @@
 ## Mini Plots
 ### Goal
-Plot a seasonal month plot as described in [https://otexts.com/fpp2/seasonal-subseries-plots.html](Hyndman and Athanasopoulos (2014, chapter 2.5)){target="_blank"}:
+Plot a seasonal month plot as described in [Hyndman and Athanasopoulos (2014, chapter 2.5)](https://otexts.com/fpp2/seasonal-subseries-plots.html){target="_blank"}:
 
 ```{r out.width='70%', fig.cap='Seasonal Plot with mini Time Plots over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotSeasonalMiniplots.png")

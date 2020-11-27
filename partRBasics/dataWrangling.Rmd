@@ -3,11 +3,11 @@ This chapter gives an overview of the most important data manipulation functions
 
 Experienced readers will find more information about data imports here:
 
-- [https://rafalab.github.io/dsbook/tidyverse.html#summarizing-data](Introduction to Data Science - Chapter 4 "The tidyverse"){target="_blank"}
+- [Introduction to Data Science - Chapter 4 "The tidyverse"](https://rafalab.github.io/dsbook/tidyverse.html#summarizing-data){target="_blank"}
 
-- [https://smogdr.github.io/edar_coursebook/rprog2.html#data-cleaning](Engineering Data Analysis in R - Chapter 3.5 "Data Cleaning"){target="_blank"}
+- [Engineering Data Analysis in R - Chapter 3.5 "Data Cleaning"](https://smogdr.github.io/edar_coursebook/rprog2.html#data-cleaning){target="_blank"}
 
-- [https://smogdr.github.io/edar_coursebook/rprog2.html#piping](Engineering Data Analysis in R - Chapter 3.6 "Piping"){target="_blank"}
+- [Engineering Data Analysis in R - Chapter 3.6 "Piping"](https://smogdr.github.io/edar_coursebook/rprog2.html#piping){target="_blank"}
 
 It is a fact that the data import and manipulation part of analyses often takes more time than the actual analysis or visualization itself. This is because the exchange data formats are not standardized and meters and sensors record at different time intervals. Data quality, missing data, data imputation and data cleansing also play a major role.
 
@@ -128,7 +128,7 @@ df <- df %>%
 ### The pipe `%>%`
 With the package `dplyr` we can perform a series of operations, for example select and then filter, by sending the results of one function to another using what is called the pipe operator: `%>%`.
 
-Details can be found in [https://rafalab.github.io/dsbook/tidyverse.html](Introduction to Data Science - Chapter 4.5){target="_blank"}
+Details can be found in [Introduction to Data Science - Chapter 4.5](https://rafalab.github.io/dsbook/tidyverse.html){target="_blank"}
 
 ### Wide to Long
 ```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}

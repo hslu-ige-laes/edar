@@ -3,9 +3,9 @@ This chapter introduces two functions that can be used to load data from csv-fil
 
 Experienced readers will find more information about data imports here:
 
-- [https://rafalab.github.io/dsbook/importing-data.html](Introduction to Data Science - Chapter 5 "Importing data"){target="_blank"}
+- [Introduction to Data Science - Chapter 5 "Importing data"](https://rafalab.github.io/dsbook/importing-data.html){target="_blank"}
 
-- [https://smogdr.github.io/edar_coursebook/rprog2.html](Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"){target="_blank"}
+- [Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"])https://smogdr.github.io/edar_coursebook/rprog2.html){target="_blank"}
 
 <br>
 <font size="5">csv-Files</font>
