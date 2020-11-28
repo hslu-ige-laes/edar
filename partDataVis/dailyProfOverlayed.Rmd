@@ -1,7 +1,7 @@
 \newpage
 ## Overlayed
 ### Goal
-Create a plot of all data per week by season of the year.
+Create a plot of all data per week by season of the year:
 
 ```{r out.width='70%', fig.cap='Overlayed Daily Profiles', echo=FALSE}
 knitr::include_graphics("images/plotDailyProfOverlayed.png")
@@ -48,7 +48,7 @@ df <- df %>% mutate(value = ifelse(x == 0.00, NA, df$value))
 rangeX <- seq(0,24,0.25)
 maxValue <- max(df$value, na.rm = TRUE)*1.05
 
-df %>% 
+plot <- df %>% 
   highlight_key(~day) %>%
   plot_ly(x=~x,
           y=~value,
@@ -84,7 +84,8 @@ df %>%
             opacityDim = 1.0,
             selected = attrs_selected(showlegend = FALSE)) %>% # this hides elements in the legend
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
+
+# show plot
+plot
 ```
-
-
 

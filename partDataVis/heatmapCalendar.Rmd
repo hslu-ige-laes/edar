@@ -1,7 +1,7 @@
 \newpage
 ## Calendar
 ### Goal
-Create a calendar heat map with daily energy consumption values.
+Create a calendar heat map with daily energy consumption values:
 
 ```{r out.width='70%', fig.cap='Calendar Heat Map', echo=FALSE}
 knitr::include_graphics("images/plotHeatMapCalendar.png")

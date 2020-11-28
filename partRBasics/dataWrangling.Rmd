@@ -1,7 +1,7 @@
 # Data Wrangling
 This chapter gives an overview of the most important data manipulation functions used throughout this book.
 
-Experienced readers will find more information about data imports here:
+Experienced readers will find more information about data imports here
 
 - [Introduction to Data Science - Chapter 4 "The tidyverse"](https://rafalab.github.io/dsbook/tidyverse.html#summarizing-data){target="_blank"}
 
@@ -112,6 +112,7 @@ df.high <- filter(df, temp_c > 30)
 
 > Note: Whether you put the whole code on one line or split it after a comma does not have an effect on the computation, it is only more readable when the lines aren't too wide.
 
+\newpage
 ### Add/remove columns with `select()`
 ```{r eval=FALSE}
 library(dplyr)
@@ -133,6 +134,7 @@ With the package `dplyr` we can perform a series of operations, for example sele
 
 Details can be found in [Introduction to Data Science - Chapter 4.5](https://rafalab.github.io/dsbook/tidyverse.html){target="_blank"}
 
+\newpage
 ### Wide to Long
 ```{r rbasics wide2long, warning=FALSE, message=FALSE, collapse = FALSE}
 library(tidyr)
@@ -156,6 +158,7 @@ df.long <- as.data.frame(tidyr::pivot_longer(df,
 head(df.long, 16)
 ```
 
+\newpage
 ### Long to Wide
 ```{r rbasics long2wide, warning=FALSE, message=FALSE, collapse = FALSE}
 # long format
@@ -171,6 +174,7 @@ df.wide <- as.data.frame(tidyr::pivot_wider(df.long,
 head(df.wide)
 ```
 
+\newpage
 ### Merge two Dataframes {#DATAWRANGLING-MERGE-TWO-DATAFRAMES}
 ```{r dataframe merge, warning=FALSE, message=FALSE, collapse = FALSE}
 library(dplyr)

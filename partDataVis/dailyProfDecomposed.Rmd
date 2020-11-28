@@ -1,7 +1,7 @@
 \newpage
 ## Decomposed {#dailyProfilesDecomposed}
 ### Goal
-Create a plot of detrended mean data per week as recommended in ["Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting", Pickering et al, 2018](https://doi.org/10.1016/j.enbuild.2018.07.056){target="_blank"}
+Create a plot of detrended mean data per week as recommended in ["Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting", Pickering et al, 2018](https://doi.org/10.1016/j.enbuild.2018.07.056){target="_blank"}:
 
 ```{r out.width='70%', fig.cap='Mean Daily Profiles per Weekday', echo=FALSE}
 knitr::include_graphics("images/plotDailyProfDecomposed.png")
@@ -32,9 +32,9 @@ library(redutils)
 df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
 df <- mutate(df, value = value * 4)
 
-p <- plotDailyProfilesDecomposed(df, locTimeZone = "Europe/Zurich")
+plot <- plotDailyProfilesDecomposed(df, locTimeZone = "Europe/Zurich")
 
-ggplotly(p)
+ggplotly(plot)
 ```
 
 ```{r dataVisDailyProfilesDecomposed2, warning=FALSE, message=FALSE, collapse = FALSE}

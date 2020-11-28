@@ -6,10 +6,7 @@ Plot a seasonal plot as described in [Hyndman and Athanasopoulos (2014, chapter 
 knitr::include_graphics("images/plotSeasonalXY.png")
 ```
 
-This is like a standard time series plot except that the data are plotted against the "seasons" for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year.
-
 ### Data Basis
-In general, the values of energy meters, as in our example, increase steadily:
 
 ```{r seasonalPlotXY0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Overlapping'}
 library(dplyr)
@@ -101,10 +98,8 @@ htmlwidgets::saveWidget(plotly, "plotlySeasonalXY.html")
 ### Discussion
 A seasonal plot allows the underlying seasonal pattern to be seen more clearly, and is especially useful in identifying years in which the pattern changes.
 
-
 Hints:
 
-* in the interactive version you can double-click on year in the legend, then only this year is visible
-
-* click once to activate/deactivate a year
+* Double click on a specific year in the legend to display only that year
+* Click once to activate/deactivate an element
 

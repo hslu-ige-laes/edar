@@ -1,11 +1,11 @@
 # Loading Data
-This chapter introduces two functions that can be used to load data from csv-files and Excel-files.
+This chapter introduces two functions that can be used to load data from csv- and Excel-files.
 
 Experienced readers will find more information about data imports here:
 
 - [Introduction to Data Science - Chapter 5 "Importing data"](https://rafalab.github.io/dsbook/importing-data.html){target="_blank"}
 
-- [Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"])https://smogdr.github.io/edar_coursebook/rprog2.html){target="_blank"}
+- [Engineering Data Analysis in R - Chapter 3 "Getting and Cleaning Data"](https://smogdr.github.io/edar_coursebook/rprog2.html){target="_blank"}
 
 <br>
 <font size="5">csv-Files</font>
@@ -55,7 +55,7 @@ df <- read.xlsx("datafile.xlsx", sheetName="Revenues")
 head(df)
 ```
 
-For reading older Excel files in the .xls format, the gdata package has the function read.xls():
+For reading older Excel files in the .xls format, the gdata package has the function read.xls:
 ```{r eval=FALSE}
 # Only need to install once
 install.packages("gdata")

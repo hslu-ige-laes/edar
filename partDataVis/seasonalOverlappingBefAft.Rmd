@@ -3,14 +3,13 @@
 ### Goal
 To highlight an energy optimization in a season diagram, we can gray out the seasons before the optimization and only highlight the monthly values after the optimization. To better quantify the success, we can calculate and display the confidence interval of the years before.
 
-In the following we will create the following plot:
+We will create the following plot:
 
 ```{r out.width='70%', fig.cap='Seasonal Plot Overlapping Before/After', echo=FALSE}
 knitr::include_graphics("images/plotEnergyConsBeforeAfter.png")
 ```
 
 ### Data Basis
-In general, the values of energy meters, as in our example, increase steadily:
 
 ```{r energyConsBeforeAfter0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Overlapping Before/After Optimization'}
 library(dplyr)

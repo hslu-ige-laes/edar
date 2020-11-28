@@ -1,0 +1,9 @@
+# (PART) Data Visualizations {-}
+
+# Introduction to Data Visualizations
+
+In the following chapters of the "Data Visualizations" section, visualizations are presented that are either already frequently used in the field of building monitoring, are difficult to create or seem to be recommendable.
+
+Sometimes not the final creation of the lines is challenging, but the preceding data preparation of the raw data.
+
+The focus is on visualizations for reports in print quality. However, since some functions are implemented in the [redutils](https://github.com/hslu-ige-laes/redutils){target="_blank"} package and are thus easy to call up, they are therefore also suitable for the fast visualization of data in the field of explorative data analysis.

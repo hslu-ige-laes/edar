@@ -2,11 +2,11 @@
 
 # Introduction to R Basics
 
-The following chapters of the part "R-Basics" is a short overview of the fundamental principles for understanding the code presented in the recipes in part "Data Visualizations".  It focuses on practical examples of how data can be loaded, transformed and analyzed.
+The following chapters of the part "R-Basics" give an overview of the basic principles for understanding the recipes in the part "Data Visualizations". It focuses on practical examples of how data can be loaded, transformed and analyzed.
 
-It is not the goal of this book to fully introduce beginners to the programming language "R" and the environment in general. There are many really good sources where you can familiarize yourself with "R" if needed.
+It is not the goal of this book to introduce beginners completely to the programming language "R" and the environment in general. There are many really good sources where you can familiarize yourself with "R" if necessary.
 
-Two sources are recommended to facilitate the introduction to "R" and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
+Two are recommended to facilitate the introduction to "R" and to learn the relevant basics. Choose one that suits you and go through the recommended chapter:
 
 - [Introduction to Data Science - Chapter 2 "R Basics"](https://rafalab.github.io/dsbook/r-basics.html){target="_blank"}
 - [Engineering Data Analysis in R - Chapter 2 "The R Programming Environment"](https://smogdr.github.io/edar_coursebook/rprog1.html){target="_blank"}

@@ -1,7 +1,7 @@
 \newpage
 ## Median-Weeks
 ### Goal
-Create an energy consumption heat map of a typical weeks depending on the season of the year.
+Create an energy consumption heat map of a typical weeks depending on the season of the year:
 
 ```{r out.width='70%', fig.cap='Heat Map of Median Weeks per Season of Year', echo=FALSE}
 knitr::include_graphics("images/plotHeatMapMedianWeeks.png")

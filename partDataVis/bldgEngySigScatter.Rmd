@@ -1,7 +1,7 @@
 \newpage
 ## Building Energy Signature
 ### Goal
-You want to create a scatter plot with
+You want to create a scatter plot with:
 
 * the daily mean outside temperature on the x-axis
 
@@ -154,8 +154,8 @@ plotly::ggplotly(plot, tooltip = c("text")) %>%
 ### Discussion
 This visualization allows a quick detection of malfunctions and provides valuable information on the energy efficiency of the building.
 
-- A constant indoor temperature is assumed.
+- A constant indoor temperature is assumed
 
-- It is also assumed that the outside temperature is the parameter with the greatest influence on heating energy consumption.
+- It is also assumed that the outside temperature is the parameter with the greatest influence on heating energy consumption
 
-- This method is suitable for buildings with stable internal heat loads and relatively low passive solar heat loads.
+- This method is suitable for buildings with stable internal heat loads and relatively low passive solar heat loads

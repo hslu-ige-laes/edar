@@ -384,3 +384,9 @@ fig <- subplot(fig1, fig2, nrows = 2, shareX = TRUE, heights = c(1-ratio, ratio)
 fig
 ```
 
+### See also
+You probably noticed the line with the average consumption value. This gets calculated by the recommended values and formulas of the study [Typischer Haushalt-Stromverbrauch - Schlussbericht](https://www.aramis.admin.ch/Default.aspx?DocumentID=61764){target="_blank"} by Nipkov, J. (2013)
+
+You can find the implementation in [redutils function getTypEleConsHousehold()](https://smogdr.github.io/edar_coursebook/){target="_blank"} where various parameters can get adapted via function call arguments.
+
+

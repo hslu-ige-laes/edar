@@ -1,7 +1,7 @@
 \newpage
 ## Mean
 ### Goal
-Create a plot of mean data per week.
+Create a plot of mean data per week:
 
 ```{r out.width='70%', fig.cap='Mean Daily Profiles per Weekday', echo=FALSE}
 knitr::include_graphics("images/plotDailyProfMean.png")
@@ -56,7 +56,7 @@ df <- df %>%
 # plot graph with mean values
 maxValMean <- max(df$dayTimeMean, na.rm = TRUE)*1.05
 
-df %>% 
+plot <- df %>% 
   highlight_key(~weekday) %>%
   plot_ly(x=~x,
           y=~dayTimeMean,
@@ -89,12 +89,11 @@ df %>%
             selected = attrs_selected(showlegend = FALSE)) %>% # this hides elements in the legend
   plotly::config(modeBarButtons = list(list("toImage")), displaylogo = FALSE)
 
+# show plot
+plot
 ```
 
-```{r dataVisDailyProfilesMean2, warning=FALSE, message=FALSE, collapse = FALSE}
-# save static plot as png (optional)
-ggsave("images/plotDailyProfMean.png", plot)
-```
+
 
 
 

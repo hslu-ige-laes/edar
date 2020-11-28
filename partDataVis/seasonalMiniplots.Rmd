@@ -7,11 +7,10 @@ Plot a seasonal month plot as described in [Hyndman and Athanasopoulos (2014, ch
 knitr::include_graphics("images/plotSeasonalMiniplots.png")
 ```
 
-Here the seasonal patterns for each season are collected together in seprate mini time plots. Be aware that seasons in this context don't correlate with the seasons of the year.
+Here the seasonal patterns for each season are collected together in seprate mini time plots.
 
 
 ### Data Basis
-In general, the values of energy meters, as in our example, increase steadily:
 
 ```{r seasonalMiniplots0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Miniplots'}
 library(dplyr)
@@ -104,7 +103,7 @@ htmlwidgets::saveWidget(plotly, "plotlySeasonalMiniplots.html")
 
 * This type of seasonal plot shows the mean value of each month and therefore emphasises on the monthly comparison
 
-* It revelas as well the mean seasonla pattern with the blue lines
+* It revelas as well the mean seasonal pattern with the blue lines
 
 
 

@@ -17,44 +17,46 @@ description: "Introduction into energy data analysis and visualization with R."
 
 This book gives you an overview of the statistical software R and its ability to analyze and visualize time series in the context of building energy and comfort.
 
-It is aimed at R beginners as well as exerienced R users and is strongly inspired by the [R Graphics Cookbook](https://r-graphics.org/){target="_blank"} and [Engineering Data Analysis in R](https://smogdr.github.io/edar_coursebook/){target="_blank"}. The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
+The aim of this book is to provide additional specific recipes for energy and comfort related tasks and to make your entry into R smooth and easy. 
+
+It is aimed at R beginners as well as exerienced R users and is inspired by the [R Graphics Cookbook](https://r-graphics.org/){target="_blank"} and [Engineering Data Analysis in R](https://smogdr.github.io/edar_coursebook/){target="_blank"}.
 
 ## Content
 The book is structured in the following main parts:
 
-* R Basics
+1. R Basics
+1. Data Visualizations
 
-* Data Visualizations
-
-The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing. An "R-beginner" receives as well information about the installation of the program environment and gets a quick and practical introduction.
+The part "R Basics" covers general data analysis tasks like data loading, wrangling and aggregation. Mostly this part deals with number juggling and table viewing.
 
 > "Numerical quantities focus on expected values, graphical summaries on unexpected values." - John W. Tukey
 
 Such so called "graphical summaries" are covered in the part "Data Visualizations" which brings the calculated numbers to life. Visualizations are good to identify patterns, changes over time, unusual readings, and relationships between variables. The presented code makes the creation of common and useful plots for energy and comfort data fast and easy.
-The recipes in this part will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, replace the sample data files with your own and execute the code.
+The recipes in this part will show you how to complete certain specific tasks. Examples are shown so that you can understand the basic principle and reproduce the analysis or visualization with your own data. Simply copy the code into your R-script, run it and if you like the visualization replace the sample data with your own.
 
 ## Why R and RStudio?
-In a study commissioned by the Swiss Federal Office of Energy, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and create visualizations.
+In the [EVISU](https://github.com/hslu-ige-laes/evisu){target="_blank"}study of the Lucerne University of Applied Sciences and Arts, experts from the field were asked how and where they perform energy analyses and create visualizations. The result was that many people today either need Excel or use a building monitoring software to execute analysis and as well for making visualizations.
 
-Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics there is limited. The change to an environment like "R" seems to be difficult for many. In the market there are numerous books which make the change to "R" for other disciplines easier. However, experts from the energy and building services engineering industry lack a corresponding work. The present book is intended to close this gap.
+Excel users are pushing the program to its limits with the ever-increasing data sets. Also the interactive ability of the graphics there is limited. Switching to an analysis environment like "R" seems unavoidable for more complex tasks, but apparently causes problems for many people. In the market there are numerous books which make the start in "R" easier. There are also packages for various fields which support the discipline-specific analysis and visualization tasks.
 
-The freely available programming language "R" and its graphical user interface "RStudio" offer many more possibilities for data analysis and data visualization.
+However, experts from the energy and building services engineering industry lack a corresponding work and corresponding packages. The present book is intended to close the first gap, the second gets closed by the package [redutils - Energy Data Utilities for R](https://github.com/hslu-ige-laes/redutils){target="_blank"}.
+
+You might also wonder why R and not Python. Well, this is a question of faith and the author seems to prefer R.
 
 ## Further Reading
-A really good source is [R for Data Science](http://r4ds.had.co.nz]{target="_blank"} by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
+A really good source is [R for Data Science](http://r4ds.had.co.nz){target="_blank"} by Garrett Grolemund and Hadley Wickham. The entire book is freely available online through the same format of this book. 
 
-There are a number of recommendable free online books available, including:
+There are a number of other recommendable and free online books available, including:
 
-- [R Graphics Cookbook](https://r-graphics.org/){target="_blank"}
-- [Introduction to Data Science - Data Analysis and Prediction Algorithms with R](https://rafalab.github.io/dsbook/){target="_blank"}
-- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/){target="_blank"}
-- [Engineering Data Analysis in R](https://smogdr.github.io/edar_coursebook/){target="_blank"}
-- [Forecasting: Principles and Practice](https://otexts.com/fpp2/){target="_blank"}
-- [AFIT Data Science Lab R Programming Guide](https://afit-r.github.io/){target="_blank"}
+- [R Graphics Cookbook](https://r-graphics.org/){target="_blank"} by Winston Chang
+- [Introduction to Data Science - Data Analysis and Prediction Algorithms with R](https://rafalab.github.io/dsbook/){target="_blank"} by Rafael A. Irizarry
+- [Hands-On Programming with R](https://rstudio-education.github.io/hopr/){target="_blank"} by Garrett Grolemund
+- [Engineering Data Analysis in R](https://smogdr.github.io/edar_coursebook/){target="_blank"} by John Volckens and Kathleen E. Wendt
+- [Forecasting: Principles and Practice](https://otexts.com/fpp2/){target="_blank"} by Rob J Hyndman and George Athanasopoulos
 
 \newpage
 ## Acknowledgements
-The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program "Buildings and Cities 2018".
+The author would like to express his sincere thank to the Swiss Federal Office of Energy, as the launch of this book was part of a project of the research program ["Buildings and Cities 2018"](https://www.bfe.admin.ch/bfe/de/home/forschung-und-cleantech/forschungsprogramme/gebaeude-und-staedte.html){target="_blank"}.
 
 This book was developed using Yihui Xie's [bookdown](https://bookdown.org){target="_blank"} framework. The book is built  using code that combines R code, data, and text to create a book for which R code and examples can be re-executed every time the book is re-built.
 

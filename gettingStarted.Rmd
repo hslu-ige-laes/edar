@@ -4,12 +4,9 @@ Therefore the first two parts of this chapter get you up and running with downlo
 
 This may seem laborious, but it is necessary and easier than it appears at first glance.
 
-If you already have "R" and "R Studio" installed, please take a look at the [https://github.com/hslu-ige-laes/redutils](https://github.com/hslu-ige-laes/redutils){target="_blank"} package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
-
-Finally "R-beginners" find in \@ref(createFirstScript) an easy code example which creates a simple time series plot.
+If you already have "R" and "R Studio" installed, please take a look at the [redutils](https://github.com/hslu-ige-laes/redutils){target="_blank"} package on github, which is frequently used throughout this book. Chapter \@ref(installationPackages) shows you how to install it.
 
 ## Install R and R Studio {#installation}
-Before we can start the first analysis, we have to install "R" and "RStudio". 
 
 - "R" is a programming language used for statistical computing while "RStudio" provides a graphical user interface
 - "R" may be used without "RStudio", but "RStudio" may not be used without "R"
@@ -34,7 +31,7 @@ The wizard will install "R" into your `Program Files` folders and adds a shortcu
 The installer allows you to customize your installation. However the default values will be suitable for most users.
 
 <br>
-<font size="5">Liux</font><br>
+<font size="5">Linux</font><br>
 "R" is part of many Linux distributions, therefore you should check with your Linux package management system if it's already installed.
 
 The CRAN website provides files to build "R" from source on Debian, Redhat, SUSE, and Ubuntu systems under the link “Download R for Linux”
@@ -50,7 +47,9 @@ The exact installation procedure will vary depending on your Linux operating sys
 
 \newpage
 ## Install required packages {#installationPackages}
-Appendix \@ref(packages) gives you an introduction to what a package is and how to install it. Below are the packages used in this book and it is recommended to install them.
+Appendix \@ref(packages) gives you an introduction to what a package is and how to install it.
+
+Fo.low these instructions to install the packages used in this book:
 
 - Open "RStudio" just as you would any program, by clicking on its icon
 

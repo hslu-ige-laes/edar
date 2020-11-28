@@ -42,6 +42,7 @@ install.packages("devtools")
 library(devtools)
 install_github("hslu-ige-laes/redutils")
 ```
+
 Create a new script, copy/paste the following code and run it:
 
 ```{r mollierhx1, warning=FALSE, message=FALSE, collapse = FALSE}
@@ -75,11 +76,16 @@ data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 # plot mollier hx diagram
 plot <- plotMollierHx(data)
 
+# show plot
 plot
 ```
 
-```{r mollierhx2, warning=FALSE, message=FALSE, collapse = FALSE}
+```{r mollierhx2, warning=FALSE, message=FALSE, collapse = FALSE, eval=FALSE}
 # save static plot as png (optional)
 library(r2d3)
 save_d3_png(plot, "images/comfortMollierHx.png")
 ```
+
+### See also
+If you are interested in implementing this plot in your own dashboard you can check the free D3 implementation of it:
+[https://github.com/hslu-ige-laes/d3-mollierhx](https://github.com/hslu-ige-laes/d3-mollierhx){target="_blank"}

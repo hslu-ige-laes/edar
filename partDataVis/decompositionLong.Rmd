@@ -1,14 +1,13 @@
 \newpage
 ## Long term
 ### Goal
-Decompose a long term time series of ten years monthly data.
+Decompose a long term time series of ten years monthly data:
 
 ```{r out.width='70%', fig.cap='Decomposition of long time series over 10 Years', echo=FALSE}
 knitr::include_graphics("images/plotDecompositionLong.png")
 ```
 
 ### Data Basis
-In general, the values of energy meters, as in our example, increase steadily:
 
 ```{r dataVisDecompositionLong0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Long Term'}
 library(dplyr)

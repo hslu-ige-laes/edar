@@ -10,7 +10,6 @@ knitr::include_graphics("images/plotSeasonalPolar.png")
 This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
 
 ### Data Basis
-In general, the values of energy meters, as in our example, increase steadily:
 
 ```{r seasonalPlotPolar00, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Polar'}
 library(dplyr)
@@ -86,6 +85,6 @@ ggsave("images/plotSeasonalPolar.png", plot)
 ### Discussion
 This representation emphasizes the high consumption in summer very well, which could undoubtedly be reduced in a residential building. The Years 2018 and 2019 show, that this optimization was done.
 
-To emphasize this optimization please refer to the next chapter \@ref(dataVisSeasonalBefAft).
+To emphasize this optimization please refer to chapter \@ref(dataVisSeasonalBefAft).
 
 

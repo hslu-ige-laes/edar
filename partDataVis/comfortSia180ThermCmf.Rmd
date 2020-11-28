@@ -127,7 +127,7 @@ df.coolSp1 <- data.frame(tempOa = c(minx, 12, 17.5, maxx),tempR = c(24.5, 24.5, 
 # line setpoint cool according to SIA 180:2014 Fig. 3
 df.coolSp2 <- data.frame(tempOa = c(minx, 10, maxx),tempR = c(25, 25, 0.33 * maxx + 21.8))
 
-data %>%
+plot <- data %>%
   plot_ly(showlegend = TRUE) %>%
   add_lines(data = df.coolSp2,
             x = ~tempOa,
@@ -237,5 +237,7 @@ data %>%
                  )
   )
 
+# show plot
+plot
 ```
 

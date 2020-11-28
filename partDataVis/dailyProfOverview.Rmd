@@ -1,7 +1,7 @@
 \newpage
 ## Overview
 ### Goal
-Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie.
+Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie:
 
 ```{r out.width='70%', fig.cap='Overview of Daily Profiles by Weekday and Season', echo=FALSE}
 knitr::include_graphics("images/plotDailyProfOverview.png")

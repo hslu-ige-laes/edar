@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-11-27" />
+<meta name="date" content="2020-11-28" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -192,9 +192,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="6.1.4" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#headtail"><i class="fa fa-check"></i><b>6.1.4</b> Head/Tail</a></li>
 <li class="chapter" data-level="6.1.5" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#five-number-summary"><i class="fa fa-check"></i><b>6.1.5</b> Five number summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="quickly-exploring-data.html"><a href="quickly-exploring-data.html"><i class="fa fa-check"></i><b>6.2</b> Quickly Exploring Data</a></li>
+<li class="chapter" data-level="6.2" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html"><i class="fa fa-check"></i><b>6.2</b> Quick Data Visualizations</a></li>
 </ul></li>
-<li class="part"><span><b>II Data Visualizations</b></span></li>
 <li class="chapter" data-level="7" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>7</b> Seasonal Plots</a><ul>
 <li class="chapter" data-level="7.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>7.1</b> Overlapping</a><ul>
 <li class="chapter" data-level="7.1.1" data-path="overlapping.html"><a href="overlapping.html#goal"><i class="fa fa-check"></i><b>7.1.1</b> Goal</a></li>
@@ -275,6 +274,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="11.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#goal-12"><i class="fa fa-check"></i><b>11.1.1</b> Goal</a></li>
 <li class="chapter" data-level="11.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#data-basis-12"><i class="fa fa-check"></i><b>11.1.2</b> Data Basis</a></li>
 <li class="chapter" data-level="11.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-12"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
+<li class="chapter" data-level="11.1.4" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#see-also"><i class="fa fa-check"></i><b>11.1.4</b> See also</a></li>
 </ul></li>
 <li class="chapter" data-level="11.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>11.2</b> SIA 180 Thermal Comfort</a><ul>
 <li class="chapter" data-level="11.2.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#goal-13"><i class="fa fa-check"></i><b>11.2.1</b> Goal</a></li>
@@ -287,6 +287,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="12.1.1" data-path="electricity-household.html"><a href="electricity-household.html#goal-14"><i class="fa fa-check"></i><b>12.1.1</b> Goal</a></li>
 <li class="chapter" data-level="12.1.2" data-path="electricity-household.html"><a href="electricity-household.html#data-basis-14"><i class="fa fa-check"></i><b>12.1.2</b> Data Basis</a></li>
 <li class="chapter" data-level="12.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-14"><i class="fa fa-check"></i><b>12.1.3</b> Solution</a></li>
+<li class="chapter" data-level="12.1.4" data-path="electricity-household.html"><a href="electricity-household.html#see-also-1"><i class="fa fa-check"></i><b>12.1.4</b> See also</a></li>
 </ul></li>
 <li class="chapter" data-level="12.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>12.2</b> Room Temperature Reduction</a><ul>
 <li class="chapter" data-level="12.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#goal-15"><i class="fa fa-check"></i><b>12.2.1</b> Goal</a></li>
@@ -332,13 +333,13 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="goal-15" class="section level3">
 <h3><span class="header-section-number">12.2.1</span> Goal</h3>
 <p>As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.</p>
-<p>You want to create a time series plot with</p>
+<p>You want to create a time series plot with:</p>
 <ul>
 <li><p>the daily median, min and max value</p></li>
 <li><p>the overall median of each period</p></li>
 <li><p>the desired setpoint</p></li>
 </ul>
-<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<div class="figure"><span id="fig:unnamed-chunk-24"></span>
 <img src="images/roomTempRed.png" alt="Room Temperature Reduction Plot" width="70%" />
 <p class="caption">
 Figure 12.3: Room Temperature Reduction Plot
@@ -360,103 +361,103 @@ Figure 12.4: Raw Data Temperature for Room Temperature Reduction Plot
 <div id="solution-15" class="section level3">
 <h3><span class="header-section-number">12.2.3</span> Solution</h3>
 <p>Create a new script, copy/paste the following code and run it:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb85-3" title="3"><span class="kw">library</span>(dygraphs)</a>
-<a class="sourceLine" id="cb85-4" title="4"><span class="kw">library</span>(xts)</a>
-<a class="sourceLine" id="cb85-5" title="5"><span class="kw">library</span>(redutils)</a>
-<a class="sourceLine" id="cb85-6" title="6"><span class="kw">library</span>(RColorBrewer)</a>
-<a class="sourceLine" id="cb85-7" title="7"></a>
-<a class="sourceLine" id="cb85-8" title="8"><span class="co"># Settings</span></a>
-<a class="sourceLine" id="cb85-9" title="9">tempSetpoint =<span class="st"> </span><span class="fl">22.0</span></a>
-<a class="sourceLine" id="cb85-10" title="10"></a>
-<a class="sourceLine" id="cb85-11" title="11">startDate =<span class="st"> &quot;2018-11-01&quot;</span></a>
-<a class="sourceLine" id="cb85-12" title="12">endDate =<span class="st"> &quot;2019-02-01&quot;</span></a>
-<a class="sourceLine" id="cb85-13" title="13"></a>
-<a class="sourceLine" id="cb85-14" title="14">optiDate1 =<span class="st"> &quot;2018-12-17&quot;</span></a>
-<a class="sourceLine" id="cb85-15" title="15">optiLabel1 =<span class="st"> &quot;Optimization I&quot;</span></a>
-<a class="sourceLine" id="cb85-16" title="16"></a>
-<a class="sourceLine" id="cb85-17" title="17">optiDate2 =<span class="st"> &quot;2019-01-03&quot;</span></a>
-<a class="sourceLine" id="cb85-18" title="18">optiLabel2 =<span class="st"> &quot;Optimization II&quot;</span></a>
-<a class="sourceLine" id="cb85-19" title="19"></a>
-<a class="sourceLine" id="cb85-20" title="20">optiDelayDays =<span class="st"> </span><span class="dv">5</span></a>
-<a class="sourceLine" id="cb85-21" title="21"></a>
-<a class="sourceLine" id="cb85-22" title="22"><span class="co"># read and print data</span></a>
-<a class="sourceLine" id="cb85-23" title="23">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb85-24" title="24">                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb85-25" title="25">                 <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb85-26" title="26"></a>
-<a class="sourceLine" id="cb85-27" title="27"><span class="co"># select temperature and remove empty cells</span></a>
-<a class="sourceLine" id="cb85-28" title="28">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb85-29" title="29"></a>
-<a class="sourceLine" id="cb85-30" title="30"><span class="co"># create column with day for later grouping</span></a>
-<a class="sourceLine" id="cb85-31" title="31">df<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb85-32" title="32">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">cut</span>(df<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;day&quot;</span>))</a>
-<a class="sourceLine" id="cb85-33" title="33">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">as.character</span>(df<span class="op">$</span>day,<span class="st">&quot;%Y-%m-%d&quot;</span>))</a>
-<a class="sourceLine" id="cb85-34" title="34"></a>
-<a class="sourceLine" id="cb85-35" title="35"><span class="co"># filter time range</span></a>
-<a class="sourceLine" id="cb85-36" title="36">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(day <span class="op">&gt;</span><span class="st"> </span>startDate, day <span class="op">&lt;</span><span class="st"> </span>endDate)</a>
-<a class="sourceLine" id="cb85-37" title="37"></a>
-<a class="sourceLine" id="cb85-38" title="38"><span class="co"># calculate daily median, min and max of temperature</span></a>
-<a class="sourceLine" id="cb85-39" title="39">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minDay =</span> <span class="kw">min</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
-<a class="sourceLine" id="cb85-42" title="42">         <span class="dt">medianDay =</span> <span class="kw">median</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
-<a class="sourceLine" id="cb85-43" title="43">         <span class="dt">maxDay =</span> <span class="kw">max</span>(<span class="kw">as.numeric</span>(FlatA_Temp))</a>
-<a class="sourceLine" id="cb85-44" title="44">         ) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-45" title="45"><span class="st">  </span><span class="kw">ungroup</span>()</a>
-<a class="sourceLine" id="cb85-46" title="46"></a>
-<a class="sourceLine" id="cb85-47" title="47"><span class="co"># shrink down to daily values and remove rows with empty values</span></a>
-<a class="sourceLine" id="cb85-48" title="48">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(day, medianDay, minDay, maxDay) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb85-49" title="49"></a>
-<a class="sourceLine" id="cb85-50" title="50"><span class="co"># calculate medians for time ranges</span></a>
-<a class="sourceLine" id="cb85-51" title="51">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-52" title="52"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">ifelse</span>(day <span class="op">&gt;=</span><span class="st"> </span>startDate <span class="op">&amp;</span><span class="st"> </span>day <span class="op">&lt;=</span><span class="st"> </span>optiDate1,</a>
-<a class="sourceLine" id="cb85-53" title="53">                         <span class="st">&quot;Baseline&quot;</span>,</a>
-<a class="sourceLine" id="cb85-54" title="54">                         <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate1) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
-<a class="sourceLine" id="cb85-55" title="55">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>optiDate2),</a>
-<a class="sourceLine" id="cb85-56" title="56">                                <span class="st">&quot;Opti1&quot;</span>,</a>
-<a class="sourceLine" id="cb85-57" title="57">                                <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate2) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
-<a class="sourceLine" id="cb85-58" title="58">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>endDate),</a>
-<a class="sourceLine" id="cb85-59" title="59">                                <span class="st">&quot;Opti2&quot;</span>,</a>
-<a class="sourceLine" id="cb85-60" title="60">                                <span class="ot">NA</span>)</a>
-<a class="sourceLine" id="cb85-61" title="61">                         )))</a>
-<a class="sourceLine" id="cb85-62" title="62"></a>
-<a class="sourceLine" id="cb85-63" title="63">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-64" title="64"><span class="st">  </span><span class="kw">group_by</span>(period) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-65" title="65"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">medianPeriod =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(period), <span class="ot">NA</span>, <span class="kw">median</span>(medianDay))) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-66" title="66"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-67" title="67"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period)</a>
-<a class="sourceLine" id="cb85-68" title="68"></a>
-<a class="sourceLine" id="cb85-69" title="69"><span class="co"># create xts object for plotting</span></a>
-<a class="sourceLine" id="cb85-70" title="70">plotdata &lt;-<span class="st"> </span><span class="kw">xts</span>( <span class="dt">x=</span>df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span>df<span class="op">$</span>day)</a>
-<a class="sourceLine" id="cb85-71" title="71"></a>
-<a class="sourceLine" id="cb85-72" title="72"><span class="co"># plot graph</span></a>
-<a class="sourceLine" id="cb85-73" title="73"><span class="kw">dygraph</span>(plotdata, <span class="dt">main =</span> <span class="st">&quot;Room Temperature Reduction&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-74" title="74"><span class="st">  </span><span class="kw">dyAxis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">drawGrid =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-75" title="75"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;minDay&quot;</span>, <span class="st">&quot;medianDay&quot;</span>, <span class="st">&quot;maxDay&quot;</span>),</a>
-<a class="sourceLine" id="cb85-76" title="76">           <span class="dt">label =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-77" title="77"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;medianPeriod&quot;</span>),</a>
-<a class="sourceLine" id="cb85-78" title="78">           <span class="dt">label =</span> <span class="st">&quot;Median Period&quot;</span>,</a>
-<a class="sourceLine" id="cb85-79" title="79">           <span class="dt">strokePattern =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-80" title="80"><span class="st">  </span><span class="kw">dyOptions</span>(<span class="dt">colors =</span> RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">3</span>, <span class="st">&quot;Set2&quot;</span>)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-81" title="81"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate1,</a>
-<a class="sourceLine" id="cb85-82" title="82">          <span class="dt">label =</span> optiLabel1,</a>
-<a class="sourceLine" id="cb85-83" title="83">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
-<a class="sourceLine" id="cb85-84" title="84">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
-<a class="sourceLine" id="cb85-85" title="85">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-86" title="86"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate2,</a>
-<a class="sourceLine" id="cb85-87" title="87">          <span class="dt">label =</span> optiLabel2,</a>
-<a class="sourceLine" id="cb85-88" title="88">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
-<a class="sourceLine" id="cb85-89" title="89">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
-<a class="sourceLine" id="cb85-90" title="90">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-91" title="91"><span class="st">  </span><span class="kw">dyLimit</span>(tempSetpoint,</a>
-<a class="sourceLine" id="cb85-92" title="92">          <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
-<a class="sourceLine" id="cb85-93" title="93">          <span class="dt">label =</span> <span class="st">&quot;Target Setpoint&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-94" title="94"><span class="st">  </span><span class="kw">dyRangeSelector</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-95" title="95"><span class="st">  </span><span class="kw">dyLegend</span>(<span class="dt">show =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
-<div id="htmlwidget-542869dfbea23786700e" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
-<script type="application/json" data-for="htmlwidget-542869dfbea23786700e">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":60,"drawGrid":false,"drawAxis":true},"y":{"drawAxis":true}},"title":"Room Temperature Reduction","labels":["day","Temperature","Median Period"],"retainDateWindow":false,"customBars":true,"series":{"Temperature":{"axis":"y"},"Median Period":{"axis":"y","strokePattern":[7,3]}},"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel","legend":"always","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"scale":"daily","annotations":[],"shadings":[],"events":[{"pos":"2018-12-17T00:00:00.000Z","label":"Optimization I","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":"2019-01-03T00:00:00.000Z","label":"Optimization II","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":22,"label":"Target Setpoint","labelLoc":"left","color":"red","strokePattern":[7,3],"axis":"y"}],"format":"date","data":[["2018-11-02T00:00:00.000Z","2018-11-03T00:00:00.000Z","2018-11-04T00:00:00.000Z","2018-11-05T00:00:00.000Z","2018-11-06T00:00:00.000Z","2018-11-07T00:00:00.000Z","2018-11-08T00:00:00.000Z","2018-11-09T00:00:00.000Z","2018-11-10T00:00:00.000Z","2018-11-11T00:00:00.000Z","2018-11-12T00:00:00.000Z","2018-11-13T00:00:00.000Z","2018-11-14T00:00:00.000Z","2018-11-15T00:00:00.000Z","2018-11-16T00:00:00.000Z","2018-11-17T00:00:00.000Z","2018-11-18T00:00:00.000Z","2018-11-19T00:00:00.000Z","2018-11-20T00:00:00.000Z","2018-11-21T00:00:00.000Z","2018-11-22T00:00:00.000Z","2018-11-23T00:00:00.000Z","2018-11-24T00:00:00.000Z","2018-11-25T00:00:00.000Z","2018-11-26T00:00:00.000Z","2018-11-27T00:00:00.000Z","2018-11-28T00:00:00.000Z","2018-11-29T00:00:00.000Z","2018-11-30T00:00:00.000Z","2018-12-01T00:00:00.000Z","2018-12-02T00:00:00.000Z","2018-12-03T00:00:00.000Z","2018-12-04T00:00:00.000Z","2018-12-05T00:00:00.000Z","2018-12-06T00:00:00.000Z","2018-12-07T00:00:00.000Z","2018-12-08T00:00:00.000Z","2018-12-09T00:00:00.000Z","2018-12-10T00:00:00.000Z","2018-12-11T00:00:00.000Z","2018-12-12T00:00:00.000Z","2018-12-13T00:00:00.000Z","2018-12-14T00:00:00.000Z","2018-12-15T00:00:00.000Z","2018-12-16T00:00:00.000Z","2018-12-17T00:00:00.000Z","2018-12-18T00:00:00.000Z","2018-12-19T00:00:00.000Z","2018-12-20T00:00:00.000Z","2018-12-21T00:00:00.000Z","2018-12-22T00:00:00.000Z","2018-12-23T00:00:00.000Z","2018-12-24T00:00:00.000Z","2018-12-25T00:00:00.000Z","2018-12-26T00:00:00.000Z","2018-12-27T00:00:00.000Z","2018-12-28T00:00:00.000Z","2018-12-29T00:00:00.000Z","2018-12-30T00:00:00.000Z","2018-12-31T00:00:00.000Z","2019-01-01T00:00:00.000Z","2019-01-02T00:00:00.000Z","2019-01-03T00:00:00.000Z","2019-01-04T00:00:00.000Z","2019-01-05T00:00:00.000Z","2019-01-06T00:00:00.000Z","2019-01-07T00:00:00.000Z","2019-01-08T00:00:00.000Z","2019-01-09T00:00:00.000Z","2019-01-10T00:00:00.000Z","2019-01-11T00:00:00.000Z","2019-01-12T00:00:00.000Z","2019-01-13T00:00:00.000Z","2019-01-14T00:00:00.000Z","2019-01-15T00:00:00.000Z","2019-01-16T00:00:00.000Z","2019-01-17T00:00:00.000Z","2019-01-18T00:00:00.000Z","2019-01-19T00:00:00.000Z","2019-01-20T00:00:00.000Z","2019-01-21T00:00:00.000Z","2019-01-22T00:00:00.000Z","2019-01-23T00:00:00.000Z","2019-01-24T00:00:00.000Z","2019-01-25T00:00:00.000Z","2019-01-26T00:00:00.000Z","2019-01-27T00:00:00.000Z","2019-01-28T00:00:00.000Z","2019-01-29T00:00:00.000Z","2019-01-30T00:00:00.000Z","2019-01-31T00:00:00.000Z"],[[23.35,23.62,23.73],[23.12,23.5,23.65],[23.28,23.51,23.92],[23.48,23.66,23.8],[22.28,23.36,23.53],[23.22,23.4,23.68],[23.2,23.36,23.53],[23.03,23.31,23.62],[23.3,23.65,24.07],[23.3,23.8,24.18],[23.55,23.775,23.95],[22.45,23.4,23.7],[23.28,23.4,23.63],[23.22,23.48,23.67],[23.3,23.5,23.8],[23.2,23.38,23.48],[23.02,23.2,23.3],[22.97,23.17,23.62],[20.83,22.9,23.43],[22.9,23.2,23.5],[23.1,23.21,23.5],[21.58,23.22,23.4],[22.67,23.2,23.5],[23.15,23.41,23.8],[23.2,23.4,23.7],[21.15,23.035,23.58],[22.9,23.285,23.53],[23.05,23.2,23.52],[23.07,23.31,23.48],[23.1,23.29,23.53],[23.2,23.43,23.6],[23.1,23.32,23.52],[22.48,23.125,23.33],[23.03,23.39,23.5],[23.17,23.3,23.7],[22.92,23.425,23.72],[23.07,23.45,23.73],[23.18,23.34,23.53],[23.2,23.525,23.8],[22.23,23.26,23.63],[23,23.5,23.8],[23.48,23.5,23.82],[23.32,23.585,23.9],[23.4,23.8,24],[23.12,23.85,24],[23.48,23.7,24],[23.38,23.71,23.98],[23.37,23.6,23.75],[23.2,23.25,23.4],[23,23.1,23.2],[22.8,22.9,23.1],[22.7,22.8,22.85],[22.6,22.84,23.08],[22.7,22.975,23.3],[22.83,23.1,23.2],[22.8,23.125,23.5],[23,23.03,23.3],[22.8,23,23.1],[22.8,23,23.08],[22.7,22.88,22.9],[22.6,22.84,23.1],[22.7,23.13,23.3],[23,23.35,23.6],[22.8,23.04,23.48],[22.53,22.635,22.75],[22.4,22.585,22.7],[22.2,22.45,22.87],[21,22.275,22.62],[21.92,22.18,22.58],[21.95,22.26,22.4],[22.08,22.31,22.52],[21.96,22.24,22.5],[21.93,22.27,22.6],[22.2,22.44,22.7],[20.63,22,22.42],[22,22.07,22.5],[22.08,22.285,22.6],[22.12,22.425,22.92],[22.4,22.685,22.95],[22.45,22.84,23.2],[21.4,22.3,22.8],[20.02,21.8,22.18],[21.8,22.255,22.63],[22.1,22.36,23.03],[22.3,22.585,22.73],[21.7,22.6,22.98],[22.3,22.55,22.83],[21.25,22.49,22.8],[22.03,22.385,23],[21.68,22.365,22.67],[22.18,22.3,22.5]],[[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305]]],"fixedtz":false,"tzone":"UTC"},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb84"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb84-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb84-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb84-3" title="3"><span class="kw">library</span>(dygraphs)</a>
+<a class="sourceLine" id="cb84-4" title="4"><span class="kw">library</span>(xts)</a>
+<a class="sourceLine" id="cb84-5" title="5"><span class="kw">library</span>(redutils)</a>
+<a class="sourceLine" id="cb84-6" title="6"><span class="kw">library</span>(RColorBrewer)</a>
+<a class="sourceLine" id="cb84-7" title="7"></a>
+<a class="sourceLine" id="cb84-8" title="8"><span class="co"># Settings</span></a>
+<a class="sourceLine" id="cb84-9" title="9">tempSetpoint =<span class="st"> </span><span class="fl">22.0</span></a>
+<a class="sourceLine" id="cb84-10" title="10"></a>
+<a class="sourceLine" id="cb84-11" title="11">startDate =<span class="st"> &quot;2018-11-01&quot;</span></a>
+<a class="sourceLine" id="cb84-12" title="12">endDate =<span class="st"> &quot;2019-02-01&quot;</span></a>
+<a class="sourceLine" id="cb84-13" title="13"></a>
+<a class="sourceLine" id="cb84-14" title="14">optiDate1 =<span class="st"> &quot;2018-12-17&quot;</span></a>
+<a class="sourceLine" id="cb84-15" title="15">optiLabel1 =<span class="st"> &quot;Optimization I&quot;</span></a>
+<a class="sourceLine" id="cb84-16" title="16"></a>
+<a class="sourceLine" id="cb84-17" title="17">optiDate2 =<span class="st"> &quot;2019-01-03&quot;</span></a>
+<a class="sourceLine" id="cb84-18" title="18">optiLabel2 =<span class="st"> &quot;Optimization II&quot;</span></a>
+<a class="sourceLine" id="cb84-19" title="19"></a>
+<a class="sourceLine" id="cb84-20" title="20">optiDelayDays =<span class="st"> </span><span class="dv">5</span></a>
+<a class="sourceLine" id="cb84-21" title="21"></a>
+<a class="sourceLine" id="cb84-22" title="22"><span class="co"># read and print data</span></a>
+<a class="sourceLine" id="cb84-23" title="23">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb84-24" title="24">                 <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb84-25" title="25">                 <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb84-26" title="26"></a>
+<a class="sourceLine" id="cb84-27" title="27"><span class="co"># select temperature and remove empty cells</span></a>
+<a class="sourceLine" id="cb84-28" title="28">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb84-29" title="29"></a>
+<a class="sourceLine" id="cb84-30" title="30"><span class="co"># create column with day for later grouping</span></a>
+<a class="sourceLine" id="cb84-31" title="31">df<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb84-32" title="32">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">cut</span>(df<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;day&quot;</span>))</a>
+<a class="sourceLine" id="cb84-33" title="33">df<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">as.Date</span>(<span class="kw">as.character</span>(df<span class="op">$</span>day,<span class="st">&quot;%Y-%m-%d&quot;</span>))</a>
+<a class="sourceLine" id="cb84-34" title="34"></a>
+<a class="sourceLine" id="cb84-35" title="35"><span class="co"># filter time range</span></a>
+<a class="sourceLine" id="cb84-36" title="36">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">filter</span>(day <span class="op">&gt;</span><span class="st"> </span>startDate, day <span class="op">&lt;</span><span class="st"> </span>endDate)</a>
+<a class="sourceLine" id="cb84-37" title="37"></a>
+<a class="sourceLine" id="cb84-38" title="38"><span class="co"># calculate daily median, min and max of temperature</span></a>
+<a class="sourceLine" id="cb84-39" title="39">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">minDay =</span> <span class="kw">min</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
+<a class="sourceLine" id="cb84-42" title="42">         <span class="dt">medianDay =</span> <span class="kw">median</span>(<span class="kw">as.numeric</span>(FlatA_Temp)),</a>
+<a class="sourceLine" id="cb84-43" title="43">         <span class="dt">maxDay =</span> <span class="kw">max</span>(<span class="kw">as.numeric</span>(FlatA_Temp))</a>
+<a class="sourceLine" id="cb84-44" title="44">         ) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-45" title="45"><span class="st">  </span><span class="kw">ungroup</span>()</a>
+<a class="sourceLine" id="cb84-46" title="46"></a>
+<a class="sourceLine" id="cb84-47" title="47"><span class="co"># shrink down to daily values and remove rows with empty values</span></a>
+<a class="sourceLine" id="cb84-48" title="48">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(day, medianDay, minDay, maxDay) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb84-49" title="49"></a>
+<a class="sourceLine" id="cb84-50" title="50"><span class="co"># calculate medians for time ranges</span></a>
+<a class="sourceLine" id="cb84-51" title="51">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-52" title="52"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">period =</span> <span class="kw">ifelse</span>(day <span class="op">&gt;=</span><span class="st"> </span>startDate <span class="op">&amp;</span><span class="st"> </span>day <span class="op">&lt;=</span><span class="st"> </span>optiDate1,</a>
+<a class="sourceLine" id="cb84-53" title="53">                         <span class="st">&quot;Baseline&quot;</span>,</a>
+<a class="sourceLine" id="cb84-54" title="54">                         <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate1) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
+<a class="sourceLine" id="cb84-55" title="55">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>optiDate2),</a>
+<a class="sourceLine" id="cb84-56" title="56">                                <span class="st">&quot;Opti1&quot;</span>,</a>
+<a class="sourceLine" id="cb84-57" title="57">                                <span class="kw">ifelse</span>((day <span class="op">&gt;=</span><span class="st"> </span>(<span class="kw">as.Date</span>(optiDate2) <span class="op">+</span><span class="st"> </span>optiDelayDays))</a>
+<a class="sourceLine" id="cb84-58" title="58">                                <span class="op">&amp;</span><span class="st"> </span>(day <span class="op">&lt;=</span><span class="st"> </span>endDate),</a>
+<a class="sourceLine" id="cb84-59" title="59">                                <span class="st">&quot;Opti2&quot;</span>,</a>
+<a class="sourceLine" id="cb84-60" title="60">                                <span class="ot">NA</span>)</a>
+<a class="sourceLine" id="cb84-61" title="61">                         )))</a>
+<a class="sourceLine" id="cb84-62" title="62"></a>
+<a class="sourceLine" id="cb84-63" title="63">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-64" title="64"><span class="st">  </span><span class="kw">group_by</span>(period) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-65" title="65"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">medianPeriod =</span> <span class="kw">ifelse</span>(<span class="kw">is.na</span>(period), <span class="ot">NA</span>, <span class="kw">median</span>(medianDay))) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-66" title="66"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-67" title="67"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>period)</a>
+<a class="sourceLine" id="cb84-68" title="68"></a>
+<a class="sourceLine" id="cb84-69" title="69"><span class="co"># create xts object for plotting</span></a>
+<a class="sourceLine" id="cb84-70" title="70">plotdata &lt;-<span class="st"> </span><span class="kw">xts</span>( <span class="dt">x=</span>df[,<span class="op">-</span><span class="dv">1</span>], <span class="dt">order.by=</span>df<span class="op">$</span>day)</a>
+<a class="sourceLine" id="cb84-71" title="71"></a>
+<a class="sourceLine" id="cb84-72" title="72"><span class="co"># plot graph</span></a>
+<a class="sourceLine" id="cb84-73" title="73"><span class="kw">dygraph</span>(plotdata, <span class="dt">main =</span> <span class="st">&quot;Room Temperature Reduction&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-74" title="74"><span class="st">  </span><span class="kw">dyAxis</span>(<span class="st">&quot;x&quot;</span>, <span class="dt">drawGrid =</span> <span class="ot">FALSE</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-75" title="75"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;minDay&quot;</span>, <span class="st">&quot;medianDay&quot;</span>, <span class="st">&quot;maxDay&quot;</span>),</a>
+<a class="sourceLine" id="cb84-76" title="76">           <span class="dt">label =</span> <span class="st">&quot;Temperature&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-77" title="77"><span class="st">  </span><span class="kw">dySeries</span>(<span class="kw">c</span>(<span class="st">&quot;medianPeriod&quot;</span>),</a>
+<a class="sourceLine" id="cb84-78" title="78">           <span class="dt">label =</span> <span class="st">&quot;Median Period&quot;</span>,</a>
+<a class="sourceLine" id="cb84-79" title="79">           <span class="dt">strokePattern =</span> <span class="st">&quot;dashed&quot;</span>) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-80" title="80"><span class="st">  </span><span class="kw">dyOptions</span>(<span class="dt">colors =</span> RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">3</span>, <span class="st">&quot;Set2&quot;</span>)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb84-81" title="81"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate1,</a>
+<a class="sourceLine" id="cb84-82" title="82">          <span class="dt">label =</span> optiLabel1,</a>
+<a class="sourceLine" id="cb84-83" title="83">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb84-84" title="84">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
+<a class="sourceLine" id="cb84-85" title="85">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-86" title="86"><span class="st">  </span><span class="kw">dyEvent</span>(<span class="dt">x =</span> optiDate2,</a>
+<a class="sourceLine" id="cb84-87" title="87">          <span class="dt">label =</span> optiLabel2,</a>
+<a class="sourceLine" id="cb84-88" title="88">          <span class="dt">labelLoc =</span> <span class="st">&quot;bottom&quot;</span>,</a>
+<a class="sourceLine" id="cb84-89" title="89">          <span class="dt">color =</span> <span class="st">&quot;slategray&quot;</span>,</a>
+<a class="sourceLine" id="cb84-90" title="90">          <span class="dt">strokePattern =</span> <span class="st">&quot;dotted&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-91" title="91"><span class="st">  </span><span class="kw">dyLimit</span>(tempSetpoint,</a>
+<a class="sourceLine" id="cb84-92" title="92">          <span class="dt">color =</span> <span class="st">&quot;red&quot;</span>,</a>
+<a class="sourceLine" id="cb84-93" title="93">          <span class="dt">label =</span> <span class="st">&quot;Target Setpoint&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-94" title="94"><span class="st">  </span><span class="kw">dyRangeSelector</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb84-95" title="95"><span class="st">  </span><span class="kw">dyLegend</span>(<span class="dt">show =</span> <span class="st">&quot;always&quot;</span>)</a></code></pre></div>
+<div id="htmlwidget-cbb47742aed7ebb5520e" style="width:672px;height:480px;" class="dygraphs html-widget"></div>
+<script type="application/json" data-for="htmlwidget-cbb47742aed7ebb5520e">{"x":{"attrs":{"axes":{"x":{"pixelsPerLabel":60,"drawGrid":false,"drawAxis":true},"y":{"drawAxis":true}},"title":"Room Temperature Reduction","labels":["day","Temperature","Median Period"],"retainDateWindow":false,"customBars":true,"series":{"Temperature":{"axis":"y"},"Median Period":{"axis":"y","strokePattern":[7,3]}},"stackedGraph":false,"fillGraph":false,"fillAlpha":0.15,"stepPlot":false,"drawPoints":false,"pointSize":1,"drawGapEdgePoints":false,"connectSeparatedPoints":false,"strokeWidth":1,"strokeBorderColor":"white","colors":["#66C2A5","#FC8D62","#8DA0CB"],"colorValue":0.5,"colorSaturation":1,"includeZero":false,"drawAxesAtZero":false,"logscale":false,"axisTickSize":3,"axisLineColor":"black","axisLineWidth":0.3,"axisLabelColor":"black","axisLabelFontSize":14,"axisLabelWidth":60,"drawGrid":true,"gridLineWidth":0.3,"rightGap":5,"digitsAfterDecimal":2,"labelsKMB":false,"labelsKMG2":false,"labelsUTC":false,"maxNumberWidth":6,"animatedZooms":false,"mobileDisableYTouch":true,"disableZoom":false,"showRangeSelector":true,"rangeSelectorHeight":40,"rangeSelectorPlotFillColor":" #A7B1C4","rangeSelectorPlotStrokeColor":"#808FAB","interactionModel":"Dygraph.Interaction.defaultModel","legend":"always","labelsDivWidth":250,"labelsShowZeroValues":true,"labelsSeparateLines":false,"hideOverlayOnMouseOut":true},"scale":"daily","annotations":[],"shadings":[],"events":[{"pos":"2018-12-17T00:00:00.000Z","label":"Optimization I","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":"2019-01-03T00:00:00.000Z","label":"Optimization II","labelLoc":"bottom","color":"slategray","strokePattern":[2,2],"axis":"x"},{"pos":22,"label":"Target Setpoint","labelLoc":"left","color":"red","strokePattern":[7,3],"axis":"y"}],"format":"date","data":[["2018-11-02T00:00:00.000Z","2018-11-03T00:00:00.000Z","2018-11-04T00:00:00.000Z","2018-11-05T00:00:00.000Z","2018-11-06T00:00:00.000Z","2018-11-07T00:00:00.000Z","2018-11-08T00:00:00.000Z","2018-11-09T00:00:00.000Z","2018-11-10T00:00:00.000Z","2018-11-11T00:00:00.000Z","2018-11-12T00:00:00.000Z","2018-11-13T00:00:00.000Z","2018-11-14T00:00:00.000Z","2018-11-15T00:00:00.000Z","2018-11-16T00:00:00.000Z","2018-11-17T00:00:00.000Z","2018-11-18T00:00:00.000Z","2018-11-19T00:00:00.000Z","2018-11-20T00:00:00.000Z","2018-11-21T00:00:00.000Z","2018-11-22T00:00:00.000Z","2018-11-23T00:00:00.000Z","2018-11-24T00:00:00.000Z","2018-11-25T00:00:00.000Z","2018-11-26T00:00:00.000Z","2018-11-27T00:00:00.000Z","2018-11-28T00:00:00.000Z","2018-11-29T00:00:00.000Z","2018-11-30T00:00:00.000Z","2018-12-01T00:00:00.000Z","2018-12-02T00:00:00.000Z","2018-12-03T00:00:00.000Z","2018-12-04T00:00:00.000Z","2018-12-05T00:00:00.000Z","2018-12-06T00:00:00.000Z","2018-12-07T00:00:00.000Z","2018-12-08T00:00:00.000Z","2018-12-09T00:00:00.000Z","2018-12-10T00:00:00.000Z","2018-12-11T00:00:00.000Z","2018-12-12T00:00:00.000Z","2018-12-13T00:00:00.000Z","2018-12-14T00:00:00.000Z","2018-12-15T00:00:00.000Z","2018-12-16T00:00:00.000Z","2018-12-17T00:00:00.000Z","2018-12-18T00:00:00.000Z","2018-12-19T00:00:00.000Z","2018-12-20T00:00:00.000Z","2018-12-21T00:00:00.000Z","2018-12-22T00:00:00.000Z","2018-12-23T00:00:00.000Z","2018-12-24T00:00:00.000Z","2018-12-25T00:00:00.000Z","2018-12-26T00:00:00.000Z","2018-12-27T00:00:00.000Z","2018-12-28T00:00:00.000Z","2018-12-29T00:00:00.000Z","2018-12-30T00:00:00.000Z","2018-12-31T00:00:00.000Z","2019-01-01T00:00:00.000Z","2019-01-02T00:00:00.000Z","2019-01-03T00:00:00.000Z","2019-01-04T00:00:00.000Z","2019-01-05T00:00:00.000Z","2019-01-06T00:00:00.000Z","2019-01-07T00:00:00.000Z","2019-01-08T00:00:00.000Z","2019-01-09T00:00:00.000Z","2019-01-10T00:00:00.000Z","2019-01-11T00:00:00.000Z","2019-01-12T00:00:00.000Z","2019-01-13T00:00:00.000Z","2019-01-14T00:00:00.000Z","2019-01-15T00:00:00.000Z","2019-01-16T00:00:00.000Z","2019-01-17T00:00:00.000Z","2019-01-18T00:00:00.000Z","2019-01-19T00:00:00.000Z","2019-01-20T00:00:00.000Z","2019-01-21T00:00:00.000Z","2019-01-22T00:00:00.000Z","2019-01-23T00:00:00.000Z","2019-01-24T00:00:00.000Z","2019-01-25T00:00:00.000Z","2019-01-26T00:00:00.000Z","2019-01-27T00:00:00.000Z","2019-01-28T00:00:00.000Z","2019-01-29T00:00:00.000Z","2019-01-30T00:00:00.000Z","2019-01-31T00:00:00.000Z"],[[23.35,23.62,23.73],[23.12,23.5,23.65],[23.28,23.51,23.92],[23.48,23.66,23.8],[22.28,23.36,23.53],[23.22,23.4,23.68],[23.2,23.36,23.53],[23.03,23.31,23.62],[23.3,23.65,24.07],[23.3,23.8,24.18],[23.55,23.775,23.95],[22.45,23.4,23.7],[23.28,23.4,23.63],[23.22,23.48,23.67],[23.3,23.5,23.8],[23.2,23.38,23.48],[23.02,23.2,23.3],[22.97,23.17,23.62],[20.83,22.9,23.43],[22.9,23.2,23.5],[23.1,23.21,23.5],[21.58,23.22,23.4],[22.67,23.2,23.5],[23.15,23.41,23.8],[23.2,23.4,23.7],[21.15,23.035,23.58],[22.9,23.285,23.53],[23.05,23.2,23.52],[23.07,23.31,23.48],[23.1,23.29,23.53],[23.2,23.43,23.6],[23.1,23.32,23.52],[22.48,23.125,23.33],[23.03,23.39,23.5],[23.17,23.3,23.7],[22.92,23.425,23.72],[23.07,23.45,23.73],[23.18,23.34,23.53],[23.2,23.525,23.8],[22.23,23.26,23.63],[23,23.5,23.8],[23.48,23.5,23.82],[23.32,23.585,23.9],[23.4,23.8,24],[23.12,23.85,24],[23.48,23.7,24],[23.38,23.71,23.98],[23.37,23.6,23.75],[23.2,23.25,23.4],[23,23.1,23.2],[22.8,22.9,23.1],[22.7,22.8,22.85],[22.6,22.84,23.08],[22.7,22.975,23.3],[22.83,23.1,23.2],[22.8,23.125,23.5],[23,23.03,23.3],[22.8,23,23.1],[22.8,23,23.08],[22.7,22.88,22.9],[22.6,22.84,23.1],[22.7,23.13,23.3],[23,23.35,23.6],[22.8,23.04,23.48],[22.53,22.635,22.75],[22.4,22.585,22.7],[22.2,22.45,22.87],[21,22.275,22.62],[21.92,22.18,22.58],[21.95,22.26,22.4],[22.08,22.31,22.52],[21.96,22.24,22.5],[21.93,22.27,22.6],[22.2,22.44,22.7],[20.63,22,22.42],[22,22.07,22.5],[22.08,22.285,22.6],[22.12,22.425,22.92],[22.4,22.685,22.95],[22.45,22.84,23.2],[21.4,22.3,22.8],[20.02,21.8,22.18],[21.8,22.255,22.63],[22.1,22.36,23.03],[22.3,22.585,22.73],[21.7,22.6,22.98],[22.3,22.55,22.83],[21.25,22.49,22.8],[22.03,22.385,23],[21.68,22.365,22.67],[22.18,22.3,22.5]],[[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[23.4,23.4,23.4],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[23,23,23],[null,null,null],[null,null,null],[null,null,null],[null,null,null],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305],[22.305,22.305,22.305]]],"fixedtz":false,"tzone":"UTC"},"evals":["attrs.interactionModel"],"jsHooks":[]}</script>
 </div>
 <div id="discussion-7" class="section level3">
 <h3><span class="header-section-number">12.2.4</span> Discussion</h3>
