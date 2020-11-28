@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 9 Time Series Decomposition | Energy Data Analysis with R</title>
+  <title>Chapter 7 Introduction to Data Visualizations | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 9 Time Series Decomposition | Energy Data Analysis with R" />
+  <meta property="og:title" content="Chapter 7 Introduction to Data Visualizations | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 9 Time Series Decomposition | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="Chapter 7 Introduction to Data Visualizations | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,8 +31,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="dataVisSeasonalBefAft.html"/>
-<link rel="next" href="long-term.html"/>
+<link rel="prev" href="quick-data-visualizations.html"/>
+<link rel="next" href="seasonal-plots.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -330,38 +330,20 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="time-series-decomposition" class="section level1">
-<h1><span class="header-section-number">Chapter 9</span> Time Series Decomposition</h1>
-<p>Typical time series result from the interaction of regular and random causes. The regular causes can vary periodically (seasonally) and/or contain long-term trends. Random influences are often called noise.</p>
-<p>Decomposition deconstructs time series into its components “trend”, “seasonality” and “randomness.” For further data analysis it is often necessary to decompose the trend and the seasonal component from the raw data. Therefore, a large part of the time series analyses deals with corresponding procedures. Sometimes the remaining Randomness is of interest and sometimes a detrended series as in chapter <a href="dailyProfilesDecomposed.html#dailyProfilesDecomposed">11.4</a>.</p>
-<p><br>
-<font size="5">Trend Component</font><br>
-The trend component of a time series refers to the general direction in which the time series is moving in the long term. Time series can have a positive or a negative trend, but can also have no trend.
-A trend exists when there is a persistent increasing and/or decreasing direction in the data.</p>
-<p><br>
-<font size="5">Seasonal Component</font><br>
-The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies. Seasonality occurs over a fixed and known period (e.g., the quarter of the year, the month, or day of the week).</p>
-<p><br>
-<font size="5">Random/Remainder/Irregular Component</font><br>
-The remainder is what’s left of the time series data after removing its trend and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.</p>
-An exemplary decomposition of an outside temperature time series over 7 days:
-<div class="figure"><span id="fig:decompositionTOa"></span>
-<img src="edar_files/figure-html/decompositionTOa-1.png" alt="Time Series Decomposition Outside Temperature over 7 days" width="672" />
-<p class="caption">
-Figure 9.1: Time Series Decomposition Outside Temperature over 7 days
-</p>
-</div>
-<p>This chapter shows how a time series can be decomposed and presented interactively.</p>
+<div id="introduction-to-data-visualizations" class="section level1">
+<h1><span class="header-section-number">Chapter 7</span> Introduction to Data Visualizations</h1>
+<p>In the following chapters of the “Data Visualizations” section, visualizations are presented that are either already frequently used in the field of building monitoring, are difficult to create or seem to be recommendable.</p>
+<p>Sometimes not the final creation of the lines is challenging, but the preceding data preparation of the raw data.</p>
+<p>The focus is on visualizations for reports in print quality. However, since some functions are implemented in the <a href="https://github.com/hslu-ige-laes/redutils" target="_blank">redutils</a> package and are thus easy to call up, they are therefore also suitable for the fast visualization of data in the field of explorative data analysis.</p>
 
-<div style="page-break-after: always;"></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="dataVisSeasonalBefAft.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="long-term.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="quick-data-visualizations.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="seasonal-plots.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

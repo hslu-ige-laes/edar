@@ -12,6 +12,7 @@ rmd_files: [
   #"partRBasics/dataWrangling_Examples.Rmd", # work in progress
   "partRBasics/eda.Rmd",
 
+  "partDataVis/introductionDataVis.Rmd",
   "partDataVis/seasonal.Rmd",
   "partDataVis/seasonalOverlapping.Rmd",
   "partDataVis/seasonalMiniplots.Rmd",

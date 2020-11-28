@@ -72,6 +72,7 @@ structure
 headtail
 five-number-summary
 quick-data-visualizations
+introduction-to-data-visualizations
 seasonal-plots
 overlapping
 goal
