@@ -9,7 +9,7 @@ knitr::include_graphics("images/comfortMollierHx.png")
 
 ### Data Basis
 
-```{r mollierhx0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature and Humidity for Mollier hx Diagram'}
+```{r mollierhx0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature and Humidity for Mollier hx Diagram', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # read and print data
@@ -31,6 +31,7 @@ plot(data$time, data$FlatA_Hum,
      xlab="Time", ylab="Rel. Humidity (%rH)", main="Hourly Interval Raw Data", type = "l")
 ```
 
+\newpage
 ### Solution
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 

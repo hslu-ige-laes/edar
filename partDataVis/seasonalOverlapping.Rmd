@@ -8,7 +8,7 @@ knitr::include_graphics("images/plotSeasonalXY.png")
 
 ### Data Basis
 
-```{r seasonalPlotXY0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Overlapping'}
+```{r seasonalPlotXY0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Overlapping', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
@@ -24,6 +24,7 @@ plot(df$timestamp, df$Adr02_energyHeat,
      xlab="Time", ylab="Meter value (kWh)", main="Monthly Raw Data")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

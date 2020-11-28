@@ -10,7 +10,7 @@ knitr::include_graphics("images/plotDailyProfOverlayed.png")
 ### Data Basis
 Energy consumption values of one whole year in an interval of 15mins.
 
-```{r dataVisDailyProfilesOverlayed0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term'}
+```{r dataVisDailyProfilesOverlayed0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Short Term', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # load time series data
@@ -21,6 +21,7 @@ plot(df$time, df$value,
      xlab="Time", ylab="Energy Consumption (kWh)", main="15min Interval Raw Data", type = "l")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
   

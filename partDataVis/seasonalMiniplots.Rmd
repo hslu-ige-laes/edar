@@ -12,7 +12,7 @@ Here the seasonal patterns for each season are collected together in seprate min
 
 ### Data Basis
 
-```{r seasonalMiniplots0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Miniplots'}
+```{r seasonalMiniplots0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Miniplots', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
@@ -30,6 +30,7 @@ plot(df$timestamp, df$Adr02_energyHeat,
 
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

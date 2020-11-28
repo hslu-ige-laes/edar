@@ -19,7 +19,7 @@ knitr::include_graphics("images/roomTempRed.png")
 
 * Time series data from e.g. a temperature sensor with unaligned time intervals
 
-```{r roomTempRed0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature for Room Temperature Reduction Plot'}
+```{r roomTempRed0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature for Room Temperature Reduction Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # read and print data
@@ -39,6 +39,7 @@ plot(df$time, df$FlatA_Temp,
 
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

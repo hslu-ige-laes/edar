@@ -16,7 +16,7 @@ knitr::include_graphics("images/plotBldgEngySigScatter.png")
 ### Data Basis
 Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals:
 
-```{r energysignature0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot'}
+```{r energysignature0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
@@ -56,6 +56,7 @@ plot(df$time, df$energyHeatingMeter,
 
 ```
 
+\newpage
 ### Solution
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 

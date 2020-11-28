@@ -48,6 +48,7 @@ head(df,2)
 tail(df,2)
 ```
 
+\newpage
 ### Season of Year
 For some analyses it is useful to color single points of a scatterplot according to the season. For this we need to have the season in a separate column: 
 

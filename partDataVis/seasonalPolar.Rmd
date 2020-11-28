@@ -11,7 +11,7 @@ This is like an overlapping time series plot which uses polar coordinates. Be aw
 
 ### Data Basis
 
-```{r seasonalPlotPolar00, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Polar'}
+```{r seasonalPlotPolar00, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Seasonal Plot Polar', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
@@ -27,6 +27,7 @@ plot(df$timestamp, df$Adr02_energyHeat,
      xlab="Time", ylab="Meter value (kWh)", main="Monthly Raw Data")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

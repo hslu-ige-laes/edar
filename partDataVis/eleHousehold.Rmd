@@ -16,7 +16,7 @@ knitr::include_graphics("images/eleHousehold.png")
 
 * A csv file with time series of an electric meter in 15 minute interval.
 
-```{r eleHousehold10, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Electricity Household Plot'}
+```{r eleHousehold10, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Electricity Household Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # load time series data and aggregate mean values
@@ -35,6 +35,7 @@ plot(df$time, df$FlatC_Ele,
      xlab="Time", ylab="Electric Meter Value (kWh)", main="15min Interval Raw Data", type = "l")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

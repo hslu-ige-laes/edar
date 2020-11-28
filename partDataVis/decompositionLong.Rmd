@@ -9,7 +9,7 @@ knitr::include_graphics("images/plotDecompositionLong.png")
 
 ### Data Basis
 
-```{r dataVisDecompositionLong0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Long Term'}
+```{r dataVisDecompositionLong0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data for Decomposition Plot Long Term', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv2("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv",
@@ -25,6 +25,7 @@ plot(df$timestamp, df$Adr02_energyHeat,
      xlab="Time", ylab="Meter value (kWh)", main="Monthly Interval Raw Data")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 

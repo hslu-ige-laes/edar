@@ -8,7 +8,7 @@ knitr::include_graphics("images/comfortSia180ThermCmf.png")
 ```
 
 ### Data Basis
-```{r comfortSia180ThermCmf0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Room and Outdoor Temperaturefor SIA180 Thermal Comfort Plot'}
+```{r comfortSia180ThermCmf0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Room and Outdoor Temperaturefor SIA180 Thermal Comfort Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # read and print data
@@ -36,6 +36,7 @@ plot(dfTempR$time, dfTempR$FlatA_Temp,
      xlab="Time", ylab="Room Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
 ```
 
+\newpage
 ### Solution
 Create a new script, copy/paste the following code and run it:
 
