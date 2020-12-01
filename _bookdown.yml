@@ -38,6 +38,8 @@ rmd_files: [
   "partDataVis/comfortSia180ThermCmf.Rmd",
 
   "partDataVis/misc.Rmd",
+  "partDataVis/boxplot.Rmd",
+  "partDataVis/crossCorrelation.Rmd",
   "partDataVis/eleHousehold.Rmd",
   "partDataVis/roomTempRed.Rmd",
   "partDataVis/bldgEngySigScatter.Rmd",

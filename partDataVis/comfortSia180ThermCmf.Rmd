@@ -8,7 +8,7 @@ knitr::include_graphics("images/comfortSia180ThermCmf.png")
 ```
 
 ### Data Basis
-```{r comfortSia180ThermCmf0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Room and Outdoor Temperaturefor SIA180 Thermal Comfort Plot', out.width = "70%"}
+```{r comfortSia180ThermCmf0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Room and Outdoor Temperature for SIA180 Thermal Comfort Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 # read and print data
