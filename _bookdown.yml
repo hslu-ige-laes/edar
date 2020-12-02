@@ -40,6 +40,7 @@ rmd_files: [
   "partDataVis/misc.Rmd",
   "partDataVis/boxplot.Rmd",
   "partDataVis/densityplot.Rmd",
+  "partDataVis/densityplotSeasons.Rmd",
   "partDataVis/sumFrequencyDays.Rmd",
   "partDataVis/sumFrequencyHours.Rmd",
   "partDataVis/crossCorrelation.Rmd",

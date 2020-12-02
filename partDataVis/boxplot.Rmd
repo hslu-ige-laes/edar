@@ -10,7 +10,7 @@ knitr::include_graphics("images/boxplot.png")
 ### Data Basis
 A csv file with room temperature and humidity time series of four rooms. Below are only the room temperatures visualized.
 
-```{r boxplot0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot', out.width = "70%"}
+```{r boxplot0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Room Temperature Raw Data for Boxplot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 library(viridis)

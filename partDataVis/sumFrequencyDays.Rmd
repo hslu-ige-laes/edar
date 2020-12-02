@@ -9,7 +9,7 @@ knitr::include_graphics("images/plotSumFrequencyDays.png")
 
 ### Data Basis
 
-```{r sumfrequencydays0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot', out.width = "70%"}
+```{r sumfrequencydays0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Sum Frequency Days Plot', out.width = "70%"}
 library(dplyr)
 library(lubridate)
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
