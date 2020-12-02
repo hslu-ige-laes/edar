@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  1 DEC 2020 18:29
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  2 DEC 2020 11:22
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1080,37 +1080,34 @@ e pdf)
 File: edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf Graphic fi
 le (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[79] [80]
+[79]
 File: images/plotDailyProfDecomposed.png Graphic file (type bmp)
 <images/plotDailyProfDecomposed.png>
 File: edar_files/figure-latex/dataVisDailyProfilesDecomposed0-1.pdf Graphic fil
 e (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesDecomposed0-1.pdf>
-[81]
+[80]
 File: edar_files/figure-latex/dataVisDailyProfilesDecomposed1 plotly-1.pdf Grap
 hic file (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesDecomposed1 plotly-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[82] [83] [84
+[81] [82]
+Chapter 12.
+[83
 
 ]
-Chapter 12.
-[85]
 File: images/comfortMollierHx.png Graphic file (type bmp)
 <images/comfortMollierHx.png>
 File: edar_files/figure-latex/mollierhx0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/mollierhx0-1.pdf>
 File: edar_files/figure-latex/mollierhx0-2.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/mollierhx0-2.pdf>
-[86] [87]
+[84] [85]
 File: edar_files/figure-latex/mollierhx1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/mollierhx1-1.pdf>
-[88]
+[86]
 File: images/comfortSia180ThermCmf.png Graphic file (type bmp)
 <images/comfortSia180ThermCmf.png>
 File: edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf Graphic file (type p
@@ -1119,7 +1116,7 @@ df)
 File: edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf Graphic file (type p
 df)
 <use edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf>
-[89] [90]
+[87] [88]
 Underfull \vbox (badness 10000) detected at line 2628
  []
 
@@ -1127,7 +1124,7 @@ Underfull \vbox (badness 10000) detected at line 2628
 Underfull \vbox (badness 10000) detected at line 2628
  []
 
-[91]
+[89]
 Underfull \vbox (badness 10000) detected at line 2628
  []
 
@@ -1135,45 +1132,61 @@ Underfull \vbox (badness 10000) detected at line 2628
 Underfull \vbox (badness 10000) detected at line 2628
  []
 
-[92]
+[90]
 File: edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf Graphic file (type p
 df)
 <use edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[93] [94]
+[91] [92]
 Chapter 13.
-[95
+[93
 
 ]
 File: images/boxplot.png Graphic file (type bmp)
 <images/boxplot.png>
 File: edar_files/figure-latex/boxplot0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/boxplot0-1.pdf>
-[96] [97]
+[94] [95]
 File: edar_files/figure-latex/boxplot2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/boxplot2-1.pdf>
-[98]
+[96]
 File: images/crossCorrelation.png Graphic file (type bmp)
 <images/crossCorrelation.png>
 File: edar_files/figure-latex/crossCorrelation0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/crossCorrelation0-1.pdf>
 File: edar_files/figure-latex/crossCorrelation0-2.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/crossCorrelation0-2.pdf>
-[99] [100]
+[97] [98]
 File: edar_files/figure-latex/crossCorrelation2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/crossCorrelation2-1.pdf>
-[101]
+[99]
 File: edar_files/figure-latex/crossCorrelation2-2.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/crossCorrelation2-2.pdf>
-[102]
+[100]
 File: images/eleHousehold.png Graphic file (type bmp)
 <images/eleHousehold.png>
 File: edar_files/figure-latex/eleHousehold10-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/eleHousehold10-1.pdf>
-[103]
+[101]
 Overfull \vbox (1.59328pt too high) detected at line 3247
+ []
+
+[102]
+Underfull \vbox (badness 10000) detected at line 3247
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3247
+ []
+
+[103]
+Underfull \vbox (badness 10000) detected at line 3247
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3247
  []
 
 [104]
@@ -1201,37 +1214,21 @@ Underfull \vbox (badness 10000) detected at line 3247
  []
 
 [107]
-Underfull \vbox (badness 10000) detected at line 3247
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3247
- []
-
-[108]
-Underfull \vbox (badness 10000) detected at line 3247
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3247
- []
-
-[109]
 File: edar_files/figure-latex/eleHousehold1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/eleHousehold1-1.pdf>
 
 Underfull \vbox (badness 7468) has occurred while \output is active []
 
-[110] [111]
+[108] [109]
 File: images/roomTempRed.png Graphic file (type bmp)
 <images/roomTempRed.png>
 File: edar_files/figure-latex/roomTempRed0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/roomTempRed0-1.pdf>
-[112]
+[110]
 Overfull \vbox (1.54527pt too high) detected at line 3401
  []
 
-[113]
+[111]
 Underfull \vbox (badness 10000) detected at line 3401
  []
 
@@ -1239,40 +1236,40 @@ Underfull \vbox (badness 10000) detected at line 3401
 Underfull \vbox (badness 10000) detected at line 3401
  []
 
-[114]
+[112]
 File: edar_files/figure-latex/roomTempRed1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/roomTempRed1-1.pdf>
-[115]
+[113]
 File: images/plotBldgEngySigScatter.png Graphic file (type bmp)
 <images/plotBldgEngySigScatter.png>
 File: edar_files/figure-latex/energysignature0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature0-1.pdf>
 File: edar_files/figure-latex/energysignature1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature1-1.pdf>
-[116] [117] [118]
+[114] [115] [116]
 File: edar_files/figure-latex/energysignature2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature2-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[119] [120]
+[117] [118]
 Appendix A.
-[121
+[119
 
 ]
 File: images/a2-installPackagesRStudio.png Graphic file (type bmp)
 <images/a2-installPackagesRStudio.png>
-[122] [123] (./edar.aux)
+[120] [121] (./edar.aux)
 Package rerunfilecheck Info: File `edar.out' has not changed.
 (rerunfilecheck)             Checksum: 4CEF6D6AD3FC41F46DCCFA590C591D36;6896.
  ) 
 Here is how much of TeX's memory you used:
  17762 strings out of 479393
  323117 string characters out of 5877705
- 835456 words of memory out of 5000000
+ 835451 words of memory out of 5000000
  36843 multiletter control sequences out of 15000+600000
  541579 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  94i,6n,118p,585b,436s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on edar.pdf (123 pages).
+Output written on edar.pdf (121 pages).

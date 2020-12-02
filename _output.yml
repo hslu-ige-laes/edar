@@ -19,4 +19,3 @@ bookdown::pdf_book:
   citation_package: natbib
   keep_tex: yes
   toc_depth: 2
-bookdown::epub_book: default
