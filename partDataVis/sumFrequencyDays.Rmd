@@ -1,0 +1,109 @@
+\newpage
+## Sum Frequency Days
+### Goal
+You want to create a sum frequency plot of a temperature series for each day in a year:
+
+```{r echo=FALSE, fig.cap='Sum Frequency Plot Temperature Days', out.width='70%'}
+knitr::include_graphics("images/plotSumFrequencyDays.png")
+```
+
+### Data Basis
+
+```{r sumfrequencydays0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Outside Temperature Raw Data for Building Energy Signature Plot', out.width = "70%"}
+library(dplyr)
+library(lubridate)
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "Europe/Zurich")
+
+# plot data
+plot(df$time, df$centralOutsideTemp,
+     xlab="Time",
+     ylab="Outside Temperature (degree Celsius)",
+     main="Outside Temperature Raw Data",
+     type = "l")
+```
+
+\newpage
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r sumfrequencydays2, warning=FALSE, message=FALSE, collapse = FALSE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(lubridate)
+library(zoo)
+library(mgcv)
+
+# load time series data and aggregate daily mean values
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "Europe/Zurich")
+
+# rename columns
+colnames(df) <- c("time", "value")
+
+df$day <- as.Date(cut(df$time, breaks = "day"))
+df$year <- year(df$time)
+
+# filter year
+
+# edit year!!!
+filterYear <- "2019"
+
+df <- filter(df, year == filterYear)
+
+df <- df %>% 
+  group_by(day) %>%
+  summarise(meanValue = mean(value, na.rm = TRUE)) %>% 
+  ungroup()
+
+# Fill missing values with NA
+grid.df <- data.frame(day = seq(as.Date(paste0(filterYear, "-01-01")),
+                                as.Date(paste0(filterYear, "-12-31")),
+                                 by = "days"))
+df <- merge(df, grid.df, all = TRUE)
+
+# replace NA with interpolation
+df$meanValue <- na.approx(df$meanValue)
+
+tempMin <- floor(min(df$meanValue, na.rm = TRUE))
+tempMax <- ceiling(max(df$meanValue, na.rm = TRUE))
+
+# create new data frame with sorted values
+data <- data.frame(sort(df$meanValue))
+data$day <- as.numeric(row.names(data))
+colnames(data) <- c("meanValue", "day")
+
+# static chart with ggplot
+plot <- ggplot2::ggplot(data) +
+  ggplot2::geom_point(aes(x = day,
+                          y = meanValue),
+                      colour = "orange",
+                      alpha = 0.8,
+                      size = 0.5
+                      ) +
+  ggtitle("Sum Frequency Plot for each Day in a Year") +
+  ylab("Mean Temperature (\u00B0C)\n") +
+  xlab("\nFrequency (days)") +
+  theme_minimal() +
+  scale_x_continuous(breaks = append(seq(0, 365, 25), 365)) +
+  scale_y_continuous(breaks = seq(tempMin, tempMax, 2))
+
+# interactive chart
+plotly::ggplotly(plot)
+```
+
+```{r sumfrequencydays3, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png
+ggsave("images/plotSumFrequencyDays.png", plot)
+```
+

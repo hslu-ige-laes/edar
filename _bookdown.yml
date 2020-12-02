@@ -39,6 +39,9 @@ rmd_files: [
 
   "partDataVis/misc.Rmd",
   "partDataVis/boxplot.Rmd",
+  "partDataVis/densityplot.Rmd",
+  "partDataVis/sumFrequencyDays.Rmd",
+  "partDataVis/sumFrequencyHours.Rmd",
   "partDataVis/crossCorrelation.Rmd",
   "partDataVis/eleHousehold.Rmd",
   "partDataVis/roomTempRed.Rmd",

@@ -1880,7 +1880,7 @@ Some findings:
 \hypertarget{goal-7}{%
 \subsection{Goal}\label{goal-7}}
 
-Create an energy consumption heat map of a typical weeks depending on the season of the year:
+Create an energy consumption heat map of a median week depending on the season of the year:
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-16}
@@ -2378,14 +2378,6 @@ Create a new script, copy/paste the following code and run it:
 
 \includegraphics{edar_files/figure-latex/mollierhx1-1.pdf}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png (optional)}
-\KeywordTok{library}\NormalTok{(r2d3)}
-\KeywordTok{save_d3_png}\NormalTok{(plot, }\StringTok{"images/comfortMollierHx.png"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
 \hypertarget{see-also}{%
 \subsection{See also}\label{see-also}}
 
@@ -2733,20 +2725,315 @@ Create a new script, copy/paste the following code and run it:
 
 \newpage
 
-\hypertarget{cross-correlation}{%
-\section{Cross-Correlation}\label{cross-correlation}}
+\hypertarget{density-plot}{%
+\section{Density Plot}\label{density-plot}}
 
 \hypertarget{goal-15}{%
 \subsection{Goal}\label{goal-15}}
 
-You want to create a cross-correlation plot:
+You want to create a density plot of a temperature series with the mean value as vertical line:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-25}
+\includegraphics[width=0.7\linewidth]{images/plotDensity} \caption{Density Plot Temperature}\label{fig:unnamed-chunk-25}
 \end{figure}
 
 \hypertarget{data-basis-15}{%
 \subsection{Data Basis}\label{data-basis-15}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/densityplot0-1} \caption{Raw Data Temperature for Density Plot}\label{fig:densityplot0}
+\end{figure}
+\newpage
+
+\hypertarget{solution-15}{%
+\subsection{Solution}\label{solution-15}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\CommentTok{# read and print data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# select temperature and remove empty cells}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
+
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_density}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)),}
+             \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
+             \DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}
+             \DataTypeTok{size =} \DecValTok{1}\NormalTok{,}
+             \DataTypeTok{label =} \StringTok{"Mean"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Density Plot of Room Temperature"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"Temperature (\textbackslash{}u00B0C)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Density (-)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
+
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/densityplot2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDensity.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{sum-frequency-days}{%
+\section{Sum Frequency Days}\label{sum-frequency-days}}
+
+\hypertarget{goal-16}{%
+\subsection{Goal}\label{goal-16}}
+
+You want to create a sum frequency plot of a temperature series for each day in a year:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyDays} \caption{Sum Frequency Plot Temperature Days}\label{fig:unnamed-chunk-26}
+\end{figure}
+
+\hypertarget{data-basis-16}{%
+\subsection{Data Basis}\label{data-basis-16}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencydays0-1} \caption{Outside Temperature Raw Data for Building Energy Signature Plot}\label{fig:sumfrequencydays0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-16}{%
+\subsection{Solution}\label{solution-16}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(zoo)}
+\KeywordTok{library}\NormalTok{(mgcv)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
+                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# rename columns}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
+
+\CommentTok{# filter year}
+
+\CommentTok{# edit year!!!}
+\NormalTok{filterYear <-}\StringTok{ "2019"}
+
+\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{day =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01"}\NormalTok{)),}
+                                \KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31"}\NormalTok{)),}
+                                 \DataTypeTok{by =} \StringTok{"days"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# replace NA with interpolation}
+\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
+
+\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\CommentTok{# create new data frame with sorted values}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
+\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"day"}\NormalTok{)}
+
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ day,}
+                          \DataTypeTok{y =}\NormalTok{ meanValue),}
+                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
+                      \DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{,}
+                      \DataTypeTok{size =} \FloatTok{0.5}
+\NormalTok{                      ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Day in a Year"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (days)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{365}\NormalTok{, }\DecValTok{25}\NormalTok{), }\DecValTok{365}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/sumfrequencydays2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyDays.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{sum-frequency-hours}{%
+\section{Sum Frequency Hours}\label{sum-frequency-hours}}
+
+\hypertarget{goal-17}{%
+\subsection{Goal}\label{goal-17}}
+
+You want to create a sum frequency plot of a temperature series for each hour in a year:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyHour} \caption{Sum Frequency Plot Temperature}\label{fig:unnamed-chunk-27}
+\end{figure}
+
+\hypertarget{data-basis-17}{%
+\subsection{Data Basis}\label{data-basis-17}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencyhour0-1} \caption{Outside Temperature Raw Data for Building Energy Signature Plot}\label{fig:sumfrequencyhour0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-17}{%
+\subsection{Solution}\label{solution-17}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(zoo)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
+                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# rename columns}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"hour"}\NormalTok{), }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
+
+\CommentTok{# filter year}
+
+\CommentTok{# edit year!!!}
+\NormalTok{filterYear <-}\StringTok{ "2019"}
+
+\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(hour) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{hour =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01 00:00:00"}\NormalTok{),}
+                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
+                                 \KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31 23:00:00"}\NormalTok{),}
+                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
+                                 \DataTypeTok{by =} \StringTok{"hours"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# replace NA with interpolation}
+\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
+
+\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\CommentTok{# create new data frame with sorted values}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
+\NormalTok{data}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"hour"}\NormalTok{)}
+
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ hour,}
+                          \DataTypeTok{y =}\NormalTok{ meanValue),}
+                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
+                      \DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{,}
+                      \DataTypeTok{size =} \FloatTok{0.5}
+\NormalTok{                      ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Hour in a Year"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (hours)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{8760}\NormalTok{, }\DecValTok{1000}\NormalTok{), }\DecValTok{8760}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/sumfrequencyhour2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyHour.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{cross-correlation}{%
+\section{Cross-Correlation}\label{cross-correlation}}
+
+\hypertarget{goal-18}{%
+\subsection{Goal}\label{goal-18}}
+
+You want to create a cross-correlation plot:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-28}
+\end{figure}
+
+\hypertarget{data-basis-18}{%
+\subsection{Data Basis}\label{data-basis-18}}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{edar_files/figure-latex/crossCorrelation0-1} \caption{Raw Data Room and Outdoor Temperature for Cross Correlation Plot}\label{fig:crossCorrelation0-1}
@@ -2757,8 +3044,8 @@ You want to create a cross-correlation plot:
 
 \newpage
 
-\hypertarget{solution-15}{%
-\subsection{Solution}\label{solution-15}}
+\hypertarget{solution-18}{%
+\subsection{Solution}\label{solution-18}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2859,8 +3146,8 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{electricity-household}{%
 \section{Electricity Household}\label{electricity-household}}
 
-\hypertarget{goal-16}{%
-\subsection{Goal}\label{goal-16}}
+\hypertarget{goal-19}{%
+\subsection{Goal}\label{goal-19}}
 
 You want to plot an electricity consumption diagram with:
 
@@ -2875,11 +3162,11 @@ You want to plot an electricity consumption diagram with:
 Additionaly we would like to see the consumption of an average Swiss household.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-26}
+\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-29}
 \end{figure}
 
-\hypertarget{data-basis-16}{%
-\subsection{Data Basis}\label{data-basis-16}}
+\hypertarget{data-basis-19}{%
+\subsection{Data Basis}\label{data-basis-19}}
 
 \begin{itemize}
 \tightlist
@@ -2893,8 +3180,8 @@ Additionaly we would like to see the consumption of an average Swiss household.
 
 \newpage
 
-\hypertarget{solution-16}{%
-\subsection{Solution}\label{solution-16}}
+\hypertarget{solution-19}{%
+\subsection{Solution}\label{solution-19}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -3260,8 +3547,8 @@ You can find the implementation in \href{https://smogdr.github.io/edar_courseboo
 \hypertarget{room-temperature-reduction}{%
 \section{Room Temperature Reduction}\label{room-temperature-reduction}}
 
-\hypertarget{goal-17}{%
-\subsection{Goal}\label{goal-17}}
+\hypertarget{goal-20}{%
+\subsection{Goal}\label{goal-20}}
 
 As part of an energy optimization, you lower the room temperatures in a room and would now like to show the reduction effect using the time series of the room temperature sensor. In the example below you make two optimizations at different dates.
 
@@ -3277,11 +3564,11 @@ You want to create a time series plot with:
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-27}
+\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-30}
 \end{figure}
 
-\hypertarget{data-basis-17}{%
-\subsection{Data Basis}\label{data-basis-17}}
+\hypertarget{data-basis-20}{%
+\subsection{Data Basis}\label{data-basis-20}}
 
 \begin{itemize}
 \tightlist
@@ -3295,8 +3582,8 @@ You want to create a time series plot with:
 
 \newpage
 
-\hypertarget{solution-17}{%
-\subsection{Solution}\label{solution-17}}
+\hypertarget{solution-20}{%
+\subsection{Solution}\label{solution-20}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -3414,8 +3701,8 @@ Please note that the calculation of the periodic median after optimization I and
 \hypertarget{building-energy-signature}{%
 \section{Building Energy Signature}\label{building-energy-signature}}
 
-\hypertarget{goal-18}{%
-\subsection{Goal}\label{goal-18}}
+\hypertarget{goal-21}{%
+\subsection{Goal}\label{goal-21}}
 
 You want to create a scatter plot with:
 
@@ -3429,11 +3716,11 @@ You want to create a scatter plot with:
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-28}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-31}
 \end{figure}
 
-\hypertarget{data-basis-18}{%
-\subsection{Data Basis}\label{data-basis-18}}
+\hypertarget{data-basis-21}{%
+\subsection{Data Basis}\label{data-basis-21}}
 
 Two separate csv files with time series data from the outside temperature and the energy data with unaligned time intervals:
 
@@ -3449,8 +3736,8 @@ Two separate csv files with time series data from the outside temperature and th
 
 \newpage
 
-\hypertarget{solution-18}{%
-\subsection{Solution}\label{solution-18}}
+\hypertarget{solution-21}{%
+\subsection{Solution}\label{solution-21}}
 
 After reading in the two time series the data has to get aggregated per day and then merged. Note that during the aggregation of the energy data you have to calculate the daily conspumption from the steadiliy increasing meter values as well.
 

@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>13.2 Cross-Correlation | Energy Data Analysis with R</title>
+  <title>13.5 Cross-Correlation | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="13.2 Cross-Correlation | Energy Data Analysis with R" />
+  <meta property="og:title" content="13.5 Cross-Correlation | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="13.2 Cross-Correlation | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="13.5 Cross-Correlation | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -31,7 +31,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="boxplot.html"/>
+<link rel="prev" href="sum-frequency-hours.html"/>
 <link rel="next" href="electricity-household.html"/>
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
@@ -290,28 +290,43 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="13.1.2" data-path="boxplot.html"><a href="boxplot.html#data-basis-14"><i class="fa fa-check"></i><b>13.1.2</b> Data Basis</a></li>
 <li class="chapter" data-level="13.1.3" data-path="boxplot.html"><a href="boxplot.html#solution-14"><i class="fa fa-check"></i><b>13.1.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="cross-correlation.html"><a href="cross-correlation.html"><i class="fa fa-check"></i><b>13.2</b> Cross-Correlation</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="cross-correlation.html"><a href="cross-correlation.html#goal-15"><i class="fa fa-check"></i><b>13.2.1</b> Goal</a></li>
-<li class="chapter" data-level="13.2.2" data-path="cross-correlation.html"><a href="cross-correlation.html#data-basis-15"><i class="fa fa-check"></i><b>13.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.2.3" data-path="cross-correlation.html"><a href="cross-correlation.html#solution-15"><i class="fa fa-check"></i><b>13.2.3</b> Solution</a></li>
+<li class="chapter" data-level="13.2" data-path="density-plot.html"><a href="density-plot.html"><i class="fa fa-check"></i><b>13.2</b> Density Plot</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="density-plot.html"><a href="density-plot.html#goal-15"><i class="fa fa-check"></i><b>13.2.1</b> Goal</a></li>
+<li class="chapter" data-level="13.2.2" data-path="density-plot.html"><a href="density-plot.html#data-basis-15"><i class="fa fa-check"></i><b>13.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.2.3" data-path="density-plot.html"><a href="density-plot.html#solution-15"><i class="fa fa-check"></i><b>13.2.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="13.3" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>13.3</b> Electricity Household</a><ul>
-<li class="chapter" data-level="13.3.1" data-path="electricity-household.html"><a href="electricity-household.html#goal-16"><i class="fa fa-check"></i><b>13.3.1</b> Goal</a></li>
-<li class="chapter" data-level="13.3.2" data-path="electricity-household.html"><a href="electricity-household.html#data-basis-16"><i class="fa fa-check"></i><b>13.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.3.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-16"><i class="fa fa-check"></i><b>13.3.3</b> Solution</a></li>
-<li class="chapter" data-level="13.3.4" data-path="electricity-household.html"><a href="electricity-household.html#see-also-1"><i class="fa fa-check"></i><b>13.3.4</b> See also</a></li>
+<li class="chapter" data-level="13.3" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html"><i class="fa fa-check"></i><b>13.3</b> Sum Frequency Days</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#goal-16"><i class="fa fa-check"></i><b>13.3.1</b> Goal</a></li>
+<li class="chapter" data-level="13.3.2" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#data-basis-16"><i class="fa fa-check"></i><b>13.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.3.3" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#solution-16"><i class="fa fa-check"></i><b>13.3.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="13.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>13.4</b> Room Temperature Reduction</a><ul>
-<li class="chapter" data-level="13.4.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#goal-17"><i class="fa fa-check"></i><b>13.4.1</b> Goal</a></li>
-<li class="chapter" data-level="13.4.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#data-basis-17"><i class="fa fa-check"></i><b>13.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.4.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-17"><i class="fa fa-check"></i><b>13.4.3</b> Solution</a></li>
-<li class="chapter" data-level="13.4.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-7"><i class="fa fa-check"></i><b>13.4.4</b> Discussion</a></li>
+<li class="chapter" data-level="13.4" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html"><i class="fa fa-check"></i><b>13.4</b> Sum Frequency Hours</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#goal-17"><i class="fa fa-check"></i><b>13.4.1</b> Goal</a></li>
+<li class="chapter" data-level="13.4.2" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#data-basis-17"><i class="fa fa-check"></i><b>13.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.4.3" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#solution-17"><i class="fa fa-check"></i><b>13.4.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="13.5" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>13.5</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="13.5.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#goal-18"><i class="fa fa-check"></i><b>13.5.1</b> Goal</a></li>
-<li class="chapter" data-level="13.5.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#data-basis-18"><i class="fa fa-check"></i><b>13.5.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.5.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-18"><i class="fa fa-check"></i><b>13.5.3</b> Solution</a></li>
-<li class="chapter" data-level="13.5.4" data-path="building-energy-signature.html"><a href="building-energy-signature.html#discussion-8"><i class="fa fa-check"></i><b>13.5.4</b> Discussion</a></li>
+<li class="chapter" data-level="13.5" data-path="cross-correlation.html"><a href="cross-correlation.html"><i class="fa fa-check"></i><b>13.5</b> Cross-Correlation</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="cross-correlation.html"><a href="cross-correlation.html#goal-18"><i class="fa fa-check"></i><b>13.5.1</b> Goal</a></li>
+<li class="chapter" data-level="13.5.2" data-path="cross-correlation.html"><a href="cross-correlation.html#data-basis-18"><i class="fa fa-check"></i><b>13.5.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.5.3" data-path="cross-correlation.html"><a href="cross-correlation.html#solution-18"><i class="fa fa-check"></i><b>13.5.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>13.6</b> Electricity Household</a><ul>
+<li class="chapter" data-level="13.6.1" data-path="electricity-household.html"><a href="electricity-household.html#goal-19"><i class="fa fa-check"></i><b>13.6.1</b> Goal</a></li>
+<li class="chapter" data-level="13.6.2" data-path="electricity-household.html"><a href="electricity-household.html#data-basis-19"><i class="fa fa-check"></i><b>13.6.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.6.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-19"><i class="fa fa-check"></i><b>13.6.3</b> Solution</a></li>
+<li class="chapter" data-level="13.6.4" data-path="electricity-household.html"><a href="electricity-household.html#see-also-1"><i class="fa fa-check"></i><b>13.6.4</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="13.7" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>13.7</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="13.7.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#goal-20"><i class="fa fa-check"></i><b>13.7.1</b> Goal</a></li>
+<li class="chapter" data-level="13.7.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#data-basis-20"><i class="fa fa-check"></i><b>13.7.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.7.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-20"><i class="fa fa-check"></i><b>13.7.3</b> Solution</a></li>
+<li class="chapter" data-level="13.7.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-7"><i class="fa fa-check"></i><b>13.7.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="13.8" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>13.8</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="13.8.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#goal-21"><i class="fa fa-check"></i><b>13.8.1</b> Goal</a></li>
+<li class="chapter" data-level="13.8.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#data-basis-21"><i class="fa fa-check"></i><b>13.8.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.8.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-21"><i class="fa fa-check"></i><b>13.8.3</b> Solution</a></li>
+<li class="chapter" data-level="13.8.4" data-path="building-energy-signature.html"><a href="building-energy-signature.html#discussion-8"><i class="fa fa-check"></i><b>13.8.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -341,112 +356,112 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="cross-correlation" class="section level2">
-<h2><span class="header-section-number">13.2</span> Cross-Correlation</h2>
-<div id="goal-15" class="section level3">
-<h3><span class="header-section-number">13.2.1</span> Goal</h3>
+<h2><span class="header-section-number">13.5</span> Cross-Correlation</h2>
+<div id="goal-18" class="section level3">
+<h3><span class="header-section-number">13.5.1</span> Goal</h3>
 <p>You want to create a cross-correlation plot:</p>
-<div class="figure"><span id="fig:unnamed-chunk-25"></span>
+<div class="figure"><span id="fig:unnamed-chunk-28"></span>
 <img src="images/crossCorrelation.png" alt="Building Energy Signature Plot" width="70%" />
 <p class="caption">
-Figure 13.3: Building Energy Signature Plot
+Figure 13.9: Building Energy Signature Plot
 </p>
 </div>
 </div>
-<div id="data-basis-15" class="section level3">
-<h3><span class="header-section-number">13.2.2</span> Data Basis</h3>
+<div id="data-basis-18" class="section level3">
+<h3><span class="header-section-number">13.5.2</span> Data Basis</h3>
 <div class="figure"><span id="fig:crossCorrelation0-1"></span>
 <img src="edar_files/figure-html/crossCorrelation0-1.png" alt="Raw Data Room and Outdoor Temperature for Cross Correlation Plot" width="70%" />
 <p class="caption">
-Figure 13.4: Raw Data Room and Outdoor Temperature for Cross Correlation Plot
+Figure 13.10: Raw Data Room and Outdoor Temperature for Cross Correlation Plot
 </p>
 </div>
 <div class="figure"><span id="fig:crossCorrelation0-2"></span>
 <img src="edar_files/figure-html/crossCorrelation0-2.png" alt="Raw Data Room and Outdoor Temperature for Cross Correlation Plot" width="70%" />
 <p class="caption">
-Figure 13.5: Raw Data Room and Outdoor Temperature for Cross Correlation Plot
+Figure 13.11: Raw Data Room and Outdoor Temperature for Cross Correlation Plot
 </p>
 </div>
 <div style="page-break-after: always;"></div>
 </div>
-<div id="solution-15" class="section level3">
-<h3><span class="header-section-number">13.2.3</span> Solution</h3>
+<div id="solution-18" class="section level3">
+<h3><span class="header-section-number">13.5.3</span> Solution</h3>
 <p>Create a new script, copy/paste the following code and run it:</p>
-<div class="sourceCode" id="cb85"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb85-1" title="1"><span class="kw">library</span>(redutils)</a>
-<a class="sourceLine" id="cb85-2" title="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb85-3" title="3"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb85-4" title="4"><span class="kw">library</span>(zoo)</a>
-<a class="sourceLine" id="cb85-5" title="5"><span class="kw">library</span>(plotly)</a>
-<a class="sourceLine" id="cb85-6" title="6"><span class="kw">library</span>(forecast)</a>
-<a class="sourceLine" id="cb85-7" title="7"></a>
-<a class="sourceLine" id="cb85-8" title="8"><span class="co"># load time series data and aggregate mean values</span></a>
-<a class="sourceLine" id="cb85-9" title="9">dfTempOa &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb85-10" title="10">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb85-11" title="11">                          <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb85-12" title="12"></a>
-<a class="sourceLine" id="cb85-13" title="13">dfTempOa<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfTempOa<span class="op">$</span>time,</a>
-<a class="sourceLine" id="cb85-14" title="14">                                      <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
-<a class="sourceLine" id="cb85-15" title="15">                                      <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)</a>
-<a class="sourceLine" id="cb85-16" title="16"></a>
-<a class="sourceLine" id="cb85-17" title="17">dfTempOa<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">cut</span>(dfTempOa<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;days&quot;</span>)</a>
-<a class="sourceLine" id="cb85-18" title="18"></a>
-<a class="sourceLine" id="cb85-19" title="19">dfTempOa &lt;-<span class="st"> </span>dfTempOa <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-20" title="20"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-21" title="21"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tempOa =</span> <span class="kw">mean</span>(centralOutsideTemp)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-22" title="22"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-23" title="23"><span class="st">  </span><span class="kw">select</span>(day, tempOa) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-24" title="24"><span class="st">  </span><span class="kw">unique</span>()</a>
-<a class="sourceLine" id="cb85-25" title="25"></a>
-<a class="sourceLine" id="cb85-26" title="26">dfTempR &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb85-27" title="27">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb85-28" title="28">                       <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb85-29" title="29"></a>
-<a class="sourceLine" id="cb85-30" title="30">dfTempR<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfTempR<span class="op">$</span>time,</a>
-<a class="sourceLine" id="cb85-31" title="31">                                   <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
-<a class="sourceLine" id="cb85-32" title="32">                                   <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)</a>
-<a class="sourceLine" id="cb85-33" title="33"></a>
-<a class="sourceLine" id="cb85-34" title="34"><span class="co"># select temperature and humidity and remove empty cells</span></a>
-<a class="sourceLine" id="cb85-35" title="35">dfTempR &lt;-<span class="st"> </span>dfTempR <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb85-36" title="36"></a>
-<a class="sourceLine" id="cb85-37" title="37">dfTempR<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">cut</span>(dfTempR<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;days&quot;</span>)</a>
-<a class="sourceLine" id="cb85-38" title="38"></a>
-<a class="sourceLine" id="cb85-39" title="39">dfTempR &lt;-<span class="st"> </span>dfTempR <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tempR =</span> <span class="kw">mean</span>(FlatA_Temp)) <span class="op">%&gt;%</span></a>
-<a class="sourceLine" id="cb85-42" title="42"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-43" title="43"><span class="st">  </span><span class="kw">select</span>(day, tempR) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-44" title="44"><span class="st">  </span><span class="kw">unique</span>()</a>
-<a class="sourceLine" id="cb85-45" title="45"></a>
-<a class="sourceLine" id="cb85-46" title="46">data &lt;-<span class="st"> </span><span class="kw">merge</span>(dfTempR, dfTempOa, <span class="dt">all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb85-47" title="47"></a>
-<a class="sourceLine" id="cb85-48" title="48">data<span class="op">$</span>season &lt;-<span class="st"> </span>redutils<span class="op">::</span><span class="kw">getSeason</span>(data<span class="op">$</span>day)</a>
-<a class="sourceLine" id="cb85-49" title="49"></a>
-<a class="sourceLine" id="cb85-50" title="50">test &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb85-51" title="51"><span class="st">  </span><span class="kw">filter</span>(season <span class="op">==</span><span class="st"> &quot;Summer&quot;</span>)</a>
-<a class="sourceLine" id="cb85-52" title="52"></a>
-<a class="sourceLine" id="cb85-53" title="53"><span class="co"># plot the cross correlation</span></a>
-<a class="sourceLine" id="cb85-54" title="54"><span class="co"># ccf(test$tempOa, test$tempR, test$season)</span></a>
-<a class="sourceLine" id="cb85-55" title="55"></a>
-<a class="sourceLine" id="cb85-56" title="56"><span class="co"># plot(data)</span></a>
-<a class="sourceLine" id="cb85-57" title="57"><span class="kw">plot</span>(</a>
-<a class="sourceLine" id="cb85-58" title="58">  test<span class="op">$</span>tempOa,</a>
-<a class="sourceLine" id="cb85-59" title="59">  test<span class="op">$</span>tempR)</a></code></pre></div>
+<div class="sourceCode" id="cb90"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb90-1" title="1"><span class="kw">library</span>(redutils)</a>
+<a class="sourceLine" id="cb90-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb90-3" title="3"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb90-4" title="4"><span class="kw">library</span>(zoo)</a>
+<a class="sourceLine" id="cb90-5" title="5"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb90-6" title="6"><span class="kw">library</span>(forecast)</a>
+<a class="sourceLine" id="cb90-7" title="7"></a>
+<a class="sourceLine" id="cb90-8" title="8"><span class="co"># load time series data and aggregate mean values</span></a>
+<a class="sourceLine" id="cb90-9" title="9">dfTempOa &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb90-10" title="10">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb90-11" title="11">                          <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb90-12" title="12"></a>
+<a class="sourceLine" id="cb90-13" title="13">dfTempOa<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfTempOa<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb90-14" title="14">                                      <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb90-15" title="15">                                      <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)</a>
+<a class="sourceLine" id="cb90-16" title="16"></a>
+<a class="sourceLine" id="cb90-17" title="17">dfTempOa<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">cut</span>(dfTempOa<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;days&quot;</span>)</a>
+<a class="sourceLine" id="cb90-18" title="18"></a>
+<a class="sourceLine" id="cb90-19" title="19">dfTempOa &lt;-<span class="st"> </span>dfTempOa <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-20" title="20"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-21" title="21"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tempOa =</span> <span class="kw">mean</span>(centralOutsideTemp)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-22" title="22"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-23" title="23"><span class="st">  </span><span class="kw">select</span>(day, tempOa) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-24" title="24"><span class="st">  </span><span class="kw">unique</span>()</a>
+<a class="sourceLine" id="cb90-25" title="25"></a>
+<a class="sourceLine" id="cb90-26" title="26">dfTempR &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb90-27" title="27">                       <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb90-28" title="28">                       <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb90-29" title="29"></a>
+<a class="sourceLine" id="cb90-30" title="30">dfTempR<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfTempR<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb90-31" title="31">                                   <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb90-32" title="32">                                   <span class="dt">tz =</span> <span class="st">&quot;UTC&quot;</span>)</a>
+<a class="sourceLine" id="cb90-33" title="33"></a>
+<a class="sourceLine" id="cb90-34" title="34"><span class="co"># select temperature and humidity and remove empty cells</span></a>
+<a class="sourceLine" id="cb90-35" title="35">dfTempR &lt;-<span class="st"> </span>dfTempR <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(time, FlatA_Temp) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb90-36" title="36"></a>
+<a class="sourceLine" id="cb90-37" title="37">dfTempR<span class="op">$</span>day &lt;-<span class="st"> </span><span class="kw">cut</span>(dfTempR<span class="op">$</span>time, <span class="dt">breaks =</span> <span class="st">&quot;days&quot;</span>)</a>
+<a class="sourceLine" id="cb90-38" title="38"></a>
+<a class="sourceLine" id="cb90-39" title="39">dfTempR &lt;-<span class="st"> </span>dfTempR <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-40" title="40"><span class="st">  </span><span class="kw">group_by</span>(day) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-41" title="41"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">tempR =</span> <span class="kw">mean</span>(FlatA_Temp)) <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb90-42" title="42"><span class="st">  </span><span class="kw">ungroup</span>() <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-43" title="43"><span class="st">  </span><span class="kw">select</span>(day, tempR) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-44" title="44"><span class="st">  </span><span class="kw">unique</span>()</a>
+<a class="sourceLine" id="cb90-45" title="45"></a>
+<a class="sourceLine" id="cb90-46" title="46">data &lt;-<span class="st"> </span><span class="kw">merge</span>(dfTempR, dfTempOa, <span class="dt">all =</span> <span class="ot">TRUE</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">unique</span>() <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb90-47" title="47"></a>
+<a class="sourceLine" id="cb90-48" title="48">data<span class="op">$</span>season &lt;-<span class="st"> </span>redutils<span class="op">::</span><span class="kw">getSeason</span>(data<span class="op">$</span>day)</a>
+<a class="sourceLine" id="cb90-49" title="49"></a>
+<a class="sourceLine" id="cb90-50" title="50">test &lt;-<span class="st"> </span>data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb90-51" title="51"><span class="st">  </span><span class="kw">filter</span>(season <span class="op">==</span><span class="st"> &quot;Summer&quot;</span>)</a>
+<a class="sourceLine" id="cb90-52" title="52"></a>
+<a class="sourceLine" id="cb90-53" title="53"><span class="co"># plot the cross correlation</span></a>
+<a class="sourceLine" id="cb90-54" title="54"><span class="co"># ccf(test$tempOa, test$tempR, test$season)</span></a>
+<a class="sourceLine" id="cb90-55" title="55"></a>
+<a class="sourceLine" id="cb90-56" title="56"><span class="co"># plot(data)</span></a>
+<a class="sourceLine" id="cb90-57" title="57"><span class="kw">plot</span>(</a>
+<a class="sourceLine" id="cb90-58" title="58">  test<span class="op">$</span>tempOa,</a>
+<a class="sourceLine" id="cb90-59" title="59">  test<span class="op">$</span>tempR)</a></code></pre></div>
 <p><img src="edar_files/figure-html/crossCorrelation2-1.png" width="672" /></p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="co"># plot diagram</span></a>
-<a class="sourceLine" id="cb86-2" title="2">plot &lt;-<span class="st"> </span><span class="kw">ggCcf</span>(test<span class="op">$</span>tempOa,</a>
-<a class="sourceLine" id="cb86-3" title="3">              test<span class="op">$</span>tempR,</a>
-<a class="sourceLine" id="cb86-4" title="4">              <span class="dt">lag.max =</span> <span class="dv">7</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-5" title="5"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb86-6" title="6"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">0</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">7</span>,<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.2</span>)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb86-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Cross Correlation between </span><span class="ch">\n</span><span class="st"> Indoor and Outdoor Temperature in Summer&quot;</span>,</a>
-<a class="sourceLine" id="cb86-9" title="9">        <span class="dt">x =</span><span class="st">&quot;Days (Lag)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Correlation&quot;</span>)</a>
-<a class="sourceLine" id="cb86-10" title="10"></a>
-<a class="sourceLine" id="cb86-11" title="11"><span class="co"># make plot interactive (optional)</span></a>
-<a class="sourceLine" id="cb86-12" title="12"><span class="kw">ggplotly</span>(plot)</a></code></pre></div>
-<div id="htmlwidget-deea55f2725f90c983fb" style="width:672px;height:480px;" class="plotly html-widget"></div>
-<script type="application/json" data-for="htmlwidget-deea55f2725f90c983fb">{"x":{"data":[{"x":[-7.35,0.35],"y":[0,0],"text":"yintercept: 0","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-7,-7,null,-6,-6,null,-5,-5,null,-4,-4,null,-3,-3,null,-2,-2,null,-1,-1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"y":[0,0.325755704906267,null,0,0.386028234381026,null,0,0.453798812440513,null,0,0.516415450205332,null,0,0.577226424429824,null,0,0.625400614245626,null,0,0.669253549085949,null,0,0.397407886186816,null,0,0.288031641208388,null,0,0.224994007490292,null,0,0.208653554316442,null,0,0.204671916984081,null,0,0.119287259296014,null,0,0.0709410891047098],"text":["lag: -7<br />Freq: 0.32575570<br />lag: -7<br />y: 0","lag: -7<br />Freq: 0.32575570<br />lag: -7<br />y: 0",null,"lag: -6<br />Freq: 0.38602823<br />lag: -6<br />y: 0","lag: -6<br />Freq: 0.38602823<br />lag: -6<br />y: 0",null,"lag: -5<br />Freq: 0.45379881<br />lag: -5<br />y: 0","lag: -5<br />Freq: 0.45379881<br />lag: -5<br />y: 0",null,"lag: -4<br />Freq: 0.51641545<br />lag: -4<br />y: 0","lag: -4<br />Freq: 0.51641545<br />lag: -4<br />y: 0",null,"lag: -3<br />Freq: 0.57722642<br />lag: -3<br />y: 0","lag: -3<br />Freq: 0.57722642<br />lag: -3<br />y: 0",null,"lag: -2<br />Freq: 0.62540061<br />lag: -2<br />y: 0","lag: -2<br />Freq: 0.62540061<br />lag: -2<br />y: 0",null,"lag: -1<br />Freq: 0.66925355<br />lag: -1<br />y: 0","lag: -1<br />Freq: 0.66925355<br />lag: -1<br />y: 0",null,"lag: NA<br />Freq: 0.39740789<br />lag:  1<br />y: 0","lag: NA<br />Freq: 0.39740789<br />lag:  1<br />y: 0",null,"lag: NA<br />Freq: 0.28803164<br />lag:  2<br />y: 0","lag: NA<br />Freq: 0.28803164<br />lag:  2<br />y: 0",null,"lag: NA<br />Freq: 0.22499401<br />lag:  3<br />y: 0","lag: NA<br />Freq: 0.22499401<br />lag:  3<br />y: 0",null,"lag: NA<br />Freq: 0.20865355<br />lag:  4<br />y: 0","lag: NA<br />Freq: 0.20865355<br />lag:  4<br />y: 0",null,"lag: NA<br />Freq: 0.20467192<br />lag:  5<br />y: 0","lag: NA<br />Freq: 0.20467192<br />lag:  5<br />y: 0",null,"lag: NA<br />Freq: 0.11928726<br />lag:  6<br />y: 0","lag: NA<br />Freq: 0.11928726<br />lag:  6<br />y: 0",null,"lag: NA<br />Freq: 0.07094109<br />lag:  7<br />y: 0","lag: NA<br />Freq: 0.07094109<br />lag:  7<br />y: 0"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-7.35,0.35,null,-7.35,0.35],"y":[-0.145282196422068,-0.145282196422068,null,0.145282196422068,0.145282196422068],"text":["yintercept: -0.1452822","yintercept: -0.1452822",null,"yintercept:  0.1452822","yintercept:  0.1452822"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Cross Correlation between <br /> Indoor and Outdoor Temperature in Summer","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.35,0.35],"tickmode":"array","ticktext":["-7","-6","-5","-4","-3","-2","-1","0"],"tickvals":[-7,-6,-5,-4,-3,-2,-1,0],"categoryorder":"array","categoryarray":["-7","-6","-5","-4","-3","-2","-1","0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Days (Lag)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.1,1.1],"tickmode":"array","ticktext":["-1.0","-0.8","-0.6","-0.4","-0.2","0.0","0.2","0.4","0.6","0.8","1.0"],"tickvals":[-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1],"categoryorder":"array","categoryarray":["-1.0","-0.8","-0.6","-0.4","-0.2","0.0","0.2","0.4","0.6","0.8","1.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Correlation","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"1f085a0e56a0":{"yintercept":{},"type":"scatter"},"1f0861e41200":{"xend":{},"yend":{},"x":{},"y":{}},"1f085f98fbd":{"yintercept":{}}},"cur_data":"1f085a0e56a0","visdat":{"1f085a0e56a0":["function (y) ","x"],"1f0861e41200":["function (y) ","x"],"1f085f98fbd":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
-<a class="sourceLine" id="cb87-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/crossCorrelation.png&quot;</span>, plot)</a></code></pre></div>
+<div class="sourceCode" id="cb91"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb91-1" title="1"><span class="co"># plot diagram</span></a>
+<a class="sourceLine" id="cb91-2" title="2">plot &lt;-<span class="st"> </span><span class="kw">ggCcf</span>(test<span class="op">$</span>tempOa,</a>
+<a class="sourceLine" id="cb91-3" title="3">              test<span class="op">$</span>tempR,</a>
+<a class="sourceLine" id="cb91-4" title="4">              <span class="dt">lag.max =</span> <span class="dv">7</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-5" title="5"><span class="st">  </span><span class="kw">theme_minimal</span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb91-6" title="6"><span class="st">  </span><span class="kw">scale_x_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">7</span>, <span class="dv">0</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">7</span>,<span class="dv">0</span>,<span class="dv">1</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-7" title="7"><span class="st">  </span><span class="kw">scale_y_continuous</span>(<span class="dt">limits =</span> <span class="kw">c</span>(<span class="op">-</span><span class="dv">1</span>, <span class="dv">1</span>), <span class="dt">breaks =</span> <span class="kw">seq</span>(<span class="op">-</span><span class="dv">1</span>,<span class="dv">1</span>,<span class="fl">0.2</span>)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb91-8" title="8"><span class="st">  </span><span class="kw">labs</span>(<span class="dt">title=</span><span class="st">&quot;Cross Correlation between </span><span class="ch">\n</span><span class="st"> Indoor and Outdoor Temperature in Summer&quot;</span>,</a>
+<a class="sourceLine" id="cb91-9" title="9">        <span class="dt">x =</span><span class="st">&quot;Days (Lag)&quot;</span>, <span class="dt">y =</span> <span class="st">&quot;Correlation&quot;</span>)</a>
+<a class="sourceLine" id="cb91-10" title="10"></a>
+<a class="sourceLine" id="cb91-11" title="11"><span class="co"># make plot interactive (optional)</span></a>
+<a class="sourceLine" id="cb91-12" title="12"><span class="kw">ggplotly</span>(plot)</a></code></pre></div>
+<div id="htmlwidget-561badcc1f1573ffb67e" style="width:672px;height:480px;" class="plotly html-widget"></div>
+<script type="application/json" data-for="htmlwidget-561badcc1f1573ffb67e">{"x":{"data":[{"x":[-7.35,0.35],"y":[0,0],"text":"yintercept: 0","type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-7,-7,null,-6,-6,null,-5,-5,null,-4,-4,null,-3,-3,null,-2,-2,null,-1,-1,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null],"y":[0,0.325755704906267,null,0,0.386028234381026,null,0,0.453798812440513,null,0,0.516415450205332,null,0,0.577226424429824,null,0,0.625400614245626,null,0,0.669253549085949,null,0,0.397407886186816,null,0,0.288031641208388,null,0,0.224994007490292,null,0,0.208653554316442,null,0,0.204671916984081,null,0,0.119287259296014,null,0,0.0709410891047098],"text":["lag: -7<br />Freq: 0.32575570<br />lag: -7<br />y: 0","lag: -7<br />Freq: 0.32575570<br />lag: -7<br />y: 0",null,"lag: -6<br />Freq: 0.38602823<br />lag: -6<br />y: 0","lag: -6<br />Freq: 0.38602823<br />lag: -6<br />y: 0",null,"lag: -5<br />Freq: 0.45379881<br />lag: -5<br />y: 0","lag: -5<br />Freq: 0.45379881<br />lag: -5<br />y: 0",null,"lag: -4<br />Freq: 0.51641545<br />lag: -4<br />y: 0","lag: -4<br />Freq: 0.51641545<br />lag: -4<br />y: 0",null,"lag: -3<br />Freq: 0.57722642<br />lag: -3<br />y: 0","lag: -3<br />Freq: 0.57722642<br />lag: -3<br />y: 0",null,"lag: -2<br />Freq: 0.62540061<br />lag: -2<br />y: 0","lag: -2<br />Freq: 0.62540061<br />lag: -2<br />y: 0",null,"lag: -1<br />Freq: 0.66925355<br />lag: -1<br />y: 0","lag: -1<br />Freq: 0.66925355<br />lag: -1<br />y: 0",null,"lag: NA<br />Freq: 0.39740789<br />lag:  1<br />y: 0","lag: NA<br />Freq: 0.39740789<br />lag:  1<br />y: 0",null,"lag: NA<br />Freq: 0.28803164<br />lag:  2<br />y: 0","lag: NA<br />Freq: 0.28803164<br />lag:  2<br />y: 0",null,"lag: NA<br />Freq: 0.22499401<br />lag:  3<br />y: 0","lag: NA<br />Freq: 0.22499401<br />lag:  3<br />y: 0",null,"lag: NA<br />Freq: 0.20865355<br />lag:  4<br />y: 0","lag: NA<br />Freq: 0.20865355<br />lag:  4<br />y: 0",null,"lag: NA<br />Freq: 0.20467192<br />lag:  5<br />y: 0","lag: NA<br />Freq: 0.20467192<br />lag:  5<br />y: 0",null,"lag: NA<br />Freq: 0.11928726<br />lag:  6<br />y: 0","lag: NA<br />Freq: 0.11928726<br />lag:  6<br />y: 0",null,"lag: NA<br />Freq: 0.07094109<br />lag:  7<br />y: 0","lag: NA<br />Freq: 0.07094109<br />lag:  7<br />y: 0"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,0,1)","dash":"solid"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null},{"x":[-7.35,0.35,null,-7.35,0.35],"y":[-0.145282196422068,-0.145282196422068,null,0.145282196422068,0.145282196422068],"text":["yintercept: -0.1452822","yintercept: -0.1452822",null,"yintercept:  0.1452822","yintercept:  0.1452822"],"type":"scatter","mode":"lines","line":{"width":1.88976377952756,"color":"rgba(0,0,255,1)","dash":"dash"},"hoveron":"points","showlegend":false,"xaxis":"x","yaxis":"y","hoverinfo":"text","frame":null}],"layout":{"margin":{"t":43.7625570776256,"r":7.30593607305936,"b":40.1826484018265,"l":48.9497716894977},"font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187},"title":{"text":"Cross Correlation between <br /> Indoor and Outdoor Temperature in Summer","font":{"color":"rgba(0,0,0,1)","family":"","size":17.5342465753425},"x":0,"xref":"paper"},"xaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-7.35,0.35],"tickmode":"array","ticktext":["-7","-6","-5","-4","-3","-2","-1","0"],"tickvals":[-7,-6,-5,-4,-3,-2,-1,0],"categoryorder":"array","categoryarray":["-7","-6","-5","-4","-3","-2","-1","0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"y","title":{"text":"Days (Lag)","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"yaxis":{"domain":[0,1],"automargin":true,"type":"linear","autorange":false,"range":[-1.1,1.1],"tickmode":"array","ticktext":["-1.0","-0.8","-0.6","-0.4","-0.2","0.0","0.2","0.4","0.6","0.8","1.0"],"tickvals":[-1,-0.8,-0.6,-0.4,-0.2,0,0.2,0.4,0.6,0.8,1],"categoryorder":"array","categoryarray":["-1.0","-0.8","-0.6","-0.4","-0.2","0.0","0.2","0.4","0.6","0.8","1.0"],"nticks":null,"ticks":"","tickcolor":null,"ticklen":3.65296803652968,"tickwidth":0,"showticklabels":true,"tickfont":{"color":"rgba(77,77,77,1)","family":"","size":11.689497716895},"tickangle":-0,"showline":false,"linecolor":null,"linewidth":0,"showgrid":true,"gridcolor":"rgba(235,235,235,1)","gridwidth":0.66417600664176,"zeroline":false,"anchor":"x","title":{"text":"Correlation","font":{"color":"rgba(0,0,0,1)","family":"","size":14.6118721461187}},"hoverformat":".2f"},"shapes":[{"type":"rect","fillcolor":null,"line":{"color":null,"width":0,"linetype":[]},"yref":"paper","xref":"paper","x0":0,"x1":1,"y0":0,"y1":1}],"showlegend":false,"legend":{"bgcolor":null,"bordercolor":null,"borderwidth":0,"font":{"color":"rgba(0,0,0,1)","family":"","size":11.689497716895}},"hovermode":"closest","barmode":"relative"},"config":{"doubleClick":"reset","showSendToCloud":false},"source":"A","attrs":{"443029216c5d":{"yintercept":{},"type":"scatter"},"443035cc3dce":{"xend":{},"yend":{},"x":{},"y":{}},"4430169126f1":{"yintercept":{}}},"cur_data":"443029216c5d","visdat":{"443029216c5d":["function (y) ","x"],"443035cc3dce":["function (y) ","x"],"4430169126f1":["function (y) ","x"]},"highlight":{"on":"plotly_click","persistent":false,"dynamic":false,"selectize":false,"opacityDim":0.2,"selected":{"opacity":1},"debounce":0},"shinyEvents":["plotly_hover","plotly_click","plotly_selected","plotly_relayout","plotly_brushed","plotly_brushing","plotly_clickannotation","plotly_doubleclick","plotly_deselect","plotly_afterplot","plotly_sunburstclick"],"base_url":"https://plot.ly"},"evals":[],"jsHooks":[]}</script>
+<div class="sourceCode" id="cb92"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb92-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
+<a class="sourceLine" id="cb92-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/crossCorrelation.png&quot;</span>, plot)</a></code></pre></div>
 
 <div style="page-break-after: always;"></div>
 </div>
@@ -456,7 +471,7 @@ Figure 13.5: Raw Data Room and Outdoor Temperature for Cross Correlation Plot
           </div>
         </div>
       </div>
-<a href="boxplot.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="sum-frequency-hours.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
 <a href="electricity-household.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>

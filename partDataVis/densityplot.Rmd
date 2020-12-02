@@ -1,0 +1,74 @@
+\newpage
+## Density Plot
+### Goal
+You want to create a density plot of a temperature series with the mean value as vertical line:
+
+```{r echo=FALSE, fig.cap='Density Plot Temperature', out.width='70%'}
+knitr::include_graphics("images/plotDensity.png")
+```
+
+### Data Basis
+
+```{r densityplot0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature for Density Plot', out.width = "70%"}
+library(dplyr)
+library(lubridate)
+# read and print data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and remove empty cells
+df <- df %>% select(time, FlatA_Temp) %>% na.omit()
+
+# create column with day for later grouping
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+
+# plot temp data
+plot(df$time, df$FlatA_Temp,
+     xlab="Time", ylab="Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+
+```
+\newpage
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r densityplot2, warning=FALSE, message=FALSE, collapse = FALSE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+
+# load time series data and aggregate daily mean values
+library(dplyr)
+library(lubridate)
+# read and print data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and remove empty cells
+df <- df %>% select(time, FlatA_Temp) %>% na.omit()
+
+colnames(df) <- c("time", "value")
+
+# static chart with ggplot
+plot <- ggplot(df, aes(x = value)) + 
+  geom_density() +
+  geom_vline(aes(xintercept = mean(value, na.rm = TRUE)),
+             color = "orange",
+             linetype = "dashed",
+             size = 1,
+             label = "Mean")+
+  ggtitle("Density Plot of Room Temperature") +
+  xlab("Temperature (\u00B0C)") +
+  ylab("Density (-)") +
+  theme_minimal()
+
+# interactive chart
+plotly::ggplotly(plot)
+```
+
+```{r densityplot3, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png
+ggsave("images/plotDensity.png", plot)
+```
+
