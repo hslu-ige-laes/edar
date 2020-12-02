@@ -81,12 +81,6 @@ plot <- plotMollierHx(data)
 plot
 ```
 
-```{r mollierhx2, warning=FALSE, message=FALSE, collapse = FALSE, eval=FALSE}
-# save static plot as png (optional)
-library(r2d3)
-save_d3_png(plot, "images/comfortMollierHx.png")
-```
-
 ### See also
 If you are interested in implementing this plot in your own dashboard you can check the free D3 implementation of it:
 [https://github.com/hslu-ige-laes/d3-mollierhx](https://github.com/hslu-ige-laes/d3-mollierhx){target="_blank"}
