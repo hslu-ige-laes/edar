@@ -75,7 +75,7 @@ df <- merge(df, grid.df, all = TRUE)
 
 # convert steadily counting energy meter value from kWh to power in kW
 df <- df %>% 
-  mutate(value = (meterValue - lag(meterValue))*4) %>%
+  dplyr::mutate(value = (meterValue - lag(meterValue))*4) %>%
   select(-meterValue) %>%
   na.omit()
 
@@ -115,7 +115,7 @@ data$component <- factor(data$component, c("value",
 componentTitles = c("Raw Data","Trend Component", "Seasonal Component", "Remainder")
 
 data <- data %>%
-  mutate(component = recode(component,
+  dplyr::mutate(component = recode(component,
                             value = componentTitles[1],
                             trend = componentTitles[2],
                             seasonal = componentTitles[3],

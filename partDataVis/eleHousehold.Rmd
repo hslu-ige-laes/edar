@@ -72,7 +72,7 @@ df <- merge(df, grid.df, all = TRUE)
 
 # convert steadily counting energy meter value from kWh to power in kW
 df <- df %>% 
-  mutate(value = (meterValue - lag(meterValue))) %>%
+  dplyr::mutate(value = (meterValue - lag(meterValue))) %>%
   select(-meterValue)
 
 # remove negative values which occur beause of change summer/winter time
@@ -86,10 +86,10 @@ df$year <- lubridate::year(df$time)
 
 # data cleansing
 # tag NA
-df <- df %>% mutate(deleteNA = ifelse(is.na(value),1,0))
+df <- df %>% dplyr::mutate(deleteNA = ifelse(is.na(value),1,0))
 
 # tag values below 0 and higher than 9.2 kW
-df <- df %>% mutate(deleteHiLoVal = ifelse(value > 9.2,1, ifelse(value < 0,1,0)))
+df <- df %>% dplyr::mutate(deleteHiLoVal = ifelse(value > 9.2,1, ifelse(value < 0,1,0)))
 # Assumption max. fuse 40 ampere (higher fuses for single family houses)
 # this results in continuous power 9.2 kW
 # this results in an hourly consumption of 9.2kWh
@@ -98,7 +98,7 @@ df <- df %>% mutate(deleteHiLoVal = ifelse(value > 9.2,1, ifelse(value < 0,1,0))
 # tag whole days which have one or more values to delete, keep only whole valid days
 df <- df %>%
   group_by(day) %>% 
-  mutate(delete = sum(deleteNA, na.rm = TRUE) + sum(deleteHiLoVal, na.rm = TRUE))
+  dplyr::mutate(delete = sum(deleteNA, na.rm = TRUE) + sum(deleteHiLoVal, na.rm = TRUE))
 
 df <- df %>% ungroup()
 
@@ -108,7 +108,7 @@ df <- df %>%
   select(-deleteNA, -deleteHiLoVal, -delete)
 
 # determine season for later filtering
-df <- df %>% mutate(season = redutils::getSeason(timestamp))
+df <- df %>% dplyr::mutate(season = redutils::getSeason(timestamp))
 
 # calculate sum and min per day
 df <- df %>% dplyr::group_by(day) %>% dplyr::mutate(sum = sum(value))

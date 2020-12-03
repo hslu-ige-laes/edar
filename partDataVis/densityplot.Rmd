@@ -59,8 +59,8 @@ plot <- ggplot(df, aes(x = value)) +
              size = 1,
              label = "Mean")+
   ggtitle("Density Plot of Room Temperature") +
-  xlab("Temperature (\u00B0C)") +
-  ylab("Density (-)") +
+  labs(x = "Temperature (\u00B0C)",
+       y = "Density (-)") +
   theme_minimal()
 
 # interactive chart

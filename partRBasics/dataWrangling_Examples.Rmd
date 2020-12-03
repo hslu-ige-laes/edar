@@ -24,7 +24,7 @@ Following the required steps to parse the data and bring them in a format we can
 ```{r w60 parsing, warning=FALSE, message=FALSE, collapse = FALSE}
 
 # create timestamp out of column "Date" and "Time"
-df <- df %>% mutate(timestamp = paste0(df$Datum, " ", df$Zeit))
+df <- df %>% dplyr::mutate(timestamp = paste0(df$Datum, " ", df$Zeit))
 df$timestamp <- parse_date_time(df$timestamp,
                                 order = "d.m.y H:M",
                                 tz = "Europe/Zurich")
@@ -37,13 +37,13 @@ df <- df %>% select(timestamp, Adr, Nr., Wert, Einheit)
 df <- df %>% filter(Nr. %in% c(1,12))
 
 # rename columns
-df <- df %>% mutate(Nr. = ifelse(Nr. == 1, paste0("Adr",sprintf("%02.0f", Adr), "_energyHeat"), ifelse(Nr. == 12, paste0("Adr",sprintf("%02.0f", Adr), "_hotWater"), Nr.)))
+df <- df %>% dplyr::mutate(Nr. = ifelse(Nr. == 1, paste0("Adr",sprintf("%02.0f", Adr), "_energyHeat"), ifelse(Nr. == 12, paste0("Adr",sprintf("%02.0f", Adr), "_hotWater"), Nr.)))
 
 # convert value to numeric
 df$Wert <- as.numeric(df$Wert)
 
 # multiply HCA-values by factor 10 to get liters and divide by 1000 to get m3
-df <- df %>% mutate(Wert = ifelse((Einheit == "HCA"), Wert * 10/1000, Wert))
+df <- df %>% dplyr::mutate(Wert = ifelse((Einheit == "HCA"), Wert * 10/1000, Wert))
 
 df <- df %>% select(-Einheit, -Adr)
 

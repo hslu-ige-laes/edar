@@ -31,7 +31,7 @@ df$hour <- as_datetime(cut(df$time, breaks = "hour"))
 df <- df %>% 
   filter(hour >= "2020-03-01", hour <= "2020-03-07") %>% 
   group_by(hour) %>% 
-  mutate(mean = mean(centralOutsideTemp, na.rm = TRUE)) %>% 
+  dplyr::mutate(mean = mean(centralOutsideTemp, na.rm = TRUE)) %>% 
   ungroup() %>% 
   select(-centralOutsideTemp, -time) %>% 
   unique() %>% 

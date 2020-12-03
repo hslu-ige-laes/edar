@@ -58,14 +58,12 @@ dfTempOa$time <- parse_date_time(dfTempOa$time,
                                       order = "YmdHMS",
                                       tz = "UTC")
 
-dfTempOa$day <- cut(dfTempOa$time, breaks = "days")
+dfTempOa$day <- as.Date(cut(dfTempOa$time, breaks = "days"))
 
 dfTempOa <- dfTempOa %>%
   group_by(day) %>%
-  mutate(tempOa = mean(centralOutsideTemp)) %>%
-  ungroup() %>% 
-  select(day, tempOa) %>% 
-  unique()
+  dplyr::summarize(tempOa = mean(centralOutsideTemp, na.rm = TRUE)) %>%
+  ungroup()
 
 dfTempR <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
                        stringsAsFactors=FALSE,
@@ -78,33 +76,23 @@ dfTempR$time <- parse_date_time(dfTempR$time,
 # select temperature and humidity and remove empty cells
 dfTempR <- dfTempR %>% select(time, FlatA_Temp) %>% na.omit()
 
-dfTempR$day <- cut(dfTempR$time, breaks = "days")
+dfTempR$day <- as.Date(cut(dfTempR$time, breaks = "days"))
 
 dfTempR <- dfTempR %>%
   group_by(day) %>%
-  mutate(tempR = mean(FlatA_Temp)) %>%
-  ungroup() %>% 
-  select(day, tempR) %>% 
-  unique()
+  dplyr::summarize(tempR = mean(FlatA_Temp, na.rm = TRUE)) %>%
+  ungroup()
 
 data <- merge(dfTempR, dfTempOa, all = TRUE) %>% unique() %>% na.omit()
 
 data$season <- redutils::getSeason(data$day)
 
-test <- data %>% 
+data <- data %>% 
   filter(season == "Summer")
 
-# plot the cross correlation
-# ccf(test$tempOa, test$tempR, test$season)
-
-# plot(data)
-plot(
-  test$tempOa,
-  test$tempR)
-
 # plot diagram
-plot <- ggCcf(test$tempOa,
-              test$tempR,
+plot <- ggCcf(data$tempOa,
+              data$tempR,
               lag.max = 7) +
   theme_minimal() + 
   scale_x_continuous(limits = c(-7, 0), breaks = seq(-7,0,1)) +

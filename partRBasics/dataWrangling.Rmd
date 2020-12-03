@@ -91,11 +91,11 @@ names(df) <- c("timestamp","humidity","temp_c")
 library(dplyr)
 
 # add new column with temperature conversion from celsius to fahrenheit
-df <- mutate(df, temp_f = temp_c * 1.8 + 32)
+df <- dplyr::mutate(df, temp_f = temp_c * 1.8 + 32)
 
 # This code does the same, but only with a pipe
 df <- df %>% 
-  mutate(df, temp_f = temp_c * 1.8 + 32)
+  dplyr::mutate(df, temp_f = temp_c * 1.8 + 32)
 
 ```
 
@@ -126,7 +126,7 @@ df.new <- select(df, timestamp, temp_f)
 
 # use select() in a so called dplyr pipe
 df <- df %>% 
-  mutate(df, temp_f = temp_c * 1.8 + 32) %>% 
+  dplyr::mutate(df, temp_f = temp_c * 1.8 + 32) %>% 
   select(-temp_c)
 ```
 

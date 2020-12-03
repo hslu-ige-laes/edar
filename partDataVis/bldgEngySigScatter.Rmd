@@ -68,6 +68,7 @@ library(plotly)
 library(dplyr)
 library(redutils)
 library(lubridate)
+
 # load time series data and aggregate daily mean values
 dfOutsideTemp <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
                           stringsAsFactors=FALSE,
@@ -80,7 +81,7 @@ dfOutsideTemp$time <- parse_date_time(dfOutsideTemp$time,
 dfOutsideTemp$day <- as.Date(cut(dfOutsideTemp$time, breaks = "day"))
 dfOutsideTemp <- dfOutsideTemp %>%
   group_by(day) %>%
-  mutate(tempMean = mean(centralOutsideTemp)) %>%
+  dplyr::mutate(tempMean = mean(centralOutsideTemp)) %>%
   ungroup()
 
 dfOutsideTemp <- dfOutsideTemp %>%
@@ -103,7 +104,7 @@ dfHeatEnergy$time <- parse_date_time(dfHeatEnergy$time,
 dfHeatEnergy$day <- as.Date(cut(dfHeatEnergy$time, breaks = "day"))
 dfHeatEnergy <- dfHeatEnergy %>%
   group_by(day) %>%
-  mutate(energyMax = max(energyHeatingMeter)) %>%
+  dplyr::mutate(energyMax = max(energyHeatingMeter)) %>%
   ungroup()
 
 dfHeatEnergy <- dfHeatEnergy %>%
@@ -112,7 +113,7 @@ dfHeatEnergy <- dfHeatEnergy %>%
   na.omit()
 
 dfHeatEnergy <- dfHeatEnergy %>% 
-  mutate(energyCons = energyMax - lag(energyMax)) %>%
+  dplyr::mutate(energyCons = energyMax - lag(energyMax)) %>%
   select(-energyMax) %>%
   na.omit()
 
@@ -120,7 +121,7 @@ dfHeatEnergy <- dfHeatEnergy %>%
 df <- merge(dfOutsideTemp, dfHeatEnergy, by = "day")
 
 # calculate season
-df <- df %>% mutate(season = redutils::getSeason(df$day))
+df <- df %>% dplyr::mutate(season = redutils::getSeason(df$day))
 
 # static chart with ggplot
 plot <- ggplot2::ggplot(df) +

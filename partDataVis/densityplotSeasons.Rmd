@@ -59,8 +59,9 @@ plot <- ggplot(df) +
   geom_density(aes(x = value, colour = season)) +
   scale_color_manual(values=c("#440154", "#2db27d", "#fde725", "#365c8d")) +
   ggtitle("Density Plot of Room Temperature for each season of the year") +
-  xlab("Temperature (\u00B0C)") +
-  ylab("Density (-)") +
+  labs(x = "Temperature (\u00B0C)",
+       y = "Density (-)",
+       colour = "Legend") +
   theme_minimal()
 
 # interactive chart

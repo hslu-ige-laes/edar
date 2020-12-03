@@ -52,7 +52,7 @@ df$Time <- parse_date_time(df$Time,
 # calculate consumption value per month
 # pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,
 # so the consumption for february first is value(march) - value(february)!
-df <- df %>% mutate(value = lead(meterValue) - meterValue)
+df <- df %>% dplyr::mutate(value = lead(meterValue) - meterValue)
 
 # remove counter value column
 df <- df %>% select(-meterValue) %>% na.omit()

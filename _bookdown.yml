@@ -35,6 +35,7 @@ rmd_files: [
 
   "partDataVis/comfort.Rmd",
   "partDataVis/comfortMollierHx.Rmd",
+  "partDataVis/comfortTempHum.Rmd",
   "partDataVis/comfortSia180ThermCmf.Rmd",
 
   "partDataVis/misc.Rmd",

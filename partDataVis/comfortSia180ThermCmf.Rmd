@@ -60,7 +60,7 @@ dfTempOa$hour <- cut(dfTempOa$time, breaks = "hour")
 
 dfTempOa <- dfTempOa %>%
   group_by(hour) %>%
-  mutate(tempMean = mean(centralOutsideTemp)) %>%
+  dplyr::mutate(tempMean = mean(centralOutsideTemp)) %>%
   ungroup() %>% 
   select(time, tempMean) %>% 
   unique()
@@ -72,7 +72,7 @@ grid.df <- data.frame(time = seq(min(dfTempOa$time, na.rm = TRUE),
 dfTempOa <- merge(dfTempOa, grid.df, all = TRUE)
 
 dfTempOa <- dfTempOa %>%
-  mutate(tempOa = rollmean(tempMean, 48, fill = NA, align = "right"))
+  dplyr::mutate(tempOa = rollmean(tempMean, 48, fill = NA, align = "right"))
 
 dfTempOa <- dfTempOa %>%
   select(time, tempOa) %>%
@@ -95,7 +95,7 @@ dfTempR$hour <- cut(dfTempR$time, breaks = "hour")
 
 dfTempR <- dfTempR %>%
   group_by(hour) %>%
-  mutate(tempR = mean(FlatA_Temp)) %>%
+  dplyr::mutate(tempR = mean(FlatA_Temp)) %>%
   ungroup() %>% 
   select(time, tempR) %>% 
   unique()

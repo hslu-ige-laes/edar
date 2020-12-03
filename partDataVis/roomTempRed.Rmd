@@ -84,9 +84,9 @@ df <- df %>% filter(day > startDate, day < endDate)
 # calculate daily median, min and max of temperature
 df <- df %>%
   group_by(day) %>%
-  mutate(minDay = min(as.numeric(FlatA_Temp)),
-         medianDay = median(as.numeric(FlatA_Temp)),
-         maxDay = max(as.numeric(FlatA_Temp))
+  dplyr::mutate(minDay = min(as.numeric(FlatA_Temp)),
+                medianDay = median(as.numeric(FlatA_Temp)),
+                maxDay = max(as.numeric(FlatA_Temp))
          ) %>%
   ungroup()
 
@@ -95,20 +95,20 @@ df <- df %>% select(day, medianDay, minDay, maxDay) %>% unique() %>% na.omit()
 
 # calculate medians for time ranges
 df <- df %>%
-  mutate(period = ifelse(day >= startDate & day <= optiDate1,
-                         "Baseline",
-                         ifelse((day >= (as.Date(optiDate1) + optiDelayDays))
-                                & (day <= optiDate2),
-                                "Opti1",
-                                ifelse((day >= (as.Date(optiDate2) + optiDelayDays))
-                                & (day <= endDate),
-                                "Opti2",
-                                NA)
-                         )))
+  dplyr::mutate(period = ifelse(day >= startDate & day <= optiDate1,
+                                "Baseline",
+                                 ifelse((day >= (as.Date(optiDate1) + optiDelayDays))
+                                        & (day <= optiDate2),
+                                        "Opti1",
+                                        ifelse((day >= (as.Date(optiDate2) + optiDelayDays))
+                                        & (day <= endDate),
+                                        "Opti2",
+                                        NA)
+                                 )))
 
 df <- df %>%
   group_by(period) %>%
-  mutate(medianPeriod = ifelse(is.na(period), NA, median(medianDay))) %>% 
+  dplyr::mutate(medianPeriod = ifelse(is.na(period), NA, median(medianDay))) %>% 
   ungroup() %>% 
   select(-period)
 

@@ -35,7 +35,7 @@ library(lubridate)
 
 # load time series data
 df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
-df <- mutate(df, value = value * 4)
+df <- dplyr::mutate(df, value = value * 4)
 
 # add metadata for later grouping and visualization purposes
 df$x <- hour(df$timestamp) + minute(df$timestamp)/60 + second(df$timestamp) / 3600

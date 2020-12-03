@@ -66,13 +66,10 @@ data$day <- as.Date(cut(data$time, breaks = "day"))
 # calculate daily mean of temperature and humidity
 data <- data %>%
   group_by(day) %>%
-  mutate(tempMean = mean(as.numeric(FlatA_Temp)),
-         humMean = mean(as.numeric(FlatA_Hum))
-         ) %>%
+  summarize(tempMean = mean(as.numeric(FlatA_Temp)),
+            humMean = mean(as.numeric(FlatA_Hum))
+            ) %>%
   ungroup()
-
-# shrink down to daily values and remove rows with empty values
-data <- data %>% select(day, tempMean, humMean) %>% unique() %>% na.omit()
 
 # plot mollier hx diagram
 plot <- plotMollierHx(data)

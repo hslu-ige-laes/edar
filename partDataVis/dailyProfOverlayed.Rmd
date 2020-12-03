@@ -35,7 +35,7 @@ library(lubridate)
 
 # load time series data
 df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
-df <- mutate(df, value = value * 4)
+df <- dplyr::mutate(df, value = value * 4)
 
 # add metadata for later grouping and visualization purposes
 df$x <- hour(df$timestamp) + minute(df$timestamp)/60 + second(df$timestamp) / 3600
@@ -43,7 +43,7 @@ df$weekday <- weekdays(df$timestamp)
 df$weekday <- factor(df$weekday, c("Monday","Tuesday","Wednesday","Thursday","Friday","Saturday", "Sunday"))
 df$day <- as.Date(df$timestamp, format = "%Y-%m-%d  %H:%M:%S")
 
-df <- df %>% mutate(value = ifelse(x == 0.00, NA, df$value))
+df <- df %>% dplyr::mutate(value = ifelse(x == 0.00, NA, df$value))
 
 # plot graph with all time series
 rangeX <- seq(0,24,0.25)

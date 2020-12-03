@@ -31,7 +31,7 @@ library(redutils)
 
 # load time series data
 df <- readRDS(system.file("sampleData/eboBookEleMeter.rds", package = "redutils"))
-df <- mutate(df, value = value * 4)
+df <- dplyr::mutate(df, value = value * 4)
 
 plot <- plotDailyProfilesDecomposed(df, locTimeZone = "Europe/Zurich")
 
