@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  3 DEC 2020 08:49
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  3 DEC 2020 10:40
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -946,82 +946,131 @@ Chapter 7.
 
 ]
 Chapter 8.
-File: images/plotSeasonalXY.png Graphic file (type bmp)
-<images/plotSeasonalXY.png>
 [37]
-File: images/plotSeasonalXY.png Graphic file (type bmp)
-<images/plotSeasonalXY.png>
-File: edar_files/figure-latex/seasonalPlotXY0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/seasonalPlotXY0-1.pdf>
-[38] [39]
-File: edar_files/figure-latex/seasonalPlotXY1-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/seasonalPlotXY1-1.pdf>
-[40] [41]
-File: images/plotSeasonalMiniplots.png Graphic file (type bmp)
-<images/plotSeasonalMiniplots.png>
-File: edar_files/figure-latex/seasonalMiniplots0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/seasonalMiniplots0-1.pdf>
-[42] [43]
-File: edar_files/figure-latex/seasonalMiniplots1-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/seasonalMiniplots1-1.pdf>
-[44] [45]
-File: images/plotSeasonalPolar.png Graphic file (type bmp)
-<images/plotSeasonalPolar.png>
-File: edar_files/figure-latex/seasonalPlotPolar00-1.pdf Graphic file (type pdf)
+File: images/boxplot.png Graphic file (type bmp)
+<images/boxplot.png>
+File: edar_files/figure-latex/boxplot0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/boxplot0-1.pdf>
+[38]
+File: edar_files/figure-latex/boxplot2-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/boxplot2-1.pdf>
+[39] [40]
+File: images/crossCorrelation.png Graphic file (type bmp)
+<images/crossCorrelation.png>
+File: edar_files/figure-latex/crossCorrelation0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/crossCorrelation0-1.pdf>
+File: edar_files/figure-latex/crossCorrelation0-2.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/crossCorrelation0-2.pdf>
+[41] [42]
+File: edar_files/figure-latex/crossCorrelation2-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/crossCorrelation2-1.pdf>
 
-<use edar_files/figure-latex/seasonalPlotPolar00-1.pdf>
-[46]
-Overfull \vbox (1.54527pt too high) detected at line 1337
- []
+Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[47]
-File: edar_files/figure-latex/seasonalPlotPolar1-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/seasonalPlotPolar1-1.pdf>
+[43] [44]
+File: images/plotDensity.png Graphic file (type bmp)
+<images/plotDensity.png>
+File: edar_files/figure-latex/densityplot0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/densityplot0-1.pdf>
+[45]
+File: edar_files/figure-latex/densityplot2-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/densityplot2-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
+[46] [47]
+File: images/plotDensitySeasons.png Graphic file (type bmp)
+<images/plotDensitySeasons.png>
+File: edar_files/figure-latex/densityplotSeasons0-1.pdf Graphic file (type pdf)
+
+<use edar_files/figure-latex/densityplotSeasons0-1.pdf>
 [48]
-File: images/plotEnergyConsBeforeAfter.png Graphic file (type bmp)
-<images/plotEnergyConsBeforeAfter.png>
-File: edar_files/figure-latex/energyConsBeforeAfter0-1.pdf Graphic file (type p
-df)
-<use edar_files/figure-latex/energyConsBeforeAfter0-1.pdf>
+File: edar_files/figure-latex/densityplotSeasons2-1.pdf Graphic file (type pdf)
+
+<use edar_files/figure-latex/densityplotSeasons2-1.pdf>
+
+Underfull \vbox (badness 10000) has occurred while \output is active []
+
 [49] [50]
-File: edar_files/figure-latex/energyConsBeforeAfter1-1.pdf Graphic file (type p
-df)
-<use edar_files/figure-latex/energyConsBeforeAfter1-1.pdf>
-[51] [52]
 Chapter 9.
 File: edar_files/figure-latex/decompositionTOa-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/decompositionTOa-1.pdf>
 
 Underfull \vbox (badness 6094) has occurred while \output is active []
 
-[53
+[51
 
-] [54]
+] [52]
 File: images/plotDecompositionLong.png Graphic file (type bmp)
 <images/plotDecompositionLong.png>
 File: edar_files/figure-latex/dataVisDecompositionLong0-1.pdf Graphic file (typ
 e pdf)
 <use edar_files/figure-latex/dataVisDecompositionLong0-1.pdf>
-[55] [56]
+[53] [54]
 File: edar_files/figure-latex/dataVisDecompositionLong1-1.pdf Graphic file (typ
 e pdf)
 <use edar_files/figure-latex/dataVisDecompositionLong1-1.pdf>
-[57] [58]
+[55] [56]
 File: images/plotDecompositionShort.png Graphic file (type bmp)
 <images/plotDecompositionShort.png>
 File: edar_files/figure-latex/dataVisDecompositionShort0-1.pdf Graphic file (ty
 pe pdf)
 <use edar_files/figure-latex/dataVisDecompositionShort0-1.pdf>
-[59] [60]
+[57] [58]
 File: edar_files/figure-latex/dataVisDecompositionShort1-1.pdf Graphic file (ty
 pe pdf)
 <use edar_files/figure-latex/dataVisDecompositionShort1-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[61] [62]
+[59] [60]
 Chapter 10.
-[63
+File: images/plotSeasonalXY.png Graphic file (type bmp)
+<images/plotSeasonalXY.png>
+[61
+
+]
+File: images/plotSeasonalXY.png Graphic file (type bmp)
+<images/plotSeasonalXY.png>
+File: edar_files/figure-latex/seasonalPlotXY0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/seasonalPlotXY0-1.pdf>
+[62] [63]
+File: edar_files/figure-latex/seasonalPlotXY1-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/seasonalPlotXY1-1.pdf>
+[64] [65]
+File: images/plotSeasonalMiniplots.png Graphic file (type bmp)
+<images/plotSeasonalMiniplots.png>
+File: edar_files/figure-latex/seasonalMiniplots0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/seasonalMiniplots0-1.pdf>
+[66] [67]
+File: edar_files/figure-latex/seasonalMiniplots1-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/seasonalMiniplots1-1.pdf>
+[68] [69]
+File: images/plotSeasonalPolar.png Graphic file (type bmp)
+<images/plotSeasonalPolar.png>
+File: edar_files/figure-latex/seasonalPlotPolar00-1.pdf Graphic file (type pdf)
+
+<use edar_files/figure-latex/seasonalPlotPolar00-1.pdf>
+[70]
+Overfull \vbox (1.54527pt too high) detected at line 1981
+ []
+
+[71]
+File: edar_files/figure-latex/seasonalPlotPolar1-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/seasonalPlotPolar1-1.pdf>
+[72]
+File: images/plotEnergyConsBeforeAfter.png Graphic file (type bmp)
+<images/plotEnergyConsBeforeAfter.png>
+File: edar_files/figure-latex/energyConsBeforeAfter0-1.pdf Graphic file (type p
+df)
+<use edar_files/figure-latex/energyConsBeforeAfter0-1.pdf>
+[73] [74]
+File: edar_files/figure-latex/energyConsBeforeAfter1-1.pdf Graphic file (type p
+df)
+<use edar_files/figure-latex/energyConsBeforeAfter1-1.pdf>
+[75] [76]
+Chapter 11.
+[77
 
 ]
 File: images/plotHeatMapCalendar.png Graphic file (type bmp)
@@ -1029,131 +1078,67 @@ File: images/plotHeatMapCalendar.png Graphic file (type bmp)
 File: edar_files/figure-latex/dataVisHeatmapCalendar1-1.pdf Graphic file (type 
 pdf)
 <use edar_files/figure-latex/dataVisHeatmapCalendar1-1.pdf>
-[64]
+[78]
 File: edar_files/figure-latex/dataVisHeatmapCalendar2-1.pdf Graphic file (type 
 pdf)
 <use edar_files/figure-latex/dataVisHeatmapCalendar2-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[65] [66]
+[79] [80]
 File: images/plotHeatMapMedianWeeks.png Graphic file (type bmp)
 <images/plotHeatMapMedianWeeks.png>
 File: edar_files/figure-latex/dataVisHeatmapMedianWeeks0-1.pdf Graphic file (ty
 pe pdf)
 <use edar_files/figure-latex/dataVisHeatmapMedianWeeks0-1.pdf>
-[67]
+[81]
 File: edar_files/figure-latex/dataVisHeatmapMedianWeeks1-1.pdf Graphic file (ty
 pe pdf)
 <use edar_files/figure-latex/dataVisHeatmapMedianWeeks1-1.pdf>
-[68] [69] [70
+[82] [83] [84
 
 ]
-Chapter 11.
-[71]
+Chapter 12.
+[85]
 File: images/plotDailyProfOverview.png Graphic file (type bmp)
 <images/plotDailyProfOverview.png>
 File: edar_files/figure-latex/dataVisDailyProfilesOverview0-1.pdf Graphic file 
 (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesOverview0-1.pdf>
-[72]
+[86]
 File: edar_files/figure-latex/dataVisDailyProfilesOverview1-1.pdf Graphic file 
 (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesOverview1-1.pdf>
-[73]
+[87]
 File: images/plotDailyProfOverlayed.png Graphic file (type bmp)
 <images/plotDailyProfOverlayed.png>
 File: edar_files/figure-latex/dataVisDailyProfilesOverlayed0-1.pdf Graphic file
  (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesOverlayed0-1.pdf>
-[74] [75]
+[88] [89]
 File: edar_files/figure-latex/dataVisDailyProfilesOverlayed1-1.pdf Graphic file
  (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesOverlayed1-1.pdf>
-[76]
+[90]
 File: images/plotDailyProfMean.png Graphic file (type bmp)
 <images/plotDailyProfMean.png>
 File: edar_files/figure-latex/dataVisDailyProfilesMean0-1.pdf Graphic file (typ
 e pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesMean0-1.pdf>
-[77] [78]
+[91] [92]
 File: edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf Graphic fi
 le (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesMean1 plotly-1.pdf>
-[79]
+[93]
 File: images/plotDailyProfDecomposed.png Graphic file (type bmp)
 <images/plotDailyProfDecomposed.png>
 File: edar_files/figure-latex/dataVisDailyProfilesDecomposed0-1.pdf Graphic fil
 e (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesDecomposed0-1.pdf>
-[80]
+[94]
 File: edar_files/figure-latex/dataVisDailyProfilesDecomposed1 plotly-1.pdf Grap
 hic file (type pdf)
 <use edar_files/figure-latex/dataVisDailyProfilesDecomposed1 plotly-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[81] [82]
-Chapter 12.
-[83
-
-]
-File: images/comfortMollierHx.png Graphic file (type bmp)
-<images/comfortMollierHx.png>
-File: edar_files/figure-latex/mollierhx0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/mollierhx0-1.pdf>
-File: edar_files/figure-latex/mollierhx0-2.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/mollierhx0-2.pdf>
-[84] [85]
-File: edar_files/figure-latex/mollierhx1-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/mollierhx1-1.pdf>
-[86]
-File: images/comfortTempHum.png Graphic file (type bmp)
-<images/comfortTempHum.png>
-File: edar_files/figure-latex/comforttemphum0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/comforttemphum0-1.pdf>
-File: edar_files/figure-latex/comforttemphum0-2.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/comforttemphum0-2.pdf>
-[87] [88]
-Underfull \vbox (badness 10000) detected at line 2511
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2511
- []
-
-[89]
-File: edar_files/figure-latex/comforttemphum1-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/comforttemphum1-1.pdf>
-[90]
-File: images/comfortSia180ThermCmf.png Graphic file (type bmp)
-<images/comfortSia180ThermCmf.png>
-File: edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf Graphic file (type p
-df)
-<use edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf>
-File: edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf Graphic file (type p
-df)
-<use edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf>
-[91] [92]
-Underfull \vbox (badness 10000) detected at line 2755
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2755
- []
-
-[93]
-Underfull \vbox (badness 10000) detected at line 2755
- []
-
-
-Underfull \vbox (badness 10000) detected at line 2755
- []
-
-[94]
-File: edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf Graphic file (type p
-df)
-<use edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
@@ -1162,172 +1147,195 @@ Chapter 13.
 [97
 
 ]
-File: images/boxplot.png Graphic file (type bmp)
-<images/boxplot.png>
-File: edar_files/figure-latex/boxplot0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/boxplot0-1.pdf>
-[98]
-File: edar_files/figure-latex/boxplot2-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/boxplot2-1.pdf>
-[99] [100]
-File: images/plotDensity.png Graphic file (type bmp)
-<images/plotDensity.png>
-File: edar_files/figure-latex/densityplot0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/densityplot0-1.pdf>
-[101]
-File: edar_files/figure-latex/densityplot2-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/densityplot2-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[102] [103]
-File: images/plotDensitySeasons.png Graphic file (type bmp)
-<images/plotDensitySeasons.png>
-File: edar_files/figure-latex/densityplotSeasons0-1.pdf Graphic file (type pdf)
-
-<use edar_files/figure-latex/densityplotSeasons0-1.pdf>
-[104]
-File: edar_files/figure-latex/densityplotSeasons2-1.pdf Graphic file (type pdf)
-
-<use edar_files/figure-latex/densityplotSeasons2-1.pdf>
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
-
-[105] [106]
 File: images/plotSumFrequencyDays.png Graphic file (type bmp)
 <images/plotSumFrequencyDays.png>
 File: edar_files/figure-latex/sumfrequencydays0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/sumfrequencydays0-1.pdf>
-[107] [108]
+[98] [99]
 File: edar_files/figure-latex/sumfrequencydays2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/sumfrequencydays2-1.pdf>
-[109]
+[100]
 File: images/plotSumFrequencyHour.png Graphic file (type bmp)
 <images/plotSumFrequencyHour.png>
 File: edar_files/figure-latex/sumfrequencyhour0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/sumfrequencyhour0-1.pdf>
-[110] [111]
+[101] [102]
 File: edar_files/figure-latex/sumfrequencyhour2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/sumfrequencyhour2-1.pdf>
+[103] [104
+
+]
+Chapter 14.
+[105]
+File: images/comfortMollierHx.png Graphic file (type bmp)
+<images/comfortMollierHx.png>
+File: edar_files/figure-latex/mollierhx0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/mollierhx0-1.pdf>
+File: edar_files/figure-latex/mollierhx0-2.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/mollierhx0-2.pdf>
+[106] [107]
+File: edar_files/figure-latex/mollierhx1-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/mollierhx1-1.pdf>
+[108]
+File: images/comfortTempHum.png Graphic file (type bmp)
+<images/comfortTempHum.png>
+File: edar_files/figure-latex/comforttemphum0-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/comforttemphum0-1.pdf>
+File: edar_files/figure-latex/comforttemphum0-2.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/comforttemphum0-2.pdf>
+[109] [110]
+Underfull \vbox (badness 10000) detected at line 3090
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3090
+ []
+
+[111]
+File: edar_files/figure-latex/comforttemphum1-1.pdf Graphic file (type pdf)
+<use edar_files/figure-latex/comforttemphum1-1.pdf>
 [112]
-File: images/crossCorrelation.png Graphic file (type bmp)
-<images/crossCorrelation.png>
-File: edar_files/figure-latex/crossCorrelation0-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/crossCorrelation0-1.pdf>
-File: edar_files/figure-latex/crossCorrelation0-2.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/crossCorrelation0-2.pdf>
+File: images/comfortSia180ThermCmf.png Graphic file (type bmp)
+<images/comfortSia180ThermCmf.png>
+File: edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf Graphic file (type p
+df)
+<use edar_files/figure-latex/comfortSia180ThermCmf0-1.pdf>
+File: edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf Graphic file (type p
+df)
+<use edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf>
 [113] [114]
-File: edar_files/figure-latex/crossCorrelation2-1.pdf Graphic file (type pdf)
-<use edar_files/figure-latex/crossCorrelation2-1.pdf>
+Underfull \vbox (badness 10000) detected at line 3334
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3334
+ []
+
+[115]
+Underfull \vbox (badness 10000) detected at line 3334
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3334
+ []
+
+[116]
+File: edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf Graphic file (type p
+df)
+<use edar_files/figure-latex/comfortSia180ThermCmf1-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[115] [116]
+[117] [118]
+Chapter 15.
+[119
+
+]
 File: images/eleHousehold.png Graphic file (type bmp)
 <images/eleHousehold.png>
 File: edar_files/figure-latex/eleHousehold10-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/eleHousehold10-1.pdf>
-[117]
-Overfull \vbox (1.59328pt too high) detected at line 3723
- []
-
-[118]
-Underfull \vbox (badness 10000) detected at line 3723
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3723
- []
-
-[119]
-Underfull \vbox (badness 10000) detected at line 3723
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3723
- []
-
 [120]
-Underfull \vbox (badness 10000) detected at line 3723
- []
-
-
-Underfull \vbox (badness 10000) detected at line 3723
+Overfull \vbox (1.59328pt too high) detected at line 3733
  []
 
 [121]
-Underfull \vbox (badness 10000) detected at line 3723
+Underfull \vbox (badness 10000) detected at line 3733
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3723
+Underfull \vbox (badness 10000) detected at line 3733
  []
 
 [122]
-Underfull \vbox (badness 10000) detected at line 3723
+Underfull \vbox (badness 10000) detected at line 3733
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3723
+Underfull \vbox (badness 10000) detected at line 3733
  []
 
 [123]
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+[124]
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+[125]
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+
+Underfull \vbox (badness 10000) detected at line 3733
+ []
+
+[126]
 File: edar_files/figure-latex/eleHousehold1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/eleHousehold1-1.pdf>
 
 Underfull \vbox (badness 7468) has occurred while \output is active []
 
-[124] [125]
+[127] [128]
 File: images/roomTempRed.png Graphic file (type bmp)
 <images/roomTempRed.png>
 File: edar_files/figure-latex/roomTempRed0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/roomTempRed0-1.pdf>
-[126]
-Overfull \vbox (1.54527pt too high) detected at line 3877
+[129]
+Overfull \vbox (1.54527pt too high) detected at line 3887
  []
 
-[127]
-Underfull \vbox (badness 10000) detected at line 3877
+[130]
+Underfull \vbox (badness 10000) detected at line 3887
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3877
+Underfull \vbox (badness 10000) detected at line 3887
  []
 
-[128]
+[131]
 File: edar_files/figure-latex/roomTempRed1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/roomTempRed1-1.pdf>
-[129]
+[132]
 File: images/plotBldgEngySigScatter.png Graphic file (type bmp)
 <images/plotBldgEngySigScatter.png>
 File: edar_files/figure-latex/energysignature0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature0-1.pdf>
 File: edar_files/figure-latex/energysignature1-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature1-1.pdf>
-[130] [131] [132]
+[133] [134] [135]
 File: edar_files/figure-latex/energysignature2-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/energysignature2-1.pdf>
 
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
-[133] [134]
-Appendix A.
-[135
+[136] [137] [138
 
 ]
+Appendix A.
+[139]
 File: images/a2-installPackagesRStudio.png Graphic file (type bmp)
 <images/a2-installPackagesRStudio.png>
-[136] [137] (./edar.aux)
+[140] [141] (./edar.aux)
 Package rerunfilecheck Info: File `edar.out' has not changed.
-(rerunfilecheck)             Checksum: DD991331F13976B6808C97733EEE244D;7683.
+(rerunfilecheck)             Checksum: 8A579D6295C7F3ECBB84D7D893318CFB;8039.
  ) 
 Here is how much of TeX's memory you used:
- 17914 strings out of 479393
- 328204 string characters out of 5877705
- 839402 words of memory out of 5000000
- 36980 multiletter control sequences out of 15000+600000
+ 17918 strings out of 479393
+ 328281 string characters out of 5877705
+ 839495 words of memory out of 5000000
+ 36984 multiletter control sequences out of 15000+600000
  541579 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
  94i,6n,118p,585b,436s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on edar.pdf (137 pages).
+Output written on edar.pdf (141 pages).

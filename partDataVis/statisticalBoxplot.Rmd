@@ -1,0 +1,106 @@
+\newpage
+## Boxplot
+### Goal
+You want to create a boxplot:
+
+```{r echo=FALSE, fig.cap='Building Energy Signature Plot', out.width='70%'}
+knitr::include_graphics("images/boxplot.png")
+```
+
+### Data Basis
+A csv file with room temperature and humidity time series of four rooms. Below are only the room temperatures visualized.
+
+```{r boxplot0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Room Temperature Raw Data for Boxplot', out.width = "70%"}
+library(dplyr)
+library(lubridate)
+library(viridis)
+library(scales)
+
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "Europe/Zurich")
+
+# plot data
+cl <- viridis(5)
+plot(df$time,
+     df$FlatA_Temp,
+     xlab="Time",
+     ylab="Temperature (degree C)",
+     main="Raw Data of 4 Time Series",
+     col = alpha(cl[1], 0.3),type = 'l')
+lines(df$time, df$FlatB_Temp, col = alpha(cl[2], 0.3),type = 'l')
+lines(df$time, df$FlatC_Temp, col = alpha(cl[3], 0.3),type = 'l')
+lines(df$time, df$FlatD_Temp, col = alpha(cl[4], 0.3),type = 'l')
+
+
+```
+
+\newpage
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r boxplot2, warning=FALSE, message=FALSE, collapse = FALSE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+library(tidyr)
+library(redutils)
+library(lubridate)
+# load time series data and aggregate daily mean values
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                          stringsAsFactors=FALSE,
+                          sep =";")
+
+df$time <- parse_date_time(df$time,
+                           order = "YmdHMS",
+                           tz = "Europe/Zurich")
+
+df <- df %>% 
+  select(time, FlatA_Temp, FlatB_Temp, FlatC_Temp, FlatD_Temp)
+
+df <- as.data.frame(tidyr::pivot_longer(df,
+                                        cols = -time,
+                                        names_to = "room",
+                                        values_to = "Temp",
+                                        values_drop_na = TRUE))
+
+minY <- round(min(df %>% select(Temp), na.rm = TRUE) - 1, digits = 0)
+maxY <- round(max(df %>% select(Temp), na.rm = TRUE) + 1, digits = 0)
+
+
+plot <- ggplot(df, aes(x = room, y = Temp)) +
+  geom_boxplot(outlier.alpha = 0.01, outlier.shape = 1, outlier.colour = "darkgrey") +
+  scale_y_continuous(limits=c(minY,maxY), breaks = seq(minY, maxY, by = 2)) +
+  ggtitle("Boxplot per Flat/Room") +
+  theme_minimal() +
+  theme(
+    legend.position="none",
+    plot.title = element_text(hjust = 0.5)
+  )
+
+yaxis <- list(
+  title = "Temp<sub>Room</sub> in \u00B0C\n",
+  automargin = TRUE,
+  titlefont = list(size = 14, color = "darkgrey")
+)
+
+# create interactive plot
+ggplotly(plot + ylab(" ") + xlab(" ")) %>%
+  plotly::config(modeBarButtons = list(list("toImage")),
+                 displaylogo = FALSE,
+                 toImageButtonOptions = list(
+                   format = "svg"
+                 )
+  ) %>%
+  layout(yaxis = yaxis)
+
+```
+
+```{r boxplot3, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png (optional)
+ggsave("images/boxplot.png", plot)
+```
+

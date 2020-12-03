@@ -13,15 +13,22 @@ rmd_files: [
   "partRBasics/eda.Rmd",
 
   "partDataVis/introductionDataVis.Rmd",
+
+  "partDataVis/statistical.Rmd",
+  "partDataVis/statisticalBoxplot.Rmd",
+  "partDataVis/statisticalCrossCorrelation.Rmd",
+  "partDataVis/statisticalDensityplot.Rmd",
+  "partDataVis/statisticalDensityplotSeasons.Rmd",
+
+  "partDataVis/decomposition.Rmd",
+  "partDataVis/decompositionLong.Rmd",
+  "partDataVis/decompositionShort.Rmd",
+
   "partDataVis/seasonal.Rmd",
   "partDataVis/seasonalOverlapping.Rmd",
   "partDataVis/seasonalMiniplots.Rmd",
   "partDataVis/seasonalPolar.Rmd",
   "partDataVis/seasonalOverlappingBefAft.Rmd",
-
-  "partDataVis/decomposition.Rmd",
-  "partDataVis/decompositionLong.Rmd",
-  "partDataVis/decompositionShort.Rmd",
 
   "partDataVis/heatmap.Rmd",
   "partDataVis/heatmapCalendar.Rmd",
@@ -33,21 +40,19 @@ rmd_files: [
   "partDataVis/dailyProfMean.Rmd",
   "partDataVis/dailyProfDecomposed.Rmd",
 
+  "partDataVis/sumfrequency.Rmd",
+  "partDataVis/sumfrequencyDays.Rmd",
+  "partDataVis/sumfrequencyHours.Rmd",
+
   "partDataVis/comfort.Rmd",
   "partDataVis/comfortMollierHx.Rmd",
   "partDataVis/comfortTempHum.Rmd",
   "partDataVis/comfortSia180ThermCmf.Rmd",
 
   "partDataVis/misc.Rmd",
-  "partDataVis/boxplot.Rmd",
-  "partDataVis/densityplot.Rmd",
-  "partDataVis/densityplotSeasons.Rmd",
-  "partDataVis/sumFrequencyDays.Rmd",
-  "partDataVis/sumFrequencyHours.Rmd",
-  "partDataVis/crossCorrelation.Rmd",
-  "partDataVis/eleHousehold.Rmd",
-  "partDataVis/roomTempRed.Rmd",
-  "partDataVis/bldgEngySigScatter.Rmd",
+  "partDataVis/miscEleHousehold.Rmd",
+  "partDataVis/miscRoomTempRed.Rmd",
+  "partDataVis/miscBldgEngySigScatter.Rmd",
 
   "a1-packages.rmd",
   #"references.rmd",

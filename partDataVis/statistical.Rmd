@@ -1,0 +1,2 @@
+# Statistical Characteristics
+The first step of a data analysis is to become familiar with the data. For this purpose some visualizations of statistical parameters are presented hereafter.

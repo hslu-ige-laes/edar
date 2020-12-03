@@ -1,0 +1,75 @@
+\newpage
+## Density Plot Season
+### Goal
+You want to create a density plot of a temperature series for each season of the year:
+
+```{r echo=FALSE, fig.cap='Density Plot Temperature for each season of the year', out.width='70%'}
+knitr::include_graphics("images/plotDensitySeasons.png")
+```
+
+### Data Basis
+
+```{r densityplotSeasons0, warning=FALSE, message=FALSE, collapse = FALSE, echo=FALSE, fig.cap='Raw Data Temperature for Density Plot', out.width = "70%"}
+library(dplyr)
+library(lubridate)
+# read and print data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and remove empty cells
+df <- df %>% select(time, FlatA_Temp) %>% na.omit()
+
+# create column with day for later grouping
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+
+# plot temp data
+plot(df$time, df$FlatA_Temp,
+     xlab="Time", ylab="Temperature (degree Celsius)", main="Hourly Interval Raw Data", type = "l")
+
+```
+\newpage
+### Solution
+Create a new script, copy/paste the following code and run it:
+
+```{r densityplotSeasons2, warning=FALSE, message=FALSE, collapse = FALSE}
+library(ggplot2)
+library(plotly)
+library(dplyr)
+
+# load time series data and aggregate daily mean values
+library(dplyr)
+library(lubridate)
+library(redutils)
+
+# read and print data
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+                 stringsAsFactors=FALSE,
+                 sep =";")
+
+# select temperature and remove empty cells
+df <- df %>% select(time, FlatA_Temp) %>% na.omit()
+
+colnames(df) <- c("time", "value")
+
+df$season = getSeason(df$time)
+
+# static chart with ggplot
+plot <- ggplot(df) + 
+  geom_density(aes(x = value, colour = season)) +
+  scale_color_manual(values=c("#440154", "#2db27d", "#fde725", "#365c8d")) +
+  ggtitle("Density Plot of Room Temperature for each season of the year") +
+  labs(x = "Temperature (\u00B0C)",
+       y = "Density (-)",
+       colour = "Legend") +
+  theme_minimal()
+
+# interactive chart
+plotly::ggplotly(plot)
+```
+
+```{r densityplotSeasons3, warning=FALSE, message=FALSE, collapse = FALSE}
+# save static plot as png
+ggsave("images/plotDensitySeasons.png", plot)
+```
+

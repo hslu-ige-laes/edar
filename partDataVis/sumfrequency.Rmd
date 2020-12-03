@@ -1,0 +1,2 @@
+# Sum Frequency Diagrams
+This type of visualization has a long tradition in energy data analyses and various calculation methods are still based on it. 

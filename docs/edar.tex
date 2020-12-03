@@ -1017,38 +1017,32 @@ Sometimes not the final creation of the lines is challenging, but the preceding 
 
 The focus is on visualizations for reports in print quality. However, since some functions are implemented in the \href{https://github.com/hslu-ige-laes/redutils}{redutils} package and are thus easy to call up, they are therefore also suitable for the fast visualization of data in the field of explorative data analysis.
 
-\hypertarget{seasonal-plots}{%
-\chapter{Seasonal Plots}\label{seasonal-plots}}
+\hypertarget{statistical-characteristics}{%
+\chapter{Statistical Characteristics}\label{statistical-characteristics}}
 
-Seasonal plots are a graphical tool to visualize and detect seasonality in a time series. Based on a selected periodicity it emphasizes the seasonal patterns and also shows the changes in seasonality over time. Especially, it allows to detect changes between different seasons.
+The first step of a data analysis is to become familiar with the data. For this purpose some visualizations of statistical parameters are presented hereafter.
 
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:figplotSeasonalXY}
-\end{figure}
+\newpage
 
-This is like a standard time series plot except that the data are plotted against the ``seasons'' for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year. For example in \ref{fig:figplotSeasonalXY} the seasons are months.
-
-However, such plots are only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
-
-This chapter shows some useful types of seasonal plots.
-
-\hypertarget{overlapping}{%
-\section{Overlapping}\label{overlapping}}
+\hypertarget{boxplot}{%
+\section{Boxplot}\label{boxplot}}
 
 \hypertarget{goal}{%
 \subsection{Goal}\label{goal}}
 
-Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
+You want to create a boxplot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-9}
+\includegraphics[width=0.7\linewidth]{images/boxplot} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-9}
 \end{figure}
 
 \hypertarget{data-basis}{%
 \subsection{Data Basis}\label{data-basis}}
 
+A csv file with room temperature and humidity time series of four rooms. Below are only the room temperatures visualized.
+
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalPlotXY0-1} \caption{Raw Data for Seasonal Plot Overlapping}\label{fig:seasonalPlotXY0}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/boxplot0-1} \caption{Room Temperature Raw Data for Boxplot}\label{fig:boxplot0}
 \end{figure}
 
 \newpage
@@ -1060,113 +1054,93 @@ Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(forecast)}
-\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
 \KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\KeywordTok{library}\NormalTok{(ggthemes)}
-\KeywordTok{library}\NormalTok{(viridis)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(redutils)}
 \KeywordTok{library}\NormalTok{(lubridate)}
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\CommentTok{# load csv file}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
-                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
+                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
 
-\CommentTok{# filter flat}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(time, FlatA_Temp, FlatB_Temp, FlatC_Temp, FlatD_Temp)}
 
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
+                                        \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
+                                        \DataTypeTok{names_to =} \StringTok{"room"}\NormalTok{,}
+                                        \DataTypeTok{values_to =} \StringTok{"Temp"}\NormalTok{,}
+                                        \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{))}
 
-\CommentTok{# calculate consumption value per month}
-\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
-\CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+\NormalTok{minY <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{min}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Temp), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{)}
+\NormalTok{maxY <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{max}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Temp), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
 
-\CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ room, }\DataTypeTok{y =}\NormalTok{ Temp)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{outlier.alpha =} \FloatTok{0.01}\NormalTok{, }\DataTypeTok{outlier.shape =} \DecValTok{1}\NormalTok{, }\DataTypeTok{outlier.colour =} \StringTok{"darkgrey"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(minY,maxY), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(minY, maxY, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Boxplot per Flat/Room"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme}\NormalTok{(}
+    \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
+    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
+\NormalTok{  )}
 
-\CommentTok{# create time series object for ggseanplot function}
-\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+\NormalTok{yaxis <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
+  \DataTypeTok{title =} \StringTok{"Temp<sub>Room</sub> in \textbackslash{}u00B0C}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+  \DataTypeTok{automargin =} \OtherTok{TRUE}\NormalTok{,}
+  \DataTypeTok{titlefont =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{size =} \DecValTok{14}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkgrey"}\NormalTok{)}
+\NormalTok{)}
 
-\CommentTok{# create x/y plot}
-\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp))) }\CommentTok{# used for colours}
-
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
-                     \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
-                     \DataTypeTok{main =} \StringTok{"Seasonal Plot x/y per Month over 10 years"}\NormalTok{,}
-                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}
-\NormalTok{                     )}
-
-\CommentTok{# show static plot (uncomment it if you want a static plot)}
-\CommentTok{#plot}
-
-\CommentTok{# change theme (optional)}
-\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
-
-\CommentTok{# make plot interactive (optional)}
-\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-
-\CommentTok{# show plot interactive plot (optional)}
-\NormalTok{plotly}
+\CommentTok{# create interactive plot}
+\KeywordTok{ggplotly}\NormalTok{(plot }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{" "}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{" "}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)),}
+                 \DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{toImageButtonOptions =} \KeywordTok{list}\NormalTok{(}
+                   \DataTypeTok{format =} \StringTok{"svg"}
+\NormalTok{                 )}
+\NormalTok{  ) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{yaxis =}\NormalTok{ yaxis)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/seasonalPlotXY1-1.pdf}
+\includegraphics{edar_files/figure-latex/boxplot2-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# save static plot as png (optional)}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalXY.png"}\NormalTok{, plot)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/boxplot.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save interactive plot as html (optional)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalXY.html"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{discussion}{%
-\subsection{Discussion}\label{discussion}}
-
-A seasonal plot allows the underlying seasonal pattern to be seen more clearly, and is especially useful in identifying years in which the pattern changes.
-
-Hints:
-
-\begin{itemize}
-\tightlist
-\item
-  Double click on a specific year in the legend to display only that year
-\item
-  Click once to activate/deactivate an element
-\end{itemize}
 
 \newpage
 
-\hypertarget{mini-plots}{%
-\section{Mini Plots}\label{mini-plots}}
+\hypertarget{cross-correlation}{%
+\section{Cross-Correlation}\label{cross-correlation}}
 
 \hypertarget{goal-1}{%
 \subsection{Goal}\label{goal-1}}
 
-Plot a seasonal month plot as described in \href{https://otexts.com/fpp2/seasonal-subseries-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.5)}:
+You want to create a cross-correlation plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-10}
+\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-10}
 \end{figure}
-
-Here the seasonal patterns for each season are collected together in seprate mini time plots.
 
 \hypertarget{data-basis-1}{%
 \subsection{Data Basis}\label{data-basis-1}}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalMiniplots0-1} \caption{Raw Data for Seasonal Miniplots}\label{fig:seasonalMiniplots0}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/crossCorrelation0-1} \caption{Raw Data Room and Outdoor Temperature for Cross Correlation Plot}\label{fig:crossCorrelation0-1}
+\end{figure}
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/crossCorrelation0-2} \caption{Raw Data Room and Outdoor Temperature for Cross Correlation Plot}\label{fig:crossCorrelation0-2}
 \end{figure}
 
 \newpage
@@ -1178,109 +1152,98 @@ Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(forecast)}
+\KeywordTok{library}\NormalTok{(redutils)}
 \KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\KeywordTok{library}\NormalTok{(ggthemes)}
-\KeywordTok{library}\NormalTok{(viridis)}
 \KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(zoo)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(forecast)}
 
-\CommentTok{# load csv file}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
-                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# load time series data and aggregate mean values}
+\NormalTok{dfTempOa <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\CommentTok{# filter flat}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\NormalTok{dfTempOa}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfTempOa}\OperatorTok{$}\NormalTok{time,}
+                                      \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                      \DataTypeTok{tz =} \StringTok{"UTC"}\NormalTok{)}
 
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\NormalTok{dfTempOa}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfTempOa}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"days"}\NormalTok{))}
 
-\CommentTok{# calculate consumption value per month}
-\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
-\CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+\NormalTok{dfTempOa <-}\StringTok{ }\NormalTok{dfTempOa }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{tempOa =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\NormalTok{dfTempR <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                       \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                       \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{dfTempR}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfTempR}\OperatorTok{$}\NormalTok{time,}
+                                   \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                   \DataTypeTok{tz =} \StringTok{"UTC"}\NormalTok{)}
 
-\CommentTok{# create time series object for ggmonthplot function}
-\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df[}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+\CommentTok{# select temperature and humidity and remove empty cells}
+\NormalTok{dfTempR <-}\StringTok{ }\NormalTok{dfTempR }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# create x/y plot}
+\NormalTok{dfTempR}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfTempR}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"days"}\NormalTok{))}
 
-\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+\NormalTok{dfTempR <-}\StringTok{ }\NormalTok{dfTempR }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{tempR =} \KeywordTok{mean}\NormalTok{(FlatA_Temp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggmonthplot}\NormalTok{(df.ts,}
-                    \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
-                    \DataTypeTok{main =} \StringTok{"Seasonal Miniplots over 10 years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-                    \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-                    \DataTypeTok{xlab =} \StringTok{"Month}\CharTok{\textbackslash{}n}\StringTok{ "}
-\NormalTok{                    )}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfTempR, dfTempOa, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# change theme (optional)}
-\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
+\NormalTok{data}\OperatorTok{$}\NormalTok{season <-}\StringTok{ }\NormalTok{redutils}\OperatorTok{::}\KeywordTok{getSeason}\NormalTok{(data}\OperatorTok{$}\NormalTok{day)}
+
+\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{filter}\NormalTok{(season }\OperatorTok{==}\StringTok{ "Summer"}\NormalTok{)}
+
+\CommentTok{# plot diagram}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggCcf}\NormalTok{(data}\OperatorTok{$}\NormalTok{tempOa,}
+\NormalTok{              data}\OperatorTok{$}\NormalTok{tempR,}
+              \DataTypeTok{lag.max =} \DecValTok{7}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FloatTok{0.2}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Cross Correlation between }\CharTok{\textbackslash{}n}\StringTok{ Indoor and Outdoor Temperature in Summer"}\NormalTok{,}
+        \DataTypeTok{x =}\StringTok{"Days (Lag)"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Correlation"}\NormalTok{)}
 
 \CommentTok{# make plot interactive (optional)}
-\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-
-\CommentTok{# show plot}
-\NormalTok{plotly}
+\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/seasonalMiniplots1-1.pdf}
+\includegraphics{edar_files/figure-latex/crossCorrelation2-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalMiniplots.png"}\NormalTok{, plot)}
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/crossCorrelation.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save interactive plot as html}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalMiniplots.html"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{discussion-1}{%
-\subsection{Discussion}\label{discussion-1}}
-
-\begin{itemize}
-\item
-  This type of seasonal plot shows the mean value of each month and therefore emphasises on the monthly comparison
-\item
-  It revelas as well the mean seasonal pattern with the blue lines
-\end{itemize}
 
 \newpage
 
-\hypertarget{polar}{%
-\section{Polar}\label{polar}}
+\hypertarget{density-plot}{%
+\section{Density Plot}\label{density-plot}}
 
 \hypertarget{goal-2}{%
 \subsection{Goal}\label{goal-2}}
 
-Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
+You want to create a density plot of a temperature series with the mean value as vertical line:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-11}
+\includegraphics[width=0.7\linewidth]{images/plotDensity} \caption{Density Plot Temperature}\label{fig:unnamed-chunk-11}
 \end{figure}
-
-This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
 
 \hypertarget{data-basis-2}{%
 \subsection{Data Basis}\label{data-basis-2}}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalPlotPolar00-1} \caption{Raw Data for Seasonal Plot Polar}\label{fig:seasonalPlotPolar00}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/densityplot0-1} \caption{Raw Data Temperature for Density Plot}\label{fig:densityplot0}
 \end{figure}
-
 \newpage
 
 \hypertarget{solution-2}{%
@@ -1290,91 +1253,70 @@ Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(forecast)}
-\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
 \KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\KeywordTok{library}\NormalTok{(ggthemes)}
-\KeywordTok{library}\NormalTok{(viridis)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(lubridate)}
+\CommentTok{# read and print data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\CommentTok{# load csv file}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
-                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# select temperature and remove empty cells}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# filter flat}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
 
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_density}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)),}
+             \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
+             \DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}
+             \DataTypeTok{size =} \DecValTok{1}\NormalTok{,}
+             \DataTypeTok{label =} \StringTok{"Mean"}\NormalTok{)}\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Density Plot of Room Temperature"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Density (-)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
 
-\CommentTok{# calculate consumption value per month}
-\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
-\CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
-
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
-
-\CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
-
-\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
-
-\CommentTok{# create polar plot}
-
-\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
-
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
-                     \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
-                     \DataTypeTok{main =} \StringTok{"Seasonal Plot Polar per Month over 10 Years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}\NormalTok{,}
-                     \DataTypeTok{polar =} \OtherTok{TRUE}
-\NormalTok{                     )}
-
-\CommentTok{# show plot (interactive version with plotly unfortunately not possible)}
-\NormalTok{plot}
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/seasonalPlotPolar1-1.pdf}
+\includegraphics{edar_files/figure-latex/densityplot2-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# save static plot as png (optional)}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalPolar.png"}\NormalTok{, plot)}
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDensity.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discussion-2}{%
-\subsection{Discussion}\label{discussion-2}}
-
-This representation emphasizes the high consumption in summer very well, which could undoubtedly be reduced in a residential building. The Years 2018 and 2019 show, that this optimization was done.
-
-To emphasize this optimization please refer to chapter \ref{dataVisSeasonalBefAft}.
-
 \newpage
 
-\hypertarget{dataVisSeasonalBefAft}{%
-\section{Before/After Optimization}\label{dataVisSeasonalBefAft}}
+\hypertarget{density-plot-season}{%
+\section{Density Plot Season}\label{density-plot-season}}
 
 \hypertarget{goal-3}{%
 \subsection{Goal}\label{goal-3}}
 
-To highlight an energy optimization in a season diagram, we can gray out the seasons before the optimization and only highlight the monthly values after the optimization. To better quantify the success, we can calculate and display the confidence interval of the years before.
-
-We will create the following plot:
+You want to create a density plot of a temperature series for each season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-12}
+\includegraphics[width=0.7\linewidth]{images/plotDensitySeasons} \caption{Density Plot Temperature for each season of the year}\label{fig:unnamed-chunk-12}
 \end{figure}
 
 \hypertarget{data-basis-3}{%
 \subsection{Data Basis}\label{data-basis-3}}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/energyConsBeforeAfter0-1} \caption{Raw Data for Seasonal Plot Overlapping Before/After Optimization}\label{fig:energyConsBeforeAfter0}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/densityplotSeasons0-1} \caption{Raw Data Temperature for Density Plot}\label{fig:densityplotSeasons0}
 \end{figure}
-
 \newpage
 
 \hypertarget{solution-3}{%
@@ -1384,79 +1326,50 @@ Create a new script, copy/paste the following code and run it:
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(ggplot2)}
 \KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(dplyr)}
 
-\CommentTok{# load csv file}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
-                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# load time series data and aggregate daily mean values}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(redutils)}
 
-\CommentTok{# filter flat}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+\CommentTok{# read and print data}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+\CommentTok{# select temperature and remove empty cells}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
 
-\CommentTok{# calculate consumption value per month}
-\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
-\CommentTok{# so the consumption for february first is value(march) - value(february)!}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{season =}\StringTok{ }\KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
 
-\CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_density}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value, }\DataTypeTok{colour =}\NormalTok{ season)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values=}\KeywordTok{c}\NormalTok{(}\StringTok{"#440154"}\NormalTok{, }\StringTok{"#2db27d"}\NormalTok{, }\StringTok{"#fde725"}\NormalTok{, }\StringTok{"#365c8d"}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Density Plot of Room Temperature for each season of the year"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
+       \DataTypeTok{y =} \StringTok{"Density (-)"}\NormalTok{,}
+       \DataTypeTok{colour =} \StringTok{"Legend"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
 
-\CommentTok{# create plot}
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotSeasonalXYBeforeAfter}\NormalTok{(df,}
-                                  \DataTypeTok{dateOptimization =} \StringTok{"2017-09-01"}\NormalTok{,}
-                                  \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
-                                  \DataTypeTok{main =} \StringTok{"Before/After Optimization"}\NormalTok{,}
-                                  \DataTypeTok{ylab =} \StringTok{"Energy Consumption }\CharTok{\textbackslash{}n}\StringTok{(kWh/month)"}
-\NormalTok{                                  )}
-
-\CommentTok{# change theme (optional)}
-\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
-
-\CommentTok{# make plot interactive (optional)}
-\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-
-\CommentTok{# show plot}
-\NormalTok{plotly}
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{edar_files/figure-latex/energyConsBeforeAfter1-1.pdf}
+\includegraphics{edar_files/figure-latex/densityplotSeasons2-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\CommentTok{# save static plot as png (optional)}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalXYBeforeAfter.png"}\NormalTok{, plot)}
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDensitySeasons.png"}\NormalTok{, plot)}
 \end{Highlighting}
 \end{Shaded}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save interactive plot as html (optional)}
-\KeywordTok{library}\NormalTok{(htmlwidgets)}
-\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalXYBeforeAfter.html"}\NormalTok{)}
-\end{Highlighting}
-\end{Shaded}
-
-\hypertarget{discussion-3}{%
-\subsection{Discussion}\label{discussion-3}}
-
-\begin{itemize}
-\item
-  One can clearly see the impact of the optimization in mid-2017
-\item
-  And as well the too low setting of January 2018 where the thermostat of the flat got deactivated
-\item
-  The confidence band shows as well the year 2013 which had an unusual high consumption from February to June
-\end{itemize}
 
 \hypertarget{time-series-decomposition}{%
 \chapter{Time Series Decomposition}\label{time-series-decomposition}}
@@ -1589,8 +1502,8 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
-\hypertarget{discussion-4}{%
-\subsection{Discussion}\label{discussion-4}}
+\hypertarget{discussion}{%
+\subsection{Discussion}\label{discussion}}
 
 \begin{itemize}
 \item
@@ -1748,6 +1661,447 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{seasonal-plots}{%
+\chapter{Seasonal Plots}\label{seasonal-plots}}
+
+Seasonal plots are a graphical tool to visualize and detect seasonality in a time series. Based on a selected periodicity it emphasizes the seasonal patterns and also shows the changes in seasonality over time. Especially, it allows to detect changes between different seasons.
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:figplotSeasonalXY}
+\end{figure}
+
+This is like a standard time series plot except that the data are plotted against the ``seasons'' for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year. For example in \ref{fig:figplotSeasonalXY} the seasons are months.
+
+However, such plots are only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
+
+This chapter shows some useful types of seasonal plots.
+
+\hypertarget{overlapping}{%
+\section{Overlapping}\label{overlapping}}
+
+\hypertarget{goal-6}{%
+\subsection{Goal}\label{goal-6}}
+
+Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-15}
+\end{figure}
+
+\hypertarget{data-basis-6}{%
+\subsection{Data Basis}\label{data-basis-6}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalPlotXY0-1} \caption{Raw Data for Seasonal Plot Overlapping}\label{fig:seasonalPlotXY0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-6}{%
+\subsection{Solution}\label{solution-6}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(forecast)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(viridis)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\CommentTok{# calculate consumption value per month}
+\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
+\CommentTok{# so the consumption for february first is value(march) - value(february)!}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+
+\CommentTok{# value correction (outlier because of commissioning)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+
+\CommentTok{# create time series object for ggseanplot function}
+\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\CommentTok{# create x/y plot}
+\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp))) }\CommentTok{# used for colours}
+
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
+                     \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
+                     \DataTypeTok{main =} \StringTok{"Seasonal Plot x/y per Month over 10 years"}\NormalTok{,}
+                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}
+\NormalTok{                     )}
+
+\CommentTok{# show static plot (uncomment it if you want a static plot)}
+\CommentTok{#plot}
+
+\CommentTok{# change theme (optional)}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
+
+\CommentTok{# make plot interactive (optional)}
+\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+
+\CommentTok{# show plot interactive plot (optional)}
+\NormalTok{plotly}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/seasonalPlotXY1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalXY.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save interactive plot as html (optional)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalXY.html"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-1}{%
+\subsection{Discussion}\label{discussion-1}}
+
+A seasonal plot allows the underlying seasonal pattern to be seen more clearly, and is especially useful in identifying years in which the pattern changes.
+
+Hints:
+
+\begin{itemize}
+\tightlist
+\item
+  Double click on a specific year in the legend to display only that year
+\item
+  Click once to activate/deactivate an element
+\end{itemize}
+
+\newpage
+
+\hypertarget{mini-plots}{%
+\section{Mini Plots}\label{mini-plots}}
+
+\hypertarget{goal-7}{%
+\subsection{Goal}\label{goal-7}}
+
+Plot a seasonal month plot as described in \href{https://otexts.com/fpp2/seasonal-subseries-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.5)}:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-16}
+\end{figure}
+
+Here the seasonal patterns for each season are collected together in seprate mini time plots.
+
+\hypertarget{data-basis-7}{%
+\subsection{Data Basis}\label{data-basis-7}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalMiniplots0-1} \caption{Raw Data for Seasonal Miniplots}\label{fig:seasonalMiniplots0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-7}{%
+\subsection{Solution}\label{solution-7}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(forecast)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(viridis)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\CommentTok{# calculate consumption value per month}
+\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
+\CommentTok{# so the consumption for february first is value(march) - value(february)!}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+
+\CommentTok{# value correction (outlier because of commissioning)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+
+\CommentTok{# create time series object for ggmonthplot function}
+\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df[}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\CommentTok{# create x/y plot}
+
+\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggmonthplot}\NormalTok{(df.ts,}
+                    \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
+                    \DataTypeTok{main =} \StringTok{"Seasonal Miniplots over 10 years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+                    \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+                    \DataTypeTok{xlab =} \StringTok{"Month}\CharTok{\textbackslash{}n}\StringTok{ "}
+\NormalTok{                    )}
+
+\CommentTok{# change theme (optional)}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
+
+\CommentTok{# make plot interactive (optional)}
+\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+
+\CommentTok{# show plot}
+\NormalTok{plotly}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/seasonalMiniplots1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalMiniplots.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save interactive plot as html}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalMiniplots.html"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-2}{%
+\subsection{Discussion}\label{discussion-2}}
+
+\begin{itemize}
+\item
+  This type of seasonal plot shows the mean value of each month and therefore emphasises on the monthly comparison
+\item
+  It revelas as well the mean seasonal pattern with the blue lines
+\end{itemize}
+
+\newpage
+
+\hypertarget{polar}{%
+\section{Polar}\label{polar}}
+
+\hypertarget{goal-8}{%
+\subsection{Goal}\label{goal-8}}
+
+Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-17}
+\end{figure}
+
+This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
+
+\hypertarget{data-basis-8}{%
+\subsection{Data Basis}\label{data-basis-8}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/seasonalPlotPolar00-1} \caption{Raw Data for Seasonal Plot Polar}\label{fig:seasonalPlotPolar00}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-8}{%
+\subsection{Solution}\label{solution-8}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(forecast)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
+\KeywordTok{library}\NormalTok{(viridis)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\CommentTok{# calculate consumption value per month}
+\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
+\CommentTok{# so the consumption for february first is value(march) - value(february)!}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+
+\CommentTok{# value correction (outlier because of commissioning)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+
+\NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\CommentTok{# create polar plot}
+
+\NormalTok{numYears =}\StringTok{ }\KeywordTok{length}\NormalTok{(}\KeywordTok{unique}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
+                     \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
+                     \DataTypeTok{main =} \StringTok{"Seasonal Plot Polar per Month over 10 Years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}\NormalTok{,}
+                     \DataTypeTok{polar =} \OtherTok{TRUE}
+\NormalTok{                     )}
+
+\CommentTok{# show plot (interactive version with plotly unfortunately not possible)}
+\NormalTok{plot}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/seasonalPlotPolar1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalPolar.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-3}{%
+\subsection{Discussion}\label{discussion-3}}
+
+This representation emphasizes the high consumption in summer very well, which could undoubtedly be reduced in a residential building. The Years 2018 and 2019 show, that this optimization was done.
+
+To emphasize this optimization please refer to chapter \ref{dataVisSeasonalBefAft}.
+
+\newpage
+
+\hypertarget{dataVisSeasonalBefAft}{%
+\section{Before/After Optimization}\label{dataVisSeasonalBefAft}}
+
+\hypertarget{goal-9}{%
+\subsection{Goal}\label{goal-9}}
+
+To highlight an energy optimization in a season diagram, we can gray out the seasons before the optimization and only highlight the monthly values after the optimization. To better quantify the success, we can calculate and display the confidence interval of the years before.
+
+We will create the following plot:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-18}
+\end{figure}
+
+\hypertarget{data-basis-9}{%
+\subsection{Data Basis}\label{data-basis-9}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/energyConsBeforeAfter0-1} \caption{Raw Data for Seasonal Plot Overlapping Before/After Optimization}\label{fig:energyConsBeforeAfter0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-9}{%
+\subsection{Solution}\label{solution-9}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(redutils)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\KeywordTok{library}\NormalTok{(ggthemes)}
+
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr02_energyHeat)}
+
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"timestamp"}\NormalTok{, }\StringTok{"meterValue"}\NormalTok{)}
+
+\CommentTok{# calculate consumption value per month}
+\CommentTok{# pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,}
+\CommentTok{# so the consumption for february first is value(march) - value(february)!}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+
+\CommentTok{# value correction (outlier because of commissioning)}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+
+\CommentTok{# create plot}
+\NormalTok{plot <-}\StringTok{ }\KeywordTok{plotSeasonalXYBeforeAfter}\NormalTok{(df,}
+                                  \DataTypeTok{dateOptimization =} \StringTok{"2017-09-01"}\NormalTok{,}
+                                  \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
+                                  \DataTypeTok{main =} \StringTok{"Before/After Optimization"}\NormalTok{,}
+                                  \DataTypeTok{ylab =} \StringTok{"Energy Consumption }\CharTok{\textbackslash{}n}\StringTok{(kWh/month)"}
+\NormalTok{                                  )}
+
+\CommentTok{# change theme (optional)}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{plot }\OperatorTok{+}\StringTok{ }\NormalTok{ggthemes}\OperatorTok{::}\KeywordTok{theme_economist}\NormalTok{()}
+
+\CommentTok{# make plot interactive (optional)}
+\NormalTok{plotly <-}\StringTok{ }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+
+\CommentTok{# show plot}
+\NormalTok{plotly}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/energyConsBeforeAfter1-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png (optional)}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSeasonalXYBeforeAfter.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save interactive plot as html (optional)}
+\KeywordTok{library}\NormalTok{(htmlwidgets)}
+\NormalTok{htmlwidgets}\OperatorTok{::}\KeywordTok{saveWidget}\NormalTok{(plotly, }\StringTok{"plotlySeasonalXYBeforeAfter.html"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{discussion-4}{%
+\subsection{Discussion}\label{discussion-4}}
+
+\begin{itemize}
+\item
+  One can clearly see the impact of the optimization in mid-2017
+\item
+  And as well the too low setting of January 2018 where the thermostat of the flat got deactivated
+\item
+  The confidence band shows as well the year 2013 which had an unusual high consumption from February to June
+\end{itemize}
+
 \hypertarget{heat-maps}{%
 \chapter{Heat Maps}\label{heat-maps}}
 
@@ -1762,17 +2116,17 @@ This chapter shows different types of heat maps which are useful for energy data
 \hypertarget{calendar}{%
 \section{Calendar}\label{calendar}}
 
-\hypertarget{goal-6}{%
-\subsection{Goal}\label{goal-6}}
+\hypertarget{goal-10}{%
+\subsection{Goal}\label{goal-10}}
 
 Create a calendar heat map with daily energy consumption values:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-15}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-19}
 \end{figure}
 
-\hypertarget{data-basis-6}{%
-\subsection{Data Basis}\label{data-basis-6}}
+\hypertarget{data-basis-10}{%
+\subsection{Data Basis}\label{data-basis-10}}
 
 Daily energy consumption values of one whole year in an interval of 15mins.
 
@@ -1782,8 +2136,8 @@ Daily energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-6}{%
-\subsection{Solution}\label{solution-6}}
+\hypertarget{solution-10}{%
+\subsection{Solution}\label{solution-10}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -1877,17 +2231,17 @@ Some findings:
 \hypertarget{median-weeks}{%
 \section{Median-Weeks}\label{median-weeks}}
 
-\hypertarget{goal-7}{%
-\subsection{Goal}\label{goal-7}}
+\hypertarget{goal-11}{%
+\subsection{Goal}\label{goal-11}}
 
 Create an energy consumption heat map of a median week depending on the season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-16}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-20}
 \end{figure}
 
-\hypertarget{data-basis-7}{%
-\subsection{Data Basis}\label{data-basis-7}}
+\hypertarget{data-basis-11}{%
+\subsection{Data Basis}\label{data-basis-11}}
 
 Daily energy consumption values of one whole year in an interval of 15mins.
 
@@ -1897,8 +2251,8 @@ Daily energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-7}{%
-\subsection{Solution}\label{solution-7}}
+\hypertarget{solution-11}{%
+\subsection{Solution}\label{solution-11}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -1957,17 +2311,17 @@ This chapter shows some useful visualizations to accommodate this recognition.
 \hypertarget{overview}{%
 \section{Overview}\label{overview}}
 
-\hypertarget{goal-8}{%
-\subsection{Goal}\label{goal-8}}
+\hypertarget{goal-12}{%
+\subsection{Goal}\label{goal-12}}
 
 Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-17}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-21}
 \end{figure}
 
-\hypertarget{data-basis-8}{%
-\subsection{Data Basis}\label{data-basis-8}}
+\hypertarget{data-basis-12}{%
+\subsection{Data Basis}\label{data-basis-12}}
 
 Energy consumption values of one whole year in an interval of 15mins.
 
@@ -1977,8 +2331,8 @@ Energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-8}{%
-\subsection{Solution}\label{solution-8}}
+\hypertarget{solution-12}{%
+\subsection{Solution}\label{solution-12}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2019,17 +2373,17 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{overlayed}{%
 \section{Overlayed}\label{overlayed}}
 
-\hypertarget{goal-9}{%
-\subsection{Goal}\label{goal-9}}
+\hypertarget{goal-13}{%
+\subsection{Goal}\label{goal-13}}
 
 Create a plot of all data per week by season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-18}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-22}
 \end{figure}
 
-\hypertarget{data-basis-9}{%
-\subsection{Data Basis}\label{data-basis-9}}
+\hypertarget{data-basis-13}{%
+\subsection{Data Basis}\label{data-basis-13}}
 
 Energy consumption values of one whole year in an interval of 15mins.
 
@@ -2039,8 +2393,8 @@ Energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-9}{%
-\subsection{Solution}\label{solution-9}}
+\hypertarget{solution-13}{%
+\subsection{Solution}\label{solution-13}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2126,17 +2480,17 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{mean}{%
 \section{Mean}\label{mean}}
 
-\hypertarget{goal-10}{%
-\subsection{Goal}\label{goal-10}}
+\hypertarget{goal-14}{%
+\subsection{Goal}\label{goal-14}}
 
 Create a plot of mean data per week:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-19}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-23}
 \end{figure}
 
-\hypertarget{data-basis-10}{%
-\subsection{Data Basis}\label{data-basis-10}}
+\hypertarget{data-basis-14}{%
+\subsection{Data Basis}\label{data-basis-14}}
 
 Energy consumption values of one whole year in an interval of 15mins.
 
@@ -2146,8 +2500,8 @@ Energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-10}{%
-\subsection{Solution}\label{solution-10}}
+\hypertarget{solution-14}{%
+\subsection{Solution}\label{solution-14}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2237,17 +2591,17 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{dailyProfilesDecomposed}{%
 \section{Decomposed}\label{dailyProfilesDecomposed}}
 
-\hypertarget{goal-11}{%
-\subsection{Goal}\label{goal-11}}
+\hypertarget{goal-15}{%
+\subsection{Goal}\label{goal-15}}
 
 Create a plot of detrended mean data per week as recommended in \href{https://doi.org/10.1016/j.enbuild.2018.07.056}{``Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting'', Pickering et al, 2018}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-20}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-24}
 \end{figure}
 
-\hypertarget{data-basis-11}{%
-\subsection{Data Basis}\label{data-basis-11}}
+\hypertarget{data-basis-15}{%
+\subsection{Data Basis}\label{data-basis-15}}
 
 Energy consumption values of one whole year in an interval of 15mins.
 
@@ -2257,8 +2611,8 @@ Energy consumption values of one whole year in an interval of 15mins.
 
 \newpage
 
-\hypertarget{solution-11}{%
-\subsection{Solution}\label{solution-11}}
+\hypertarget{solution-15}{%
+\subsection{Solution}\label{solution-15}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2286,6 +2640,231 @@ Create a new script, copy/paste the following code and run it:
 \end{Highlighting}
 \end{Shaded}
 
+\hypertarget{sum-frequency-diagrams}{%
+\chapter{Sum Frequency Diagrams}\label{sum-frequency-diagrams}}
+
+This type of visualization has a long tradition in energy data analyses and various calculation methods are still based on it.
+
+\newpage
+
+\hypertarget{sum-frequency-days}{%
+\section{Sum Frequency Days}\label{sum-frequency-days}}
+
+\hypertarget{goal-16}{%
+\subsection{Goal}\label{goal-16}}
+
+You want to create a sum frequency plot of a temperature series for each day in a year:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyDays} \caption{Sum Frequency Plot Temperature Days}\label{fig:unnamed-chunk-25}
+\end{figure}
+
+\hypertarget{data-basis-16}{%
+\subsection{Data Basis}\label{data-basis-16}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencydays0-1} \caption{Outside Temperature Raw Data for Sum Frequency Days Plot}\label{fig:sumfrequencydays0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-16}{%
+\subsection{Solution}\label{solution-16}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(zoo)}
+\KeywordTok{library}\NormalTok{(mgcv)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
+                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# rename columns}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
+
+\CommentTok{# filter year}
+\NormalTok{filterYear <-}\StringTok{ "2019"}
+
+\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{day =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01"}\NormalTok{)),}
+                                \KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31"}\NormalTok{)),}
+                                 \DataTypeTok{by =} \StringTok{"days"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# replace NA with interpolation}
+\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
+
+\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\CommentTok{# create new data frame with sorted values}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
+\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"day"}\NormalTok{)}
+
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ day,}
+                          \DataTypeTok{y =}\NormalTok{ meanValue),}
+                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
+                      \DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{,}
+                      \DataTypeTok{size =} \FloatTok{0.5}
+\NormalTok{                      ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Day in a Year"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (days)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{365}\NormalTok{, }\DecValTok{25}\NormalTok{), }\DecValTok{365}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/sumfrequencydays2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyDays.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\newpage
+
+\hypertarget{sum-frequency-hours}{%
+\section{Sum Frequency Hours}\label{sum-frequency-hours}}
+
+\hypertarget{goal-17}{%
+\subsection{Goal}\label{goal-17}}
+
+You want to create a sum frequency plot of a temperature series for each hour in a year:
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyHour} \caption{Sum Frequency Plot Temperature}\label{fig:unnamed-chunk-26}
+\end{figure}
+
+\hypertarget{data-basis-17}{%
+\subsection{Data Basis}\label{data-basis-17}}
+
+\begin{figure}
+\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencyhour0-1} \caption{Outside Temperature Raw Data for Sum Frequency Hours Plot}\label{fig:sumfrequencyhour0}
+\end{figure}
+
+\newpage
+
+\hypertarget{solution-17}{%
+\subsection{Solution}\label{solution-17}}
+
+Create a new script, copy/paste the following code and run it:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+\KeywordTok{library}\NormalTok{(plotly)}
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\KeywordTok{library}\NormalTok{(zoo)}
+
+\CommentTok{# load time series data and aggregate daily mean values}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
+                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
+                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\CommentTok{# rename columns}
+\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
+
+\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
+\NormalTok{df}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"hour"}\NormalTok{), }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
+
+\CommentTok{# filter year}
+
+\CommentTok{# edit year!!!}
+\NormalTok{filterYear <-}\StringTok{ "2019"}
+
+\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{group_by}\NormalTok{(hour) }\OperatorTok{%>%}
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
+
+\CommentTok{# Fill missing values with NA}
+\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{hour =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01 00:00:00"}\NormalTok{),}
+                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
+                                 \KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31 23:00:00"}\NormalTok{),}
+                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
+                                 \DataTypeTok{by =} \StringTok{"hours"}\NormalTok{))}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
+
+\CommentTok{# replace NA with interpolation}
+\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
+
+\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
+
+\CommentTok{# create new data frame with sorted values}
+\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
+\NormalTok{data}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
+\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"hour"}\NormalTok{)}
+
+\CommentTok{# static chart with ggplot}
+\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
+\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ hour,}
+                          \DataTypeTok{y =}\NormalTok{ meanValue),}
+                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
+                      \DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{,}
+                      \DataTypeTok{size =} \FloatTok{0.5}
+\NormalTok{                      ) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Hour in a Year"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (hours)"}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{8760}\NormalTok{, }\DecValTok{1000}\NormalTok{), }\DecValTok{8760}\NormalTok{)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
+
+\CommentTok{# interactive chart}
+\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/sumfrequencyhour2-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# save static plot as png}
+\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyHour.png"}\NormalTok{, plot)}
+\end{Highlighting}
+\end{Shaded}
+
 \hypertarget{comfort-plots}{%
 \chapter{Comfort Plots}\label{comfort-plots}}
 
@@ -2300,17 +2879,17 @@ This chapter shows how to create some popular comfort plots.
 \hypertarget{mollier-hx-diagram}{%
 \section{Mollier hx Diagram}\label{mollier-hx-diagram}}
 
-\hypertarget{goal-12}{%
-\subsection{Goal}\label{goal-12}}
+\hypertarget{goal-18}{%
+\subsection{Goal}\label{goal-18}}
 
 You want to plot a mollier h-x diagram:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-21}
+\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-27}
 \end{figure}
 
-\hypertarget{data-basis-12}{%
-\subsection{Data Basis}\label{data-basis-12}}
+\hypertarget{data-basis-18}{%
+\subsection{Data Basis}\label{data-basis-18}}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{edar_files/figure-latex/mollierhx0-1} \caption{Raw Data Temperature and Humidity for Mollier hx Diagram}\label{fig:mollierhx0-1}
@@ -2321,8 +2900,8 @@ You want to plot a mollier h-x diagram:
 
 \newpage
 
-\hypertarget{solution-12}{%
-\subsection{Solution}\label{solution-12}}
+\hypertarget{solution-18}{%
+\subsection{Solution}\label{solution-18}}
 
 The sensor data is not in a constant intervall and not yet aggregated. So after reading in the time series the data has to get filtered and aggregated per day.
 
@@ -2386,17 +2965,17 @@ If you are interested in implementing this plot in your own dashboard you can ch
 \hypertarget{temperature-versus-humidity}{%
 \section{Temperature versus Humidity}\label{temperature-versus-humidity}}
 
-\hypertarget{goal-13}{%
-\subsection{Goal}\label{goal-13}}
+\hypertarget{goal-19}{%
+\subsection{Goal}\label{goal-19}}
 
 You want to create a temperature versus humidity comfort plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortTempHum} \caption{Temperature versus Humidity Comfort Plot}\label{fig:unnamed-chunk-23}
+\includegraphics[width=0.7\linewidth]{images/comfortTempHum} \caption{Temperature versus Humidity Comfort Plot}\label{fig:unnamed-chunk-29}
 \end{figure}
 
-\hypertarget{data-basis-13}{%
-\subsection{Data Basis}\label{data-basis-13}}
+\hypertarget{data-basis-19}{%
+\subsection{Data Basis}\label{data-basis-19}}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{edar_files/figure-latex/comforttemphum0-1} \caption{Raw Data Temperature and Humidity for Temp vs. Hum Comfort Plot}\label{fig:comforttemphum0-1}
@@ -2407,8 +2986,8 @@ You want to create a temperature versus humidity comfort plot:
 
 \newpage
 
-\hypertarget{solution-13}{%
-\subsection{Solution}\label{solution-13}}
+\hypertarget{solution-19}{%
+\subsection{Solution}\label{solution-19}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2524,17 +3103,17 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{sia-180-thermal-comfort}{%
 \section{SIA 180 Thermal Comfort}\label{sia-180-thermal-comfort}}
 
-\hypertarget{goal-14}{%
-\subsection{Goal}\label{goal-14}}
+\hypertarget{goal-20}{%
+\subsection{Goal}\label{goal-20}}
 
 You want to plot a diagram like the one from the SIA 180:2014
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-24}
+\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-30}
 \end{figure}
 
-\hypertarget{data-basis-14}{%
-\subsection{Data Basis}\label{data-basis-14}}
+\hypertarget{data-basis-20}{%
+\subsection{Data Basis}\label{data-basis-20}}
 
 \begin{figure}
 \includegraphics[width=0.7\linewidth]{edar_files/figure-latex/comfortSia180ThermCmf0-1} \caption{Raw Data Room and Outdoor Temperature for SIA180 Thermal Comfort Plot}\label{fig:comfortSia180ThermCmf0-1}
@@ -2545,8 +3124,8 @@ You want to plot a diagram like the one from the SIA 180:2014
 
 \newpage
 
-\hypertarget{solution-14}{%
-\subsection{Solution}\label{solution-14}}
+\hypertarget{solution-20}{%
+\subsection{Solution}\label{solution-20}}
 
 Create a new script, copy/paste the following code and run it:
 
@@ -2760,575 +3339,6 @@ Create a new script, copy/paste the following code and run it:
 \chapter{Miscellaneous}\label{miscellaneous}}
 
 Finally, some visualizations that did not fit into any of the above chapters and are not (yet) worth a separate chapter. But these are not less interesting\ldots{}
-
-\newpage
-
-\hypertarget{boxplot}{%
-\section{Boxplot}\label{boxplot}}
-
-\hypertarget{goal-15}{%
-\subsection{Goal}\label{goal-15}}
-
-You want to create a boxplot:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/boxplot} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-25}
-\end{figure}
-
-\hypertarget{data-basis-15}{%
-\subsection{Data Basis}\label{data-basis-15}}
-
-A csv file with room temperature and humidity time series of four rooms. Below are only the room temperatures visualized.
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/boxplot0-1} \caption{Room Temperature Raw Data for Boxplot}\label{fig:boxplot0}
-\end{figure}
-
-\newpage
-
-\hypertarget{solution-15}{%
-\subsection{Solution}\label{solution-15}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(tidyr)}
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\CommentTok{# load time series data and aggregate daily mean values}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
-                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
-                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{select}\NormalTok{(time, FlatA_Temp, FlatB_Temp, FlatC_Temp, FlatD_Temp)}
-
-\NormalTok{df <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
-                                        \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
-                                        \DataTypeTok{names_to =} \StringTok{"room"}\NormalTok{,}
-                                        \DataTypeTok{values_to =} \StringTok{"Temp"}\NormalTok{,}
-                                        \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{))}
-
-\NormalTok{minY <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{min}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Temp), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{-}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{)}
-\NormalTok{maxY <-}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{max}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(Temp), }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{+}\StringTok{ }\DecValTok{1}\NormalTok{, }\DataTypeTok{digits =} \DecValTok{0}\NormalTok{)}
-
-
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ room, }\DataTypeTok{y =}\NormalTok{ Temp)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_boxplot}\NormalTok{(}\DataTypeTok{outlier.alpha =} \FloatTok{0.01}\NormalTok{, }\DataTypeTok{outlier.shape =} \DecValTok{1}\NormalTok{, }\DataTypeTok{outlier.colour =} \StringTok{"darkgrey"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits=}\KeywordTok{c}\NormalTok{(minY,maxY), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(minY, maxY, }\DataTypeTok{by =} \DecValTok{2}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Boxplot per Flat/Room"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme}\NormalTok{(}
-    \DataTypeTok{legend.position=}\StringTok{"none"}\NormalTok{,}
-    \DataTypeTok{plot.title =} \KeywordTok{element_text}\NormalTok{(}\DataTypeTok{hjust =} \FloatTok{0.5}\NormalTok{)}
-\NormalTok{  )}
-
-\NormalTok{yaxis <-}\StringTok{ }\KeywordTok{list}\NormalTok{(}
-  \DataTypeTok{title =} \StringTok{"Temp<sub>Room</sub> in \textbackslash{}u00B0C}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-  \DataTypeTok{automargin =} \OtherTok{TRUE}\NormalTok{,}
-  \DataTypeTok{titlefont =} \KeywordTok{list}\NormalTok{(}\DataTypeTok{size =} \DecValTok{14}\NormalTok{, }\DataTypeTok{color =} \StringTok{"darkgrey"}\NormalTok{)}
-\NormalTok{)}
-
-\CommentTok{# create interactive plot}
-\KeywordTok{ggplotly}\NormalTok{(plot }\OperatorTok{+}\StringTok{ }\KeywordTok{ylab}\NormalTok{(}\StringTok{" "}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{xlab}\NormalTok{(}\StringTok{" "}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{plotly}\OperatorTok{::}\KeywordTok{config}\NormalTok{(}\DataTypeTok{modeBarButtons =} \KeywordTok{list}\NormalTok{(}\KeywordTok{list}\NormalTok{(}\StringTok{"toImage"}\NormalTok{)),}
-                 \DataTypeTok{displaylogo =} \OtherTok{FALSE}\NormalTok{,}
-                 \DataTypeTok{toImageButtonOptions =} \KeywordTok{list}\NormalTok{(}
-                   \DataTypeTok{format =} \StringTok{"svg"}
-\NormalTok{                 )}
-\NormalTok{  ) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{layout}\NormalTok{(}\DataTypeTok{yaxis =}\NormalTok{ yaxis)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/boxplot2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png (optional)}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/boxplot.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{density-plot}{%
-\section{Density Plot}\label{density-plot}}
-
-\hypertarget{goal-16}{%
-\subsection{Goal}\label{goal-16}}
-
-You want to create a density plot of a temperature series with the mean value as vertical line:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDensity} \caption{Density Plot Temperature}\label{fig:unnamed-chunk-26}
-\end{figure}
-
-\hypertarget{data-basis-16}{%
-\subsection{Data Basis}\label{data-basis-16}}
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/densityplot0-1} \caption{Raw Data Temperature for Density Plot}\label{fig:densityplot0}
-\end{figure}
-\newpage
-
-\hypertarget{solution-16}{%
-\subsection{Solution}\label{solution-16}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-
-\CommentTok{# load time series data and aggregate daily mean values}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\CommentTok{# read and print data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\CommentTok{# select temperature and remove empty cells}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
-
-\CommentTok{# static chart with ggplot}
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value)) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_density}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{geom_vline}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{xintercept =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)),}
-             \DataTypeTok{color =} \StringTok{"orange"}\NormalTok{,}
-             \DataTypeTok{linetype =} \StringTok{"dashed"}\NormalTok{,}
-             \DataTypeTok{size =} \DecValTok{1}\NormalTok{,}
-             \DataTypeTok{label =} \StringTok{"Mean"}\NormalTok{)}\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Density Plot of Room Temperature"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Density (-)"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
-
-\CommentTok{# interactive chart}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/densityplot2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDensity.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{density-plot-season}{%
-\section{Density Plot Season}\label{density-plot-season}}
-
-\hypertarget{goal-17}{%
-\subsection{Goal}\label{goal-17}}
-
-You want to create a density plot of a temperature series for each season of the year:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDensitySeasons} \caption{Density Plot Temperature for each season of the year}\label{fig:unnamed-chunk-27}
-\end{figure}
-
-\hypertarget{data-basis-17}{%
-\subsection{Data Basis}\label{data-basis-17}}
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/densityplotSeasons0-1} \caption{Raw Data Temperature for Density Plot}\label{fig:densityplotSeasons0}
-\end{figure}
-\newpage
-
-\hypertarget{solution-17}{%
-\subsection{Solution}\label{solution-17}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-
-\CommentTok{# load time series data and aggregate daily mean values}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\KeywordTok{library}\NormalTok{(redutils)}
-
-\CommentTok{# read and print data}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                 \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-                 \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\CommentTok{# select temperature and remove empty cells}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{season =}\StringTok{ }\KeywordTok{getSeason}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
-
-\CommentTok{# static chart with ggplot}
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(df) }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{geom_density}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ value, }\DataTypeTok{colour =}\NormalTok{ season)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_color_manual}\NormalTok{(}\DataTypeTok{values=}\KeywordTok{c}\NormalTok{(}\StringTok{"#440154"}\NormalTok{, }\StringTok{"#2db27d"}\NormalTok{, }\StringTok{"#fde725"}\NormalTok{, }\StringTok{"#365c8d"}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Density Plot of Room Temperature for each season of the year"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{x =} \StringTok{"Temperature (\textbackslash{}u00B0C)"}\NormalTok{,}
-       \DataTypeTok{y =} \StringTok{"Density (-)"}\NormalTok{,}
-       \DataTypeTok{colour =} \StringTok{"Legend"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{()}
-
-\CommentTok{# interactive chart}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/densityplotSeasons2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotDensitySeasons.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{sum-frequency-days}{%
-\section{Sum Frequency Days}\label{sum-frequency-days}}
-
-\hypertarget{goal-18}{%
-\subsection{Goal}\label{goal-18}}
-
-You want to create a sum frequency plot of a temperature series for each day in a year:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyDays} \caption{Sum Frequency Plot Temperature Days}\label{fig:unnamed-chunk-28}
-\end{figure}
-
-\hypertarget{data-basis-18}{%
-\subsection{Data Basis}\label{data-basis-18}}
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencydays0-1} \caption{Outside Temperature Raw Data for Sum Frequency Days Plot}\label{fig:sumfrequencydays0}
-\end{figure}
-
-\newpage
-
-\hypertarget{solution-18}{%
-\subsection{Solution}\label{solution-18}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\KeywordTok{library}\NormalTok{(zoo)}
-\KeywordTok{library}\NormalTok{(mgcv)}
-
-\CommentTok{# load time series data and aggregate daily mean values}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
-                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
-                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
-\CommentTok{# rename columns}
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
-
-\CommentTok{# filter year}
-\NormalTok{filterYear <-}\StringTok{ "2019"}
-
-\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
-
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-\CommentTok{# Fill missing values with NA}
-\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{day =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01"}\NormalTok{)),}
-                                \KeywordTok{as.Date}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31"}\NormalTok{)),}
-                                 \DataTypeTok{by =} \StringTok{"days"}\NormalTok{))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# replace NA with interpolation}
-\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
-
-\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-
-\CommentTok{# create new data frame with sorted values}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
-\NormalTok{data}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
-\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"day"}\NormalTok{)}
-
-\CommentTok{# static chart with ggplot}
-\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
-\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ day,}
-                          \DataTypeTok{y =}\NormalTok{ meanValue),}
-                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
-                      \DataTypeTok{alpha =} \FloatTok{0.8}\NormalTok{,}
-                      \DataTypeTok{size =} \FloatTok{0.5}
-\NormalTok{                      ) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Day in a Year"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (days)"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{365}\NormalTok{, }\DecValTok{25}\NormalTok{), }\DecValTok{365}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
-
-\CommentTok{# interactive chart}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/sumfrequencydays2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyDays.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{sum-frequency-hours}{%
-\section{Sum Frequency Hours}\label{sum-frequency-hours}}
-
-\hypertarget{goal-19}{%
-\subsection{Goal}\label{goal-19}}
-
-You want to create a sum frequency plot of a temperature series for each hour in a year:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyHour} \caption{Sum Frequency Plot Temperature}\label{fig:unnamed-chunk-29}
-\end{figure}
-
-\hypertarget{data-basis-19}{%
-\subsection{Data Basis}\label{data-basis-19}}
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/sumfrequencyhour0-1} \caption{Outside Temperature Raw Data for Sum Frequency Hours Plot}\label{fig:sumfrequencyhour0}
-\end{figure}
-
-\newpage
-
-\hypertarget{solution-19}{%
-\subsection{Solution}\label{solution-19}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(ggplot2)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\KeywordTok{library}\NormalTok{(zoo)}
-
-\CommentTok{# load time series data and aggregate daily mean values}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
-                           \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
-                           \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-
-\CommentTok{# rename columns}
-\KeywordTok{colnames}\NormalTok{(df) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{, }\StringTok{"value"}\NormalTok{)}
-
-\NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
-\NormalTok{df}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"hour"}\NormalTok{), }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
-
-\CommentTok{# filter year}
-
-\CommentTok{# edit year!!!}
-\NormalTok{filterYear <-}\StringTok{ "2019"}
-
-\NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
-
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(hour) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-\CommentTok{# Fill missing values with NA}
-\NormalTok{grid.df <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{hour =} \KeywordTok{seq}\NormalTok{(}\KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-01-01 00:00:00"}\NormalTok{),}
-                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
-                                 \KeywordTok{as.POSIXct}\NormalTok{(}\KeywordTok{paste0}\NormalTok{(filterYear, }\StringTok{"-12-31 23:00:00"}\NormalTok{),}
-                                            \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{),}
-                                 \DataTypeTok{by =} \StringTok{"hours"}\NormalTok{))}
-\NormalTok{df <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(df, grid.df, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{)}
-
-\CommentTok{# replace NA with interpolation}
-\NormalTok{df}\OperatorTok{$}\NormalTok{meanValue <-}\StringTok{ }\KeywordTok{na.approx}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue)}
-
-\NormalTok{tempMin <-}\StringTok{ }\KeywordTok{floor}\NormalTok{(}\KeywordTok{min}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-\NormalTok{tempMax <-}\StringTok{ }\KeywordTok{ceiling}\NormalTok{(}\KeywordTok{max}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{))}
-
-\CommentTok{# create new data frame with sorted values}
-\NormalTok{data <-}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\KeywordTok{sort}\NormalTok{(df}\OperatorTok{$}\NormalTok{meanValue))}
-\NormalTok{data}\OperatorTok{$}\NormalTok{hour <-}\StringTok{ }\KeywordTok{as.numeric}\NormalTok{(}\KeywordTok{row.names}\NormalTok{(data))}
-\KeywordTok{colnames}\NormalTok{(data) <-}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"meanValue"}\NormalTok{, }\StringTok{"hour"}\NormalTok{)}
-
-\CommentTok{# static chart with ggplot}
-\NormalTok{plot <-}\StringTok{ }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{ggplot}\NormalTok{(data) }\OperatorTok{+}
-\StringTok{  }\NormalTok{ggplot2}\OperatorTok{::}\KeywordTok{geom_point}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ hour,}
-                          \DataTypeTok{y =}\NormalTok{ meanValue),}
-                      \DataTypeTok{colour =} \StringTok{"orange"}\NormalTok{,}
-                      \DataTypeTok{alpha =} \FloatTok{0.3}\NormalTok{,}
-                      \DataTypeTok{size =} \FloatTok{0.5}
-\NormalTok{                      ) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Sum Frequency Plot for each Hour in a Year"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{ylab}\NormalTok{(}\StringTok{"Mean Temperature (\textbackslash{}u00B0C)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{xlab}\NormalTok{(}\StringTok{"}\CharTok{\textbackslash{}n}\StringTok{Frequency (hours)"}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{append}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\DecValTok{0}\NormalTok{, }\DecValTok{8760}\NormalTok{, }\DecValTok{1000}\NormalTok{), }\DecValTok{8760}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(tempMin, tempMax, }\DecValTok{2}\NormalTok{))}
-
-\CommentTok{# interactive chart}
-\NormalTok{plotly}\OperatorTok{::}\KeywordTok{ggplotly}\NormalTok{(plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/sumfrequencyhour2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/plotSumFrequencyHour.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\newpage
-
-\hypertarget{cross-correlation}{%
-\section{Cross-Correlation}\label{cross-correlation}}
-
-\hypertarget{goal-20}{%
-\subsection{Goal}\label{goal-20}}
-
-You want to create a cross-correlation plot:
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-30}
-\end{figure}
-
-\hypertarget{data-basis-20}{%
-\subsection{Data Basis}\label{data-basis-20}}
-
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/crossCorrelation0-1} \caption{Raw Data Room and Outdoor Temperature for Cross Correlation Plot}\label{fig:crossCorrelation0-1}
-\end{figure}
-\begin{figure}
-\includegraphics[width=0.7\linewidth]{edar_files/figure-latex/crossCorrelation0-2} \caption{Raw Data Room and Outdoor Temperature for Cross Correlation Plot}\label{fig:crossCorrelation0-2}
-\end{figure}
-
-\newpage
-
-\hypertarget{solution-20}{%
-\subsection{Solution}\label{solution-20}}
-
-Create a new script, copy/paste the following code and run it:
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(redutils)}
-\KeywordTok{library}\NormalTok{(dplyr)}
-\KeywordTok{library}\NormalTok{(lubridate)}
-\KeywordTok{library}\NormalTok{(zoo)}
-\KeywordTok{library}\NormalTok{(plotly)}
-\KeywordTok{library}\NormalTok{(forecast)}
-
-\CommentTok{# load time series data and aggregate mean values}
-\NormalTok{dfTempOa <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv"}\NormalTok{,}
-                          \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-                          \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\NormalTok{dfTempOa}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfTempOa}\OperatorTok{$}\NormalTok{time,}
-                                      \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
-                                      \DataTypeTok{tz =} \StringTok{"UTC"}\NormalTok{)}
-
-\NormalTok{dfTempOa}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfTempOa}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"days"}\NormalTok{))}
-
-\NormalTok{dfTempOa <-}\StringTok{ }\NormalTok{dfTempOa }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{tempOa =} \KeywordTok{mean}\NormalTok{(centralOutsideTemp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-\NormalTok{dfTempR <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
-                       \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
-                       \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
-
-\NormalTok{dfTempR}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(dfTempR}\OperatorTok{$}\NormalTok{time,}
-                                   \DataTypeTok{order =} \StringTok{"YmdHMS"}\NormalTok{,}
-                                   \DataTypeTok{tz =} \StringTok{"UTC"}\NormalTok{)}
-
-\CommentTok{# select temperature and humidity and remove empty cells}
-\NormalTok{dfTempR <-}\StringTok{ }\NormalTok{dfTempR }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(time, FlatA_Temp) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-
-\NormalTok{dfTempR}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(dfTempR}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"days"}\NormalTok{))}
-
-\NormalTok{dfTempR <-}\StringTok{ }\NormalTok{dfTempR }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarize}\NormalTok{(}\DataTypeTok{tempR =} \KeywordTok{mean}\NormalTok{(FlatA_Temp, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
-
-\NormalTok{data <-}\StringTok{ }\KeywordTok{merge}\NormalTok{(dfTempR, dfTempOa, }\DataTypeTok{all =} \OtherTok{TRUE}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{unique}\NormalTok{() }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
-
-\NormalTok{data}\OperatorTok{$}\NormalTok{season <-}\StringTok{ }\NormalTok{redutils}\OperatorTok{::}\KeywordTok{getSeason}\NormalTok{(data}\OperatorTok{$}\NormalTok{day)}
-
-\NormalTok{data <-}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }
-\StringTok{  }\KeywordTok{filter}\NormalTok{(season }\OperatorTok{==}\StringTok{ "Summer"}\NormalTok{)}
-
-\CommentTok{# plot diagram}
-\NormalTok{plot <-}\StringTok{ }\KeywordTok{ggCcf}\NormalTok{(data}\OperatorTok{$}\NormalTok{tempOa,}
-\NormalTok{              data}\OperatorTok{$}\NormalTok{tempR,}
-              \DataTypeTok{lag.max =} \DecValTok{7}\NormalTok{) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{theme_minimal}\NormalTok{() }\OperatorTok{+}\StringTok{ }
-\StringTok{  }\KeywordTok{scale_x_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{, }\DecValTok{0}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{7}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{scale_y_continuous}\NormalTok{(}\DataTypeTok{limits =} \KeywordTok{c}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{, }\DecValTok{1}\NormalTok{), }\DataTypeTok{breaks =} \KeywordTok{seq}\NormalTok{(}\OperatorTok{-}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\FloatTok{0.2}\NormalTok{)) }\OperatorTok{+}
-\StringTok{  }\KeywordTok{labs}\NormalTok{(}\DataTypeTok{title=}\StringTok{"Cross Correlation between }\CharTok{\textbackslash{}n}\StringTok{ Indoor and Outdoor Temperature in Summer"}\NormalTok{,}
-        \DataTypeTok{x =}\StringTok{"Days (Lag)"}\NormalTok{, }\DataTypeTok{y =} \StringTok{"Correlation"}\NormalTok{)}
-
-\CommentTok{# make plot interactive (optional)}
-\KeywordTok{ggplotly}\NormalTok{(plot)}
-\end{Highlighting}
-\end{Shaded}
-
-\includegraphics{edar_files/figure-latex/crossCorrelation2-1.pdf}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{# save static plot as png (optional)}
-\KeywordTok{ggsave}\NormalTok{(}\StringTok{"images/crossCorrelation.png"}\NormalTok{, plot)}
-\end{Highlighting}
-\end{Shaded}
 
 \newpage
 
