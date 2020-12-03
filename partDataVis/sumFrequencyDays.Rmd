@@ -55,15 +55,13 @@ df$day <- as.Date(cut(df$time, breaks = "day"))
 df$year <- year(df$time)
 
 # filter year
-
-# edit year!!!
 filterYear <- "2019"
 
 df <- filter(df, year == filterYear)
 
 df <- df %>% 
   group_by(day) %>%
-  summarise(meanValue = mean(value, na.rm = TRUE)) %>% 
+  dplyr::summarise(meanValue = mean(value, na.rm = TRUE)) %>% 
   ungroup()
 
 # Fill missing values with NA

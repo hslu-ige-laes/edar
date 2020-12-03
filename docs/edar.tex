@@ -3058,15 +3058,13 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{time)}
 
 \CommentTok{# filter year}
-
-\CommentTok{# edit year!!!}
 \NormalTok{filterYear <-}\StringTok{ "2019"}
 
 \NormalTok{df <-}\StringTok{ }\KeywordTok{filter}\NormalTok{(df, year }\OperatorTok{==}\StringTok{ }\NormalTok{filterYear)}
 
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(day) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
 \CommentTok{# Fill missing values with NA}
@@ -3176,7 +3174,7 @@ Create a new script, copy/paste the following code and run it:
 
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{group_by}\NormalTok{(hour) }\OperatorTok{%>%}
-\StringTok{  }\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{summarise}\NormalTok{(}\DataTypeTok{meanValue =} \KeywordTok{mean}\NormalTok{(value, }\DataTypeTok{na.rm =} \OtherTok{TRUE}\NormalTok{)) }\OperatorTok{%>%}\StringTok{ }
 \StringTok{  }\KeywordTok{ungroup}\NormalTok{()}
 
 \CommentTok{# Fill missing values with NA}

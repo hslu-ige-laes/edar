@@ -63,7 +63,7 @@ df <- filter(df, year == filterYear)
 
 df <- df %>% 
   group_by(hour) %>%
-  summarise(meanValue = mean(value, na.rm = TRUE)) %>% 
+  dplyr::summarise(meanValue = mean(value, na.rm = TRUE)) %>% 
   ungroup()
 
 # Fill missing values with NA
