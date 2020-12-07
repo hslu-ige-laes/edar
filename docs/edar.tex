@@ -141,7 +141,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2020-12-03}
+\date{2020-12-07}
 
 \begin{document}
 \maketitle
@@ -1374,24 +1374,25 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{time-series-decomposition}{%
 \chapter{Time Series Decomposition}\label{time-series-decomposition}}
 
-Typical time series result from the interaction of regular and random causes. The regular causes can vary periodically (seasonally) and/or contain long-term trends. Random influences are often called noise.
+Typical time series result from the interaction of regular deterministic and random causes. The deterministic regular causes can vary periodically (seasonally) and/or contain long-term trends. Random causes are often also called noise.
 
-Decomposition deconstructs time series into its components ``trend'', ``seasonality'' and ``randomness.'' For further data analysis it is often necessary to decompose the trend and the seasonal component from the raw data. Therefore, a large part of the time series analyses deals with corresponding procedures. Sometimes the remaining Randomness is of interest and sometimes a detrended series as in chapter \ref{dailyProfilesDecomposed}.
+Decomposition breaks down time series into their components ``trend'', ``seasonality'' and ``randomness''. For further data analysis it is often necessary to decompose the trend and the seasonal component from the raw data. Therefore, a large part of the time series analyses deals with corresponding procedures. Sometimes the remaining Randomness is of interest and sometimes a detrended series as in chapter \ref{dailyProfilesDecomposed}.
 
 Trend Component
-The trend component of a time series refers to the general direction in which the time series is moving in the long term. Time series can have a positive or a negative trend, but can also have no trend.
-A trend exists when there is a persistent increasing and/or decreasing direction in the data.
+The trend component of a time series refers to the general direction in which the time series moves in the long term. Time series can have a positive or negative trend, or no trend, but they can also have no trend. A trend is present when the data show a continuously rising and/or falling direction.
 
 Seasonal Component
-The seasonal component for time series data refers to its tendency to rise and fall at consistent frequencies. Seasonality occurs over a fixed and known period (e.g., the quarter of the year, the month, or day of the week).
+The seasonal component for time series data refers to their tendency to rise and fall with constant frequency. Seasonality occurs over a fixed and known period of time (e.g.~the quarter of the year, the month or the day of the week).
 
 Random/Remainder/Irregular Component
-The remainder is what's left of the time series data after removing its trend and seasonal components. It is the random fluctuation in the time series data that the above components cannot explain.
+The rest is what remains of the time series data after its trend and seasonal components have been removed. It is the random fluctuation in the time series data that cannot be explained by the above components.
+
+For energy data analysis, each of the three components mentioned above may be of interest, depending on the case.
+
+This chapter shows how a time series can be decomposed and presented interactively.
 
 An exemplary decomposition of an outside temperature time series over 7 days:
 \includegraphics{edar_files/figure-latex/decompositionTOa-1.pdf}
-
-This chapter shows how a time series can be decomposed and presented interactively.
 
 \newpage
 
@@ -1672,6 +1673,8 @@ Seasonal plots are a graphical tool to visualize and detect seasonality in a tim
 
 This is like a standard time series plot except that the data are plotted against the ``seasons'' for each year and are overlapping. Be aware that seasons in this context don't correlate with the seasons of the year. For example in \ref{fig:figplotSeasonalXY} the seasons are months.
 
+When displaying the data in months, it is important that the consumption is calculated down to a daily value, otherwise there will be unnecessary distortions due to the different number of days per month.
+
 However, such plots are only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.
 
 This chapter shows some useful types of seasonal plots.
@@ -1726,11 +1729,13 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\CommentTok{# remove counter value column and calculate consumption per day instead of month}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{/}\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{days_in_month}\NormalTok{(timestamp))}
 
 \CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{19}
 
 \CommentTok{# create time series object for ggseanplot function}
 \NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
@@ -1741,7 +1746,7 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
                      \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
                      \DataTypeTok{main =} \StringTok{"Seasonal Plot x/y per Month over 10 years"}\NormalTok{,}
-                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}
+                     \DataTypeTok{ylab =} \StringTok{"Average Daily Energy Consumption per Month }\CharTok{\textbackslash{}n}\StringTok{(kWh/day)}\CharTok{\textbackslash{}n}\StringTok{"}
 \NormalTok{                     )}
 
 \CommentTok{# show static plot (uncomment it if you want a static plot)}
@@ -1844,11 +1849,13 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\CommentTok{# remove counter value column and calculate consumption per day instead of month}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{/}\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{days_in_month}\NormalTok{(timestamp))}
 
 \CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{19}
 
 \CommentTok{# create time series object for ggmonthplot function}
 \NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df[}\OperatorTok{-}\DecValTok{1}\NormalTok{], }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
@@ -1860,7 +1867,7 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{ggmonthplot}\NormalTok{(df.ts,}
                     \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
                     \DataTypeTok{main =} \StringTok{"Seasonal Miniplots over 10 years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-                    \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
+                    \DataTypeTok{ylab =} \StringTok{"Average Daily Energy Consumption per Month }\CharTok{\textbackslash{}n}\StringTok{(kWh/day)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
                     \DataTypeTok{xlab =} \StringTok{"Month}\CharTok{\textbackslash{}n}\StringTok{ "}
 \NormalTok{                    )}
 
@@ -1956,11 +1963,13 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\CommentTok{# remove counter value column and calculate consumption per day instead of month}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{/}\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{days_in_month}\NormalTok{(timestamp))}
 
 \CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{19}
 
 \NormalTok{df.ts <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(value) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{(), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
 
@@ -1971,7 +1980,7 @@ Create a new script, copy/paste the following code and run it:
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{ggseasonplot}\NormalTok{(df.ts,}
                      \DataTypeTok{col =} \KeywordTok{viridis}\NormalTok{(numYears),}
                      \DataTypeTok{main =} \StringTok{"Seasonal Plot Polar per Month over 10 Years}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
-                     \DataTypeTok{ylab =} \StringTok{"Energy Consumption (kWh/month)"}\NormalTok{,}
+                     \DataTypeTok{ylab =} \StringTok{"Average Daily Energy Consumption per Month }\CharTok{\textbackslash{}n}\StringTok{(kWh/day)}\CharTok{\textbackslash{}n}\StringTok{"}\NormalTok{,}
                      \DataTypeTok{polar =} \OtherTok{TRUE}
 \NormalTok{                     )}
 
@@ -2048,18 +2057,20 @@ Create a new script, copy/paste the following code and run it:
 \CommentTok{# so the consumption for february first is value(march) - value(february)!}
 \NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =} \KeywordTok{lead}\NormalTok{(meterValue) }\OperatorTok{-}\StringTok{ }\NormalTok{meterValue)}
 
-\CommentTok{# remove counter value column}
-\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue)}
+\CommentTok{# remove counter value column and calculate consumption per day instead of month}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{meterValue) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{value =}\NormalTok{ value }\OperatorTok{/}\NormalTok{lubridate}\OperatorTok{::}\KeywordTok{days_in_month}\NormalTok{(timestamp))}
 
 \CommentTok{# value correction (outlier because of commissioning)}
-\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{600}
+\NormalTok{df[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{] <-}\StringTok{ }\DecValTok{19}
 
 \CommentTok{# create plot}
 \NormalTok{plot <-}\StringTok{ }\KeywordTok{plotSeasonalXYBeforeAfter}\NormalTok{(df,}
                                   \DataTypeTok{dateOptimization =} \StringTok{"2017-09-01"}\NormalTok{,}
                                   \DataTypeTok{locTimeZone =} \StringTok{"Europe/Zurich"}\NormalTok{,}
                                   \DataTypeTok{main =} \StringTok{"Before/After Optimization"}\NormalTok{,}
-                                  \DataTypeTok{ylab =} \StringTok{"Energy Consumption }\CharTok{\textbackslash{}n}\StringTok{(kWh/month)"}
+                                  \DataTypeTok{ylab =} \StringTok{"Average Daily Energy Consumption per Month }\CharTok{\textbackslash{}n}\StringTok{(kWh/day)}\CharTok{\textbackslash{}n}\StringTok{"}
 \NormalTok{                                  )}
 
 \CommentTok{# change theme (optional)}
@@ -2868,11 +2879,9 @@ Create a new script, copy/paste the following code and run it:
 \hypertarget{comfort-plots}{%
 \chapter{Comfort Plots}\label{comfort-plots}}
 
-Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. This is why the so-called comfort monitoring is becoming increasingly more important.
+Satisfied and healthy residents are important, so energetic optimization should improve comfort as much as possible and certainly not adversely affect it. For this reason, the so-called comfort monitoring is gaining more and more importance.
 
-The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
-
-This chapter shows how to create some popular comfort plots.
+The visualizations in this part focus on some typical comfort related visualizations.
 
 \newpage
 

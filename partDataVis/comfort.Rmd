@@ -1,6 +1,4 @@
 # Comfort Plots
-Satisfied and healthy residents are important, thus an energetic optimization should not influence the comfort if possible. This is why the so-called comfort monitoring is becoming increasingly more important.
+Satisfied and healthy residents are important, so energetic optimization should improve comfort as much as possible and certainly not adversely affect it. For this reason, the so-called comfort monitoring is gaining more and more importance.
 
-The recipes in this chapter focus on some typical comfort related visualizations which help identifying multiple problems like moisture and damage of wooden floor because of the humidity influence.
-
-This chapter shows how to create some popular comfort plots.
+The visualizations in this part focus on some typical comfort related visualizations.

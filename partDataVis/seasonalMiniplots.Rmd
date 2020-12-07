@@ -57,11 +57,13 @@ colnames(df) <- c("timestamp", "meterValue")
 # so the consumption for february first is value(march) - value(february)!
 df <- df %>% dplyr::mutate(value = lead(meterValue) - meterValue)
 
-# remove counter value column
-df <- df %>% select(-meterValue)
+# remove counter value column and calculate consumption per day instead of month
+df <- df %>% 
+  select(-meterValue) %>% 
+  mutate(value = value /lubridate::days_in_month(timestamp))
 
 # value correction (outlier because of commissioning)
-df[1,2] <- 600
+df[1,2] <- 19
 
 # create time series object for ggmonthplot function
 df.ts <- ts(df[-1], frequency = 12, start = min(year(df$timestamp)))
@@ -73,7 +75,7 @@ numYears = length(unique(year(df$timestamp)))
 plot <- ggmonthplot(df.ts,
                     col = viridis(numYears),
                     main = "Seasonal Miniplots over 10 years\n",
-                    ylab = "Energy Consumption (kWh/month)\n",
+                    ylab = "Average Daily Energy Consumption per Month \n(kWh/day)\n",
                     xlab = "Month\n "
                     )
 

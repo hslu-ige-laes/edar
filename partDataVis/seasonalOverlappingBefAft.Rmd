@@ -52,18 +52,20 @@ colnames(df) <- c("timestamp", "meterValue")
 # so the consumption for february first is value(march) - value(february)!
 df <- df %>% dplyr::mutate(value = lead(meterValue) - meterValue)
 
-# remove counter value column
-df <- df %>% select(-meterValue)
+# remove counter value column and calculate consumption per day instead of month
+df <- df %>% 
+  select(-meterValue) %>% 
+  mutate(value = value /lubridate::days_in_month(timestamp))
 
 # value correction (outlier because of commissioning)
-df[1,2] <- 600
+df[1,2] <- 19
 
 # create plot
 plot <- plotSeasonalXYBeforeAfter(df,
                                   dateOptimization = "2017-09-01",
                                   locTimeZone = "Europe/Zurich",
                                   main = "Before/After Optimization",
-                                  ylab = "Energy Consumption \n(kWh/month)"
+                                  ylab = "Average Daily Energy Consumption per Month \n(kWh/day)\n"
                                   )
 
 # change theme (optional)

@@ -51,11 +51,13 @@ colnames(df) <- c("timestamp", "meterValue")
 # so the consumption for february first is value(march) - value(february)!
 df <- df %>% dplyr::mutate(value = lead(meterValue) - meterValue)
 
-# remove counter value column
-df <- df %>% select(-meterValue)
+# remove counter value column and calculate consumption per day instead of month
+df <- df %>% 
+  select(-meterValue) %>% 
+  mutate(value = value /lubridate::days_in_month(timestamp))
 
 # value correction (outlier because of commissioning)
-df[1,2] <- 600
+df[1,2] <- 19
 
 # create time series object for ggseanplot function
 df.ts <- ts(df %>% select(value) %>% na.omit(), frequency = 12, start = min(year(df$timestamp)))
@@ -66,7 +68,7 @@ numYears = length(unique(year(df$timestamp))) # used for colours
 plot <- ggseasonplot(df.ts,
                      col = viridis(numYears),
                      main = "Seasonal Plot x/y per Month over 10 years",
-                     ylab = "Energy Consumption (kWh/month)"
+                     ylab = "Average Daily Energy Consumption per Month \n(kWh/day)\n"
                      )
 
 # show static plot (uncomment it if you want a static plot)
