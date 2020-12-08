@@ -53,6 +53,8 @@ rmd_files: [
   "partDataVis/miscEleHousehold.Rmd",
   "partDataVis/miscRoomTempRed.Rmd",
   "partDataVis/miscBldgEngySigScatter.Rmd",
+  "partDataVis/miscBldgEngySigProposed.Rmd",
+
 
   "a1-packages.rmd",
   #"references.rmd",
