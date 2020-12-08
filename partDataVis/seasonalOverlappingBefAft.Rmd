@@ -83,7 +83,7 @@ plotly
 ```{r energyConsBeforeAfter3, eval=FALSE}
 # save interactive plot as html (optional)
 library(htmlwidgets)
-htmlwidgets::saveWidget(plotly, "plotlySeasonalXYBeforeAfter.html")
+htmlwidgets::saveWidget(plotly, "plotEnergyConsBeforeAfter.png")
 ```
 
 ### Discussion

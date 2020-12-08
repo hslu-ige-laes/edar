@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  8 DEC 2020 03:30
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020/W32TeX) (preloaded format=xelatex 2020.11.25)  8 DEC 2020 03:52
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1192,11 +1192,11 @@ File: edar_files/figure-latex/comforttemphum0-1.pdf Graphic file (type pdf)
 File: edar_files/figure-latex/comforttemphum0-2.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/comforttemphum0-2.pdf>
 [109] [110]
-Underfull \vbox (badness 10000) detected at line 3099
+Underfull \vbox (badness 10000) detected at line 3092
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3099
+Underfull \vbox (badness 10000) detected at line 3092
  []
 
 [111]
@@ -1212,19 +1212,19 @@ File: edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf Graphic file (type p
 df)
 <use edar_files/figure-latex/comfortSia180ThermCmf0-2.pdf>
 [113] [114]
-Underfull \vbox (badness 10000) detected at line 3343
+Underfull \vbox (badness 10000) detected at line 3336
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3343
+Underfull \vbox (badness 10000) detected at line 3336
  []
 
 [115]
-Underfull \vbox (badness 10000) detected at line 3343
+Underfull \vbox (badness 10000) detected at line 3336
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3343
+Underfull \vbox (badness 10000) detected at line 3336
  []
 
 [116]
@@ -1244,47 +1244,47 @@ File: images/eleHousehold.png Graphic file (type bmp)
 File: edar_files/figure-latex/eleHousehold10-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/eleHousehold10-1.pdf>
 [120]
-Overfull \vbox (1.59328pt too high) detected at line 3742
+Overfull \vbox (1.59328pt too high) detected at line 3735
  []
 
 [121]
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 [122]
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 [123]
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 [124]
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 [125]
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3742
+Underfull \vbox (badness 10000) detected at line 3735
  []
 
 [126]
@@ -1299,15 +1299,15 @@ File: images/roomTempRed.png Graphic file (type bmp)
 File: edar_files/figure-latex/roomTempRed0-1.pdf Graphic file (type pdf)
 <use edar_files/figure-latex/roomTempRed0-1.pdf>
 [129]
-Overfull \vbox (1.54527pt too high) detected at line 3896
+Overfull \vbox (1.54527pt too high) detected at line 3889
  []
 
 [130]
-Underfull \vbox (badness 10000) detected at line 3896
+Underfull \vbox (badness 10000) detected at line 3889
  []
 
 
-Underfull \vbox (badness 10000) detected at line 3896
+Underfull \vbox (badness 10000) detected at line 3889
  []
 
 [131]
@@ -1339,12 +1339,12 @@ File: edar_files/figure-latex/energysignaturepes1-3.pdf Graphic file (type pdf)
 
 <use edar_files/figure-latex/energysignaturepes1-3.pdf>
 
-Underfull \hbox (badness 10000) in paragraph at lines 4080--4081
+Underfull \hbox (badness 10000) in paragraph at lines 4073--4074
 []
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 4080--4081
+Underfull \hbox (badness 10000) in paragraph at lines 4073--4074
 []
  []
 
@@ -1355,27 +1355,27 @@ Underfull \vbox (badness 10000) has occurred while \output is active []
 Underfull \vbox (badness 10000) has occurred while \output is active []
 
 [139] [140] [141]
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 [142]
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 [143]
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 
-Underfull \vbox (badness 10000) detected at line 4331
+Underfull \vbox (badness 10000) detected at line 4324
  []
 
 [144]
@@ -1396,7 +1396,7 @@ Package rerunfilecheck Info: File `edar.out' has not changed.
 Here is how much of TeX's memory you used:
  17959 strings out of 479393
  329955 string characters out of 5877705
- 840810 words of memory out of 5000000
+ 840807 words of memory out of 5000000
  37020 multiletter control sequences out of 15000+600000
  541579 words of font info for 87 fonts, out of 8000000 for 9000
  14 hyphenation exceptions out of 8191
