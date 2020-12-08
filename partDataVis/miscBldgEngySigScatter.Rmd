@@ -20,8 +20,9 @@ Two separate csv files with time series data from the outside temperature and th
 library(dplyr)
 library(lubridate)
 df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv",
-                          stringsAsFactors=FALSE,
-                          sep =";")
+               stringsAsFactors=FALSE,
+               sep =";")
+
 df$time <- parse_date_time(df$time,
                            order = "YmdHMS",
                            tz = "Europe/Zurich")
