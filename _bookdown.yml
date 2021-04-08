@@ -54,6 +54,7 @@ rmd_files: [
   "partDataVis/miscRoomTempRed.Rmd",
   "partDataVis/miscBldgEngySigScatter.Rmd",
   "partDataVis/miscBldgEngySigProposed.Rmd",
+  "partDataVis/miscPlotlyMultipleYAxis.Rmd",
 
 
   "a1-packages.rmd",

@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-12-08" />
+<meta name="date" content="2021-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,7 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="5.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>5.1</b> Add Metadata for later filtering</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>5.1.1</b> Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.2</b> Season of Year</a></li>
+<li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#hour-minute-second"><i class="fa fa-check"></i><b>5.1.2</b> Hour, Minute, Second</a></li>
+<li class="chapter" data-level="5.1.3" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.3</b> Season of Year</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html"><i class="fa fa-check"></i><b>5.2</b> Manipulating Data Frames</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#change-row-names"><i class="fa fa-check"></i><b>5.2.1</b> Change Row Names</a></li>
@@ -348,6 +349,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.4.3" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#solution-24"><i class="fa fa-check"></i><b>15.4.3</b> Solution</a></li>
 <li class="chapter" data-level="15.4.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#discussion-9"><i class="fa fa-check"></i><b>15.4.4</b> Discussion</a></li>
 </ul></li>
+<li class="chapter" data-level="15.5" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html"><i class="fa fa-check"></i><b>15.5</b> Plotly Multiple Y Axis</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#goal-25"><i class="fa fa-check"></i><b>15.5.1</b> Goal</a></li>
+<li class="chapter" data-level="15.5.2" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#solution-25"><i class="fa fa-check"></i><b>15.5.2</b> Solution</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>A</b> Packages in R</a><ul>
@@ -401,54 +406,54 @@ Figure 10.7: Raw Data for Seasonal Plot Polar
 <div id="solution-8" class="section level3">
 <h3><span class="header-section-number">10.3.3</span> Solution</h3>
 <p>Create a new script, copy/paste the following code and run it:</p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1"><span class="kw">library</span>(forecast)</a>
-<a class="sourceLine" id="cb66-2" title="2"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb66-3" title="3"><span class="kw">library</span>(plotly)</a>
-<a class="sourceLine" id="cb66-4" title="4"><span class="kw">library</span>(htmlwidgets)</a>
-<a class="sourceLine" id="cb66-5" title="5"><span class="kw">library</span>(ggthemes)</a>
-<a class="sourceLine" id="cb66-6" title="6"><span class="kw">library</span>(viridis)</a>
-<a class="sourceLine" id="cb66-7" title="7"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb66-8" title="8"></a>
-<a class="sourceLine" id="cb66-9" title="9"><span class="co"># load csv file</span></a>
-<a class="sourceLine" id="cb66-10" title="10">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb66-11" title="11">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb66-12" title="12"></a>
-<a class="sourceLine" id="cb66-13" title="13"><span class="co"># filter flat</span></a>
-<a class="sourceLine" id="cb66-14" title="14">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr02_energyHeat)</a>
-<a class="sourceLine" id="cb66-15" title="15"></a>
-<a class="sourceLine" id="cb66-16" title="16"><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;meterValue&quot;</span>)</a>
-<a class="sourceLine" id="cb66-17" title="17"></a>
-<a class="sourceLine" id="cb66-18" title="18"><span class="co"># calculate consumption value per month</span></a>
-<a class="sourceLine" id="cb66-19" title="19"><span class="co"># pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,</span></a>
-<a class="sourceLine" id="cb66-20" title="20"><span class="co"># so the consumption for february first is value(march) - value(february)!</span></a>
-<a class="sourceLine" id="cb66-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">lead</span>(meterValue) <span class="op">-</span><span class="st"> </span>meterValue)</a>
-<a class="sourceLine" id="cb66-22" title="22"></a>
-<a class="sourceLine" id="cb66-23" title="23"><span class="co"># remove counter value column and calculate consumption per day instead of month</span></a>
-<a class="sourceLine" id="cb66-24" title="24">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-25" title="25"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>meterValue) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-26" title="26"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> value <span class="op">/</span>lubridate<span class="op">::</span><span class="kw">days_in_month</span>(timestamp))</a>
-<a class="sourceLine" id="cb66-27" title="27"></a>
-<a class="sourceLine" id="cb66-28" title="28"><span class="co"># value correction (outlier because of commissioning)</span></a>
-<a class="sourceLine" id="cb66-29" title="29">df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">19</span></a>
-<a class="sourceLine" id="cb66-30" title="30"></a>
-<a class="sourceLine" id="cb66-31" title="31">df.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>(), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
-<a class="sourceLine" id="cb66-32" title="32"></a>
-<a class="sourceLine" id="cb66-33" title="33"><span class="co"># create polar plot</span></a>
-<a class="sourceLine" id="cb66-34" title="34"></a>
-<a class="sourceLine" id="cb66-35" title="35">numYears =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
-<a class="sourceLine" id="cb66-36" title="36"></a>
-<a class="sourceLine" id="cb66-37" title="37">plot &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(df.ts,</a>
-<a class="sourceLine" id="cb66-38" title="38">                     <span class="dt">col =</span> <span class="kw">viridis</span>(numYears),</a>
-<a class="sourceLine" id="cb66-39" title="39">                     <span class="dt">main =</span> <span class="st">&quot;Seasonal Plot Polar per Month over 10 Years</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
-<a class="sourceLine" id="cb66-40" title="40">                     <span class="dt">ylab =</span> <span class="st">&quot;Average Daily Energy Consumption per Month </span><span class="ch">\n</span><span class="st">(kWh/day)</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
-<a class="sourceLine" id="cb66-41" title="41">                     <span class="dt">polar =</span> <span class="ot">TRUE</span></a>
-<a class="sourceLine" id="cb66-42" title="42">                     )</a>
-<a class="sourceLine" id="cb66-43" title="43"></a>
-<a class="sourceLine" id="cb66-44" title="44"><span class="co"># show plot (interactive version with plotly unfortunately not possible)</span></a>
-<a class="sourceLine" id="cb66-45" title="45">plot</a></code></pre></div>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">library</span>(forecast)</a>
+<a class="sourceLine" id="cb67-2" title="2"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb67-3" title="3"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb67-4" title="4"><span class="kw">library</span>(htmlwidgets)</a>
+<a class="sourceLine" id="cb67-5" title="5"><span class="kw">library</span>(ggthemes)</a>
+<a class="sourceLine" id="cb67-6" title="6"><span class="kw">library</span>(viridis)</a>
+<a class="sourceLine" id="cb67-7" title="7"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb67-8" title="8"></a>
+<a class="sourceLine" id="cb67-9" title="9"><span class="co"># load csv file</span></a>
+<a class="sourceLine" id="cb67-10" title="10">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb67-11" title="11">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb67-12" title="12"></a>
+<a class="sourceLine" id="cb67-13" title="13"><span class="co"># filter flat</span></a>
+<a class="sourceLine" id="cb67-14" title="14">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr02_energyHeat)</a>
+<a class="sourceLine" id="cb67-15" title="15"></a>
+<a class="sourceLine" id="cb67-16" title="16"><span class="kw">colnames</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>, <span class="st">&quot;meterValue&quot;</span>)</a>
+<a class="sourceLine" id="cb67-17" title="17"></a>
+<a class="sourceLine" id="cb67-18" title="18"><span class="co"># calculate consumption value per month</span></a>
+<a class="sourceLine" id="cb67-19" title="19"><span class="co"># pay attention, the value of 2010-02-01 00:00:00 represents the meter reading on february first,</span></a>
+<a class="sourceLine" id="cb67-20" title="20"><span class="co"># so the consumption for february first is value(march) - value(february)!</span></a>
+<a class="sourceLine" id="cb67-21" title="21">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">value =</span> <span class="kw">lead</span>(meterValue) <span class="op">-</span><span class="st"> </span>meterValue)</a>
+<a class="sourceLine" id="cb67-22" title="22"></a>
+<a class="sourceLine" id="cb67-23" title="23"><span class="co"># remove counter value column and calculate consumption per day instead of month</span></a>
+<a class="sourceLine" id="cb67-24" title="24">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-25" title="25"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>meterValue) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb67-26" title="26"><span class="st">  </span><span class="kw">mutate</span>(<span class="dt">value =</span> value <span class="op">/</span>lubridate<span class="op">::</span><span class="kw">days_in_month</span>(timestamp))</a>
+<a class="sourceLine" id="cb67-27" title="27"></a>
+<a class="sourceLine" id="cb67-28" title="28"><span class="co"># value correction (outlier because of commissioning)</span></a>
+<a class="sourceLine" id="cb67-29" title="29">df[<span class="dv">1</span>,<span class="dv">2</span>] &lt;-<span class="st"> </span><span class="dv">19</span></a>
+<a class="sourceLine" id="cb67-30" title="30"></a>
+<a class="sourceLine" id="cb67-31" title="31">df.ts &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(value) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>(), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb67-32" title="32"></a>
+<a class="sourceLine" id="cb67-33" title="33"><span class="co"># create polar plot</span></a>
+<a class="sourceLine" id="cb67-34" title="34"></a>
+<a class="sourceLine" id="cb67-35" title="35">numYears =<span class="st"> </span><span class="kw">length</span>(<span class="kw">unique</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a>
+<a class="sourceLine" id="cb67-36" title="36"></a>
+<a class="sourceLine" id="cb67-37" title="37">plot &lt;-<span class="st"> </span><span class="kw">ggseasonplot</span>(df.ts,</a>
+<a class="sourceLine" id="cb67-38" title="38">                     <span class="dt">col =</span> <span class="kw">viridis</span>(numYears),</a>
+<a class="sourceLine" id="cb67-39" title="39">                     <span class="dt">main =</span> <span class="st">&quot;Seasonal Plot Polar per Month over 10 Years</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb67-40" title="40">                     <span class="dt">ylab =</span> <span class="st">&quot;Average Daily Energy Consumption per Month </span><span class="ch">\n</span><span class="st">(kWh/day)</span><span class="ch">\n</span><span class="st">&quot;</span>,</a>
+<a class="sourceLine" id="cb67-41" title="41">                     <span class="dt">polar =</span> <span class="ot">TRUE</span></a>
+<a class="sourceLine" id="cb67-42" title="42">                     )</a>
+<a class="sourceLine" id="cb67-43" title="43"></a>
+<a class="sourceLine" id="cb67-44" title="44"><span class="co"># show plot (interactive version with plotly unfortunately not possible)</span></a>
+<a class="sourceLine" id="cb67-45" title="45">plot</a></code></pre></div>
 <p><img src="edar_files/figure-html/seasonalPlotPolar1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
-<a class="sourceLine" id="cb67-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotSeasonalPolar.png&quot;</span>, plot)</a></code></pre></div>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
+<a class="sourceLine" id="cb68-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotSeasonalPolar.png&quot;</span>, plot)</a></code></pre></div>
 </div>
 <div id="discussion-3" class="section level3">
 <h3><span class="header-section-number">10.3.4</span> Discussion</h3>

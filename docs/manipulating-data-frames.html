@@ -24,7 +24,7 @@
 <meta name="author" content="Reto Marek" />
 
 
-<meta name="date" content="2020-12-08" />
+<meta name="date" content="2021-04-08" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -171,7 +171,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5" data-path="data-wrangling.html"><a href="data-wrangling.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling</a><ul>
 <li class="chapter" data-level="5.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html"><i class="fa fa-check"></i><b>5.1</b> Add Metadata for later filtering</a><ul>
 <li class="chapter" data-level="5.1.1" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#year-month-day-day-of-week"><i class="fa fa-check"></i><b>5.1.1</b> Year, Month, Day, Day of Week</a></li>
-<li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.2</b> Season of Year</a></li>
+<li class="chapter" data-level="5.1.2" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#hour-minute-second"><i class="fa fa-check"></i><b>5.1.2</b> Hour, Minute, Second</a></li>
+<li class="chapter" data-level="5.1.3" data-path="add-metadata-for-later-filtering.html"><a href="add-metadata-for-later-filtering.html#season-of-year"><i class="fa fa-check"></i><b>5.1.3</b> Season of Year</a></li>
 </ul></li>
 <li class="chapter" data-level="5.2" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html"><i class="fa fa-check"></i><b>5.2</b> Manipulating Data Frames</a><ul>
 <li class="chapter" data-level="5.2.1" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#change-row-names"><i class="fa fa-check"></i><b>5.2.1</b> Change Row Names</a></li>
@@ -348,6 +349,10 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="15.4.3" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#solution-24"><i class="fa fa-check"></i><b>15.4.3</b> Solution</a></li>
 <li class="chapter" data-level="15.4.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#discussion-9"><i class="fa fa-check"></i><b>15.4.4</b> Discussion</a></li>
 </ul></li>
+<li class="chapter" data-level="15.5" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html"><i class="fa fa-check"></i><b>15.5</b> Plotly Multiple Y Axis</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#goal-25"><i class="fa fa-check"></i><b>15.5.1</b> Goal</a></li>
+<li class="chapter" data-level="15.5.2" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#solution-25"><i class="fa fa-check"></i><b>15.5.2</b> Solution</a></li>
+</ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
 <li class="chapter" data-level="A" data-path="packages.html"><a href="packages.html"><i class="fa fa-check"></i><b>A</b> Packages in R</a><ul>
@@ -380,30 +385,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>The <code>dplyr</code> package from the <code>tidyverse</code> introduces functions that perform some of the most common operations when working with data frames and uses names for these functions that are relatively easy to remember.</p>
 <div id="change-row-names" class="section level3">
 <h3><span class="header-section-number">5.2.1</span> Change Row Names</h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb21-1" title="1"><span class="co"># rename columns</span></a>
-<a class="sourceLine" id="cb21-2" title="2"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>,<span class="st">&quot;humidity&quot;</span>,<span class="st">&quot;temp_c&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="co"># rename columns</span></a>
+<a class="sourceLine" id="cb22-2" title="2"><span class="kw">names</span>(df) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;timestamp&quot;</span>,<span class="st">&quot;humidity&quot;</span>,<span class="st">&quot;temp_c&quot;</span>)</a></code></pre></div>
 </div>
 <div id="adding-a-column-with-mutate" class="section level3">
 <h3><span class="header-section-number">5.2.2</span> Adding a column with <code>mutate()</code></h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb22-2" title="2"></a>
-<a class="sourceLine" id="cb22-3" title="3"><span class="co"># add new column with temperature conversion from celsius to fahrenheit</span></a>
-<a class="sourceLine" id="cb22-4" title="4">df &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a>
-<a class="sourceLine" id="cb22-5" title="5"></a>
-<a class="sourceLine" id="cb22-6" title="6"><span class="co"># This code does the same, but only with a pipe</span></a>
-<a class="sourceLine" id="cb22-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb22-8" title="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a></code></pre></div>
-</div>
-<div id="subsetting-with-filter" class="section level3">
-<h3><span class="header-section-number">5.2.3</span> Subsetting with <code>filter()</code></h3>
 <div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb23-1" title="1"><span class="kw">library</span>(dplyr)</a>
 <a class="sourceLine" id="cb23-2" title="2"></a>
 <a class="sourceLine" id="cb23-3" title="3"><span class="co"># add new column with temperature conversion from celsius to fahrenheit</span></a>
-<a class="sourceLine" id="cb23-4" title="4">df &lt;-<span class="st"> </span><span class="kw">filter</span>(df,</a>
-<a class="sourceLine" id="cb23-5" title="5">             timestamp <span class="op">&gt;=</span><span class="st"> &quot;2020-01-01 00:00:00&quot;</span>,</a>
-<a class="sourceLine" id="cb23-6" title="6">             timestamp <span class="op">&lt;=</span><span class="st"> &quot;2020-12-31 23:45:00&quot;</span>)</a>
-<a class="sourceLine" id="cb23-7" title="7"></a>
-<a class="sourceLine" id="cb23-8" title="8">df.high &lt;-<span class="st"> </span><span class="kw">filter</span>(df, temp_c <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb23-4" title="4">df &lt;-<span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a>
+<a class="sourceLine" id="cb23-5" title="5"></a>
+<a class="sourceLine" id="cb23-6" title="6"><span class="co"># This code does the same, but only with a pipe</span></a>
+<a class="sourceLine" id="cb23-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb23-8" title="8"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>)</a></code></pre></div>
+</div>
+<div id="subsetting-with-filter" class="section level3">
+<h3><span class="header-section-number">5.2.3</span> Subsetting with <code>filter()</code></h3>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb24-2" title="2"></a>
+<a class="sourceLine" id="cb24-3" title="3"><span class="co"># add new column with temperature conversion from celsius to fahrenheit</span></a>
+<a class="sourceLine" id="cb24-4" title="4">df &lt;-<span class="st"> </span><span class="kw">filter</span>(df,</a>
+<a class="sourceLine" id="cb24-5" title="5">             timestamp <span class="op">&gt;=</span><span class="st"> &quot;2020-01-01 00:00:00&quot;</span>,</a>
+<a class="sourceLine" id="cb24-6" title="6">             timestamp <span class="op">&lt;=</span><span class="st"> &quot;2020-12-31 23:45:00&quot;</span>)</a>
+<a class="sourceLine" id="cb24-7" title="7"></a>
+<a class="sourceLine" id="cb24-8" title="8">df.high &lt;-<span class="st"> </span><span class="kw">filter</span>(df, temp_c <span class="op">&gt;</span><span class="st"> </span><span class="dv">30</span>)</a></code></pre></div>
 <blockquote>
 <p>Note: Whether you put the whole code on one line or split it after a comma does not have an effect on the computation, it is only more readable when the lines aren’t too wide.</p>
 </blockquote>
@@ -411,18 +416,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="addremove-columns-with-select" class="section level3">
 <h3><span class="header-section-number">5.2.4</span> Add/remove columns with <code>select()</code></h3>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb24-2" title="2"></a>
-<a class="sourceLine" id="cb24-3" title="3"><span class="co"># Based on the upper example we remove the celsius column after calculation</span></a>
-<a class="sourceLine" id="cb24-4" title="4">df &lt;-<span class="st"> </span><span class="kw">select</span>(df, <span class="op">-</span>temp_c)</a>
-<a class="sourceLine" id="cb24-5" title="5"></a>
-<a class="sourceLine" id="cb24-6" title="6"><span class="co"># Create new data frame</span></a>
-<a class="sourceLine" id="cb24-7" title="7">df.new &lt;-<span class="st"> </span><span class="kw">select</span>(df, timestamp, temp_f)</a>
-<a class="sourceLine" id="cb24-8" title="8"></a>
-<a class="sourceLine" id="cb24-9" title="9"><span class="co"># use select() in a so called dplyr pipe</span></a>
-<a class="sourceLine" id="cb24-10" title="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-11" title="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb24-12" title="12"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>temp_c)</a></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb25-2" title="2"></a>
+<a class="sourceLine" id="cb25-3" title="3"><span class="co"># Based on the upper example we remove the celsius column after calculation</span></a>
+<a class="sourceLine" id="cb25-4" title="4">df &lt;-<span class="st"> </span><span class="kw">select</span>(df, <span class="op">-</span>temp_c)</a>
+<a class="sourceLine" id="cb25-5" title="5"></a>
+<a class="sourceLine" id="cb25-6" title="6"><span class="co"># Create new data frame</span></a>
+<a class="sourceLine" id="cb25-7" title="7">df.new &lt;-<span class="st"> </span><span class="kw">select</span>(df, timestamp, temp_f)</a>
+<a class="sourceLine" id="cb25-8" title="8"></a>
+<a class="sourceLine" id="cb25-9" title="9"><span class="co"># use select() in a so called dplyr pipe</span></a>
+<a class="sourceLine" id="cb25-10" title="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-11" title="11"><span class="st">  </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(df, <span class="dt">temp_f =</span> temp_c <span class="op">*</span><span class="st"> </span><span class="fl">1.8</span> <span class="op">+</span><span class="st"> </span><span class="dv">32</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb25-12" title="12"><span class="st">  </span><span class="kw">select</span>(<span class="op">-</span>temp_c)</a></code></pre></div>
 </div>
 <div id="the-pipe" class="section level3">
 <h3><span class="header-section-number">5.2.5</span> The pipe <code>%&gt;%</code></h3>
@@ -432,15 +437,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="wide-to-long" class="section level3">
 <h3><span class="header-section-number">5.2.6</span> Wide to Long</h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb25-1" title="1"><span class="kw">library</span>(tidyr)</a>
-<a class="sourceLine" id="cb25-2" title="2"></a>
-<a class="sourceLine" id="cb25-3" title="3"><span class="co"># load test data set</span></a>
-<a class="sourceLine" id="cb25-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb25-5" title="5">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb25-6" title="6">               <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb25-7" title="7"></a>
-<a class="sourceLine" id="cb25-8" title="8"><span class="co"># create a copy of the dataframe and print the header and the first five line</span></a>
-<a class="sourceLine" id="cb25-9" title="9"><span class="kw">head</span>(df, <span class="dv">5</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" title="1"><span class="kw">library</span>(tidyr)</a>
+<a class="sourceLine" id="cb26-2" title="2"></a>
+<a class="sourceLine" id="cb26-3" title="3"><span class="co"># load test data set</span></a>
+<a class="sourceLine" id="cb26-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb26-5" title="5">               <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb26-6" title="6">               <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb26-7" title="7"></a>
+<a class="sourceLine" id="cb26-8" title="8"><span class="co"># create a copy of the dataframe and print the header and the first five line</span></a>
+<a class="sourceLine" id="cb26-9" title="9"><span class="kw">head</span>(df, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
 ## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
 ## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
@@ -453,15 +458,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3       24.5      48.3      24.38
 ## 4       24.5      48.0      24.33
 ## 5       24.5      47.7      24.30</code></pre>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb27-1" title="1"><span class="co"># convert wide to long format</span></a>
-<a class="sourceLine" id="cb27-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
-<a class="sourceLine" id="cb27-3" title="3">                                             <span class="dt">cols =</span> <span class="op">-</span>time,</a>
-<a class="sourceLine" id="cb27-4" title="4">                                             <span class="dt">names_to =</span> <span class="st">&quot;sensor&quot;</span>,</a>
-<a class="sourceLine" id="cb27-5" title="5">                                             <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>,</a>
-<a class="sourceLine" id="cb27-6" title="6">                                             <span class="dt">values_drop_na =</span> <span class="ot">TRUE</span>))</a>
-<a class="sourceLine" id="cb27-7" title="7"></a>
-<a class="sourceLine" id="cb27-8" title="8"><span class="co"># long format</span></a>
-<a class="sourceLine" id="cb27-9" title="9"><span class="kw">head</span>(df.long, <span class="dv">16</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" title="1"><span class="co"># convert wide to long format</span></a>
+<a class="sourceLine" id="cb28-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
+<a class="sourceLine" id="cb28-3" title="3">                                             <span class="dt">cols =</span> <span class="op">-</span>time,</a>
+<a class="sourceLine" id="cb28-4" title="4">                                             <span class="dt">names_to =</span> <span class="st">&quot;sensor&quot;</span>,</a>
+<a class="sourceLine" id="cb28-5" title="5">                                             <span class="dt">values_to =</span> <span class="st">&quot;value&quot;</span>,</a>
+<a class="sourceLine" id="cb28-6" title="6">                                             <span class="dt">values_drop_na =</span> <span class="ot">TRUE</span>))</a>
+<a class="sourceLine" id="cb28-7" title="7"></a>
+<a class="sourceLine" id="cb28-8" title="8"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb28-9" title="9"><span class="kw">head</span>(df.long, <span class="dv">16</span>)</a></code></pre></div>
 <pre><code>##                   time     sensor value
 ## 1  2018-10-03 00:00:00  FlatA_Hum 53.00
 ## 2  2018-10-03 00:00:00 FlatA_Temp 24.43
@@ -483,8 +488,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="long-to-wide" class="section level3">
 <h3><span class="header-section-number">5.2.7</span> Long to Wide</h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb29-1" title="1"><span class="co"># long format</span></a>
-<a class="sourceLine" id="cb29-2" title="2"><span class="kw">head</span>(df.long)</a></code></pre></div>
+<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" title="1"><span class="co"># long format</span></a>
+<a class="sourceLine" id="cb30-2" title="2"><span class="kw">head</span>(df.long)</a></code></pre></div>
 <pre><code>##                  time     sensor value
 ## 1 2018-10-03 00:00:00  FlatA_Hum 53.00
 ## 2 2018-10-03 00:00:00 FlatA_Temp 24.43
@@ -492,14 +497,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 4 2018-10-03 00:00:00 FlatB_Temp 22.40
 ## 5 2018-10-03 00:00:00  FlatC_Hum 44.00
 ## 6 2018-10-03 00:00:00 FlatC_Temp 24.50</code></pre>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb31-1" title="1"><span class="co"># convert long table into wide table</span></a>
-<a class="sourceLine" id="cb31-2" title="2">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_wider</span>(df.long,</a>
-<a class="sourceLine" id="cb31-3" title="3">                                            <span class="dt">names_from =</span> <span class="st">&quot;sensor&quot;</span>,</a>
-<a class="sourceLine" id="cb31-4" title="4">                                            <span class="dt">values_from =</span> <span class="st">&quot;value&quot;</span>)</a>
-<a class="sourceLine" id="cb31-5" title="5">                         )</a>
-<a class="sourceLine" id="cb31-6" title="6"></a>
-<a class="sourceLine" id="cb31-7" title="7"><span class="co"># wide format</span></a>
-<a class="sourceLine" id="cb31-8" title="8"><span class="kw">head</span>(df.wide)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" title="1"><span class="co"># convert long table into wide table</span></a>
+<a class="sourceLine" id="cb32-2" title="2">df.wide &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_wider</span>(df.long,</a>
+<a class="sourceLine" id="cb32-3" title="3">                                            <span class="dt">names_from =</span> <span class="st">&quot;sensor&quot;</span>,</a>
+<a class="sourceLine" id="cb32-4" title="4">                                            <span class="dt">values_from =</span> <span class="st">&quot;value&quot;</span>)</a>
+<a class="sourceLine" id="cb32-5" title="5">                         )</a>
+<a class="sourceLine" id="cb32-6" title="6"></a>
+<a class="sourceLine" id="cb32-7" title="7"><span class="co"># wide format</span></a>
+<a class="sourceLine" id="cb32-8" title="8"><span class="kw">head</span>(df.wide)</a></code></pre></div>
 <pre><code>##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
 ## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
 ## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
@@ -518,30 +523,30 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 </div>
 <div id="DATAWRANGLING-MERGE-TWO-DATAFRAMES" class="section level3">
 <h3><span class="header-section-number">5.2.8</span> Merge two Dataframes</h3>
-<div class="sourceCode" id="cb33"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb33-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb33-2" title="2"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb33-3" title="3"></a>
-<a class="sourceLine" id="cb33-4" title="4"><span class="co"># read file one and parse dates</span></a>
-<a class="sourceLine" id="cb33-5" title="5">dfOutsideTemp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb33-6" title="6">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
-<a class="sourceLine" id="cb33-7" title="7">                          <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb33-8" title="8"></a>
-<a class="sourceLine" id="cb33-9" title="9">dfOutsideTemp<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfOutsideTemp<span class="op">$</span>time,</a>
-<a class="sourceLine" id="cb33-10" title="10">                                      <span class="dt">orders =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
-<a class="sourceLine" id="cb33-11" title="11">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb33-12" title="12"></a>
-<a class="sourceLine" id="cb33-13" title="13"><span class="co"># read file two and parse dates</span></a>
-<a class="sourceLine" id="cb33-14" title="14">dfFlatTempHum &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb33-15" title="15">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
-<a class="sourceLine" id="cb33-16" title="16"></a>
-<a class="sourceLine" id="cb33-17" title="17">dfFlatTempHum<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfFlatTempHum<span class="op">$</span>time,</a>
-<a class="sourceLine" id="cb33-18" title="18">                                      <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
-<a class="sourceLine" id="cb33-19" title="19">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb33-20" title="20"></a>
-<a class="sourceLine" id="cb33-21" title="21"><span class="co"># merge the two files into a new data frame and keep only rows where all values are available</span></a>
-<a class="sourceLine" id="cb33-22" title="22">df &lt;-<span class="st"> </span><span class="kw">merge</span>(dfOutsideTemp, dfFlatTempHum, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb33-23" title="23"></a>
-<a class="sourceLine" id="cb33-24" title="24"><span class="kw">head</span>(df)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb34-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb34-3" title="3"></a>
+<a class="sourceLine" id="cb34-4" title="4"><span class="co"># read file one and parse dates</span></a>
+<a class="sourceLine" id="cb34-5" title="5">dfOutsideTemp &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/centralOutsideTemp.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb34-6" title="6">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb34-7" title="7">                          <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb34-8" title="8"></a>
+<a class="sourceLine" id="cb34-9" title="9">dfOutsideTemp<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfOutsideTemp<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb34-10" title="10">                                      <span class="dt">orders =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb34-11" title="11">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb34-12" title="12"></a>
+<a class="sourceLine" id="cb34-13" title="13"><span class="co"># read file two and parse dates</span></a>
+<a class="sourceLine" id="cb34-14" title="14">dfFlatTempHum &lt;-<span class="st"> </span><span class="kw">read.csv</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb34-15" title="15">                          <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>, <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
+<a class="sourceLine" id="cb34-16" title="16"></a>
+<a class="sourceLine" id="cb34-17" title="17">dfFlatTempHum<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(dfFlatTempHum<span class="op">$</span>time,</a>
+<a class="sourceLine" id="cb34-18" title="18">                                      <span class="dt">order =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb34-19" title="19">                                      <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb34-20" title="20"></a>
+<a class="sourceLine" id="cb34-21" title="21"><span class="co"># merge the two files into a new data frame and keep only rows where all values are available</span></a>
+<a class="sourceLine" id="cb34-22" title="22">df &lt;-<span class="st"> </span><span class="kw">merge</span>(dfOutsideTemp, dfFlatTempHum, <span class="dt">by =</span> <span class="st">&quot;time&quot;</span>) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb34-23" title="23"></a>
+<a class="sourceLine" id="cb34-24" title="24"><span class="kw">head</span>(df)</a></code></pre></div>
 <pre><code>##                  time centralOutsideTemp FlatA_Hum FlatA_Temp FlatB_Hum
 ## 1 2018-10-03 00:00:00              11.80      53.0      24.43      38.8
 ## 2 2018-10-03 01:00:00              11.25      53.0      24.40      38.8
