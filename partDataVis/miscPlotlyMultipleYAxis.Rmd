@@ -34,8 +34,6 @@ maxyaxis1 <- ceiling(max(28.0,max(data$temperature)))
 minyaxis2 <- 0.0
 maxyaxis2 <- 100.0
 
-
-# ================================================
 dateRange <- c(min(data$time), max(data$time))
 plotColors <- c("darkgreen", "orange")
 pAxisSpacer <- 0.07
