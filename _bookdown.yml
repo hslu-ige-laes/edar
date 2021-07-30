@@ -9,6 +9,7 @@ rmd_files: [
   "partRBasics/introductionRBasics.Rmd",
   "partRBasics/loadingData.Rmd",
   "partRBasics/dataWrangling.Rmd",
+  "partRBasics/tidyData.Rmd",
   #"partRBasics/dataWrangling_Examples.Rmd", # work in progress
   "partRBasics/eda.Rmd",
 

@@ -527,8 +527,7 @@ To e.g.~group, filter and aggregate data we need eventually the date splitted up
 \KeywordTok{library}\NormalTok{(dplyr)}
 \KeywordTok{library}\NormalTok{(lubridate)}
 
-\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
-\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
+ \OperatorTok{%>%}\StringTok{ }\OperatorTok{%>%}\StringTok{ }\OperatorTok{%>%}\StringTok{ }\OperatorTok{%>%}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{year <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"year"}\NormalTok{))}
 \NormalTok{df}\OperatorTok{$}\NormalTok{month <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"month"}\NormalTok{))}
 \NormalTok{df}\OperatorTok{$}\NormalTok{day <-}\StringTok{ }\KeywordTok{as.Date}\NormalTok{(}\KeywordTok{cut}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\DataTypeTok{breaks =} \StringTok{"day"}\NormalTok{))}
 \NormalTok{df}\OperatorTok{$}\NormalTok{weekday <-}\StringTok{ }\KeywordTok{wday}\NormalTok{(df}\OperatorTok{$}\NormalTok{time,}
@@ -893,37 +892,74 @@ Details can be found in \href{https://rafalab.github.io/dsbook/tidyverse.html}{I
 ## 6      22.30      47.2      24.57      47.2      24.30
 \end{verbatim}
 
-\newpage
-
 \hypertarget{tidy-data}{%
-\section{Tidy data}\label{tidy-data}}
+\chapter{Tidy data}\label{tidy-data}}
 
-The\texttt{tidyverse} focus on a consistent way to organise the data which is called \texttt{tidy\ data}. Why should we care? Because a lot of elements in the data analytics process in R like dplyr or ggplot2 work best if the data is in a tidy format.
+The \href{https://www.tidyverse.org/}{`Tidyverse'}\{target="\_blank\} is a collection of R packages designed for data science. See \href{https://www.tidyverse.org/packages/}{tidyverse.org/packages/}\{target="\_blank\} for an up-to-date list of included packages. Beside these core packages, a lot of other packages base on the same philosopy, e.g.~\href{https://tidyverts.org/}{\texttt{tidyverts} - a collection of tidy tools for time series}.
 
-There are three interrelated rules which make a dataset tidy:
-1. Each variable must have its own column.
-2. Each observation must have its own row.
-3. Each value must have its own cell.
+What's so special about that? Well, all packages have the same design philosophy, grammar and data structures. This means that once the data is in this data structure, it is relatively easy and straightforward to perform analysis and visualization.
+
+\hypertarget{philosopyprinciples}{%
+\section{Philosopy/Principles}\label{philosopyprinciples}}
+
+There are three interrelated rules which make a dataset according to this philosophy tidy:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Each variable must have its own column.
+\item
+  Each observation must have its own row.
+\item
+  Each value must have its own cell.
+\end{enumerate}
 
 \begin{figure}
-\includegraphics[width=0.5\linewidth]{images/tidyData} \caption{Three rules make a dataset tidy: variables are in columns, observations are in rows, and values are in cells}\label{fig:unnamed-chunk-9}
+\includegraphics[width=0.7\linewidth]{images/tidyData} \caption{Three rules make a dataset tidy: variables are in columns, observations are in rows, and values are in cells}\label{fig:unnamed-chunk-9}
 \end{figure}
 
-For more info you can have a look at the \href{https://r4ds.had.co.nz/tidy-data.html}{`Tidy Data' chapter of the book `R for Data Science'"} and the \href{http://www.jstatsoft.org/v59/i10/paper}{`Tidy Data' paper published in the `Journal of Statistical Software'"}
+For more information, see the \href{https://r4ds.had.co.nz/tidy-data.html}{`Tidy Data' chapter of the book `R for Data Science'"} and the \href{http://www.jstatsoft.org/v59/i10/paper}{`Tidy Data' paper published in the `Journal of Statistical Software'"}.
 
-Following examples of how to practically apply these concepts.
+\hypertarget{tsibble}{%
+\section{tsibble}\label{tsibble}}
 
-\hypertarget{flattemphum.csv}{%
-\subsection{flatTempHum.csv}\label{flattemphum.csv}}
+The \href{https://tsibble.tidyverts.org/}{\texttt{tsibble}} package provides a data infrastructure for tidy temporal data with wrangling tools. Adapting the forementioned tidy data principles, tsibble is a data- and model-oriented object.
+
+In \texttt{tsibble}:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Index is a variable with inherent ordering from past to present.
+\item
+  Key is a set of variables that define observational units over time.
+\item
+  Each observation should be uniquely identified by index and key.
+\item
+  Each observational unit should be measured at a common interval, if regularly spaced.
+\end{enumerate}
+
+\hypertarget{examples}{%
+\section{Examples}\label{examples}}
+
+\hypertarget{tidy-up-flattemphum.csv}{%
+\subsection{tidy up flatTempHum.csv}\label{tidy-up-flattemphum.csv}}
+
+The following example show how these concepts can be applied in practice.
 
 \begin{Shaded}
 \begin{Highlighting}[]
-\KeywordTok{library}\NormalTok{(tidyr)}
+\KeywordTok{library}\NormalTok{(tidyverse)}
+\KeywordTok{library}\NormalTok{(lubridate)}
 
 \CommentTok{# load test data set}
 \NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
                \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
 
 \CommentTok{# create a copy of the dataframe and print the header and the first five line}
 \KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
@@ -946,8 +982,8 @@ Following examples of how to practically apply these concepts.
 \end{verbatim}
 
 What needs to be done here to get this data set into a tidy format?
-- Firstly each observation should have its own row\ldots{} well.. not yet. To fulfill that, we have to convert from wide to long.
-- Secondly, the variables are \texttt{Flat} and \texttt{Sensor} which are currently merged together in the column name. That must be separated.
+- Firstly each observation should have its own row\ldots{} To fulfill that, we have to convert from wide to long.
+- Secondly, the variables are \texttt{flat} and \texttt{sensor} which are currently merged together in the column name. That must be separated.
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -957,59 +993,74 @@ What needs to be done here to get this data set into a tidy format?
                                              \DataTypeTok{names_to =} \StringTok{"datapoint"}\NormalTok{,}
                                              \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
                                              \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{))}
-\KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(df.long, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                   time  datapoint value
-## 1  2018-10-03 00:00:00  FlatA_Hum 53.00
-## 2  2018-10-03 00:00:00 FlatA_Temp 24.43
-## 3  2018-10-03 00:00:00  FlatB_Hum 38.80
-## 4  2018-10-03 00:00:00 FlatB_Temp 22.40
-## 5  2018-10-03 00:00:00  FlatC_Hum 44.00
-## 6  2018-10-03 00:00:00 FlatC_Temp 24.50
-## 7  2018-10-03 00:00:00  FlatD_Hum 49.00
-## 8  2018-10-03 00:00:00 FlatD_Temp 24.43
-## 9  2018-10-03 01:00:00  FlatA_Hum 53.00
-## 10 2018-10-03 01:00:00 FlatA_Temp 24.40
-## 11 2018-10-03 01:00:00  FlatB_Hum 38.80
-## 12 2018-10-03 01:00:00 FlatB_Temp 22.40
-## 13 2018-10-03 01:00:00  FlatC_Hum 44.00
-## 14 2018-10-03 01:00:00 FlatC_Temp 24.50
-## 15 2018-10-03 01:00:00  FlatD_Hum 49.00
-## 16 2018-10-03 01:00:00 FlatD_Temp 24.40
+##         time  datapoint value
+## 1 2018-10-03  FlatA_Hum 53.00
+## 2 2018-10-03 FlatA_Temp 24.43
+## 3 2018-10-03  FlatB_Hum 38.80
+## 4 2018-10-03 FlatB_Temp 22.40
+## 5 2018-10-03  FlatC_Hum 44.00
 \end{verbatim}
 
 \begin{Shaded}
 \begin{Highlighting}[]
 \CommentTok{# separate datapoint into two columns}
-\NormalTok{df.separated <-}\StringTok{ }\NormalTok{df.long }\OperatorTok{%>%}\StringTok{ }\KeywordTok{separate}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ datapoint, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"flat"}\NormalTok{, }\StringTok{"sensor"}\NormalTok{), }\DataTypeTok{sep =} \StringTok{"_"}\NormalTok{)}
-\KeywordTok{head}\NormalTok{(df.separated, }\DecValTok{16}\NormalTok{)}
+\NormalTok{df.separated <-}\StringTok{ }\NormalTok{df.long }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{separate}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ datapoint, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"flat"}\NormalTok{, }\StringTok{"sensor"}\NormalTok{), }\DataTypeTok{sep =} \StringTok{"_"}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{mutate_at}\NormalTok{(}\StringTok{"flat"}\NormalTok{, str_replace, }\StringTok{"Flat"}\NormalTok{, }\StringTok{""}\NormalTok{) }\OperatorTok{%>%}\StringTok{ }
+\StringTok{  }\KeywordTok{na.omit}\NormalTok{()}
+
+\KeywordTok{head}\NormalTok{(df.separated, }\DecValTok{10}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
 
 \begin{verbatim}
-##                   time  flat sensor value
-## 1  2018-10-03 00:00:00 FlatA    Hum 53.00
-## 2  2018-10-03 00:00:00 FlatA   Temp 24.43
-## 3  2018-10-03 00:00:00 FlatB    Hum 38.80
-## 4  2018-10-03 00:00:00 FlatB   Temp 22.40
-## 5  2018-10-03 00:00:00 FlatC    Hum 44.00
-## 6  2018-10-03 00:00:00 FlatC   Temp 24.50
-## 7  2018-10-03 00:00:00 FlatD    Hum 49.00
-## 8  2018-10-03 00:00:00 FlatD   Temp 24.43
-## 9  2018-10-03 01:00:00 FlatA    Hum 53.00
-## 10 2018-10-03 01:00:00 FlatA   Temp 24.40
-## 11 2018-10-03 01:00:00 FlatB    Hum 38.80
-## 12 2018-10-03 01:00:00 FlatB   Temp 22.40
-## 13 2018-10-03 01:00:00 FlatC    Hum 44.00
-## 14 2018-10-03 01:00:00 FlatC   Temp 24.50
-## 15 2018-10-03 01:00:00 FlatD    Hum 49.00
-## 16 2018-10-03 01:00:00 FlatD   Temp 24.40
+##                   time flat sensor value
+## 1  2018-10-03 00:00:00    A    Hum 53.00
+## 2  2018-10-03 00:00:00    A   Temp 24.43
+## 3  2018-10-03 00:00:00    B    Hum 38.80
+## 4  2018-10-03 00:00:00    B   Temp 22.40
+## 5  2018-10-03 00:00:00    C    Hum 44.00
+## 6  2018-10-03 00:00:00    C   Temp 24.50
+## 7  2018-10-03 00:00:00    D    Hum 49.00
+## 8  2018-10-03 00:00:00    D   Temp 24.43
+## 9  2018-10-03 01:00:00    A    Hum 53.00
+## 10 2018-10-03 01:00:00    A   Temp 24.40
 \end{verbatim}
 
 This dataset can now be considered tidy and is ready for further processing.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tsibble)}
+
+\CommentTok{# convert the data frame in a tsibble object}
+\NormalTok{tsbl <-}\StringTok{ }\KeywordTok{as_tsibble}\NormalTok{(df.separated, }\DataTypeTok{key =} \KeywordTok{c}\NormalTok{(flat, sensor), }\DataTypeTok{index =}\NormalTok{ time)}
+\NormalTok{tsbl}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## # A tsibble: 131,602 x 4 [1h] <Europe/Zurich>
+## # Key:       flat, sensor [8]
+##    time                flat  sensor value
+##    <dttm>              <chr> <chr>  <dbl>
+##  1 2018-10-03 00:00:00 A     Hum     53  
+##  2 2018-10-03 01:00:00 A     Hum     53  
+##  3 2018-10-03 02:00:00 A     Hum     53  
+##  4 2018-10-03 03:00:00 A     Hum     53  
+##  5 2018-10-03 04:00:00 A     Hum     53.3
+##  6 2018-10-03 05:00:00 A     Hum     53.7
+##  7 2018-10-03 06:00:00 A     Hum     50.8
+##  8 2018-10-03 08:00:00 A     Hum     42.7
+##  9 2018-10-03 09:00:00 A     Hum     46  
+## 10 2018-10-03 10:00:00 A     Hum     41.3
+## # ... with 131,592 more rows
+\end{verbatim}
 
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}

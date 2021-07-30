@@ -1,0 +1,81 @@
+# Tidy data
+The ['Tidyverse'](https://www.tidyverse.org/){target="_blank} is a collection of R packages designed for data science. See [tidyverse.org/packages/](https://www.tidyverse.org/packages/){target="_blank} for an up-to-date list of included packages. Beside these core packages, a lot of other packages base on the same philosopy, e.g. [`tidyverts` - a collection of tidy tools for time series](https://tidyverts.org/){target="_blank}.
+
+What's so special about that? Well, all packages have the same design philosophy, grammar and data structures. This means that once the data is in this data structure, it is relatively easy and straightforward to perform analysis and visualization.
+
+## Philosopy/Principles
+There are three interrelated rules which make a dataset according to this philosophy tidy:
+
+1. Each variable must have its own column.
+1. Each observation must have its own row.
+1. Each value must have its own cell.
+
+```{r out.width='70%', fig.cap='Three rules make a dataset tidy: variables are in columns, observations are in rows, and values are in cells', echo=FALSE}
+knitr::include_graphics("images/tidyData.png")
+```
+
+For more information, see the ['Tidy Data' chapter of the book 'R for Data Science'"](https://r4ds.had.co.nz/tidy-data.html){target="_blank"} and the ['Tidy Data' paper published in the 'Journal of Statistical Software'"](http://www.jstatsoft.org/v59/i10/paper){target="_blank"}.
+
+## tsibble
+The [`tsibble`](https://tsibble.tidyverts.org/){target="_blank"} package provides a data infrastructure for tidy temporal data with wrangling tools. Adapting the forementioned tidy data principles, tsibble is a data- and model-oriented object.
+
+In `tsibble`:
+
+1. Index is a variable with inherent ordering from past to present.
+1. Key is a set of variables that define observational units over time.
+1. Each observation should be uniquely identified by index and key.
+1. Each observational unit should be measured at a common interval, if regularly spaced.
+
+
+## Examples
+### tidy up flatTempHum.csv
+The following example show how these concepts can be applied in practice.
+
+```{r tidyData11, warning=FALSE, message=FALSE, collapse = FALSE}
+library(tidyverse)
+library(lubridate)
+
+# load test data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+df$time <- parse_date_time(df$time, "YmdHMS", tz = "Europe/Zurich")
+
+
+# create a copy of the dataframe and print the header and the first five line
+head(df, 5)
+```
+
+What needs to be done here to get this data set into a tidy format?
+- Firstly each observation should have its own row... To fulfill that, we have to convert from wide to long.
+- Secondly, the variables are `flat` and `sensor` which are currently merged together in the column name. That must be separated.
+
+```{r tidyData12, warning=FALSE, message=FALSE, collapse = FALSE}
+# convert wide to long format
+df.long <- as.data.frame(tidyr::pivot_longer(df,
+                                             cols = -time,
+                                             names_to = "datapoint",
+                                             values_to = "value",
+                                             values_drop_na = TRUE))
+head(df.long, 5)
+
+# separate datapoint into two columns
+df.separated <- df.long %>% 
+  separate(col = datapoint, into = c("flat", "sensor"), sep = "_") %>% 
+  mutate_at("flat", str_replace, "Flat", "") %>% 
+  na.omit()
+
+head(df.separated, 10)
+
+```
+
+This dataset can now be considered tidy and is ready for further processing.
+
+```{r tidyData13, warning=FALSE, message=FALSE, collapse = FALSE}
+library(tsibble)
+
+# convert the data frame in a tsibble object
+tsbl <- as_tsibble(df.separated, key = c(flat, sensor), index = time)
+tsbl
+
+```

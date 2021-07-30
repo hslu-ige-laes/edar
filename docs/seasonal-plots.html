@@ -4,11 +4,11 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>Chapter 10 Seasonal Plots | Energy Data Analysis with R</title>
+  <title>Chapter 11 Seasonal Plots | Energy Data Analysis with R</title>
   <meta name="description" content="Introduction into energy data analysis and visualization with R." />
   <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="Chapter 10 Seasonal Plots | Energy Data Analysis with R" />
+  <meta property="og:title" content="Chapter 11 Seasonal Plots | Energy Data Analysis with R" />
   <meta property="og:type" content="book" />
   
   
@@ -16,7 +16,7 @@
   <meta name="github-repo" content="hslu-ige-laes/edar" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Chapter 10 Seasonal Plots | Energy Data Analysis with R" />
+  <meta name="twitter:title" content="Chapter 11 Seasonal Plots | Energy Data Analysis with R" />
   
   <meta name="twitter:description" content="Introduction into energy data analysis and visualization with R." />
   
@@ -184,181 +184,185 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.2.7" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#long-to-wide"><i class="fa fa-check"></i><b>5.2.7</b> Long to Wide</a></li>
 <li class="chapter" data-level="5.2.8" data-path="manipulating-data-frames.html"><a href="manipulating-data-frames.html#DATAWRANGLING-MERGE-TWO-DATAFRAMES"><i class="fa fa-check"></i><b>5.2.8</b> Merge two Dataframes</a></li>
 </ul></li>
-<li class="chapter" data-level="5.3" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>5.3</b> Tidy data</a><ul>
-<li class="chapter" data-level="5.3.1" data-path="tidy-data.html"><a href="tidy-data.html#flattemphum.csv"><i class="fa fa-check"></i><b>5.3.1</b> flatTempHum.csv</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>6</b> Tidy data</a><ul>
+<li class="chapter" data-level="6.1" data-path="philosopyprinciples.html"><a href="philosopyprinciples.html"><i class="fa fa-check"></i><b>6.1</b> Philosopy/Principles</a></li>
+<li class="chapter" data-level="6.2" data-path="tsibble.html"><a href="tsibble.html"><i class="fa fa-check"></i><b>6.2</b> tsibble</a></li>
+<li class="chapter" data-level="6.3" data-path="examples.html"><a href="examples.html"><i class="fa fa-check"></i><b>6.3</b> Examples</a><ul>
+<li class="chapter" data-level="6.3.1" data-path="examples.html"><a href="examples.html#tidy-up-flattemphum.csv"><i class="fa fa-check"></i><b>6.3.1</b> tidy up flatTempHum.csv</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="6" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>6</b> Explorative Data Analysis</a><ul>
-<li class="chapter" data-level="6.1" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html"><i class="fa fa-check"></i><b>6.1</b> Get Overview of Data</a><ul>
-<li class="chapter" data-level="6.1.1" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#load-data"><i class="fa fa-check"></i><b>6.1.1</b> Load data</a></li>
-<li class="chapter" data-level="6.1.2" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#names"><i class="fa fa-check"></i><b>6.1.2</b> Names</a></li>
-<li class="chapter" data-level="6.1.3" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#structure"><i class="fa fa-check"></i><b>6.1.3</b> Structure</a></li>
-<li class="chapter" data-level="6.1.4" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#headtail"><i class="fa fa-check"></i><b>6.1.4</b> Head/Tail</a></li>
-<li class="chapter" data-level="6.1.5" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#five-number-summary"><i class="fa fa-check"></i><b>6.1.5</b> Five number summary</a></li>
+<li class="chapter" data-level="7" data-path="explorative-data-analysis.html"><a href="explorative-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Explorative Data Analysis</a><ul>
+<li class="chapter" data-level="7.1" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html"><i class="fa fa-check"></i><b>7.1</b> Get Overview of Data</a><ul>
+<li class="chapter" data-level="7.1.1" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#load-data"><i class="fa fa-check"></i><b>7.1.1</b> Load data</a></li>
+<li class="chapter" data-level="7.1.2" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#names"><i class="fa fa-check"></i><b>7.1.2</b> Names</a></li>
+<li class="chapter" data-level="7.1.3" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#structure"><i class="fa fa-check"></i><b>7.1.3</b> Structure</a></li>
+<li class="chapter" data-level="7.1.4" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#headtail"><i class="fa fa-check"></i><b>7.1.4</b> Head/Tail</a></li>
+<li class="chapter" data-level="7.1.5" data-path="get-overview-of-data.html"><a href="get-overview-of-data.html#five-number-summary"><i class="fa fa-check"></i><b>7.1.5</b> Five number summary</a></li>
 </ul></li>
-<li class="chapter" data-level="6.2" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html"><i class="fa fa-check"></i><b>6.2</b> Quick Data Visualizations</a><ul>
-<li class="chapter" data-level="6.2.1" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#multiple-time-series-plot"><i class="fa fa-check"></i><b>6.2.1</b> Multiple time series plot</a></li>
-<li class="chapter" data-level="6.2.2" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#multiple-time-series-plot-in-one-plot"><i class="fa fa-check"></i><b>6.2.2</b> Multiple time series plot in one plot</a></li>
-<li class="chapter" data-level="6.2.3" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#indexed-time-series-plot"><i class="fa fa-check"></i><b>6.2.3</b> Indexed time series plot</a></li>
+<li class="chapter" data-level="7.2" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html"><i class="fa fa-check"></i><b>7.2</b> Quick Data Visualizations</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#multiple-time-series-plot"><i class="fa fa-check"></i><b>7.2.1</b> Multiple time series plot</a></li>
+<li class="chapter" data-level="7.2.2" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#multiple-time-series-plot-in-one-plot"><i class="fa fa-check"></i><b>7.2.2</b> Multiple time series plot in one plot</a></li>
+<li class="chapter" data-level="7.2.3" data-path="quick-data-visualizations.html"><a href="quick-data-visualizations.html#indexed-time-series-plot"><i class="fa fa-check"></i><b>7.2.3</b> Indexed time series plot</a></li>
 </ul></li>
 </ul></li>
 <li class="part"><span><b>II Data Visualizations</b></span></li>
-<li class="chapter" data-level="7" data-path="introduction-to-data-visualizations.html"><a href="introduction-to-data-visualizations.html"><i class="fa fa-check"></i><b>7</b> Introduction to Data Visualizations</a></li>
-<li class="chapter" data-level="8" data-path="statistical-characteristics.html"><a href="statistical-characteristics.html"><i class="fa fa-check"></i><b>8</b> Statistical Characteristics</a><ul>
-<li class="chapter" data-level="8.1" data-path="boxplot.html"><a href="boxplot.html"><i class="fa fa-check"></i><b>8.1</b> Boxplot</a><ul>
-<li class="chapter" data-level="8.1.1" data-path="boxplot.html"><a href="boxplot.html#goal"><i class="fa fa-check"></i><b>8.1.1</b> Goal</a></li>
-<li class="chapter" data-level="8.1.2" data-path="boxplot.html"><a href="boxplot.html#data-basis"><i class="fa fa-check"></i><b>8.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="8.1.3" data-path="boxplot.html"><a href="boxplot.html#solution"><i class="fa fa-check"></i><b>8.1.3</b> Solution</a></li>
+<li class="chapter" data-level="8" data-path="introduction-to-data-visualizations.html"><a href="introduction-to-data-visualizations.html"><i class="fa fa-check"></i><b>8</b> Introduction to Data Visualizations</a></li>
+<li class="chapter" data-level="9" data-path="statistical-characteristics.html"><a href="statistical-characteristics.html"><i class="fa fa-check"></i><b>9</b> Statistical Characteristics</a><ul>
+<li class="chapter" data-level="9.1" data-path="boxplot.html"><a href="boxplot.html"><i class="fa fa-check"></i><b>9.1</b> Boxplot</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="boxplot.html"><a href="boxplot.html#goal"><i class="fa fa-check"></i><b>9.1.1</b> Goal</a></li>
+<li class="chapter" data-level="9.1.2" data-path="boxplot.html"><a href="boxplot.html#data-basis"><i class="fa fa-check"></i><b>9.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="9.1.3" data-path="boxplot.html"><a href="boxplot.html#solution"><i class="fa fa-check"></i><b>9.1.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="8.2" data-path="cross-correlation.html"><a href="cross-correlation.html"><i class="fa fa-check"></i><b>8.2</b> Cross-Correlation</a><ul>
-<li class="chapter" data-level="8.2.1" data-path="cross-correlation.html"><a href="cross-correlation.html#goal-1"><i class="fa fa-check"></i><b>8.2.1</b> Goal</a></li>
-<li class="chapter" data-level="8.2.2" data-path="cross-correlation.html"><a href="cross-correlation.html#data-basis-1"><i class="fa fa-check"></i><b>8.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="8.2.3" data-path="cross-correlation.html"><a href="cross-correlation.html#solution-1"><i class="fa fa-check"></i><b>8.2.3</b> Solution</a></li>
+<li class="chapter" data-level="9.2" data-path="cross-correlation.html"><a href="cross-correlation.html"><i class="fa fa-check"></i><b>9.2</b> Cross-Correlation</a><ul>
+<li class="chapter" data-level="9.2.1" data-path="cross-correlation.html"><a href="cross-correlation.html#goal-1"><i class="fa fa-check"></i><b>9.2.1</b> Goal</a></li>
+<li class="chapter" data-level="9.2.2" data-path="cross-correlation.html"><a href="cross-correlation.html#data-basis-1"><i class="fa fa-check"></i><b>9.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="9.2.3" data-path="cross-correlation.html"><a href="cross-correlation.html#solution-1"><i class="fa fa-check"></i><b>9.2.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="8.3" data-path="density-plot.html"><a href="density-plot.html"><i class="fa fa-check"></i><b>8.3</b> Density Plot</a><ul>
-<li class="chapter" data-level="8.3.1" data-path="density-plot.html"><a href="density-plot.html#goal-2"><i class="fa fa-check"></i><b>8.3.1</b> Goal</a></li>
-<li class="chapter" data-level="8.3.2" data-path="density-plot.html"><a href="density-plot.html#data-basis-2"><i class="fa fa-check"></i><b>8.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="8.3.3" data-path="density-plot.html"><a href="density-plot.html#solution-2"><i class="fa fa-check"></i><b>8.3.3</b> Solution</a></li>
+<li class="chapter" data-level="9.3" data-path="density-plot.html"><a href="density-plot.html"><i class="fa fa-check"></i><b>9.3</b> Density Plot</a><ul>
+<li class="chapter" data-level="9.3.1" data-path="density-plot.html"><a href="density-plot.html#goal-2"><i class="fa fa-check"></i><b>9.3.1</b> Goal</a></li>
+<li class="chapter" data-level="9.3.2" data-path="density-plot.html"><a href="density-plot.html#data-basis-2"><i class="fa fa-check"></i><b>9.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="9.3.3" data-path="density-plot.html"><a href="density-plot.html#solution-2"><i class="fa fa-check"></i><b>9.3.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="8.4" data-path="density-plot-season.html"><a href="density-plot-season.html"><i class="fa fa-check"></i><b>8.4</b> Density Plot Season</a><ul>
-<li class="chapter" data-level="8.4.1" data-path="density-plot-season.html"><a href="density-plot-season.html#goal-3"><i class="fa fa-check"></i><b>8.4.1</b> Goal</a></li>
-<li class="chapter" data-level="8.4.2" data-path="density-plot-season.html"><a href="density-plot-season.html#data-basis-3"><i class="fa fa-check"></i><b>8.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="8.4.3" data-path="density-plot-season.html"><a href="density-plot-season.html#solution-3"><i class="fa fa-check"></i><b>8.4.3</b> Solution</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="9" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>9</b> Time Series Decomposition</a><ul>
-<li class="chapter" data-level="9.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>9.1</b> Long term</a><ul>
-<li class="chapter" data-level="9.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>9.1.1</b> Goal</a></li>
-<li class="chapter" data-level="9.1.2" data-path="long-term.html"><a href="long-term.html#data-basis-4"><i class="fa fa-check"></i><b>9.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="9.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>9.1.3</b> Solution</a></li>
-<li class="chapter" data-level="9.1.4" data-path="long-term.html"><a href="long-term.html#discussion"><i class="fa fa-check"></i><b>9.1.4</b> Discussion</a></li>
-</ul></li>
-<li class="chapter" data-level="9.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>9.2</b> Short term</a><ul>
-<li class="chapter" data-level="9.2.1" data-path="short-term.html"><a href="short-term.html#goal-5"><i class="fa fa-check"></i><b>9.2.1</b> Goal</a></li>
-<li class="chapter" data-level="9.2.2" data-path="short-term.html"><a href="short-term.html#data-basis-5"><i class="fa fa-check"></i><b>9.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="9.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>9.2.3</b> Solution</a></li>
+<li class="chapter" data-level="9.4" data-path="density-plot-season.html"><a href="density-plot-season.html"><i class="fa fa-check"></i><b>9.4</b> Density Plot Season</a><ul>
+<li class="chapter" data-level="9.4.1" data-path="density-plot-season.html"><a href="density-plot-season.html#goal-3"><i class="fa fa-check"></i><b>9.4.1</b> Goal</a></li>
+<li class="chapter" data-level="9.4.2" data-path="density-plot-season.html"><a href="density-plot-season.html#data-basis-3"><i class="fa fa-check"></i><b>9.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="9.4.3" data-path="density-plot-season.html"><a href="density-plot-season.html#solution-3"><i class="fa fa-check"></i><b>9.4.3</b> Solution</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="10" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>10</b> Seasonal Plots</a><ul>
-<li class="chapter" data-level="10.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>10.1</b> Overlapping</a><ul>
-<li class="chapter" data-level="10.1.1" data-path="overlapping.html"><a href="overlapping.html#goal-6"><i class="fa fa-check"></i><b>10.1.1</b> Goal</a></li>
-<li class="chapter" data-level="10.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis-6"><i class="fa fa-check"></i><b>10.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="10.1.3" data-path="overlapping.html"><a href="overlapping.html#solution-6"><i class="fa fa-check"></i><b>10.1.3</b> Solution</a></li>
-<li class="chapter" data-level="10.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion-1"><i class="fa fa-check"></i><b>10.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="10" data-path="time-series-decomposition.html"><a href="time-series-decomposition.html"><i class="fa fa-check"></i><b>10</b> Time Series Decomposition</a><ul>
+<li class="chapter" data-level="10.1" data-path="long-term.html"><a href="long-term.html"><i class="fa fa-check"></i><b>10.1</b> Long term</a><ul>
+<li class="chapter" data-level="10.1.1" data-path="long-term.html"><a href="long-term.html#goal-4"><i class="fa fa-check"></i><b>10.1.1</b> Goal</a></li>
+<li class="chapter" data-level="10.1.2" data-path="long-term.html"><a href="long-term.html#data-basis-4"><i class="fa fa-check"></i><b>10.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="10.1.3" data-path="long-term.html"><a href="long-term.html#solution-4"><i class="fa fa-check"></i><b>10.1.3</b> Solution</a></li>
+<li class="chapter" data-level="10.1.4" data-path="long-term.html"><a href="long-term.html#discussion"><i class="fa fa-check"></i><b>10.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="10.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>10.2</b> Mini Plots</a><ul>
-<li class="chapter" data-level="10.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-7"><i class="fa fa-check"></i><b>10.2.1</b> Goal</a></li>
-<li class="chapter" data-level="10.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-7"><i class="fa fa-check"></i><b>10.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="10.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-7"><i class="fa fa-check"></i><b>10.2.3</b> Solution</a></li>
-<li class="chapter" data-level="10.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-2"><i class="fa fa-check"></i><b>10.2.4</b> Discussion</a></li>
-</ul></li>
-<li class="chapter" data-level="10.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>10.3</b> Polar</a><ul>
-<li class="chapter" data-level="10.3.1" data-path="polar.html"><a href="polar.html#goal-8"><i class="fa fa-check"></i><b>10.3.1</b> Goal</a></li>
-<li class="chapter" data-level="10.3.2" data-path="polar.html"><a href="polar.html#data-basis-8"><i class="fa fa-check"></i><b>10.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="10.3.3" data-path="polar.html"><a href="polar.html#solution-8"><i class="fa fa-check"></i><b>10.3.3</b> Solution</a></li>
-<li class="chapter" data-level="10.3.4" data-path="polar.html"><a href="polar.html#discussion-3"><i class="fa fa-check"></i><b>10.3.4</b> Discussion</a></li>
-</ul></li>
-<li class="chapter" data-level="10.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>10.4</b> Before/After Optimization</a><ul>
-<li class="chapter" data-level="10.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-9"><i class="fa fa-check"></i><b>10.4.1</b> Goal</a></li>
-<li class="chapter" data-level="10.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-9"><i class="fa fa-check"></i><b>10.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="10.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-9"><i class="fa fa-check"></i><b>10.4.3</b> Solution</a></li>
-<li class="chapter" data-level="10.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-4"><i class="fa fa-check"></i><b>10.4.4</b> Discussion</a></li>
+<li class="chapter" data-level="10.2" data-path="short-term.html"><a href="short-term.html"><i class="fa fa-check"></i><b>10.2</b> Short term</a><ul>
+<li class="chapter" data-level="10.2.1" data-path="short-term.html"><a href="short-term.html#goal-5"><i class="fa fa-check"></i><b>10.2.1</b> Goal</a></li>
+<li class="chapter" data-level="10.2.2" data-path="short-term.html"><a href="short-term.html#data-basis-5"><i class="fa fa-check"></i><b>10.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="10.2.3" data-path="short-term.html"><a href="short-term.html#solution-5"><i class="fa fa-check"></i><b>10.2.3</b> Solution</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="11" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>11</b> Heat Maps</a><ul>
-<li class="chapter" data-level="11.1" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>11.1</b> Calendar</a><ul>
-<li class="chapter" data-level="11.1.1" data-path="calendar.html"><a href="calendar.html#goal-10"><i class="fa fa-check"></i><b>11.1.1</b> Goal</a></li>
-<li class="chapter" data-level="11.1.2" data-path="calendar.html"><a href="calendar.html#data-basis-10"><i class="fa fa-check"></i><b>11.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="11.1.3" data-path="calendar.html"><a href="calendar.html#solution-10"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
-<li class="chapter" data-level="11.1.4" data-path="calendar.html"><a href="calendar.html#discussion-5"><i class="fa fa-check"></i><b>11.1.4</b> Discussion</a></li>
+<li class="chapter" data-level="11" data-path="seasonal-plots.html"><a href="seasonal-plots.html"><i class="fa fa-check"></i><b>11</b> Seasonal Plots</a><ul>
+<li class="chapter" data-level="11.1" data-path="overlapping.html"><a href="overlapping.html"><i class="fa fa-check"></i><b>11.1</b> Overlapping</a><ul>
+<li class="chapter" data-level="11.1.1" data-path="overlapping.html"><a href="overlapping.html#goal-6"><i class="fa fa-check"></i><b>11.1.1</b> Goal</a></li>
+<li class="chapter" data-level="11.1.2" data-path="overlapping.html"><a href="overlapping.html#data-basis-6"><i class="fa fa-check"></i><b>11.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="11.1.3" data-path="overlapping.html"><a href="overlapping.html#solution-6"><i class="fa fa-check"></i><b>11.1.3</b> Solution</a></li>
+<li class="chapter" data-level="11.1.4" data-path="overlapping.html"><a href="overlapping.html#discussion-1"><i class="fa fa-check"></i><b>11.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="11.2" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>11.2</b> Median-Weeks</a><ul>
-<li class="chapter" data-level="11.2.1" data-path="median-weeks.html"><a href="median-weeks.html#goal-11"><i class="fa fa-check"></i><b>11.2.1</b> Goal</a></li>
-<li class="chapter" data-level="11.2.2" data-path="median-weeks.html"><a href="median-weeks.html#data-basis-11"><i class="fa fa-check"></i><b>11.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="11.2.3" data-path="median-weeks.html"><a href="median-weeks.html#solution-11"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
-<li class="chapter" data-level="11.2.4" data-path="median-weeks.html"><a href="median-weeks.html#discussion-6"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="11.2" data-path="mini-plots.html"><a href="mini-plots.html"><i class="fa fa-check"></i><b>11.2</b> Mini Plots</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="mini-plots.html"><a href="mini-plots.html#goal-7"><i class="fa fa-check"></i><b>11.2.1</b> Goal</a></li>
+<li class="chapter" data-level="11.2.2" data-path="mini-plots.html"><a href="mini-plots.html#data-basis-7"><i class="fa fa-check"></i><b>11.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="11.2.3" data-path="mini-plots.html"><a href="mini-plots.html#solution-7"><i class="fa fa-check"></i><b>11.2.3</b> Solution</a></li>
+<li class="chapter" data-level="11.2.4" data-path="mini-plots.html"><a href="mini-plots.html#discussion-2"><i class="fa fa-check"></i><b>11.2.4</b> Discussion</a></li>
 </ul></li>
+<li class="chapter" data-level="11.3" data-path="polar.html"><a href="polar.html"><i class="fa fa-check"></i><b>11.3</b> Polar</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="polar.html"><a href="polar.html#goal-8"><i class="fa fa-check"></i><b>11.3.1</b> Goal</a></li>
+<li class="chapter" data-level="11.3.2" data-path="polar.html"><a href="polar.html#data-basis-8"><i class="fa fa-check"></i><b>11.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="11.3.3" data-path="polar.html"><a href="polar.html#solution-8"><i class="fa fa-check"></i><b>11.3.3</b> Solution</a></li>
+<li class="chapter" data-level="11.3.4" data-path="polar.html"><a href="polar.html#discussion-3"><i class="fa fa-check"></i><b>11.3.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="12" data-path="typical-daily-profiles.html"><a href="typical-daily-profiles.html"><i class="fa fa-check"></i><b>12</b> Typical Daily Profiles</a><ul>
-<li class="chapter" data-level="12.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>12.1</b> Overview</a><ul>
-<li class="chapter" data-level="12.1.1" data-path="overview.html"><a href="overview.html#goal-12"><i class="fa fa-check"></i><b>12.1.1</b> Goal</a></li>
-<li class="chapter" data-level="12.1.2" data-path="overview.html"><a href="overview.html#data-basis-12"><i class="fa fa-check"></i><b>12.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="12.1.3" data-path="overview.html"><a href="overview.html#solution-12"><i class="fa fa-check"></i><b>12.1.3</b> Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="12.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>12.2</b> Overlayed</a><ul>
-<li class="chapter" data-level="12.2.1" data-path="overlayed.html"><a href="overlayed.html#goal-13"><i class="fa fa-check"></i><b>12.2.1</b> Goal</a></li>
-<li class="chapter" data-level="12.2.2" data-path="overlayed.html"><a href="overlayed.html#data-basis-13"><i class="fa fa-check"></i><b>12.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="12.2.3" data-path="overlayed.html"><a href="overlayed.html#solution-13"><i class="fa fa-check"></i><b>12.2.3</b> Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="12.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>12.3</b> Mean</a><ul>
-<li class="chapter" data-level="12.3.1" data-path="mean.html"><a href="mean.html#goal-14"><i class="fa fa-check"></i><b>12.3.1</b> Goal</a></li>
-<li class="chapter" data-level="12.3.2" data-path="mean.html"><a href="mean.html#data-basis-14"><i class="fa fa-check"></i><b>12.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="12.3.3" data-path="mean.html"><a href="mean.html#solution-14"><i class="fa fa-check"></i><b>12.3.3</b> Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="12.4" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html"><i class="fa fa-check"></i><b>12.4</b> Decomposed</a><ul>
-<li class="chapter" data-level="12.4.1" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#goal-15"><i class="fa fa-check"></i><b>12.4.1</b> Goal</a></li>
-<li class="chapter" data-level="12.4.2" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#data-basis-15"><i class="fa fa-check"></i><b>12.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="12.4.3" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#solution-15"><i class="fa fa-check"></i><b>12.4.3</b> Solution</a></li>
+<li class="chapter" data-level="11.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html"><i class="fa fa-check"></i><b>11.4</b> Before/After Optimization</a><ul>
+<li class="chapter" data-level="11.4.1" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#goal-9"><i class="fa fa-check"></i><b>11.4.1</b> Goal</a></li>
+<li class="chapter" data-level="11.4.2" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#data-basis-9"><i class="fa fa-check"></i><b>11.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="11.4.3" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#solution-9"><i class="fa fa-check"></i><b>11.4.3</b> Solution</a></li>
+<li class="chapter" data-level="11.4.4" data-path="dataVisSeasonalBefAft.html"><a href="dataVisSeasonalBefAft.html#discussion-4"><i class="fa fa-check"></i><b>11.4.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="13" data-path="sum-frequency-diagrams.html"><a href="sum-frequency-diagrams.html"><i class="fa fa-check"></i><b>13</b> Sum Frequency Diagrams</a><ul>
-<li class="chapter" data-level="13.1" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html"><i class="fa fa-check"></i><b>13.1</b> Sum Frequency Days</a><ul>
-<li class="chapter" data-level="13.1.1" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#goal-16"><i class="fa fa-check"></i><b>13.1.1</b> Goal</a></li>
-<li class="chapter" data-level="13.1.2" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#data-basis-16"><i class="fa fa-check"></i><b>13.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.1.3" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#solution-16"><i class="fa fa-check"></i><b>13.1.3</b> Solution</a></li>
+<li class="chapter" data-level="12" data-path="heat-maps.html"><a href="heat-maps.html"><i class="fa fa-check"></i><b>12</b> Heat Maps</a><ul>
+<li class="chapter" data-level="12.1" data-path="calendar.html"><a href="calendar.html"><i class="fa fa-check"></i><b>12.1</b> Calendar</a><ul>
+<li class="chapter" data-level="12.1.1" data-path="calendar.html"><a href="calendar.html#goal-10"><i class="fa fa-check"></i><b>12.1.1</b> Goal</a></li>
+<li class="chapter" data-level="12.1.2" data-path="calendar.html"><a href="calendar.html#data-basis-10"><i class="fa fa-check"></i><b>12.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="12.1.3" data-path="calendar.html"><a href="calendar.html#solution-10"><i class="fa fa-check"></i><b>12.1.3</b> Solution</a></li>
+<li class="chapter" data-level="12.1.4" data-path="calendar.html"><a href="calendar.html#discussion-5"><i class="fa fa-check"></i><b>12.1.4</b> Discussion</a></li>
 </ul></li>
-<li class="chapter" data-level="13.2" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html"><i class="fa fa-check"></i><b>13.2</b> Sum Frequency Hours</a><ul>
-<li class="chapter" data-level="13.2.1" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#goal-17"><i class="fa fa-check"></i><b>13.2.1</b> Goal</a></li>
-<li class="chapter" data-level="13.2.2" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#data-basis-17"><i class="fa fa-check"></i><b>13.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="13.2.3" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#solution-17"><i class="fa fa-check"></i><b>13.2.3</b> Solution</a></li>
-</ul></li>
-</ul></li>
-<li class="chapter" data-level="14" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>14</b> Comfort Plots</a><ul>
-<li class="chapter" data-level="14.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>14.1</b> Mollier hx Diagram</a><ul>
-<li class="chapter" data-level="14.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#goal-18"><i class="fa fa-check"></i><b>14.1.1</b> Goal</a></li>
-<li class="chapter" data-level="14.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#data-basis-18"><i class="fa fa-check"></i><b>14.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="14.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-18"><i class="fa fa-check"></i><b>14.1.3</b> Solution</a></li>
-<li class="chapter" data-level="14.1.4" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#see-also"><i class="fa fa-check"></i><b>14.1.4</b> See also</a></li>
-</ul></li>
-<li class="chapter" data-level="14.2" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html"><i class="fa fa-check"></i><b>14.2</b> Temperature versus Humidity</a><ul>
-<li class="chapter" data-level="14.2.1" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#goal-19"><i class="fa fa-check"></i><b>14.2.1</b> Goal</a></li>
-<li class="chapter" data-level="14.2.2" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#data-basis-19"><i class="fa fa-check"></i><b>14.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="14.2.3" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#solution-19"><i class="fa fa-check"></i><b>14.2.3</b> Solution</a></li>
-</ul></li>
-<li class="chapter" data-level="14.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>14.3</b> SIA 180 Thermal Comfort</a><ul>
-<li class="chapter" data-level="14.3.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#goal-20"><i class="fa fa-check"></i><b>14.3.1</b> Goal</a></li>
-<li class="chapter" data-level="14.3.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#data-basis-20"><i class="fa fa-check"></i><b>14.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="14.3.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-20"><i class="fa fa-check"></i><b>14.3.3</b> Solution</a></li>
+<li class="chapter" data-level="12.2" data-path="median-weeks.html"><a href="median-weeks.html"><i class="fa fa-check"></i><b>12.2</b> Median-Weeks</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="median-weeks.html"><a href="median-weeks.html#goal-11"><i class="fa fa-check"></i><b>12.2.1</b> Goal</a></li>
+<li class="chapter" data-level="12.2.2" data-path="median-weeks.html"><a href="median-weeks.html#data-basis-11"><i class="fa fa-check"></i><b>12.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="12.2.3" data-path="median-weeks.html"><a href="median-weeks.html#solution-11"><i class="fa fa-check"></i><b>12.2.3</b> Solution</a></li>
+<li class="chapter" data-level="12.2.4" data-path="median-weeks.html"><a href="median-weeks.html#discussion-6"><i class="fa fa-check"></i><b>12.2.4</b> Discussion</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="15" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>15</b> Miscellaneous</a><ul>
-<li class="chapter" data-level="15.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>15.1</b> Electricity Household</a><ul>
-<li class="chapter" data-level="15.1.1" data-path="electricity-household.html"><a href="electricity-household.html#goal-21"><i class="fa fa-check"></i><b>15.1.1</b> Goal</a></li>
-<li class="chapter" data-level="15.1.2" data-path="electricity-household.html"><a href="electricity-household.html#data-basis-21"><i class="fa fa-check"></i><b>15.1.2</b> Data Basis</a></li>
-<li class="chapter" data-level="15.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-21"><i class="fa fa-check"></i><b>15.1.3</b> Solution</a></li>
-<li class="chapter" data-level="15.1.4" data-path="electricity-household.html"><a href="electricity-household.html#see-also-1"><i class="fa fa-check"></i><b>15.1.4</b> See also</a></li>
+<li class="chapter" data-level="13" data-path="typical-daily-profiles.html"><a href="typical-daily-profiles.html"><i class="fa fa-check"></i><b>13</b> Typical Daily Profiles</a><ul>
+<li class="chapter" data-level="13.1" data-path="overview.html"><a href="overview.html"><i class="fa fa-check"></i><b>13.1</b> Overview</a><ul>
+<li class="chapter" data-level="13.1.1" data-path="overview.html"><a href="overview.html#goal-12"><i class="fa fa-check"></i><b>13.1.1</b> Goal</a></li>
+<li class="chapter" data-level="13.1.2" data-path="overview.html"><a href="overview.html#data-basis-12"><i class="fa fa-check"></i><b>13.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.1.3" data-path="overview.html"><a href="overview.html#solution-12"><i class="fa fa-check"></i><b>13.1.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="15.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>15.2</b> Room Temperature Reduction</a><ul>
-<li class="chapter" data-level="15.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#goal-22"><i class="fa fa-check"></i><b>15.2.1</b> Goal</a></li>
-<li class="chapter" data-level="15.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#data-basis-22"><i class="fa fa-check"></i><b>15.2.2</b> Data Basis</a></li>
-<li class="chapter" data-level="15.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-22"><i class="fa fa-check"></i><b>15.2.3</b> Solution</a></li>
-<li class="chapter" data-level="15.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-7"><i class="fa fa-check"></i><b>15.2.4</b> Discussion</a></li>
+<li class="chapter" data-level="13.2" data-path="overlayed.html"><a href="overlayed.html"><i class="fa fa-check"></i><b>13.2</b> Overlayed</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="overlayed.html"><a href="overlayed.html#goal-13"><i class="fa fa-check"></i><b>13.2.1</b> Goal</a></li>
+<li class="chapter" data-level="13.2.2" data-path="overlayed.html"><a href="overlayed.html#data-basis-13"><i class="fa fa-check"></i><b>13.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.2.3" data-path="overlayed.html"><a href="overlayed.html#solution-13"><i class="fa fa-check"></i><b>13.2.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="15.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>15.3</b> Building Energy Signature</a><ul>
-<li class="chapter" data-level="15.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#goal-23"><i class="fa fa-check"></i><b>15.3.1</b> Goal</a></li>
-<li class="chapter" data-level="15.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#data-basis-23"><i class="fa fa-check"></i><b>15.3.2</b> Data Basis</a></li>
-<li class="chapter" data-level="15.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-23"><i class="fa fa-check"></i><b>15.3.3</b> Solution</a></li>
-<li class="chapter" data-level="15.3.4" data-path="building-energy-signature.html"><a href="building-energy-signature.html#discussion-8"><i class="fa fa-check"></i><b>15.3.4</b> Discussion</a></li>
+<li class="chapter" data-level="13.3" data-path="mean.html"><a href="mean.html"><i class="fa fa-check"></i><b>13.3</b> Mean</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="mean.html"><a href="mean.html#goal-14"><i class="fa fa-check"></i><b>13.3.1</b> Goal</a></li>
+<li class="chapter" data-level="13.3.2" data-path="mean.html"><a href="mean.html#data-basis-14"><i class="fa fa-check"></i><b>13.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.3.3" data-path="mean.html"><a href="mean.html#solution-14"><i class="fa fa-check"></i><b>13.3.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="15.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html"><i class="fa fa-check"></i><b>15.4</b> Building Energy Signature Proposed</a><ul>
-<li class="chapter" data-level="15.4.1" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#goal-24"><i class="fa fa-check"></i><b>15.4.1</b> Goal</a></li>
-<li class="chapter" data-level="15.4.2" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#data-basis-24"><i class="fa fa-check"></i><b>15.4.2</b> Data Basis</a></li>
-<li class="chapter" data-level="15.4.3" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#solution-24"><i class="fa fa-check"></i><b>15.4.3</b> Solution</a></li>
-<li class="chapter" data-level="15.4.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#discussion-9"><i class="fa fa-check"></i><b>15.4.4</b> Discussion</a></li>
+<li class="chapter" data-level="13.4" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html"><i class="fa fa-check"></i><b>13.4</b> Decomposed</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#goal-15"><i class="fa fa-check"></i><b>13.4.1</b> Goal</a></li>
+<li class="chapter" data-level="13.4.2" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#data-basis-15"><i class="fa fa-check"></i><b>13.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="13.4.3" data-path="dailyProfilesDecomposed.html"><a href="dailyProfilesDecomposed.html#solution-15"><i class="fa fa-check"></i><b>13.4.3</b> Solution</a></li>
 </ul></li>
-<li class="chapter" data-level="15.5" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html"><i class="fa fa-check"></i><b>15.5</b> Plotly Multiple Y Axis</a><ul>
-<li class="chapter" data-level="15.5.1" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#goal-25"><i class="fa fa-check"></i><b>15.5.1</b> Goal</a></li>
-<li class="chapter" data-level="15.5.2" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#solution-25"><i class="fa fa-check"></i><b>15.5.2</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="sum-frequency-diagrams.html"><a href="sum-frequency-diagrams.html"><i class="fa fa-check"></i><b>14</b> Sum Frequency Diagrams</a><ul>
+<li class="chapter" data-level="14.1" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html"><i class="fa fa-check"></i><b>14.1</b> Sum Frequency Days</a><ul>
+<li class="chapter" data-level="14.1.1" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#goal-16"><i class="fa fa-check"></i><b>14.1.1</b> Goal</a></li>
+<li class="chapter" data-level="14.1.2" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#data-basis-16"><i class="fa fa-check"></i><b>14.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="14.1.3" data-path="sum-frequency-days.html"><a href="sum-frequency-days.html#solution-16"><i class="fa fa-check"></i><b>14.1.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="14.2" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html"><i class="fa fa-check"></i><b>14.2</b> Sum Frequency Hours</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#goal-17"><i class="fa fa-check"></i><b>14.2.1</b> Goal</a></li>
+<li class="chapter" data-level="14.2.2" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#data-basis-17"><i class="fa fa-check"></i><b>14.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="14.2.3" data-path="sum-frequency-hours.html"><a href="sum-frequency-hours.html#solution-17"><i class="fa fa-check"></i><b>14.2.3</b> Solution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="comfort-plots.html"><a href="comfort-plots.html"><i class="fa fa-check"></i><b>15</b> Comfort Plots</a><ul>
+<li class="chapter" data-level="15.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html"><i class="fa fa-check"></i><b>15.1</b> Mollier hx Diagram</a><ul>
+<li class="chapter" data-level="15.1.1" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#goal-18"><i class="fa fa-check"></i><b>15.1.1</b> Goal</a></li>
+<li class="chapter" data-level="15.1.2" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#data-basis-18"><i class="fa fa-check"></i><b>15.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="15.1.3" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#solution-18"><i class="fa fa-check"></i><b>15.1.3</b> Solution</a></li>
+<li class="chapter" data-level="15.1.4" data-path="mollier-hx-diagram.html"><a href="mollier-hx-diagram.html#see-also"><i class="fa fa-check"></i><b>15.1.4</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="15.2" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html"><i class="fa fa-check"></i><b>15.2</b> Temperature versus Humidity</a><ul>
+<li class="chapter" data-level="15.2.1" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#goal-19"><i class="fa fa-check"></i><b>15.2.1</b> Goal</a></li>
+<li class="chapter" data-level="15.2.2" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#data-basis-19"><i class="fa fa-check"></i><b>15.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="15.2.3" data-path="temperature-versus-humidity.html"><a href="temperature-versus-humidity.html#solution-19"><i class="fa fa-check"></i><b>15.2.3</b> Solution</a></li>
+</ul></li>
+<li class="chapter" data-level="15.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html"><i class="fa fa-check"></i><b>15.3</b> SIA 180 Thermal Comfort</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#goal-20"><i class="fa fa-check"></i><b>15.3.1</b> Goal</a></li>
+<li class="chapter" data-level="15.3.2" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#data-basis-20"><i class="fa fa-check"></i><b>15.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="15.3.3" data-path="sia-180-thermal-comfort.html"><a href="sia-180-thermal-comfort.html#solution-20"><i class="fa fa-check"></i><b>15.3.3</b> Solution</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="miscellaneous.html"><a href="miscellaneous.html"><i class="fa fa-check"></i><b>16</b> Miscellaneous</a><ul>
+<li class="chapter" data-level="16.1" data-path="electricity-household.html"><a href="electricity-household.html"><i class="fa fa-check"></i><b>16.1</b> Electricity Household</a><ul>
+<li class="chapter" data-level="16.1.1" data-path="electricity-household.html"><a href="electricity-household.html#goal-21"><i class="fa fa-check"></i><b>16.1.1</b> Goal</a></li>
+<li class="chapter" data-level="16.1.2" data-path="electricity-household.html"><a href="electricity-household.html#data-basis-21"><i class="fa fa-check"></i><b>16.1.2</b> Data Basis</a></li>
+<li class="chapter" data-level="16.1.3" data-path="electricity-household.html"><a href="electricity-household.html#solution-21"><i class="fa fa-check"></i><b>16.1.3</b> Solution</a></li>
+<li class="chapter" data-level="16.1.4" data-path="electricity-household.html"><a href="electricity-household.html#see-also-1"><i class="fa fa-check"></i><b>16.1.4</b> See also</a></li>
+</ul></li>
+<li class="chapter" data-level="16.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html"><i class="fa fa-check"></i><b>16.2</b> Room Temperature Reduction</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#goal-22"><i class="fa fa-check"></i><b>16.2.1</b> Goal</a></li>
+<li class="chapter" data-level="16.2.2" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#data-basis-22"><i class="fa fa-check"></i><b>16.2.2</b> Data Basis</a></li>
+<li class="chapter" data-level="16.2.3" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#solution-22"><i class="fa fa-check"></i><b>16.2.3</b> Solution</a></li>
+<li class="chapter" data-level="16.2.4" data-path="room-temperature-reduction.html"><a href="room-temperature-reduction.html#discussion-7"><i class="fa fa-check"></i><b>16.2.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html"><i class="fa fa-check"></i><b>16.3</b> Building Energy Signature</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="building-energy-signature.html"><a href="building-energy-signature.html#goal-23"><i class="fa fa-check"></i><b>16.3.1</b> Goal</a></li>
+<li class="chapter" data-level="16.3.2" data-path="building-energy-signature.html"><a href="building-energy-signature.html#data-basis-23"><i class="fa fa-check"></i><b>16.3.2</b> Data Basis</a></li>
+<li class="chapter" data-level="16.3.3" data-path="building-energy-signature.html"><a href="building-energy-signature.html#solution-23"><i class="fa fa-check"></i><b>16.3.3</b> Solution</a></li>
+<li class="chapter" data-level="16.3.4" data-path="building-energy-signature.html"><a href="building-energy-signature.html#discussion-8"><i class="fa fa-check"></i><b>16.3.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html"><i class="fa fa-check"></i><b>16.4</b> Building Energy Signature Proposed</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#goal-24"><i class="fa fa-check"></i><b>16.4.1</b> Goal</a></li>
+<li class="chapter" data-level="16.4.2" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#data-basis-24"><i class="fa fa-check"></i><b>16.4.2</b> Data Basis</a></li>
+<li class="chapter" data-level="16.4.3" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#solution-24"><i class="fa fa-check"></i><b>16.4.3</b> Solution</a></li>
+<li class="chapter" data-level="16.4.4" data-path="building-energy-signature-proposed.html"><a href="building-energy-signature-proposed.html#discussion-9"><i class="fa fa-check"></i><b>16.4.4</b> Discussion</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html"><i class="fa fa-check"></i><b>16.5</b> Plotly Multiple Y Axis</a><ul>
+<li class="chapter" data-level="16.5.1" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#goal-25"><i class="fa fa-check"></i><b>16.5.1</b> Goal</a></li>
+<li class="chapter" data-level="16.5.2" data-path="plotly-multiple-y-axis.html"><a href="plotly-multiple-y-axis.html#solution-25"><i class="fa fa-check"></i><b>16.5.2</b> Solution</a></li>
 </ul></li>
 </ul></li>
 <li class="appendix"><span><b>Appendix</b></span></li>
@@ -388,15 +392,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 
             <section class="normal" id="section-">
 <div id="seasonal-plots" class="section level1">
-<h1><span class="header-section-number">Chapter 10</span> Seasonal Plots</h1>
+<h1><span class="header-section-number">Chapter 11</span> Seasonal Plots</h1>
 <p>Seasonal plots are a graphical tool to visualize and detect seasonality in a time series. Based on a selected periodicity it emphasizes the seasonal patterns and also shows the changes in seasonality over time. Especially, it allows to detect changes between different seasons.</p>
 <div class="figure"><span id="fig:figplotSeasonalXY"></span>
 <img src="images/plotSeasonalXY.png" alt="Seasonal Plot Overlapping per Month over 10 Years" width="70%" />
 <p class="caption">
-Figure 10.1: Seasonal Plot Overlapping per Month over 10 Years
+Figure 11.1: Seasonal Plot Overlapping per Month over 10 Years
 </p>
 </div>
-<p>This is like a standard time series plot except that the data are plotted against the “seasons” for each year and are overlapping. Be aware that seasons in this context don’t correlate with the seasons of the year. For example in <a href="seasonal-plots.html#fig:figplotSeasonalXY">10.1</a> the seasons are months.</p>
+<p>This is like a standard time series plot except that the data are plotted against the “seasons” for each year and are overlapping. Be aware that seasons in this context don’t correlate with the seasons of the year. For example in <a href="seasonal-plots.html#fig:figplotSeasonalXY">11.1</a> the seasons are months.</p>
 <p>When displaying the data in months, it is important that the consumption is calculated down to a daily value, otherwise there will be unnecessary distortions due to the different number of days per month.</p>
 <p>However, such plots are only useful if the period of the seasonality is already known. In many cases, this will in fact be known. For example, monthly data typically has a period of 12. If the period is not known, an autocorrelation plot or spectral plot can be used to determine it.</p>
 <p>This chapter shows some useful types of seasonal plots.</p>
