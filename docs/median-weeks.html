@@ -417,19 +417,19 @@ Figure 12.4: Raw Data for Decomposition Plot Short Term
 <div id="solution-11" class="section level3">
 <h3><span class="header-section-number">12.2.3</span> Solution</h3>
 <p>Create a new script, copy/paste the following code and run it:</p>
-<div class="sourceCode" id="cb86"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb86-1" title="1"><span class="kw">library</span>(redutils)</a>
-<a class="sourceLine" id="cb86-2" title="2"><span class="kw">library</span>(plotly)</a>
-<a class="sourceLine" id="cb86-3" title="3"></a>
-<a class="sourceLine" id="cb86-4" title="4">data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">system.file</span>(<span class="st">&quot;sampleData/eboBookEleMeter.rds&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;redutils&quot;</span>))</a>
-<a class="sourceLine" id="cb86-5" title="5">plot &lt;-<span class="st"> </span><span class="kw">plotHeatmapMedianWeeks</span>(data, <span class="dt">locTimeZone =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb86-6" title="6"></a>
-<a class="sourceLine" id="cb86-7" title="7"><span class="co"># show the static plot</span></a>
-<a class="sourceLine" id="cb86-8" title="8">plot</a></code></pre></div>
+<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="kw">library</span>(redutils)</a>
+<a class="sourceLine" id="cb87-2" title="2"><span class="kw">library</span>(plotly)</a>
+<a class="sourceLine" id="cb87-3" title="3"></a>
+<a class="sourceLine" id="cb87-4" title="4">data &lt;-<span class="st"> </span><span class="kw">readRDS</span>(<span class="kw">system.file</span>(<span class="st">&quot;sampleData/eboBookEleMeter.rds&quot;</span>, <span class="dt">package =</span> <span class="st">&quot;redutils&quot;</span>))</a>
+<a class="sourceLine" id="cb87-5" title="5">plot &lt;-<span class="st"> </span><span class="kw">plotHeatmapMedianWeeks</span>(data, <span class="dt">locTimeZone =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb87-6" title="6"></a>
+<a class="sourceLine" id="cb87-7" title="7"><span class="co"># show the static plot</span></a>
+<a class="sourceLine" id="cb87-8" title="8">plot</a></code></pre></div>
 <p><img src="edar_files/figure-html/dataVisHeatmapMedianWeeks1-1.png" width="672" /></p>
-<div class="sourceCode" id="cb87"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb87-1" title="1"><span class="co"># create the interactive plot (optional, uncomment line)</span></a>
-<a class="sourceLine" id="cb87-2" title="2"><span class="co">#ggplotly(plot)</span></a></code></pre></div>
-<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
-<a class="sourceLine" id="cb88-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotHeatMapMedianWeeks.png&quot;</span>, plot)</a></code></pre></div>
+<div class="sourceCode" id="cb88"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb88-1" title="1"><span class="co"># create the interactive plot (optional, uncomment line)</span></a>
+<a class="sourceLine" id="cb88-2" title="2"><span class="co">#ggplotly(plot)</span></a></code></pre></div>
+<div class="sourceCode" id="cb89"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb89-1" title="1"><span class="co"># save static plot as png (optional)</span></a>
+<a class="sourceLine" id="cb89-2" title="2"><span class="kw">ggsave</span>(<span class="st">&quot;images/plotHeatMapMedianWeeks.png&quot;</span>, plot)</a></code></pre></div>
 </div>
 <div id="discussion-6" class="section level3">
 <h3><span class="header-section-number">12.2.4</span> Discussion</h3>

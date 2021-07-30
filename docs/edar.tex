@@ -895,7 +895,7 @@ Details can be found in \href{https://rafalab.github.io/dsbook/tidyverse.html}{I
 \hypertarget{tidy-data}{%
 \chapter{Tidy data}\label{tidy-data}}
 
-The \href{https://www.tidyverse.org/}{`Tidyverse'}\{target="\_blank\} is a collection of R packages designed for data science. See \href{https://www.tidyverse.org/packages/}{tidyverse.org/packages/}\{target="\_blank\} for an up-to-date list of included packages. Beside these core packages, a lot of other packages base on the same philosopy, e.g.~\href{https://tidyverts.org/}{\texttt{tidyverts} - a collection of tidy tools for time series}.
+The \href{https://www.tidyverse.org/}{`Tidyverse'} is a collection of R packages designed for data science. See \href{https://www.tidyverse.org/packages/}{tidyverse.org/packages/} for an up-to-date list of included packages. Beside these core packages, a lot of other packages base on the same philosopy, e.g.~\href{https://tidyverts.org/}{`tidyverts' - a collection of tidy tools for time series}.
 
 What's so special about that? Well, all packages have the same design philosophy, grammar and data structures. This means that once the data is in this data structure, it is relatively easy and straightforward to perform analysis and visualization.
 
@@ -924,7 +924,7 @@ For more information, see the \href{https://r4ds.had.co.nz/tidy-data.html}{`Tidy
 \hypertarget{tsibble}{%
 \section{tsibble}\label{tsibble}}
 
-The \href{https://tsibble.tidyverts.org/}{\texttt{tsibble}} package provides a data infrastructure for tidy temporal data with wrangling tools. Adapting the forementioned tidy data principles, tsibble is a data- and model-oriented object.
+The \href{https://tsibble.tidyverts.org/}{`tsibble'} package provides a data infrastructure for tidy temporal data with wrangling tools. Adapting the forementioned tidy data principles, tsibble is a data- and model-oriented object.
 
 In \texttt{tsibble}:
 
@@ -944,10 +944,13 @@ In \texttt{tsibble}:
 \hypertarget{examples}{%
 \section{Examples}\label{examples}}
 
+The following example show how these concepts can be applied in practice.
+
 \hypertarget{tidy-up-flattemphum.csv}{%
 \subsection{tidy up flatTempHum.csv}\label{tidy-up-flattemphum.csv}}
 
-The following example show how these concepts can be applied in practice.
+\hypertarget{loading-data-and-parsing-timestamp}{%
+\subsubsection{Loading data and parsing timestamp}\label{loading-data-and-parsing-timestamp}}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -960,8 +963,6 @@ The following example show how these concepts can be applied in practice.
                \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
 \NormalTok{df}\OperatorTok{$}\NormalTok{time <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{time, }\StringTok{"YmdHMS"}\NormalTok{, }\DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
 
-
-\CommentTok{# create a copy of the dataframe and print the header and the first five line}
 \KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
 \end{Highlighting}
 \end{Shaded}
@@ -981,9 +982,18 @@ The following example show how these concepts can be applied in practice.
 ## 5       24.5      47.7      24.30
 \end{verbatim}
 
+\hypertarget{tidy-up}{%
+\subsubsection{tidy up}\label{tidy-up}}
+
 What needs to be done here to get this data set into a tidy format?
-- Firstly each observation should have its own row\ldots{} To fulfill that, we have to convert from wide to long.
-- Secondly, the variables are \texttt{flat} and \texttt{sensor} which are currently merged together in the column name. That must be separated.
+
+\begin{itemize}
+\tightlist
+\item
+  Firstly each observation should have its own row\ldots{} To fulfill that, we have to convert from wide to long.
+\item
+  Secondly, the variables are \texttt{flat} and \texttt{sensor} which are currently merged together in the column name. That must be separated.
+\end{itemize}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -1034,6 +1044,9 @@ What needs to be done here to get this data set into a tidy format?
 
 This dataset can now be considered tidy and is ready for further processing.
 
+\hypertarget{convert-to-tsibble}{%
+\subsubsection{convert to `tsibble'}\label{convert-to-tsibble}}
+
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{library}\NormalTok{(tsibble)}
@@ -1061,6 +1074,23 @@ This dataset can now be considered tidy and is ready for further processing.
 ## 10 2018-10-03 10:00:00 A     Hum     41.3
 ## # ... with 131,592 more rows
 \end{verbatim}
+
+\hypertarget{visualization}{%
+\subsubsection{Visualization}\label{visualization}}
+
+It's now relatively easy and straightforward to make a plot using the key-columns \texttt{flat} and \texttt{sensor}:
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(ggplot2)}
+
+\KeywordTok{ggplot}\NormalTok{(tsbl, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x=}\NormalTok{ time, }\DataTypeTok{y=}\NormalTok{ value, }\DataTypeTok{colour =}\NormalTok{ flat)) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{alpha=}\FloatTok{0.4}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{facet_wrap}\NormalTok{(}\OperatorTok{~}\StringTok{ }\NormalTok{sensor,  }\DataTypeTok{scales=}\StringTok{"free"}\NormalTok{, }\DataTypeTok{ncol =} \DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/tidyData14-1.pdf}
 
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}

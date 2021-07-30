@@ -396,61 +396,61 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Please refer to the <a href="https://r-graphics.org/chapter-quick" target="_blank">R Graphics Cookbook from Winston Chang - Chapter 2 “Quickly Exploring Data”</a>.</p>
 <p>This is a great resource where you can find everything you need to know about creating basic plots.
 Some plots of the part “Data Visualizations” are as well easy to create and can get used in the context of EDA.</p>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">library</span>(dplyr)</a>
-<a class="sourceLine" id="cb55-2" title="2"><span class="kw">library</span>(lubridate)</a>
-<a class="sourceLine" id="cb55-3" title="3"><span class="co"># load csv file</span></a>
-<a class="sourceLine" id="cb55-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
-<a class="sourceLine" id="cb55-5" title="5">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
-<a class="sourceLine" id="cb55-6" title="6"><span class="co"># filter flat</span></a>
-<a class="sourceLine" id="cb55-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr01_energyHeat, Adr02_energyHeat, Adr03_energyHeat)</a>
-<a class="sourceLine" id="cb55-8" title="8"><span class="co">#df &lt;- df %&gt;% filter(timestamp &gt; &quot;2014-12-01&quot;)</span></a>
-<a class="sourceLine" id="cb55-9" title="9"></a>
-<a class="sourceLine" id="cb55-10" title="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatA =</span> <span class="kw">lead</span>(Adr01_energyHeat) <span class="op">-</span><span class="st"> </span>Adr01_energyHeat)</a>
-<a class="sourceLine" id="cb55-11" title="11">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatB =</span> <span class="kw">lead</span>(Adr02_energyHeat) <span class="op">-</span><span class="st"> </span>Adr02_energyHeat)</a>
-<a class="sourceLine" id="cb55-12" title="12">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatC =</span> <span class="kw">lead</span>(Adr03_energyHeat) <span class="op">-</span><span class="st"> </span>Adr03_energyHeat)</a>
-<a class="sourceLine" id="cb55-13" title="13"></a>
-<a class="sourceLine" id="cb55-14" title="14"><span class="co"># remove counter value column</span></a>
-<a class="sourceLine" id="cb55-15" title="15">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Adr01_energyHeat, <span class="op">-</span>Adr02_energyHeat, <span class="op">-</span>Adr03_energyHeat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
-<a class="sourceLine" id="cb55-16" title="16">df<span class="op">$</span>timestamp &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>timestamp,</a>
-<a class="sourceLine" id="cb55-17" title="17">                                <span class="dt">orders =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
-<a class="sourceLine" id="cb55-18" title="18">                                <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
-<a class="sourceLine" id="cb55-19" title="19"></a>
-<a class="sourceLine" id="cb55-20" title="20">tsd &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>timestamp), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a></code></pre></div>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">library</span>(dplyr)</a>
+<a class="sourceLine" id="cb56-2" title="2"><span class="kw">library</span>(lubridate)</a>
+<a class="sourceLine" id="cb56-3" title="3"><span class="co"># load csv file</span></a>
+<a class="sourceLine" id="cb56-4" title="4">df &lt;-<span class="st"> </span><span class="kw">read.csv2</span>(<span class="st">&quot;https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv&quot;</span>,</a>
+<a class="sourceLine" id="cb56-5" title="5">                <span class="dt">stringsAsFactors=</span><span class="ot">FALSE</span>)</a>
+<a class="sourceLine" id="cb56-6" title="6"><span class="co"># filter flat</span></a>
+<a class="sourceLine" id="cb56-7" title="7">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(timestamp, Adr01_energyHeat, Adr02_energyHeat, Adr03_energyHeat)</a>
+<a class="sourceLine" id="cb56-8" title="8"><span class="co">#df &lt;- df %&gt;% filter(timestamp &gt; &quot;2014-12-01&quot;)</span></a>
+<a class="sourceLine" id="cb56-9" title="9"></a>
+<a class="sourceLine" id="cb56-10" title="10">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatA =</span> <span class="kw">lead</span>(Adr01_energyHeat) <span class="op">-</span><span class="st"> </span>Adr01_energyHeat)</a>
+<a class="sourceLine" id="cb56-11" title="11">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatB =</span> <span class="kw">lead</span>(Adr02_energyHeat) <span class="op">-</span><span class="st"> </span>Adr02_energyHeat)</a>
+<a class="sourceLine" id="cb56-12" title="12">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span>dplyr<span class="op">::</span><span class="kw">mutate</span>(<span class="dt">FlatC =</span> <span class="kw">lead</span>(Adr03_energyHeat) <span class="op">-</span><span class="st"> </span>Adr03_energyHeat)</a>
+<a class="sourceLine" id="cb56-13" title="13"></a>
+<a class="sourceLine" id="cb56-14" title="14"><span class="co"># remove counter value column</span></a>
+<a class="sourceLine" id="cb56-15" title="15">df &lt;-<span class="st"> </span>df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>Adr01_energyHeat, <span class="op">-</span>Adr02_energyHeat, <span class="op">-</span>Adr03_energyHeat) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">na.omit</span>()</a>
+<a class="sourceLine" id="cb56-16" title="16">df<span class="op">$</span>timestamp &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>timestamp,</a>
+<a class="sourceLine" id="cb56-17" title="17">                                <span class="dt">orders =</span> <span class="st">&quot;YmdHMS&quot;</span>,</a>
+<a class="sourceLine" id="cb56-18" title="18">                                <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
+<a class="sourceLine" id="cb56-19" title="19"></a>
+<a class="sourceLine" id="cb56-20" title="20">tsd &lt;-<span class="st"> </span><span class="kw">ts</span>(df <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(<span class="op">-</span>timestamp), <span class="dt">frequency =</span> <span class="dv">12</span>, <span class="dt">start =</span> <span class="kw">min</span>(<span class="kw">year</span>(df<span class="op">$</span>timestamp)))</a></code></pre></div>
 <div id="multiple-time-series-plot" class="section level3">
 <h3><span class="header-section-number">7.2.1</span> Multiple time series plot</h3>
-<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="co"># plot FlatA_Ele</span></a>
-<a class="sourceLine" id="cb56-2" title="2"><span class="kw">plot</span>(tsd)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># plot FlatA_Ele</span></a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="kw">plot</span>(tsd)</a></code></pre></div>
 <p><img src="edar_files/figure-html/eda%20qda%20simple%20ts-1.png" width="672" /></p>
 </div>
 <div id="multiple-time-series-plot-in-one-plot" class="section level3">
 <h3><span class="header-section-number">7.2.2</span> Multiple time series plot in one plot</h3>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="co"># Plotting all in one frame</span></a>
-<a class="sourceLine" id="cb57-2" title="2">colours&lt;-<span class="kw">c</span>(<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;red3&quot;</span>,<span class="st">&quot;blue3&quot;</span>)</a>
-<a class="sourceLine" id="cb57-3" title="3"></a>
-<a class="sourceLine" id="cb57-4" title="4"><span class="kw">plot</span>(tsd,<span class="dt">plot.type=</span><span class="st">&quot;single&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;(kWh)&quot;</span>,<span class="dt">col=</span>colours)</a>
-<a class="sourceLine" id="cb57-5" title="5"></a>
-<a class="sourceLine" id="cb57-6" title="6"><span class="co"># Legend</span></a>
-<a class="sourceLine" id="cb57-7" title="7">ltxt&lt;-<span class="kw">c</span>(<span class="st">&quot;Flat A&quot;</span>, <span class="st">&quot;Flat B&quot;</span>, <span class="st">&quot;Flat C&quot;</span>)</a>
-<a class="sourceLine" id="cb57-8" title="8"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">col=</span>colours, <span class="dt">legend=</span>ltxt)</a></code></pre></div>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co"># Plotting all in one frame</span></a>
+<a class="sourceLine" id="cb58-2" title="2">colours&lt;-<span class="kw">c</span>(<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;red3&quot;</span>,<span class="st">&quot;blue3&quot;</span>)</a>
+<a class="sourceLine" id="cb58-3" title="3"></a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="kw">plot</span>(tsd,<span class="dt">plot.type=</span><span class="st">&quot;single&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;(kWh)&quot;</span>,<span class="dt">col=</span>colours)</a>
+<a class="sourceLine" id="cb58-5" title="5"></a>
+<a class="sourceLine" id="cb58-6" title="6"><span class="co"># Legend</span></a>
+<a class="sourceLine" id="cb58-7" title="7">ltxt&lt;-<span class="kw">c</span>(<span class="st">&quot;Flat A&quot;</span>, <span class="st">&quot;Flat B&quot;</span>, <span class="st">&quot;Flat C&quot;</span>)</a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">col=</span>colours, <span class="dt">legend=</span>ltxt)</a></code></pre></div>
 <p><img src="edar_files/figure-html/eda%20qda%20all%20ts-1.png" width="672" /></p>
 </div>
 <div id="indexed-time-series-plot" class="section level3">
 <h3><span class="header-section-number">7.2.3</span> Indexed time series plot</h3>
-<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1">tsdPlot &lt;-<span class="st"> </span>tsd</a>
-<a class="sourceLine" id="cb58-2" title="2"></a>
-<a class="sourceLine" id="cb58-3" title="3"><span class="co"># Index timeseries</span></a>
-<a class="sourceLine" id="cb58-4" title="4">tsdPlot[,<span class="dv">1</span>]&lt;-tsdPlot[,<span class="dv">1</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb58-5" title="5">tsdPlot[,<span class="dv">2</span>]&lt;-tsdPlot[,<span class="dv">2</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">*</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb58-6" title="6">tsdPlot[,<span class="dv">3</span>]&lt;-tsdPlot[,<span class="dv">3</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">3</span>]<span class="op">*</span><span class="dv">100</span></a>
-<a class="sourceLine" id="cb58-7" title="7"></a>
-<a class="sourceLine" id="cb58-8" title="8"><span class="co"># Plotting all in one frame</span></a>
-<a class="sourceLine" id="cb58-9" title="9">colours&lt;-<span class="kw">c</span>(<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;red3&quot;</span>,<span class="st">&quot;blue3&quot;</span>)</a>
-<a class="sourceLine" id="cb58-10" title="10"></a>
-<a class="sourceLine" id="cb58-11" title="11"><span class="kw">plot</span>(tsdPlot,<span class="dt">plot.type=</span><span class="st">&quot;single&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Index&quot;</span>,<span class="dt">col=</span>colours)</a>
-<a class="sourceLine" id="cb58-12" title="12"></a>
-<a class="sourceLine" id="cb58-13" title="13"><span class="co"># Legend</span></a>
-<a class="sourceLine" id="cb58-14" title="14">ltxt&lt;-<span class="kw">c</span>(<span class="st">&quot;Flat A&quot;</span>, <span class="st">&quot;Flat B&quot;</span>, <span class="st">&quot;Flat C&quot;</span>)</a>
-<a class="sourceLine" id="cb58-15" title="15"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">col=</span>colours, <span class="dt">legend=</span>ltxt)</a></code></pre></div>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1">tsdPlot &lt;-<span class="st"> </span>tsd</a>
+<a class="sourceLine" id="cb59-2" title="2"></a>
+<a class="sourceLine" id="cb59-3" title="3"><span class="co"># Index timeseries</span></a>
+<a class="sourceLine" id="cb59-4" title="4">tsdPlot[,<span class="dv">1</span>]&lt;-tsdPlot[,<span class="dv">1</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">1</span>]<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb59-5" title="5">tsdPlot[,<span class="dv">2</span>]&lt;-tsdPlot[,<span class="dv">2</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">2</span>]<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb59-6" title="6">tsdPlot[,<span class="dv">3</span>]&lt;-tsdPlot[,<span class="dv">3</span>]<span class="op">/</span>tsdPlot[<span class="dv">1</span>,<span class="dv">3</span>]<span class="op">*</span><span class="dv">100</span></a>
+<a class="sourceLine" id="cb59-7" title="7"></a>
+<a class="sourceLine" id="cb59-8" title="8"><span class="co"># Plotting all in one frame</span></a>
+<a class="sourceLine" id="cb59-9" title="9">colours&lt;-<span class="kw">c</span>(<span class="st">&quot;green3&quot;</span>,<span class="st">&quot;red3&quot;</span>,<span class="st">&quot;blue3&quot;</span>)</a>
+<a class="sourceLine" id="cb59-10" title="10"></a>
+<a class="sourceLine" id="cb59-11" title="11"><span class="kw">plot</span>(tsdPlot,<span class="dt">plot.type=</span><span class="st">&quot;single&quot;</span>,<span class="dt">ylab=</span><span class="st">&quot;Index&quot;</span>,<span class="dt">col=</span>colours)</a>
+<a class="sourceLine" id="cb59-12" title="12"></a>
+<a class="sourceLine" id="cb59-13" title="13"><span class="co"># Legend</span></a>
+<a class="sourceLine" id="cb59-14" title="14">ltxt&lt;-<span class="kw">c</span>(<span class="st">&quot;Flat A&quot;</span>, <span class="st">&quot;Flat B&quot;</span>, <span class="st">&quot;Flat C&quot;</span>)</a>
+<a class="sourceLine" id="cb59-15" title="15"><span class="kw">legend</span>(<span class="st">&quot;topleft&quot;</span>,<span class="dt">lty=</span><span class="dv">1</span>,<span class="dt">col=</span>colours, <span class="dt">legend=</span>ltxt)</a></code></pre></div>
 <p><img src="edar_files/figure-html/eda%20qda%20indexed%20ts-1.png" width="672" /></p>
 
 </div>

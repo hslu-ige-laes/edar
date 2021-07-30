@@ -393,9 +393,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
             <section class="normal" id="section-">
 <div id="examples" class="section level2">
 <h2><span class="header-section-number">6.3</span> Examples</h2>
+<p>The following example show how these concepts can be applied in practice.</p>
 <div id="tidy-up-flattemphum.csv" class="section level3">
 <h3><span class="header-section-number">6.3.1</span> tidy up flatTempHum.csv</h3>
-<p>The following example show how these concepts can be applied in practice.</p>
+<div id="loading-data-and-parsing-timestamp" class="section level4">
+<h4><span class="header-section-number">6.3.1.1</span> Loading data and parsing timestamp</h4>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">library</span>(tidyverse)</a>
 <a class="sourceLine" id="cb36-2" title="2"><span class="kw">library</span>(lubridate)</a>
 <a class="sourceLine" id="cb36-3" title="3"></a>
@@ -405,9 +407,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <a class="sourceLine" id="cb36-7" title="7">               <span class="dt">sep =</span><span class="st">&quot;;&quot;</span>)</a>
 <a class="sourceLine" id="cb36-8" title="8">df<span class="op">$</span>time &lt;-<span class="st"> </span><span class="kw">parse_date_time</span>(df<span class="op">$</span>time, <span class="st">&quot;YmdHMS&quot;</span>, <span class="dt">tz =</span> <span class="st">&quot;Europe/Zurich&quot;</span>)</a>
 <a class="sourceLine" id="cb36-9" title="9"></a>
-<a class="sourceLine" id="cb36-10" title="10"></a>
-<a class="sourceLine" id="cb36-11" title="11"><span class="co"># create a copy of the dataframe and print the header and the first five line</span></a>
-<a class="sourceLine" id="cb36-12" title="12"><span class="kw">head</span>(df, <span class="dv">5</span>)</a></code></pre></div>
+<a class="sourceLine" id="cb36-10" title="10"><span class="kw">head</span>(df, <span class="dv">5</span>)</a></code></pre></div>
 <pre><code>##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
 ## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
 ## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
@@ -420,9 +420,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 3       24.5      48.3      24.38
 ## 4       24.5      48.0      24.33
 ## 5       24.5      47.7      24.30</code></pre>
-<p>What needs to be done here to get this data set into a tidy format?
-- Firstly each observation should have its own row… To fulfill that, we have to convert from wide to long.
-- Secondly, the variables are <code>flat</code> and <code>sensor</code> which are currently merged together in the column name. That must be separated.</p>
+</div>
+<div id="tidy-up" class="section level4">
+<h4><span class="header-section-number">6.3.1.2</span> tidy up</h4>
+<p>What needs to be done here to get this data set into a tidy format?</p>
+<ul>
+<li>Firstly each observation should have its own row… To fulfill that, we have to convert from wide to long.</li>
+<li>Secondly, the variables are <code>flat</code> and <code>sensor</code> which are currently merged together in the column name. That must be separated.</li>
+</ul>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="co"># convert wide to long format</span></a>
 <a class="sourceLine" id="cb38-2" title="2">df.long &lt;-<span class="st"> </span><span class="kw">as.data.frame</span>(tidyr<span class="op">::</span><span class="kw">pivot_longer</span>(df,</a>
 <a class="sourceLine" id="cb38-3" title="3">                                             <span class="dt">cols =</span> <span class="op">-</span>time,</a>
@@ -455,6 +460,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## 9  2018-10-03 01:00:00    A    Hum 53.00
 ## 10 2018-10-03 01:00:00    A   Temp 24.40</code></pre>
 <p>This dataset can now be considered tidy and is ready for further processing.</p>
+</div>
+<div id="convert-to-tsibble" class="section level4">
+<h4><span class="header-section-number">6.3.1.3</span> convert to ‘tsibble’</h4>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="kw">library</span>(tsibble)</a>
 <a class="sourceLine" id="cb42-2" title="2"></a>
 <a class="sourceLine" id="cb42-3" title="3"><span class="co"># convert the data frame in a tsibble object</span></a>
@@ -475,7 +483,18 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##  9 2018-10-03 09:00:00 A     Hum     46  
 ## 10 2018-10-03 10:00:00 A     Hum     41.3
 ## # ... with 131,592 more rows</code></pre>
+</div>
+<div id="visualization" class="section level4">
+<h4><span class="header-section-number">6.3.1.4</span> Visualization</h4>
+<p>It’s now relatively easy and straightforward to make a plot using the key-columns <code>flat</code> and <code>sensor</code>:</p>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1"><span class="kw">library</span>(ggplot2)</a>
+<a class="sourceLine" id="cb44-2" title="2"></a>
+<a class="sourceLine" id="cb44-3" title="3"><span class="kw">ggplot</span>(tsbl, <span class="kw">aes</span>(<span class="dt">x=</span> time, <span class="dt">y=</span> value, <span class="dt">colour =</span> flat)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-4" title="4"><span class="st">  </span><span class="kw">geom_line</span>(<span class="dt">alpha=</span><span class="fl">0.4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb44-5" title="5"><span class="st">  </span><span class="kw">facet_wrap</span>(<span class="op">~</span><span class="st"> </span>sensor,  <span class="dt">scales=</span><span class="st">&quot;free&quot;</span>, <span class="dt">ncol =</span> <span class="dv">1</span>)</a></code></pre></div>
+<p><img src="edar_files/figure-html/tidyData14-1.png" width="672" /></p>
 
+</div>
 </div>
 </div>
 <!-- </div> -->
