@@ -212,3 +212,54 @@ df <- merge(dfOutsideTemp, dfFlatTempHum, by = "time") %>% na.omit()
 
 head(df)
 ```
+
+\newpage
+## Tidy data
+The`tidyverse` focus on a consistent way to organise the data which is called `tidy data`. Why should we care? Because a lot of elements in the data analytics process in R like dplyr or ggplot2 work best if the data is in a tidy format.
+
+There are three interrelated rules which make a dataset tidy:
+1. Each variable must have its own column.
+2. Each observation must have its own row.
+3. Each value must have its own cell.
+
+```{r out.width='50%', fig.cap='Three rules make a dataset tidy: variables are in columns, observations are in rows, and values are in cells', echo=FALSE}
+knitr::include_graphics("images/tidyData.png")
+```
+
+For more info you can have a look at the ['Tidy Data' chapter of the book 'R for Data Science'"](https://r4ds.had.co.nz/tidy-data.html){target="_blank"} and the ['Tidy Data' paper published in the 'Journal of Statistical Software'"](http://www.jstatsoft.org/v59/i10/paper){target="_blank"}
+
+Following examples of how to practically apply these concepts.
+
+### flatTempHum.csv
+```{r tidyData11, warning=FALSE, message=FALSE, collapse = FALSE}
+library(tidyr)
+
+# load test data set
+df <- read.csv("https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv",
+               stringsAsFactors=FALSE,
+               sep =";")
+
+# create a copy of the dataframe and print the header and the first five line
+head(df, 5)
+```
+
+What needs to be done here to get this data set into a tidy format?
+- Firstly each observation should have its own row... well.. not yet. To fulfill that, we have to convert from wide to long.
+- Secondly, the variables are `Flat` and `Sensor` which are currently merged together in the column name. That must be separated.
+
+```{r tidyData12, warning=FALSE, message=FALSE, collapse = FALSE}
+# convert wide to long format
+df.long <- as.data.frame(tidyr::pivot_longer(df,
+                                             cols = -time,
+                                             names_to = "datapoint",
+                                             values_to = "value",
+                                             values_drop_na = TRUE))
+head(df.long, 16)
+
+# separate datapoint into two columns
+df.separated <- df.long %>% separate(col = datapoint, into = c("flat", "sensor"), sep = "_")
+head(df.separated, 16)
+
+```
+
+This dataset can now be considered tidy and is ready for further processing.

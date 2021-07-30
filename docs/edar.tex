@@ -141,7 +141,7 @@
 
 \title{Energy Data Analysis with R}
 \author{Reto Marek}
-\date{2021-04-17}
+\date{2021-07-30}
 
 \begin{document}
 \maketitle
@@ -637,7 +637,7 @@ To apply this function to a whole dataframe we can use the dplyr mutate function
 
 \begin{verbatim}
 ##                      time centralOutsideTemp season
-## 21865 2020-09-17 11:00:00               28.1   Fall
+## 21865 2020-09-17 11:00:00               28.1 Summer
 \end{verbatim}
 
 \newpage
@@ -893,6 +893,124 @@ Details can be found in \href{https://rafalab.github.io/dsbook/tidyverse.html}{I
 ## 6      22.30      47.2      24.57      47.2      24.30
 \end{verbatim}
 
+\newpage
+
+\hypertarget{tidy-data}{%
+\section{Tidy data}\label{tidy-data}}
+
+The\texttt{tidyverse} focus on a consistent way to organise the data which is called \texttt{tidy\ data}. Why should we care? Because a lot of elements in the data analytics process in R like dplyr or ggplot2 work best if the data is in a tidy format.
+
+There are three interrelated rules which make a dataset tidy:
+1. Each variable must have its own column.
+2. Each observation must have its own row.
+3. Each value must have its own cell.
+
+\begin{figure}
+\includegraphics[width=0.5\linewidth]{images/tidyData} \caption{Three rules make a dataset tidy: variables are in columns, observations are in rows, and values are in cells}\label{fig:unnamed-chunk-9}
+\end{figure}
+
+For more info you can have a look at the \href{https://r4ds.had.co.nz/tidy-data.html}{`Tidy Data' chapter of the book `R for Data Science'"} and the \href{http://www.jstatsoft.org/v59/i10/paper}{`Tidy Data' paper published in the `Journal of Statistical Software'"}
+
+Following examples of how to practically apply these concepts.
+
+\hypertarget{flattemphum.csv}{%
+\subsection{flatTempHum.csv}\label{flattemphum.csv}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(tidyr)}
+
+\CommentTok{# load test data set}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatTempHum.csv"}\NormalTok{,}
+               \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{,}
+               \DataTypeTok{sep =}\StringTok{";"}\NormalTok{)}
+
+\CommentTok{# create a copy of the dataframe and print the header and the first five line}
+\KeywordTok{head}\NormalTok{(df, }\DecValTok{5}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                  time FlatA_Hum FlatA_Temp FlatB_Hum FlatB_Temp FlatC_Hum
+## 1 2018-10-03 00:00:00      53.0      24.43      38.8      22.40      44.0
+## 2 2018-10-03 01:00:00      53.0      24.40      38.8      22.40      44.0
+## 3 2018-10-03 02:00:00      53.0      24.40      39.3      22.40      44.7
+## 4 2018-10-03 03:00:00      53.0      24.40      40.3      22.40      45.0
+## 5 2018-10-03 04:00:00      53.3      24.40      41.0      22.37      45.2
+##   FlatC_Temp FlatD_Hum FlatD_Temp
+## 1       24.5      49.0      24.43
+## 2       24.5      49.0      24.40
+## 3       24.5      48.3      24.38
+## 4       24.5      48.0      24.33
+## 5       24.5      47.7      24.30
+\end{verbatim}
+
+What needs to be done here to get this data set into a tidy format?
+- Firstly each observation should have its own row\ldots{} well.. not yet. To fulfill that, we have to convert from wide to long.
+- Secondly, the variables are \texttt{Flat} and \texttt{Sensor} which are currently merged together in the column name. That must be separated.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# convert wide to long format}
+\NormalTok{df.long <-}\StringTok{ }\KeywordTok{as.data.frame}\NormalTok{(tidyr}\OperatorTok{::}\KeywordTok{pivot_longer}\NormalTok{(df,}
+                                             \DataTypeTok{cols =} \OperatorTok{-}\NormalTok{time,}
+                                             \DataTypeTok{names_to =} \StringTok{"datapoint"}\NormalTok{,}
+                                             \DataTypeTok{values_to =} \StringTok{"value"}\NormalTok{,}
+                                             \DataTypeTok{values_drop_na =} \OtherTok{TRUE}\NormalTok{))}
+\KeywordTok{head}\NormalTok{(df.long, }\DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   time  datapoint value
+## 1  2018-10-03 00:00:00  FlatA_Hum 53.00
+## 2  2018-10-03 00:00:00 FlatA_Temp 24.43
+## 3  2018-10-03 00:00:00  FlatB_Hum 38.80
+## 4  2018-10-03 00:00:00 FlatB_Temp 22.40
+## 5  2018-10-03 00:00:00  FlatC_Hum 44.00
+## 6  2018-10-03 00:00:00 FlatC_Temp 24.50
+## 7  2018-10-03 00:00:00  FlatD_Hum 49.00
+## 8  2018-10-03 00:00:00 FlatD_Temp 24.43
+## 9  2018-10-03 01:00:00  FlatA_Hum 53.00
+## 10 2018-10-03 01:00:00 FlatA_Temp 24.40
+## 11 2018-10-03 01:00:00  FlatB_Hum 38.80
+## 12 2018-10-03 01:00:00 FlatB_Temp 22.40
+## 13 2018-10-03 01:00:00  FlatC_Hum 44.00
+## 14 2018-10-03 01:00:00 FlatC_Temp 24.50
+## 15 2018-10-03 01:00:00  FlatD_Hum 49.00
+## 16 2018-10-03 01:00:00 FlatD_Temp 24.40
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# separate datapoint into two columns}
+\NormalTok{df.separated <-}\StringTok{ }\NormalTok{df.long }\OperatorTok{%>%}\StringTok{ }\KeywordTok{separate}\NormalTok{(}\DataTypeTok{col =}\NormalTok{ datapoint, }\DataTypeTok{into =} \KeywordTok{c}\NormalTok{(}\StringTok{"flat"}\NormalTok{, }\StringTok{"sensor"}\NormalTok{), }\DataTypeTok{sep =} \StringTok{"_"}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(df.separated, }\DecValTok{16}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##                   time  flat sensor value
+## 1  2018-10-03 00:00:00 FlatA    Hum 53.00
+## 2  2018-10-03 00:00:00 FlatA   Temp 24.43
+## 3  2018-10-03 00:00:00 FlatB    Hum 38.80
+## 4  2018-10-03 00:00:00 FlatB   Temp 22.40
+## 5  2018-10-03 00:00:00 FlatC    Hum 44.00
+## 6  2018-10-03 00:00:00 FlatC   Temp 24.50
+## 7  2018-10-03 00:00:00 FlatD    Hum 49.00
+## 8  2018-10-03 00:00:00 FlatD   Temp 24.43
+## 9  2018-10-03 01:00:00 FlatA    Hum 53.00
+## 10 2018-10-03 01:00:00 FlatA   Temp 24.40
+## 11 2018-10-03 01:00:00 FlatB    Hum 38.80
+## 12 2018-10-03 01:00:00 FlatB   Temp 22.40
+## 13 2018-10-03 01:00:00 FlatC    Hum 44.00
+## 14 2018-10-03 01:00:00 FlatC   Temp 24.50
+## 15 2018-10-03 01:00:00 FlatD    Hum 49.00
+## 16 2018-10-03 01:00:00 FlatD   Temp 24.40
+\end{verbatim}
+
+This dataset can now be considered tidy and is ready for further processing.
+
 \hypertarget{explorative-data-analysis}{%
 \chapter{Explorative Data Analysis}\label{explorative-data-analysis}}
 
@@ -1016,6 +1134,86 @@ Please refer to the \href{https://r-graphics.org/chapter-quick}{R Graphics Cookb
 This is a great resource where you can find everything you need to know about creating basic plots.
 Some plots of the part ``Data Visualizations'' are as well easy to create and can get used in the context of EDA.
 
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{library}\NormalTok{(dplyr)}
+\KeywordTok{library}\NormalTok{(lubridate)}
+\CommentTok{# load csv file}
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv2}\NormalTok{(}\StringTok{"https://github.com/hslu-ige-laes/edar/raw/master/sampleData/flatHeatAndHotWater.csv"}\NormalTok{,}
+                \DataTypeTok{stringsAsFactors=}\OtherTok{FALSE}\NormalTok{)}
+\CommentTok{# filter flat}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(timestamp, Adr01_energyHeat, Adr02_energyHeat, Adr03_energyHeat)}
+\CommentTok{#df <- df %>% filter(timestamp > "2014-12-01")}
+
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{FlatA =} \KeywordTok{lead}\NormalTok{(Adr01_energyHeat) }\OperatorTok{-}\StringTok{ }\NormalTok{Adr01_energyHeat)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{FlatB =} \KeywordTok{lead}\NormalTok{(Adr02_energyHeat) }\OperatorTok{-}\StringTok{ }\NormalTok{Adr02_energyHeat)}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\NormalTok{dplyr}\OperatorTok{::}\KeywordTok{mutate}\NormalTok{(}\DataTypeTok{FlatC =} \KeywordTok{lead}\NormalTok{(Adr03_energyHeat) }\OperatorTok{-}\StringTok{ }\NormalTok{Adr03_energyHeat)}
+
+\CommentTok{# remove counter value column}
+\NormalTok{df <-}\StringTok{ }\NormalTok{df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{Adr01_energyHeat, }\OperatorTok{-}\NormalTok{Adr02_energyHeat, }\OperatorTok{-}\NormalTok{Adr03_energyHeat) }\OperatorTok{%>%}\StringTok{ }\KeywordTok{na.omit}\NormalTok{()}
+\NormalTok{df}\OperatorTok{$}\NormalTok{timestamp <-}\StringTok{ }\KeywordTok{parse_date_time}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp,}
+                                \DataTypeTok{orders =} \StringTok{"YmdHMS"}\NormalTok{,}
+                                \DataTypeTok{tz =} \StringTok{"Europe/Zurich"}\NormalTok{)}
+
+\NormalTok{tsd <-}\StringTok{ }\KeywordTok{ts}\NormalTok{(df }\OperatorTok{%>%}\StringTok{ }\KeywordTok{select}\NormalTok{(}\OperatorTok{-}\NormalTok{timestamp), }\DataTypeTok{frequency =} \DecValTok{12}\NormalTok{, }\DataTypeTok{start =} \KeywordTok{min}\NormalTok{(}\KeywordTok{year}\NormalTok{(df}\OperatorTok{$}\NormalTok{timestamp)))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{multiple-time-series-plot}{%
+\subsection{Multiple time series plot}\label{multiple-time-series-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# plot FlatA_Ele}
+\KeywordTok{plot}\NormalTok{(tsd)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/eda qda simple ts-1.pdf}
+
+\hypertarget{multiple-time-series-plot-in-one-plot}{%
+\subsection{Multiple time series plot in one plot}\label{multiple-time-series-plot-in-one-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Plotting all in one frame}
+\NormalTok{colours<-}\KeywordTok{c}\NormalTok{(}\StringTok{"green3"}\NormalTok{,}\StringTok{"red3"}\NormalTok{,}\StringTok{"blue3"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(tsd,}\DataTypeTok{plot.type=}\StringTok{"single"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"(kWh)"}\NormalTok{,}\DataTypeTok{col=}\NormalTok{colours)}
+
+\CommentTok{# Legend}
+\NormalTok{ltxt<-}\KeywordTok{c}\NormalTok{(}\StringTok{"Flat A"}\NormalTok{, }\StringTok{"Flat B"}\NormalTok{, }\StringTok{"Flat C"}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\NormalTok{colours, }\DataTypeTok{legend=}\NormalTok{ltxt)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/eda qda all ts-1.pdf}
+
+\hypertarget{indexed-time-series-plot}{%
+\subsection{Indexed time series plot}\label{indexed-time-series-plot}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{tsdPlot <-}\StringTok{ }\NormalTok{tsd}
+
+\CommentTok{# Index timeseries}
+\NormalTok{tsdPlot[,}\DecValTok{1}\NormalTok{]<-tsdPlot[,}\DecValTok{1}\NormalTok{]}\OperatorTok{/}\NormalTok{tsdPlot[}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{]}\OperatorTok{*}\DecValTok{100}
+\NormalTok{tsdPlot[,}\DecValTok{2}\NormalTok{]<-tsdPlot[,}\DecValTok{2}\NormalTok{]}\OperatorTok{/}\NormalTok{tsdPlot[}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{]}\OperatorTok{*}\DecValTok{100}
+\NormalTok{tsdPlot[,}\DecValTok{3}\NormalTok{]<-tsdPlot[,}\DecValTok{3}\NormalTok{]}\OperatorTok{/}\NormalTok{tsdPlot[}\DecValTok{1}\NormalTok{,}\DecValTok{3}\NormalTok{]}\OperatorTok{*}\DecValTok{100}
+
+\CommentTok{# Plotting all in one frame}
+\NormalTok{colours<-}\KeywordTok{c}\NormalTok{(}\StringTok{"green3"}\NormalTok{,}\StringTok{"red3"}\NormalTok{,}\StringTok{"blue3"}\NormalTok{)}
+
+\KeywordTok{plot}\NormalTok{(tsdPlot,}\DataTypeTok{plot.type=}\StringTok{"single"}\NormalTok{,}\DataTypeTok{ylab=}\StringTok{"Index"}\NormalTok{,}\DataTypeTok{col=}\NormalTok{colours)}
+
+\CommentTok{# Legend}
+\NormalTok{ltxt<-}\KeywordTok{c}\NormalTok{(}\StringTok{"Flat A"}\NormalTok{, }\StringTok{"Flat B"}\NormalTok{, }\StringTok{"Flat C"}\NormalTok{)}
+\KeywordTok{legend}\NormalTok{(}\StringTok{"topleft"}\NormalTok{,}\DataTypeTok{lty=}\DecValTok{1}\NormalTok{,}\DataTypeTok{col=}\NormalTok{colours, }\DataTypeTok{legend=}\NormalTok{ltxt)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{edar_files/figure-latex/eda qda indexed ts-1.pdf}
+
 \hypertarget{part-data-visualizations}{%
 \part{Data Visualizations}\label{part-data-visualizations}}
 
@@ -1044,7 +1242,7 @@ The first step of a data analysis is to become familiar with the data. For this 
 You want to create a boxplot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/boxplot} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-9}
+\includegraphics[width=0.7\linewidth]{images/boxplot} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-10}
 \end{figure}
 
 \hypertarget{data-basis}{%
@@ -1141,7 +1339,7 @@ Create a new script, copy/paste the following code and run it:
 You want to create a cross-correlation plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-10}
+\includegraphics[width=0.7\linewidth]{images/crossCorrelation} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-11}
 \end{figure}
 
 \hypertarget{data-basis-1}{%
@@ -1246,7 +1444,7 @@ Create a new script, copy/paste the following code and run it:
 You want to create a density plot of a temperature series with the mean value as vertical line:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDensity} \caption{Density Plot Temperature}\label{fig:unnamed-chunk-11}
+\includegraphics[width=0.7\linewidth]{images/plotDensity} \caption{Density Plot Temperature}\label{fig:unnamed-chunk-12}
 \end{figure}
 
 \hypertarget{data-basis-2}{%
@@ -1319,7 +1517,7 @@ Create a new script, copy/paste the following code and run it:
 You want to create a density plot of a temperature series for each season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDensitySeasons} \caption{Density Plot Temperature for each season of the year}\label{fig:unnamed-chunk-12}
+\includegraphics[width=0.7\linewidth]{images/plotDensitySeasons} \caption{Density Plot Temperature for each season of the year}\label{fig:unnamed-chunk-13}
 \end{figure}
 
 \hypertarget{data-basis-3}{%
@@ -1416,7 +1614,7 @@ An exemplary decomposition of an outside temperature time series over 7 days:
 Decompose a long term time series of ten years monthly data:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDecompositionLong} \caption{Decomposition of long time series over 10 Years}\label{fig:unnamed-chunk-13}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionLong} \caption{Decomposition of long time series over 10 Years}\label{fig:unnamed-chunk-14}
 \end{figure}
 
 \hypertarget{data-basis-4}{%
@@ -1537,7 +1735,7 @@ Create a new script, copy/paste the following code and run it:
 Decompose a short term time series of e.g.~5 days 15min data:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDecompositionShort} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-14}
+\includegraphics[width=0.7\linewidth]{images/plotDecompositionShort} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-15}
 \end{figure}
 
 \hypertarget{data-basis-5}{%
@@ -1699,7 +1897,7 @@ This chapter shows some useful types of seasonal plots.
 Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-15}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalXY} \caption{Seasonal Plot Overlapping per Month over 10 Years}\label{fig:unnamed-chunk-16}
 \end{figure}
 
 \hypertarget{data-basis-6}{%
@@ -1817,7 +2015,7 @@ Hints:
 Plot a seasonal month plot as described in \href{https://otexts.com/fpp2/seasonal-subseries-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.5)}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-16}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalMiniplots} \caption{Seasonal Plot with mini Time Plots over 10 Years}\label{fig:unnamed-chunk-17}
 \end{figure}
 
 Here the seasonal patterns for each season are collected together in seprate mini time plots.
@@ -1931,7 +2129,7 @@ Create a new script, copy/paste the following code and run it:
 Plot a seasonal plot as described in \href{https://otexts.com/fpp2/seasonal-plots.html}{Hyndman and Athanasopoulos (2014, chapter 2.4)}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-17}
+\includegraphics[width=0.7\linewidth]{images/plotSeasonalPolar} \caption{Seasonal Plot Polar per Month over 10 Years}\label{fig:unnamed-chunk-18}
 \end{figure}
 
 This is like an overlapping time series plot which uses polar coordinates. Be aware that seasons in this context don't correlate with the seasons of the year.
@@ -2029,7 +2227,7 @@ To highlight an energy optimization in a season diagram, we can gray out the sea
 We will create the following plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-18}
+\includegraphics[width=0.7\linewidth]{images/plotEnergyConsBeforeAfter} \caption{Seasonal Plot Overlapping Before/After}\label{fig:unnamed-chunk-19}
 \end{figure}
 
 \hypertarget{data-basis-9}{%
@@ -2137,7 +2335,7 @@ This chapter shows different types of heat maps which are useful for energy data
 Create a calendar heat map with daily energy consumption values:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-19}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapCalendar} \caption{Calendar Heat Map}\label{fig:unnamed-chunk-20}
 \end{figure}
 
 \hypertarget{data-basis-10}{%
@@ -2252,7 +2450,7 @@ Some findings:
 Create an energy consumption heat map of a median week depending on the season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-20}
+\includegraphics[width=0.7\linewidth]{images/plotHeatMapMedianWeeks} \caption{Heat Map of Median Weeks per Season of Year}\label{fig:unnamed-chunk-21}
 \end{figure}
 
 \hypertarget{data-basis-11}{%
@@ -2332,7 +2530,7 @@ This chapter shows some useful visualizations to accommodate this recognition.
 Create an overview of typical daily profiles per weekday and season of year with a confidence band where most of the values lie:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-21}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverview} \caption{Overview of Daily Profiles by Weekday and Season}\label{fig:unnamed-chunk-22}
 \end{figure}
 
 \hypertarget{data-basis-12}{%
@@ -2394,7 +2592,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of all data per week by season of the year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-22}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfOverlayed} \caption{Overlayed Daily Profiles}\label{fig:unnamed-chunk-23}
 \end{figure}
 
 \hypertarget{data-basis-13}{%
@@ -2501,7 +2699,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of mean data per week:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-23}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfMean} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-24}
 \end{figure}
 
 \hypertarget{data-basis-14}{%
@@ -2612,7 +2810,7 @@ Create a new script, copy/paste the following code and run it:
 Create a plot of detrended mean data per week as recommended in \href{https://doi.org/10.1016/j.enbuild.2018.07.056}{``Building electricity consumption: Data analytics of building operations with classical time series decomposition and case based subsetting'', Pickering et al, 2018}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-24}
+\includegraphics[width=0.7\linewidth]{images/plotDailyProfDecomposed} \caption{Mean Daily Profiles per Weekday}\label{fig:unnamed-chunk-25}
 \end{figure}
 
 \hypertarget{data-basis-15}{%
@@ -2671,7 +2869,7 @@ This type of visualization has a long tradition in energy data analyses and vari
 You want to create a sum frequency plot of a temperature series for each day in a year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyDays} \caption{Sum Frequency Plot Temperature Days}\label{fig:unnamed-chunk-25}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyDays} \caption{Sum Frequency Plot Temperature Days}\label{fig:unnamed-chunk-26}
 \end{figure}
 
 \hypertarget{data-basis-16}{%
@@ -2779,7 +2977,7 @@ Create a new script, copy/paste the following code and run it:
 You want to create a sum frequency plot of a temperature series for each hour in a year:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyHour} \caption{Sum Frequency Plot Temperature}\label{fig:unnamed-chunk-26}
+\includegraphics[width=0.7\linewidth]{images/plotSumFrequencyHour} \caption{Sum Frequency Plot Temperature}\label{fig:unnamed-chunk-27}
 \end{figure}
 
 \hypertarget{data-basis-17}{%
@@ -2898,7 +3096,7 @@ The visualizations in this part focus on some typical comfort related visualizat
 You want to plot a mollier h-x diagram:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-27}
+\includegraphics[width=0.7\linewidth]{images/comfortMollierHx} \caption{Mollier hx Diagram with comfort zone}\label{fig:unnamed-chunk-28}
 \end{figure}
 
 \hypertarget{data-basis-18}{%
@@ -2984,7 +3182,7 @@ If you are interested in implementing this plot in your own dashboard you can ch
 You want to create a temperature versus humidity comfort plot:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortTempHum} \caption{Temperature versus Humidity Comfort Plot}\label{fig:unnamed-chunk-29}
+\includegraphics[width=0.7\linewidth]{images/comfortTempHum} \caption{Temperature versus Humidity Comfort Plot}\label{fig:unnamed-chunk-30}
 \end{figure}
 
 \hypertarget{data-basis-19}{%
@@ -3122,7 +3320,7 @@ Create a new script, copy/paste the following code and run it:
 You want to plot a diagram like the one from the SIA 180:2014
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-30}
+\includegraphics[width=0.7\linewidth]{images/comfortSia180ThermCmf} \caption{Thermal Comfort according to SIA 180:2014}\label{fig:unnamed-chunk-31}
 \end{figure}
 
 \hypertarget{data-basis-20}{%
@@ -3374,7 +3572,7 @@ You want to plot an electricity consumption diagram with:
 Additionaly we would like to see the consumption of an average Swiss household.
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-31}
+\includegraphics[width=0.7\linewidth]{images/eleHousehold} \caption{Plot Electricity Household}\label{fig:unnamed-chunk-32}
 \end{figure}
 
 \hypertarget{data-basis-21}{%
@@ -3776,7 +3974,7 @@ You want to create a time series plot with:
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-32}
+\includegraphics[width=0.7\linewidth]{images/roomTempRed} \caption{Room Temperature Reduction Plot}\label{fig:unnamed-chunk-33}
 \end{figure}
 
 \hypertarget{data-basis-22}{%
@@ -3928,7 +4126,7 @@ You want to create a scatter plot with:
 \end{itemize}
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-33}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigScatter} \caption{Building Energy Signature Plot}\label{fig:unnamed-chunk-34}
 \end{figure}
 
 \hypertarget{data-basis-23}{%
@@ -4075,7 +4273,7 @@ This visualization allows a quick detection of malfunctions and provides valuabl
 Create a plot of a building energy signature as proposed in \href{https://doi.org/10.1016/j.enbuild.2020.109756}{``Development and validation of energy signature method'', Eriksson et al, 2020}:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigProposed} \caption{Building Energy Signature Plot "PES"}\label{fig:unnamed-chunk-34}
+\includegraphics[width=0.7\linewidth]{images/plotBldgEngySigProposed} \caption{Building Energy Signature Plot "PES"}\label{fig:unnamed-chunk-35}
 \end{figure}
 
 \hypertarget{data-basis-24}{%
@@ -4352,7 +4550,7 @@ This is a new method, which calculates the balance Temperture, a heating loss co
 You want to create a plot with more than one y axis:
 
 \begin{figure}
-\includegraphics[width=0.7\linewidth]{images/miscPlotlyMultipleYAxis} \caption{Plotly Polot with Multiple Y Axis}\label{fig:unnamed-chunk-35}
+\includegraphics[width=0.7\linewidth]{images/miscPlotlyMultipleYAxis} \caption{Plotly Polot with Multiple Y Axis}\label{fig:unnamed-chunk-36}
 \end{figure}
 
 \newpage
